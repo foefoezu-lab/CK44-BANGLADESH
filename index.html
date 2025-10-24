@@ -543,6 +543,16 @@ html[data-theme="sun"] footer{background:linear-gradient(to top, rgba(255,255,25
   border: 1px solid rgba(255,215,0,.6) !important;
   box-shadow: 0 0 40px rgba(255,215,0,.25) !important;
 }
+
+/* === v20 tweak: tighter right alignment & baseline === */
+.hero > .highlight-image{
+  align-self: start !important;         /* align to top of hero text */
+  margin: 6px 16px 0 0 !important;      /* small top offset + right spacing */
+  max-width: 500px !important;          /* a bit tighter than 520px */
+}
+@media (min-width:1400px){
+  .hero > .highlight-image{ max-width: 560px !important; } /* allow larger on very wide screens */
+}
 </style>
 <!-- JSON-LD -->
 <script type="application/ld+json">
