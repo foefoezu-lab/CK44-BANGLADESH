@@ -766,8 +766,226 @@ footer{border-top:1px solid var(--border);background:linear-gradient(to top, rgb
 <style>
 #goldFX{ position:fixed; inset:0; width:100vw; height:100vh; z-index:-1; pointer-events:none; }
 @media (prefers-reduced-motion: reduce){ #goldFX{ display:none !important; } }
+
+/* === NAV FIX: remove underline/shadow from Events/Benefits buttons === */
+.nav .group .link,
+.nav .group .cta{
+  text-decoration: none !important;
+  box-shadow: none !important;
+  background-image: none !important;
+  border-bottom: 0 !important;
+  position: relative;
+  -webkit-tap-highlight-color: transparent;
+}
+.nav .group .link::before,
+.nav .group .link::after,
+.nav .group .cta::before,
+.nav .group .cta::after{
+  content: none !important;
+  display: none !important;
+}
+.nav .group .link:focus,
+.nav .group .link:active,
+.nav .group .cta:focus,
+.nav .group .cta:active{
+  outline: none !important;
+  box-shadow: none !important;
+  border-bottom: 0 !important;
+}
+.nav .group .link.active,
+.nav .group .link.is-active{
+  border-bottom: 0 !important;
+  box-shadow: none !important;
+  background-image: none !important;
+}
+
+
+/* === POLISH PATCH: button hover/focus + lighter goldFX on mobile === */
+.btn, .link, .cta{
+  transition: transform .16s ease, box-shadow .16s ease, opacity .16s ease;
+  will-change: transform;
+}
+.btn:hover, .cta:hover{ transform: translateY(-1px); }
+.btn:active, .cta:active{ transform: translateY(0); opacity:.95; }
+
+/* Gold FX: reduce visual intensity on smaller screens without touching JS */
+@media (max-width: 640px){ #goldFX{ opacity:.8; } }
+@media (max-width: 390px){ #goldFX{ opacity:.65; } }
+
+
+/* === Header Pills (non-destructive) === */
+.header-pill {
+  display:inline-flex; align-items:center; gap:8px;
+  padding:8px 12px; border-radius:12px; font-weight:800;
+  border:1px solid rgba(255,215,0,.45);
+  background:linear-gradient(180deg,#1a1a1f,#111118);
+  color:#f5e8b5; box-shadow:inset 0 0 14px rgba(255,215,0,.10);
+  white-space:nowrap;
+}
+.header-pill .dot{
+  width:8px; height:8px; border-radius:999px; background:#3ad07a;
+  box-shadow:0 0 10px rgba(58,208,122,.9);
+  animation:pulse 1.6s ease-in-out infinite;
+}
+@keyframes pulse{0%{transform:scale(1)}50%{transform:scale(1.3)}100%{transform:scale(1)}}
+.header-countdown{
+  background:linear-gradient(180deg,#ffe08d,#e3b75a);
+  color:#141217; border-color:rgba(140,100,0,.45);
+}
+.header-countdown .time{
+  font-feature-settings:"tnum" 1,"lnum" 1;
+  letter-spacing:.5px; font-weight:900;
+}
+@media (max-width: 640px){
+  .header-pill{ padding:6px 10px; font-size:12px; }
+  .header-countdown .time{ font-size:12px; }
+}
+
+
+/* === MOBILE HEADER FIX: keep nav clear, move pills to 2nd row on phones === */
+@media (max-width: 640px){
+  .nav{ padding:10px 8px !important; }
+  .nav .group{
+    flex-wrap: wrap !important;
+    gap: 8px 10px !important;
+    justify-content: flex-start !important;
+  }
+  .nav .group .link, .nav .group .cta{
+    white-space: nowrap !important;
+  }
+  /* pills go to next row, centered, full width */
+  .header-pill{ order: 3; width:100% !important; justify-content:center !important; padding:6px 10px !important; font-size:12px !important; }
+  .header-countdown{ order: 4; }
+}
+@media (max-width: 380px){
+  /* very small screens: keep only Live pill to save space */
+  .header-countdown{ display:none !important; }
+}
+
+
+/* === MOBILE HEADER REFINEMENT: pills full-width row under nav === */
+@media (max-width: 640px){
+  /* Arrange nav links in compact grid; put pills on their own row */
+  .nav .group{
+    display:grid !important;
+    grid-auto-flow: row !important;
+    grid-template-columns: repeat(3, max-content);
+    justify-content:center !important;
+    gap: 8px 10px !important;
+    padding-bottom: 6px !important;
+  }
+  .nav .group > .header-pill{
+    grid-column: 1 / -1;               /* span full width */
+    width: 100% !important;
+    justify-content:center !important;
+    margin-top: 2px !important;
+    margin-bottom: 2px !important;
+    box-shadow: 0 4px 14px rgba(0,0,0,.22), inset 0 0 12px rgba(255,215,0,.08);
+  }
+  .nav .group > .header-countdown{ order: 4; }
+}
+@media (max-width: 380px){
+  /* If space is tight, shrink pill paddings slightly */
+  .nav .group > .header-pill{ padding:5px 9px !important; font-size:12px !important; }
+}
+
+
+/* === MOBILE HEADER TIDY (flex-wrap, clean two-row layout) === */
+@media (max-width: 640px){
+  .nav{ padding:10px 12px !important; }
+  .nav .group{
+    display:flex !important;
+    flex-wrap: wrap !important;
+    justify-content: center !important;
+    gap: 8px 10px !important;
+  }
+  /* Ensure nav buttons come first */
+  .nav .group .link,
+  .nav .group .cta{ order: 1; white-space:nowrap; }
+
+  /* Pills: always second row, full width & centered */
+  .nav .group .header-pill{
+    order: 2;
+    flex: 1 1 100% !important;
+    width: 100% !important;
+    justify-content: center !important;
+    margin-top: 2px !important;
+  }
+  .nav .group .header-countdown{ order: 3; }
+
+  /* Minor spacing balance */
+  .header-pill{ padding: 6px 10px !important; font-size: 12px !important; }
+}
+
+
+/* === SOLID BLACK ELEGANT THEME (no HTML changes) ====================== */
+/* Panels / cards / provider boxes / 'table-like' containers */
+.highlight-box,
+.pp-grid-wrapper,
+.pp-cell,
+.card,
+.kpi,
+.highlight-table,
+.table-like,
+.box,
+.section-box {
+  background: #0b0b10 !important;                    /* solid black */
+  border: 1px solid rgba(255,215,128,0.18) !important;/* soft gold edge */
+  box-shadow: 0 10px 24px rgba(0,0,0,.55) !important; /* elegant drop */
+}
+
+/* True <table> elements */
+table,
+.table {
+  width: 100%;
+  border-collapse: collapse;
+  background: #0b0b10 !important;
+  border: 1px solid rgba(255,215,128,0.18) !important;
+  box-shadow: 0 10px 24px rgba(0,0,0,.55) !important;
+}
+table th, table td,
+.table th, .table td {
+  padding: 10px 12px;
+  color: #e9e9f2;
+  border-top: 1px solid rgba(255,215,128,0.10);
+  border-bottom: 1px solid rgba(255,215,128,0.06);
+  background: transparent; /* keep cell background consistent */
+}
+table thead th,
+.table thead th {
+  color: #ffe6a7;
+  background: #101015;
+  border-bottom: 1px solid rgba(255,215,128,0.22);
+}
+
+/* Headings inside panels */
+.highlight-box h3, .card h3, .section, .provider-title-ck {
+  color:#ffe6a7; text-shadow: 0 1px 0 rgba(0,0,0,.35);
+}
+
+/* Mobile: maintain solid look and tighten spacing */
+@media (max-width:640px){
+  .highlight-box,
+  .pp-grid-wrapper,
+  .pp-cell,
+  .card,
+  .kpi,
+  .highlight-table,
+  .table-like,
+  .box,
+  .section-box,
+  table, .table {
+    background:#08080c !important;
+    border-color: rgba(255,215,128,0.22) !important;
+  }
+  table th, table td, .table th, .table td { padding: 9px 10px; }
+}
+/* ===================================================================== */
+
 </style>
 
+
+<link rel="preload" as="image" href="assets/referalck444%20terbaru.jpg">
 </head>
 <body>
 <!-- Ambient sound -->
@@ -1073,6 +1291,48 @@ new IntersectionObserver(es=>es.forEach(e=>{ audioEl.muted=!e.isIntersecting }),
     requestAnimationFrame(draw);
   }
   init();
+})();
+</script>
+
+
+<script>
+(function(){
+  if (document.getElementById('hp-time') || document.getElementById('hp-support')) { return; } // prevent duplicates
+  var group = document.querySelector('.nav .group');
+  if(!group) return;
+
+  // Live Online + Support pill
+  var support = document.createElement('a');
+  support.className = 'header-pill';
+  support.id = 'hp-support';
+  support.href = '#support'; // TODO: replace with your WA/Telegram link
+  support.setAttribute('aria-label','Live Support 24/7');
+  var online = Math.floor(120 + Math.random()*80); // playful number
+  support.innerHTML = '<span class="dot"></span><span>Live '+ online +' Online</span>';
+
+  // Promo Countdown pill
+  var countdown = document.createElement('span');
+  countdown.className = 'header-pill header-countdown';
+  countdown.innerHTML = 'Promo ends in <span class="time" id="hp-time">--:--:--</span>';
+
+  // Append after existing items
+  group.appendChild(support);
+  group.appendChild(countdown);
+
+  // Countdown target: +8 hours from now (adjust if needed)
+  var target = new Date();
+  target.setHours(target.getHours()+8);
+  var el = document.getElementById('hp-time');
+  function two(n){ return n<10 ? '0'+n : ''+n; }
+  function tick(){
+    var now = new Date();
+    var s = Math.max(0, Math.floor((target - now)/1000));
+    var h = Math.floor(s/3600); s%=3600;
+    var m = Math.floor(s/60);  s%=60;
+    el.textContent = two(h)+':'+two(m)+':'+two(s);
+    requestAnimationFrame(tick);
+  }
+  tick();
 })();
 </script>
 
