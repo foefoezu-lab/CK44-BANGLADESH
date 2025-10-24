@@ -586,6 +586,32 @@ footer{border-top:1px solid var(--border);background:linear-gradient(to top, rgb
   .card{ padding: 14px !important; }
 }
 
+
+/* === MOBILE OVERLAP & HEADER FIX (<= 600px) === */
+@media (max-width: 600px){
+  /* Prevent bottom overlap with FABs */
+  body, main{ padding-bottom: calc(96px + env(safe-area-inset-bottom)) !important; }
+
+  /* Hide vertical social bar on phones (prevents overlap in provider panel) */
+  .social-bar{ display: none !important; }
+
+  /* Keep FABs compact and out of way */
+  .fab-wrap{ right: 12px !important; bottom: 14px !important; gap: 10px !important; z-index: 90 !important; }
+  .fab{ padding: 10px 12px !important; border-radius: 12px !important; }
+
+  /* Add extra space under provider panel so CTAs are not covered */
+  .pp-grid-wrapper{ margin-bottom: 14px !important; }
+  #events{ margin-bottom: 18px !important; }
+
+  /* Header buttons: remove accidental underline/line artifacts */
+  .nav .group .link, .nav .group .cta{
+    text-decoration: none !important;
+    box-shadow: none !important;
+    border-bottom: none !important;
+  }
+  .nav .group .link::after, .nav .group .cta::after{ display: none !important; }
+}
+
 </style>
 <!-- JSON-LD -->
 <script type="application/ld+json">
