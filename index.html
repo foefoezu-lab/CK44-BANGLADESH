@@ -612,6 +612,43 @@ footer{border-top:1px solid var(--border);background:linear-gradient(to top, rgb
   .nav .group .link::after, .nav .group .cta::after{ display: none !important; }
 }
 
+
+/* === FINAL MOBILE FIX (<= 600px) === */
+@media (max-width: 600px){
+  html, body { overflow-x: hidden; }
+  main, .wrap { width: 100% !important; max-width: 100% !important; margin: 0 auto !important; padding-left: 12px !important; padding-right: 12px !important; }
+
+  /* Header underline/glitch killer */
+  .nav .group .link, .nav .group .cta{
+    text-decoration: none !important;
+    border: 0 !important;
+    box-shadow: none !important;
+    background-image: none !important;
+  }
+  .nav .group .link::before,
+  .nav .group .link::after,
+  .nav .group .cta::before,
+  .nav .group .cta::after{ content: none !important; display: none !important; }
+
+  /* Providers panel title wrapping and size */
+  .provider-title-ck{ font-size: 16px !important; white-space: normal !important; text-align:center !important; }
+
+  /* Providers container truly full width and no overflow */
+  .pp-grid-wrapper{ width: 100% !important; max-width: 100% !important; margin-left: 0 !important; margin-right: 0 !important; overflow: hidden !important; }
+  .pp-viewport-ck{ overflow: hidden !important; }
+  .pp-track-ck{ display: flex !important; flex-wrap: wrap !important; justify-content: center !important; gap: 16px !important; }
+  .pp-track-ck img{ height: 24px !important; }
+
+  /* Inner slots grid: single column to avoid cut sides */
+  .pp-grid3{ display: grid !important; grid-template-columns: 1fr !important; gap: 12px !important; }
+
+  /* Remove any outer negative margins that might clip edges */
+  [class*="-grid"], [class*="grid-"]{ margin-left: 0 !important; margin-right: 0 !important; }
+
+  /* Ensure no element exceeds width */
+  *{ max-width: 100%; }
+}
+
 </style>
 <!-- JSON-LD -->
 <script type="application/ld+json">
