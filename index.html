@@ -477,6 +477,63 @@ footer{border-top:1px solid var(--border);background:linear-gradient(to top, rgb
   .fab{ padding: 12px 14px !important; border-radius: 12px !important; }
 }
 
+
+/* === FULL MOBILE FIX (<= 600px) === */
+@media (max-width: 600px){
+  /* Global resets */
+  *{ box-sizing: border-box; }
+  img{ max-width:100%; height:auto; }
+  body{ overflow-x:hidden; }
+  .title, h1, h2, h3{ word-break: break-word; }
+
+  /* Header compact */
+  header{ position: sticky; top:0; z-index:99; }
+  .nav{ padding:10px 12px !important; }
+  .nav .group{ gap:8px !important; flex-wrap:nowrap; overflow:auto; }
+  .nav .group .link, .nav .group .cta{ padding:8px 10px !important; border-radius:10px !important; white-space:nowrap; }
+
+  /* Hero becomes flex column (keeps DOM order: text -> banner -> card) */
+  .hero{ display:flex !important; flex-direction:column !important; gap:14px !important; padding:64px 12px 18px !important; }
+  .hero .text{ order:1; }
+  .hero .banner{ order:2; width:100% !important; max-width:100% !important; margin:0 !important; border:1px solid rgba(255,215,0,.45); border-radius:14px !important; overflow:hidden; aspect-ratio: 16 / 9; }
+  .hero .banner img{ width:100%; height:100%; object-fit:cover; object-position:center; }
+  .card-hero{ order:3; padding:14px !important; border-radius:14px !important; }
+
+  /* Buttons full width */
+  .actions{ gap:10px !important; }
+  .actions .btn, .actions .btn.secondary{ width:100% !important; justify-content:center; padding:13px 14px !important; border-radius:12px !important; }
+
+  /* Highlight table readability */
+  .highlight-table{ width:100% !important; font-size:14px; }
+  .highlight-table td{ padding:8px !important; }
+  .kpi{ grid-template-columns:1fr 1fr 1fr !important; gap:8px !important; }
+
+  /* Highlight grid spacing */
+  section.wrap{ padding:36px 12px !important; }
+  .highlight-grid{ gap:14px !important; }
+  .highlight-box{ padding:16px 12px !important; }
+
+  /* Providers panel width & padding */
+  .pp-grid-wrapper{ padding:14px !important; }
+  .pp-viewport-ck{ padding:8px 2px !important; }
+  .pp-track-ck img{ height:28px !important; }
+  .pp-grid3{ gap:12px !important; }
+  .pp-cell{ min-height:110px !important; }
+
+  /* Events grid single column */
+  #events .steps-grid{ grid-template-columns:1fr !important; gap:12px !important; }
+  #events .step-card{ padding:12px !important; grid-template-columns:44px 1fr !important; }
+
+  /* Social bar & FABs reduce/avoid overlap */
+  .social-bar{ right:8px !important; bottom: 90px !important; gap:10px !important; }
+  .social-bar a{ width:38px !important; height:38px !important; }
+  .fab-wrap{ right: 10px !important; bottom: 14px !important; gap: 10px !important; }
+  .fab{ padding: 11px 13px !important; border-radius:12px !important; }
+
+  /* Reduce outer glows on mobile */
+  .pp-grid-wrapper, .highlight-box{ box-shadow: 0 8px 20px rgba(0,0,0,.35) !important; }
+}
+
 </style>
 <!-- JSON-LD -->
 <script type="application/ld+json">
