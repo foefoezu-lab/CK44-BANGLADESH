@@ -523,6 +523,26 @@ html[data-theme="sun"] footer{background:linear-gradient(to top, rgba(255,255,25
   border:1px solid rgba(255,214,77,.7);
   box-shadow: inset 0 0 0 1px rgba(255,214,77,.25), inset 0 0 22px rgba(255,214,77,.12), 0 10px 28px rgba(0,0,0,.45);
 }
+
+/* === Hero Right Banner — minimal override (no other changes) === */
+.hero > .highlight-image{
+  grid-column: 2 !important;
+  justify-self: end !important;
+  align-self: center !important;
+  max-width: 520px !important;
+  margin: 0 12px 0 0 !important;
+  border-radius: 16px !important;
+  animation: none !important;
+  box-shadow: none !important; /* wrapper shadow off; image will carry glow */
+}
+@media (max-width:960px){
+  .hero > .highlight-image{ justify-self: center !important; margin: 24px 0 0 0 !important; max-width: 100% !important; }
+}
+.hero > .highlight-image img{
+  border-radius: 16px !important;
+  border: 1px solid rgba(255,215,0,.6) !important;
+  box-shadow: 0 0 40px rgba(255,215,0,.25) !important;
+}
 </style>
 <!-- JSON-LD -->
 <script type="application/ld+json">
