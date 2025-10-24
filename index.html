@@ -269,6 +269,157 @@ footer{border-top:1px solid var(--border);background:linear-gradient(to top, rgb
   }
 }
 
+
+/* === Centered VIP Timeline (override) === */
+#events .timeline{
+  position: relative;
+  max-width: 820px;
+  margin: 0 auto;
+  padding: 12px 24px;
+  text-align: center;
+  border-left: none !important;
+  padding-left: 0 !important;
+}
+#events .timeline:before{
+  content: "";
+  position: absolute;
+  left: 50%;
+  top: 0; bottom: 0;
+  width: 2px;
+  transform: translateX(-50%);
+  background: repeating-linear-gradient(
+    to bottom,
+    rgba(245,217,124,.55) 0 12px,
+    rgba(245,217,124,.00) 12px 24px
+  );
+  filter: drop-shadow(0 0 8px rgba(245,217,124,.35));
+  opacity: .9;
+}
+#events .step{
+  position: relative;
+  padding: 22px 0 28px;
+}
+#events .step .dot{
+  position: absolute;
+  left: 50%;
+  width: 14px; height: 14px;
+  transform: translate(-50%, 4px);
+  border-radius: 50%;
+  background: linear-gradient(135deg, var(--gold), var(--gold2));
+  box-shadow: 0 0 12px rgba(245,217,124,.7), 0 0 24px rgba(245,217,124,.35);
+}
+#events .step h4{
+  margin: 0 0 6px;
+  font: 700 18px/1.2 Playfair Display, serif;
+  color: var(--gold);
+}
+#events .step p{
+  margin: 0;
+  color: #dfe2f3;
+}
+@media (max-width: 960px){
+  #events .timeline{ max-width: 640px; padding: 8px 12px; }
+  #events .step{ padding: 18px 0 22px; }
+}
+
+
+/* === Professional Black Boxed Event Table === */
+#events .steps-grid{
+  max-width: 880px;
+  margin: 18px auto 0;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 14px;
+}
+#events .step-card{
+  display: grid;
+  grid-template-columns: 56px 1fr;
+  align-items: center;
+  gap: 14px;
+  padding: 16px 18px;
+  border-radius: 14px;
+  background: rgba(10,10,16,.85);
+  border: 1px solid rgba(255,215,0,.35);
+  box-shadow:
+    inset 0 0 0 1px rgba(255,215,0,.18),
+    inset 0 0 22px rgba(255,215,0,.10),
+    0 10px 28px rgba(0,0,0,.45);
+}
+#events .step-card .badge{
+  width: 42px; height: 42px;
+  display: grid; place-items: center;
+  border-radius: 999px;
+  background: linear-gradient(135deg, var(--gold), var(--gold2));
+  color: #0b0b10; font-weight: 900;
+  box-shadow: 0 0 14px rgba(245,217,124,.45);
+}
+#events .step-card h4{
+  margin: 0 0 4px;
+  font: 700 18px/1.2 Playfair Display, serif;
+  color: var(--gold);
+}
+#events .step-card p{
+  margin: 0; color: #dfe2f3;
+}
+@media (max-width: 960px){
+  #events .steps-grid{ max-width: 96%; }
+  #events .step-card{ grid-template-columns: 48px 1fr; padding: 14px; }
+  #events .step-card .badge{ width: 36px; height: 36px; }
+}
+
+
+/* === 2-column layout for event cards === */
+@media (min-width: 960px){
+  #events .steps-grid{
+    grid-template-columns: repeat(2, 1fr);
+    gap: 18px 18px;
+  }
+}
+
+
+/* === CK44 Polished Highlights & Providers (override) === */
+
+/* 1) Layout balance & spacing */
+.highlight-grid{
+  gap: 28px !important;
+  align-items: stretch !important;
+}
+@media (min-width: 1100px){
+  .highlight-grid{ grid-template-columns: 1fr 1fr 1.6fr !important; }
+}
+.highlight-box{ padding: 28px 22px !important; }
+
+/* 2) Tone down glow & simplify borders */
+.provider-title-ck{
+  margin: 4px 0 14px !important;
+  font-weight: 800 !important; font-size: 18px !important; text-align:center !important;
+  text-shadow: 0 0 10px rgba(255,214,77,.25) !important;
+}
+.pp-grid-wrapper{
+  background: radial-gradient(120% 100% at 50% 0%, rgba(255,214,77,.06), transparent 60%) #0b0b0f !important;
+  border: 1px solid rgba(255,214,77,.55) !important;
+  box-shadow: inset 0 0 22px rgba(255,214,77,.10), 0 10px 28px rgba(0,0,0,.35) !important;
+  padding: 18px !important; margin-bottom:14px !important; border-radius: 14px !important;
+}
+
+/* 3) Marquee logos sizing & clarity */
+.pp-viewport-ck{ padding: 10px 6px !important; }
+.pp-track-ck img{ height: 32px !important; opacity: .96 !important; filter: drop-shadow(0 0 8px rgba(255,214,77,.18)) !important; }
+.pp-track-ck{ gap: 28px !important; }
+
+/* 4) Three inner cells */
+.pp-grid3{ width: 100% !important; max-width: 100% !important; gap: 14px !important; }
+.pp-cell{ min-height: 128px !important; }
+
+/* 5) Bottom promo banner bar */
+.banner-ck44{
+  border: 1px solid rgba(255,214,77,.55) !important;
+  box-shadow: 0 6px 18px rgba(0,0,0,.35) !important;
+}
+
+/* Optional: equal height for cards */
+.highlight-box, .pp-grid-wrapper{ display: flex; flex-direction: column; }
+
 </style>
 <!-- JSON-LD -->
 <script type="application/ld+json">
@@ -379,8 +530,7 @@ footer{border-top:1px solid var(--border);background:linear-gradient(to top, rgb
         </div>
       </div>
       <!-- bottom banner inside right panel -->
-      <img class="banner-ck44" src="assets/providers/banner.png" alt="CK44 VIP Promotion Banner" loading="lazy"/>
-    </div>
+</div>
   </section>
 
   <!-- Popular Games -->
@@ -398,28 +548,42 @@ footer{border-top:1px solid var(--border);background:linear-gradient(to top, rgb
   </section>
 
   <!-- Events -->
-  <section class="wrap" id="events">
-    <h2 class="section">VIP 30 Event</h2>
-    <p class="sub">Daily missions, cashback tiers, and limited-time <b>Mystery Bonus</b> drops. | ডেইলি মিশন, ক্যাশব্যাক টিয়ার ও সারপ্রাইজ বোনাস।</p>
-    <div class="timeline" style="border-left:2px dashed rgba(245,217,124,.35);padding-left:18px;max-width:760px;margin:0 auto">
-      <div class="step" style="margin:16px 0;position:relative">
-        <div style="position:absolute;left:-30px;top:4px;width:14px;height:14px;border-radius:50%;background:linear-gradient(135deg,var(--gold),var(--gold2));box-shadow:0 0 12px rgba(245,217,124,.7)"></div>
-        <h4 style="margin:0 0 6px;font:700 18px/1.2 Playfair Display,serif;color:var(--gold)">Join CK44 VIP</h4><p style="margin:0;color:#dfe2f3">Register &amp; verify (দ্রুত ভেরিফাই)।</p>
-      </div>
-      <div class="step" style="margin:16px 0;position:relative">
-        <div style="position:absolute;left:-30px;top:4px;width:14px;height:14px;border-radius:50%;background:linear-gradient(135deg,var(--gold),var(--gold2));box-shadow:0 0 12px rgba(245,217,124,.7)"></div>
-        <h4 style="margin:0 0 6px;font:700 18px/1.2 Playfair Display,serif;color:var(--gold)">Complete Missions</h4><p style="margin:0;color:#dfe2f3">Play PG Soft/JILI favorites.</p>
-      </div>
-      <div class="step" style="margin:16px 0;position:relative">
-        <div style="position:absolute;left:-30px;top:4px;width:14px;height:14px;border-radius:50%;background:linear-gradient(135deg,var(--gold),var(--gold2));box-shadow:0 0 12px rgba(245,217,124,.7)"></div>
-        <h4 style="margin:0 0 6px;font:700 18px/1.2 Playfair Display,serif;color:var(--gold)">Claim Rewards</h4><p style="margin:0;color:#dfe2f3">VIP 30 bonuses + Mystery Bonus.</p>
-      </div>
-      <div class="step" style="margin:16px 0;position:relative">
-        <div style="position:absolute;left:-30px;top:4px;width:14px;height:14px;border-radius:50%;background:linear-gradient(135deg,var(--gold),var(--gold2));box-shadow:0 0 12px rgba(245,217,124,.7)"></div>
-        <h4 style="margin:0 0 6px;font:700 18px/1.2 Playfair Display,serif;color:var(--gold)">Fast Withdrawal</h4><p style="margin:0;color:#dfe2f3">Local, quick &amp; secure payout.</p>
+  
+<section class="wrap" id="events">
+  <h2 class="section">VIP 30 Event</h2>
+  <p class="sub">Daily missions, cashback tiers, and limited-time <b>Mystery Bonus</b> drops. | ডেইলি মিশন, ক্যাশব্যাক টিয়ার ও সারপ্রাইজ বোনাস।</p>
+  <div class="steps-grid" role="table" aria-label="VIP 30 Event Steps">
+    <div class="step-card" role="row">
+      <div class="badge" aria-hidden="true">1</div>
+      <div>
+        <h4 role="rowheader">Join CK44 VIP</h4>
+        <p>Register &amp; verify (দ্রুত ভেরিফাই)।</p>
       </div>
     </div>
-  </section>
+    <div class="step-card" role="row">
+      <div class="badge" aria-hidden="true">2</div>
+      <div>
+        <h4 role="rowheader">Complete Missions</h4>
+        <p>Play PG Soft/JILI favorites.</p>
+      </div>
+    </div>
+    <div class="step-card" role="row">
+      <div class="badge" aria-hidden="true">3</div>
+      <div>
+        <h4 role="rowheader">Claim Rewards</h4>
+        <p>VIP 30 bonuses + Mystery Bonus.</p>
+      </div>
+    </div>
+    <div class="step-card" role="row">
+      <div class="badge" aria-hidden="true">4</div>
+      <div>
+        <h4 role="rowheader">Fast Withdrawal</h4>
+        <p>Local, quick &amp; secure payout.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
 
   <!-- Benefits -->
   <section class="wrap" id="benefits">
