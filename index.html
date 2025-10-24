@@ -420,6 +420,63 @@ footer{border-top:1px solid var(--border);background:linear-gradient(to top, rgb
 /* Optional: equal height for cards */
 .highlight-box, .pp-grid-wrapper{ display: flex; flex-direction: column; }
 
+
+/* === Mobile polish (<= 600px) === */
+@media (max-width: 600px){
+  /* tighter header */
+  header .nav{ padding:10px 14px; }
+  .nav .group .link, .nav .group .cta{ padding:8px 10px; border-radius:10px; font-weight:700; }
+  .nav .group{ gap:8px; }
+
+  /* hero stack + spacing */
+  .hero{ grid-template-columns: 1fr !important; row-gap:14px !important; padding:64px 14px 24px !important; }
+  .hero .text{ text-align:left; }
+  .badge{ font-size:12px; padding:6px 10px; }
+  .title{ font-size: clamp(26px, 7vw, 34px) !important; line-height:1.12 !important; letter-spacing:.2px; }
+  .lead{ font-size:15px !important; line-height:1.6 !important; }
+
+  /* buttons full-width & neat */
+  .actions{ gap:10px !important; }
+  .actions .btn,
+  .actions .btn.secondary{
+    width: 100% !important;
+    justify-content: center;
+    padding: 13px 14px !important;
+    border-radius: 12px !important;
+  }
+
+  /* banner full-width aspect */
+  .hero .banner{ max-width: 100% !important; aspect-ratio: 16 / 9 !important; margin: 6px 0 0 0 !important; padding: 0 !important; border-radius: 14px !important; }
+  .hero .banner img{ width:100%; height:100%; object-fit: cover; object-position: center; }
+
+  /* card hero spacing */
+  .card-hero{ padding:16px !important; border-radius:14px !important; }
+  .highlight-table th{ font-size:14px !important; }
+  .highlight-table td{ padding:8px !important; font-size:14px !important; }
+
+  /* social bar reposition */
+  .social-bar{
+    right: 12px !important;
+    bottom: 18px !important;
+    gap: 10px !important;
+  }
+  .social-bar a{ width:40px !important; height:40px !important; }
+
+  /* fix highlight grid spacing */
+  section.wrap{ padding: 40px 14px !important; }
+  .highlight-grid{ gap:16px !important; }
+  .highlight-box{ padding:18px 14px !important; }
+
+  /* event 2-col -> single col on small phones */
+  #events .steps-grid{ grid-template-columns: 1fr !important; gap:12px !important; }
+  #events .step-card{ padding:12px 12px !important; grid-template-columns: 44px 1fr !important; }
+  #events .step-card .badge{ width:34px !important; height:34px !important; }
+
+  /* FABs spacing */
+  .fab-wrap{ right: 14px !important; bottom: 18px !important; gap: 12px !important; }
+  .fab{ padding: 12px 14px !important; border-radius: 12px !important; }
+}
+
 </style>
 <!-- JSON-LD -->
 <script type="application/ld+json">
@@ -625,7 +682,7 @@ footer{border-top:1px solid var(--border);background:linear-gradient(to top, rgb
 
 <!-- Floating Action Buttons -->
 <div class="fab-wrap" aria-label="Quick actions">
-  <a class="fab call" href="event.html"> Promotion</a>
+  <a class="fab call" href="event.html">🎯 Promotion</a>
   <a class="fab join" href="https://www.wwwck-444.com/" rel="nofollow" target="_blank">Join Now</a>
   <a class="fab register" href="https://www.wwwck-444.com/register" rel="nofollow" target="_blank">Register</a>
 </div>
