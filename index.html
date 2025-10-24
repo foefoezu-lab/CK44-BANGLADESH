@@ -246,6 +246,29 @@ footer{border-top:1px solid var(--border);background:linear-gradient(to top, rgb
 100%{text-shadow:0 0 4px #FFD700,0 0 8px #FFD700,0 0 12px #FFD700,0 0 16px #FFD700;color:#FFD700}}
 /* subtle glow utility */
 .subtle-glow{ text-shadow:0 0 6px rgba(255,255,255,.35); }
+
+/* === Banner fit fixes (override) === */
+.hero .banner{
+  max-width:560px;
+  /* keep it visually tall on desktop so the 2-row span feels balanced */
+  aspect-ratio: 4 / 5;
+}
+.hero .banner img{
+  width:100%;
+  height:100%;
+  object-fit: cover;       /* fill with cropping for premium look */
+  object-position: center top; /* reduce cropping on important top area (faces, text) */
+}
+@media (max-width: 960px){
+  .hero .banner{
+    max-width:100%;
+    aspect-ratio: 16 / 9; /* more horizontal for mobile */
+  }
+  .hero .banner img{
+    object-position: center; /* center on mobile */
+  }
+}
+
 </style>
 <!-- JSON-LD -->
 <script type="application/ld+json">
@@ -305,7 +328,7 @@ footer{border-top:1px solid var(--border);background:linear-gradient(to top, rgb
 
     <!-- Right banner spans two rows -->
     <figure class="banner">
-      <img src="assets/referalck444 terbaru.jpg" alt="CK44 VIP Deluxe Banner" loading="lazy"/>
+      <img src="assets/referalck444%20terbaru.jpg" alt="CK44 VIP Deluxe Banner" loading="lazy"/>
     </figure>
 
     <div class="card-hero">
