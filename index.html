@@ -743,6 +743,41 @@ footer{border-top:1px solid var(--border);background:linear-gradient(to top, rgb
   ]
 }
 </script>
+
+  <!-- === CK44 SEO ADDITIONS (non-destructive) === -->
+  <link rel="canonical" href="https://ck-44-bangladesh.vercel.app/">
+  <!-- Open Graph -->
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://ck-44-bangladesh.vercel.app/">
+  <meta property="og:title" content="CK44 VIP — Bangladesh Trusted Casino Platform">
+  <meta property="og:description" content="Fast withdrawal, 24/7 support, Mystery Bonus &amp; VIP 30 Events.">
+  <meta property="og:image" content="https://ck-44-bangladesh.vercel.app/assets/og-cover.jpg">
+  <!-- Twitter -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="CK44 VIP — Bangladesh Trusted Casino Platform">
+  <meta name="twitter:description" content="Fast withdrawal, Mystery Bonus, VIP 30, 24/7 support.">
+  <meta name="twitter:image" content="https://ck-44-bangladesh.vercel.app/assets/og-cover.jpg">
+  <!-- Optional perf: preconnect to fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" crossorigin>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+
+<style>
+/* === CK44 Gold FX (non-destructive) === */
+#goldFX{
+  position: fixed; inset: 0;
+  width: 100vw; height: 100vh;
+  z-index: 0; pointer-events: none;
+}
+/* Keep all existing content above the canvas */
+body.gold-fx-enabled > *{ position: relative; z-index: 1; }
+
+/* Respect reduced motion */
+@media (prefers-reduced-motion: reduce){
+  #goldFX{ display:none !important; }
+}
+</style>
+
 </head>
 <body>
 <!-- Ambient sound -->
@@ -970,5 +1005,104 @@ new IntersectionObserver(es=>es.forEach(e=>{ audioEl.muted=!e.isIntersecting }),
   }
 })();
 </script>
+
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"How do I join and verify my CK44 VIP account?","acceptedAnswer":{"@type":"Answer","text":"Click Join Now, register, and complete a short KYC verification. Our support team is available 24/7 to help."}},{"@type":"Question","name":"How fast is the withdrawal process?","acceptedAnswer":{"@type":"Answer","text":"Withdrawals are typically fast (minutes) for local bank or e-wallet methods. Fast Withdrawal is available 24/7."}},{"@type":"Question","name":"What is VIP 30 and Mystery Bonus?","acceptedAnswer":{"@type":"Answer","text":"A daily program with missions, cashback tiers, and surprise bonus drops. Terms apply based on your VIP level."}},{"@type":"Question","name":"Which providers can I play on CK44 VIP?","acceptedAnswer":{"@type":"Answer","text":"Popular options include PG Soft, JILI, Rise of Thunder, Mahjong Ways 2, and Aztec Empire, among others."}}]}</script>
+
+<script>
+(function(){
+  // Create canvas without altering existing HTML structure manually
+  var c = document.createElement('canvas');
+  c.id = 'goldFX';
+  document.body.classList.add('gold-fx-enabled');
+  document.body.appendChild(c);
+
+  var dpr = Math.max(1, Math.min(2, window.devicePixelRatio || 1));
+  var ctx = c.getContext('2d');
+  var W=0, H=0, drops=[], stars=[], last=0;
+
+  function rnd(a,b){ return a + Math.random()*(b-a); }
+
+  function makeDrop(){
+    return {
+      x: rnd(0, W), y: rnd(-H, 0),
+      len: rnd(18*dpr, 42*dpr),
+      spd: rnd(40*dpr, 120*dpr),
+      w:  rnd(0.8*dpr, 1.8*dpr),
+      glow: rnd(.25,.7)
+    };
+  }
+  function makeStar(){
+    return {
+      x: rnd(0, W), y: rnd(0, H),
+      r: rnd(0.5*dpr, 1.8*dpr),
+      a: rnd(.3, .85),
+      tw: rnd(.8, 1.6) // twinkle speed
+    };
+  }
+
+  function resize(){
+    W = c.width  = Math.floor(window.innerWidth * dpr);
+    H = c.height = Math.floor(window.innerHeight * dpr);
+    c.style.width = '100vw';
+    c.style.height= '100vh';
+    var countRain = Math.floor((W*H)/(90000) * 18);  // density scaled by area
+    var countStar = Math.floor((W*H)/(120000) * 14);
+    drops = new Array(countRain).fill(0).map(makeDrop);
+    stars = new Array(countStar).fill(0).map(makeStar);
+  }
+
+  function draw(ts){
+    if(!last) last = ts;
+    var dt = Math.min(32, ts - last) / 1000; // cap dt for perf
+    last = ts;
+
+    ctx.clearRect(0,0,W,H);
+
+    // subtle warm vignette
+    var g = ctx.createRadialGradient(W*.5, H*.2, 0, W*.5, H*.3, Math.max(W,H)*.8);
+    g.addColorStop(0, 'rgba(255,215,128,0.04)');
+    g.addColorStop(1, 'rgba(0,0,0,0)');
+    ctx.fillStyle = g; ctx.fillRect(0,0,W,H);
+
+    // stars (twinkling)
+    for(var i=0;i<stars.length;i++){
+      var s = stars[i];
+      s.a += (Math.random()-.5)*0.02*s.tw;
+      s.a = Math.max(0.15, Math.min(.9, s.a));
+      ctx.beginPath();
+      ctx.arc(s.x, s.y, s.r, 0, Math.PI*2);
+      ctx.fillStyle = 'rgba(245,217,124,'+s.a+')';
+      ctx.shadowBlur = 8*dpr; ctx.shadowColor = 'rgba(245,217,124,0.6)';
+      ctx.fill();
+      ctx.shadowBlur = 0;
+    }
+
+    // gold rain
+    ctx.strokeStyle = 'rgba(245,217,124,0.9)';
+    for(var j=0;j<drops.length;j++){
+      var d = drops[j];
+      d.y += d.spd * dt;
+      if(d.y - d.len > H){
+        d.x = rnd(0, W);
+        d.y = rnd(-H*0.2, 0);
+        d.spd = rnd(40*dpr, 120*dpr);
+      }
+      ctx.lineWidth = d.w;
+      ctx.beginPath(); ctx.moveTo(d.x, d.y - d.len); ctx.lineTo(d.x, d.y); ctx.stroke();
+      // trailing glow
+      ctx.strokeStyle = 'rgba(245,217,124,0.35)';
+      ctx.beginPath(); ctx.moveTo(d.x, d.y - d.len*0.6); ctx.lineTo(d.x, d.y); ctx.stroke();
+      ctx.strokeStyle = 'rgba(245,217,124,0.9)';
+    }
+
+    requestAnimationFrame(draw);
+  }
+
+  resize();
+  window.addEventListener('resize', resize, {passive:true});
+  requestAnimationFrame(draw);
+})();
+</script>
+
 </body>
 </html>
