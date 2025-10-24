@@ -553,6 +553,77 @@ html[data-theme="sun"] footer{background:linear-gradient(to top, rgba(255,255,25
 @media (min-width:1400px){
   .hero > .highlight-image{ max-width: 560px !important; } /* allow larger on very wide screens */
 }
+
+/* === v21: Correct Hero Banner alignment (no glow animation) === */
+.hero {
+  display: grid !important;
+  grid-template-columns: 1fr 500px !important;
+  align-items: start !important;
+  gap: 32px !important;
+}
+.hero .highlight-image {
+  grid-column: 2 !important;
+  justify-self: end !important;
+  align-self: start !important;
+  margin-top: -10px !important;
+  margin-right: 12px !important;
+  max-width: 500px !important;
+  border-radius: 16px !important;
+  box-shadow: none !important;
+  animation: none !important;
+}
+.hero .highlight-image img {
+  border-radius: 16px !important;
+  border: 1px solid rgba(255,215,0,0.6) !important;
+  box-shadow: 0 0 28px rgba(255,215,0,0.25) !important;
+}
+@media (max-width: 960px) {
+  .hero {
+    grid-template-columns: 1fr !important;
+  }
+  .hero .highlight-image {
+    order: 3 !important;
+    justify-self: center !important;
+    align-self: center !important;
+    margin: 24px auto 0 auto !important;
+    max-width: 100% !important;
+  }
+}
+
+/* === v22: Center-right aligned Hero Banner (no glow, fully responsive) === */
+.hero {
+  display: grid !important;
+  grid-template-columns: 1fr 500px !important;
+  align-items: center !important; /* Center vertically */
+  gap: 32px !important;
+}
+.hero .highlight-image {
+  grid-column: 2 !important;
+  justify-self: end !important;
+  align-self: center !important;
+  margin: 0 16px 0 0 !important;
+  max-width: 500px !important;
+  border-radius: 16px !important;
+  box-shadow: none !important;
+  animation: none !important;
+}
+.hero .highlight-image img {
+  border-radius: 16px !important;
+  border: 1px solid rgba(255,215,0,0.6) !important;
+  box-shadow: 0 0 28px rgba(255,215,0,0.25) !important;
+}
+@media (max-width: 960px) {
+  .hero {
+    grid-template-columns: 1fr !important;
+  }
+  .hero .highlight-image {
+    order: 3 !important;
+    justify-self: center !important;
+    align-self: center !important;
+    margin: 24px auto 0 auto !important;
+    max-width: 100% !important;
+  }
+}
 </style>
 <!-- JSON-LD -->
 <script type="application/ld+json">
