@@ -4,8 +4,8 @@
 <meta charset="utf-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
 <title>CK44 VIP — প্রোমোশন পেজ | Bangladesh</title>
-<meta name="description" content="CK44 VIP Bangladesh — Trusted Casino Platform with Mystery Bonus, VIP 30 Event, Fast Withdrawal, 24/7 Support. Play PG Soft, JILI, Rise of Thunder, Mahjong Ways 2, Aztec Empire. Join TAKA ALLIANCE."/>
-<meta name="keywords" content="CK44 VIP, CK44VIP Bangladesh, Trusted Casino Platform, Mystery Bonus, VIP 30 Event, Fast Withdrawal, 24/7 Support, PG Soft, JILI, Rise of Thunder, Mahjong Ways 2, Aztec Empire, TAKA ALLIANCE, Bangladesh casino"/>
+<meta name="description" content="CK44 VIP Bangladesh — Trusted Casino Platform with Mystery Bonus, VIP 30 Event, Fast Withdrawal, 24/7 Support. Play PG Soft, JILI, Rise of Thunder, Mahjong Ways 2, Aztec Empire. Join <span class="glow-text">TAKA ALLIANCE</span>."/>
+<meta name="keywords" content="CK44 VIP, CK44VIP Bangladesh, Trusted Casino Platform, Mystery Bonus, VIP 30 Event, Fast Withdrawal, 24/7 Support, PG Soft, JILI, Rise of Thunder, Mahjong Ways 2, Aztec Empire, <span class="glow-text">TAKA ALLIANCE</span>, Bangladesh casino"/>
 <meta name="robots" content="index, follow"/>
 <meta name="theme-color" content="#0a0a0d"/>
 <link rel="canonical" href="https://ck44vip.vercel.app/"/>
@@ -100,9 +100,13 @@ header{
   display:grid; grid-template-columns:1fr 560px; grid-template-rows:auto auto;
   align-items:stretch; column-gap:32px; row-gap:22px;
   max-width:1220px; margin:0 auto; padding:90px 20px 60px;
-}
+
+  align-items: center; /* center vertically with banner */}
 .hero .text{grid-column:1;grid-row:1}
-.hero .card-hero{grid-column:1;grid-row:2}
+.hero .card-hero{grid-column:1;grid-row:2
+  margin-top: 24px;
+  margin-bottom: 24px;
+  box-shadow: inset 0 0 25px rgba(255,215,0,.12);}
 .hero .banner{grid-column:2;grid-row:1 / 3; align-self:stretch; justify-self:end;
   width:100%; max-width:560px; border-radius:18px; overflow:hidden;
   border:1px solid rgba(255,215,0,.6); box-shadow:0 0 32px rgba(255,215,0,.22);
@@ -123,7 +127,10 @@ header{
 .btn.secondary{background:transparent;border:1px solid rgba(245,217,124,.38);color:var(--gold);font-weight:700}
 
 /* Hero card */
-.card-hero{background:linear-gradient(180deg,rgba(255,255,255,.04),rgba(255,255,255,.015));border:1px solid var(--border);border-radius:18px;padding:20px;position:relative;overflow:hidden;box-shadow:0 14px 40px rgba(0,0,0,.5)}
+.card-hero{background:linear-gradient(180deg,rgba(255,255,255,.04),rgba(255,255,255,.015));border:1px solid var(--border);border-radius:18px;padding:20px;position:relative;overflow:hidden;box-shadow:0 14px 40px rgba(0,0,0,.5)
+  margin-top: 24px;
+  margin-bottom: 24px;
+  box-shadow: inset 0 0 25px rgba(255,215,0,.12);}
 .card-hero .sigil{position:absolute;inset:auto -40px -40px auto;width:360px;height:360px;opacity:.12;filter:blur(.2px);background:radial-gradient(circle at 50% 50%, rgba(245,217,124,.55), rgba(245,217,124,0) 60%);mask:radial-gradient(circle at 50% 50%, black 35%, transparent 36%), radial-gradient(circle at 50% 50%, transparent 0 46%, black 47% 48%, transparent 49% 56%, black 57% 58%, transparent 59% 100%);mix-blend-mode:screen}
 .list{display:grid;gap:10px;margin-top:6px;font-size:14px;color:#e7e7f6}
 .list li{list-style:none;padding:10px 12px;border:1px solid var(--border);border-radius:12px;background:rgba(255,255,255,.02)}
@@ -189,7 +196,8 @@ footer{border-top:1px solid var(--border);background:linear-gradient(to top, rgb
 
 /* ===== RESPONSIVE ===== */
 @media(max-width:960px){
-  .hero{grid-template-columns:1fr;grid-template-rows:auto auto auto;padding:70px 16px 24px;row-gap:16px}
+  .hero{grid-template-columns:1fr;grid-template-rows:auto auto auto;padding:70px 16px 24px;row-gap:16px
+  align-items: center; /* center vertically with banner */}
   .hero .text{grid-row:1}.hero .banner{grid-row:2;max-width:100%;justify-self:center
   margin-top: 12px;
   margin-left: 8px;
@@ -197,7 +205,48 @@ footer{border-top:1px solid var(--border);background:linear-gradient(to top, rgb
   background:#000;
   margin: 16px 14px 16px 14px;
   padding: 8px;
-  background:#000;}.hero .card-hero{grid-row:3}
+  background:#000;}.hero .card-hero{grid-row:3
+  margin-top: 24px;
+  margin-bottom: 24px;
+  box-shadow: inset 0 0 25px rgba(255,215,0,.12);}
+}
+
+/* === CK44 VIP: Highlight Table Styles (v44) === */
+.highlight-table {
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0;
+  background: rgba(0, 0, 0, .4);
+  border: 1px solid rgba(255, 215, 0, .25);
+  border-radius: 14px;
+  box-shadow: inset 0 0 25px rgba(255,215,0,.12);
+  margin-top: 10px;
+}
+.highlight-table td, .highlight-table th {
+  padding: 10px;
+  text-align: center;
+  vertical-align: middle;
+  color: #f5f5f7;
+  border-top: 1px solid rgba(255,255,255,.05);
+}
+.highlight-table th {
+  background: linear-gradient(135deg, var(--gold), var(--gold2));
+  color: #0b0b10;
+  font-size: 15px;
+  font-weight: 800;
+  border-top: none;
+  border-radius: 14px 14px 0 0;
+}
+
+
+.glow-text {
+  animation: glow 1.8s ease-in-out infinite alternate;
+  color: #FFD700;
+}
+@keyframes glow {
+  0% { text-shadow: 0 0 4px #FFD700,0 0 8px #FFD700,0 0 12px #FFD700,0 0 16px #FFD700; color:#FFD700; }
+  50% { text-shadow: 0 0 6px #FFD700,0 0 12px #FFD700,0 0 18px #FFD700,0 0 24px #FFD700; color:#FFE066; }
+  100% { text-shadow: 0 0 4px #FFD700,0 0 8px #FFD700,0 0 12px #FFD700,0 0 16px #FFD700; color:#FFD700; }
 }
 </style>
 <!-- JSON-LD -->
@@ -209,7 +258,7 @@ footer{border-top:1px solid var(--border);background:linear-gradient(to top, rgb
      "sameAs":["https://t.me/yourchannel","https://instagram.com/yourprofile","https://twitter.com/yourprofile","https://medium.com/@yourprofile","https://www.quora.com/profile/yourprofile","https://www.tiktok.com/@yourprofile"]},
     {"@type":"Organization","name":"CK44 VIP","url":"https://ck44vip.vercel.app","areaServed":"Bangladesh",
      "slogan":"Trusted Casino Platform • Mystery Bonus • VIP 30 Event",
-     "knowsAbout":["Trusted Casino Platform","Mystery Bonus","VIP 30 Event","Fast Withdrawal","24/7 Support","PG Soft","JILI","Rise of Thunder","Mahjong Ways 2","Aztec Empire","TAKA ALLIANCE"],
+     "knowsAbout":["Trusted Casino Platform","Mystery Bonus","VIP 30 Event","Fast Withdrawal","24/7 Support","PG Soft","JILI","Rise of Thunder","Mahjong Ways 2","Aztec Empire","<span class="glow-text">TAKA ALLIANCE</span>"],
      "logo":"assets/og-1080x1080.jpg"}
   ]
 }
@@ -246,7 +295,7 @@ footer{border-top:1px solid var(--border);background:linear-gradient(to top, rgb
       <h1 class="title">Mystery Bonus &amp; <span style="background:linear-gradient(135deg,var(--gold),#fff);-webkit-background-clip:text;color:transparent">VIP 30 Event</span></h1>
       <p class="lead">
         Play <b>PG Soft</b>, <b>JILI</b>, <b>Rise of Thunder</b>, <b>Mahjong Ways 2</b>, <b>Aztec Empire</b>.<br/>
-        Enjoy <b>Fast Withdrawal</b>, <b>24/7 Support</b>, and perks from <b>TAKA ALLIANCE</b>. <br/>
+        Enjoy <b>Fast Withdrawal</b>, <b>24/7 Support</b>, and perks from <b><span class="glow-text">TAKA ALLIANCE</span></b>. <br/>
         <span lang="bn" style="opacity:.9">এখানেই সেরা বোনাস ও দ্রুত পেমেন্ট — join now!</span>
       </p>
       <div class="actions">
@@ -263,14 +312,12 @@ footer{border-top:1px solid var(--border);background:linear-gradient(to top, rgb
 
     <div class="card-hero">
       <div class="sigil"></div>
-      <div class="chip" style="display:inline-flex;gap:8px;align-items:center;font-size:12px;color:#0b0b10;background:linear-gradient(135deg,var(--gold),var(--gold2));padding:6px 10px;border-radius:999px;font-weight:800;box-shadow:var(--ring)">Highlights</div>
-      <ul class="list">
-        <li>Trusted Casino Platform (Bangladesh) • বাংলাদেশ</li>
-        <li>Fast Withdrawal &amp; 24/7 Support • দ্রুত পেমেন্ট</li>
-        <li>Mystery Bonus • VIP 30 Event • এক্সক্লুসিভ অফার</li>
-        <li>PG Soft • JILI • Rise of Thunder • Mahjong Ways 2 • Aztec Empire</li>
-        <li class="powered" style="text-align:center;font-weight:700;color:#ffd700;letter-spacing:.6px;text-shadow:0 0 25px rgba(255,215,0,1),0 0 60px rgba(255,240,150,1)">Powered by <b>TAKA ALLIANCE</b></li>
-      </ul>
+      <table class="highlight-table">
+  <tr><td colspan="3" style="text-align:center;font-weight:800;font-size:16px;color:#f5d97c;">HIGHLIGHTS</td></tr>
+  <tr><td>Trusted Casino Platform (Bangladesh) • বাংলাদেশ</td><td>Fast Withdrawal &amp; 24/7 Support • দ্রুত পেমেন্ট</td><td>Mystery Bonus • VIP 30 Event • এক্সক্লুসিভ অফার</td></tr>
+  <tr><td colspan="3" style="text-align:center">PG Soft • JILI • Rise of Thunder • Mahjong Ways 2 • Aztec Empire</td></tr>
+  <tr><td colspan="3" style="text-align:center">Powered by <b><span class="glow-text">TAKA ALLIANCE</span></b></td></tr>
+</table>
       <div class="kpi">
         <div><b>24/7</b><span>Live Support</span></div>
         <div><b>Fast</b><span>Withdrawal</span></div>
@@ -360,7 +407,7 @@ footer{border-top:1px solid var(--border);background:linear-gradient(to top, rgb
     <div class="grid-3">
       <article class="card"><h3>Fast Withdrawal</h3><p>Quick cash out with local methods.</p></article>
       <article class="card"><h3>24/7 Support</h3><p>We help you anytime. | ২৪/৭ সাপোর্ট</p></article>
-      <article class="card"><h3>TAKA ALLIANCE</h3><p>Exclusive perks for members.</p></article>
+      <article class="card"><h3><span class="glow-text">TAKA ALLIANCE</span></h3><p>Exclusive perks for members.</p></article>
     </div>
   </section>
 </main>
