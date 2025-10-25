@@ -1158,6 +1158,225 @@ table thead th,
 
 
 <link rel="preload" as="image" href="assets/referalck444%20terbaru.webp">
+
+<style>
+
+/* === FINAL HEADER MOBILE VISIBILITY PATCH (promo button always visible) === */
+@media (max-width:640px){
+  header .nav{ padding:10px 12px !important; }
+
+  .nav .group{
+    display:flex !important;
+    flex-wrap:wrap !important;
+    overflow:visible !important;
+    justify-content:flex-start !important;
+    gap:8px 10px !important;
+  }
+
+  /* show all menu buttons (Games / Events / Benefits / প্রোমোশন) in first row */
+  .nav .group .link,
+  .nav .group .cta{
+    order:1 !important;
+    white-space:nowrap !important;
+    display:inline-flex !important;
+    align-items:center !important;
+    padding:8px 10px !important;
+    border-radius:10px !important;
+    font-weight:700 !important;
+  }
+
+  /* live pill goes full width as second row */
+  .nav .group .header-pill{
+    order:2 !important;
+    flex:1 1 100% !important;
+    width:100% !important;
+    justify-content:center !important;
+    margin-top:4px !important;
+    font-size:12px !important;
+    padding:6px 10px !important;
+  }
+
+  /* countdown pill (if any) after live pill */
+  .nav .group .header-countdown{
+    order:3 !important;
+    flex:1 1 100% !important;
+    width:100% !important;
+    text-align:center !important;
+  }
+}
+
+</style>
+
+<style>
+
+/* === PROMO BUTTON MOBILE MIRROR PATCH (v6) === */
+/* default: hide the mobile clone */
+.promo-mobile{
+  display:none;
+}
+
+/* phones: show promo-mobile like normal pill; hide gradient .cta */
+@media(max-width:640px){
+  /* force wrap so promo visible */
+  .nav .group{
+    flex-wrap:wrap !important;
+    overflow:visible !important;
+    gap:8px 10px !important;
+    justify-content:flex-start !important;
+  }
+
+  /* show cloned promo button */
+  .promo-mobile{
+    display:inline-flex !important;
+    align-items:center !important;
+    white-space:nowrap !important;
+    padding:8px 10px !important;
+    border-radius:10px !important;
+    font-weight:700 !important;
+    text-decoration:none !important;
+    color:var(--gold) !important;
+    background:rgba(255,255,255,.04) !important;
+    border:1px solid var(--border) !important;
+  }
+
+  /* hide original .cta button on mobile to avoid double */
+  .nav .group .cta{
+    display:none !important;
+  }
+
+  /* Live pill full width row under buttons */
+  .nav .group .header-pill{
+    flex:1 1 100% !important;
+    width:100% !important;
+    order:99 !important;
+    justify-content:center !important;
+    margin-top:4px !important;
+    padding:6px 10px !important;
+    font-size:12px !important;
+  }
+}
+
+</style>
+
+<style>
+
+/* === PROMO BUTTON FORCE SHOW PATCH (v7 final override) === */
+@media (max-width:640px){
+
+  /* header nav container must wrap and not hide overflow */
+  .nav .group{
+    flex-wrap:wrap !important;
+    overflow:visible !important;
+    max-width:100% !important;
+    justify-content:flex-start !important;
+    gap:8px 10px !important;
+  }
+
+  /* show original .cta (প্রোমোশন) always */
+  .nav .group .cta{
+    display:inline-flex !important;
+    order:1 !important;
+    white-space:nowrap !important;
+    padding:8px 10px !important;
+    border-radius:10px !important;
+    font-weight:700 !important;
+
+    /* make style match pills instead of big gradient */
+    background:rgba(255,255,255,.04) !important;
+    background-image:none !important;
+    box-shadow:none !important;
+    border:1px solid var(--border) !important;
+    color:var(--gold) !important;
+  }
+
+  /* make sure Games / Events / Benefits stay visible too */
+  .nav .group .link{
+    order:1 !important;
+    display:inline-flex !important;
+    white-space:nowrap !important;
+    padding:8px 10px !important;
+    border-radius:10px !important;
+    font-weight:700 !important;
+  }
+
+  /* pill "Live XXX Online" goes second row full width */
+  .nav .group .header-pill{
+    order:99 !important;
+    flex:1 1 100% !important;
+    width:100% !important;
+    justify-content:center !important;
+    margin-top:4px !important;
+    padding:6px 10px !important;
+    font-size:12px !important;
+  }
+}
+
+</style>
+
+<style>
+
+/* === FINAL HEADER MOBILE CLEAN PATCH (v9) === */
+@media (max-width:640px){
+
+  /* wrap nav buttons nicely */
+  .nav .group{
+    flex-wrap:wrap !important;
+    overflow:visible !important;
+    justify-content:flex-start !important;
+    gap:8px 10px !important;
+  }
+
+  /* main promo button (.cta) style compact pill */
+  .nav .group .cta{
+    display:inline-flex !important;
+    order:1 !important;
+    white-space:nowrap !important;
+    padding:8px 10px !important;
+    border-radius:10px !important;
+    font-weight:700 !important;
+    background:rgba(255,255,255,.04) !important;
+    background-image:none !important;
+    box-shadow:none !important;
+    border:1px solid var(--border) !important;
+    color:var(--gold) !important;
+  }
+
+  /* nav basic buttons */
+  .nav .group .link{
+    order:1 !important;
+    display:inline-flex !important;
+    white-space:nowrap !important;
+    padding:8px 10px !important;
+    border-radius:10px !important;
+    font-weight:700 !important;
+  }
+
+  /* pills (Live Online + Promo ends) go to next rows, full width */
+  .nav .group .header-pill{
+    flex:1 1 100% !important;
+    width:100% !important;
+    order:99 !important;
+    justify-content:center !important;
+    margin-top:4px !important;
+    padding:6px 10px !important;
+    font-size:12px !important;
+    display:flex !important;
+  }
+
+  /* make sure countdown pill is visible even on very small screens */
+  .nav .group .header-countdown{
+    display:flex !important;
+  }
+}
+
+/* also override ultra-small rule that hid countdown under 380px */
+@media (max-width:380px){
+  .nav .group .header-countdown{
+    display:flex !important;
+  }
+}
+
+</style>
 </head>
 <body>
 <!-- Ambient sound -->
@@ -1177,8 +1396,16 @@ table thead th,
       <a class="link" href="#games">Games</a>
       <a class="link" href="#events">Events</a>
       <a class="link" href="#benefits">Benefits</a>
-      <a class="cta" href="event.html" aria-label="Promotion">প্রোমোশন</a>
-    </div>
+<a class="cta" href="event.html" aria-label="Promotion">প্রোমোশন</a>
+    
+      <div class="header-pill" id="hp-support">
+        <span class="dot"></span>
+        <span>Live 150 Online</span>
+      </div>
+      <div class="header-pill header-countdown">
+        Promo ends in <span class="time" id="hp-time">--:--:--</span>
+      </div>
+</div>
   </nav>
 </header>
 
@@ -1585,6 +1812,26 @@ new IntersectionObserver(es=>es.forEach(e=>{ audioEl.muted=!e.isIntersecting }),
   tick();
 })();
 </script>
+<script>
+// standalone countdown updater (mobile + desktop)
+(function(){
+  var el = document.getElementById('hp-time');
+  if(!el) return;
+  var target = new Date();
+  target.setHours(target.getHours()+8); // 8h window
+  function two(n){ return n<10 ? '0'+n : ''+n; }
+  function tick(){
+    var now = new Date();
+    var s = Math.max(0, Math.floor((target - now)/1000));
+    var h = Math.floor(s/3600); s%=3600;
+    var m = Math.floor(s/60);  s%=60;
+    el.textContent = two(h)+':'+two(m)+':'+two(s);
+    requestAnimationFrame(tick);
+  }
+  tick();
+})();
+</script>
+
 
 
 
