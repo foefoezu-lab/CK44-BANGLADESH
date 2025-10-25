@@ -1442,20 +1442,21 @@ table thead th,
 </style>
 
 <style id="ck44-nolag-patch">
-/* PATCH: stop animations only, keep layout EXACT */
-/* 1. Background hitam + sedikit emas */
+/* PATCH: smooth no-lag
+   - background hitam + sedikit emas glow
+   - matikan animasi berat (tapi marquee provider tetap jalan)
+*/
+
 body{
   background:
     radial-gradient(circle at 20% 15%, rgba(245,217,124,0.18) 0%, rgba(0,0,0,0) 60%),
     #000 !important;
 }
 
-/* 2. Matikan animasi berat */
 .bg-aurora,
 .gold-beams,
 .gold-beams:after,
 .stardust i,
-.pp-track-ck,
 .tile-anim,
 .tile-anim:before {
   animation: none !important;
@@ -1463,7 +1464,7 @@ body{
   transform: none !important;
 }
 
-/* 3. Matikan canvas hujan emas */
+/* matiin hujan emas canvas */
 #goldFX{
   display:none !important;
   visibility:hidden !important;
@@ -1471,11 +1472,10 @@ body{
   pointer-events:none !important;
 }
 
-/* 4. Freeze keyframes supaya browser tidak render GPU loop */
+/* freeze keyframes berat; ck-scroll (logo jalan) tetap hidup */
 @keyframes aurora{0%{transform:none}100%{transform:none}}
 @keyframes beams{0%{transform:none}100%{transform:none}}
 @keyframes float{0%{transform:none}100%{transform:none}}
-@keyframes ck-scroll{0%{transform:none}100%{transform:none}}
 @keyframes floaty{0%{transform:none}100%{transform:none}}
 @keyframes scan{0%{transform:none}100%{transform:none}}
 </style>
@@ -1977,6 +1977,35 @@ new IntersectionObserver(es=>es.forEach(e=>{ audioEl.muted=!e.isIntersecting }),
     }
   ]
 }
+</script>
+
+
+<script id="ck44-livepatch">
+(function(){
+  function updateLiveOnline(){
+    var pill = document.getElementById('hp-support');
+    if(!pill) return;
+    // baca angka yang ada sekarang
+    var matchNum = pill.textContent.match(/Live\s+(\d+)\s+Online/i);
+    var current = matchNum ? parseInt(matchNum[1],10) : null;
+    if (!current || isNaN(current)) {
+      current = Math.floor(150 + Math.random()*40); // fallback awal 150-190
+    }
+    // random +/- 1..5 biar keliatan hidup pelan
+    var diff = Math.floor(Math.random()*11)-5; // -5..+5
+    var nextVal = current + diff;
+    // clamp supaya keliatan realistis (120-260)
+    if (nextVal < 120) nextVal = 120;
+    if (nextVal > 260) nextVal = 260;
+    pill.innerHTML = '<span class="dot"></span><span>Live ' + nextVal + ' Online</span>';
+  }
+
+  // langsung jalan sekali setelah render
+  setTimeout(updateLiveOnline, 300);
+
+  // lalu update tiap 2 detik
+  setInterval(updateLiveOnline, 2000);
+})();
 </script>
 
 </body>
