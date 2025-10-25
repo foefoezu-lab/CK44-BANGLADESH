@@ -19,7 +19,7 @@
 
 <style>
 /* =========================
-   CK44 VIP — DELUXE GOLD v33 (light mobile perf)
+   CK44 VIP — DELUXE GOLD v32 (base layout)
    ========================= */
 :root{
   --bg:#000;
@@ -45,7 +45,7 @@ body{
   background:#000 !important;
 }
 
-/* ===== STATIC BLACK BACKGROUND LAYER ===== */
+/* ===== STATIC BACKGROUND LAYERS ===== */
 .bg-wrap{
   position:fixed;
   inset:0;
@@ -91,32 +91,44 @@ body{
 }
 @keyframes beams{ to{ transform: rotate(1turn) } }
 
-/* background stardust wrapper (static container, no JS spawn here) */
 .stardust{
   position:absolute;
   inset:0;
   background:transparent;
-  pointer-events:none;
   overflow:hidden;
+  pointer-events:none;
+}
+.stardust i{
+  position:absolute;
+  width:3px;
+  height:3px;
+  border-radius:50%;
+  background:rgba(255,215,0,.9);
+  box-shadow:0 0 8px rgba(255,215,0,.8);
+  animation: float 10s linear infinite;
+}
+@keyframes float{
+  from{ transform: translateY(120vh) scale(1) }
+  to  { transform: translateY(-20vh)  scale(1.1) }
 }
 
-/* fallback css line rain shimmer */
+/* subtle CSS rain fallback */
 .rain,
 .rain2{
   position:fixed;
   inset:0;
   z-index:-3;
   pointer-events:none;
-  opacity:.28;
+  opacity:.35;
   background-repeat:repeat;
 }
 .rain{
-  background-image: linear-gradient(180deg, rgba(255,255,255,.22) 0%, transparent 60%);
+  background-image: linear-gradient(180deg, rgba(255,255,255,.25) 0%, transparent 60%);
   background-size: 1px 88px;
   animation: rainA 1.35s linear infinite;
 }
 .rain2{
-  background-image: linear-gradient(180deg, rgba(245,217,124,.18) 0%, transparent 70%);
+  background-image: linear-gradient(180deg, rgba(245,217,124,.22) 0%, transparent 70%);
   background-size: 2px 120px;
   animation: rainB 1.85s linear infinite;
 }
@@ -184,7 +196,7 @@ header{
   box-shadow:var(--ring);
 }
 
-/* ===== HERO SECTION ===== */
+/* ===== HERO ===== */
 .hero{
   display:grid;
   grid-template-columns:1fr 560px;
@@ -265,8 +277,6 @@ header{
   background:linear-gradient(135deg,var(--gold),var(--gold2));
   color:#0b0b10;
   box-shadow:var(--ring);
-  transition:transform .16s ease, box-shadow .16s ease, opacity .16s ease;
-  will-change:transform;
 }
 .btn.secondary{
   background:transparent;
@@ -274,11 +284,6 @@ header{
   color:var(--gold);
   font-weight:700;
 }
-.btn:hover,
-.cta:hover{transform:translateY(-1px);}
-.btn:active,
-.cta:active{transform:translateY(0);opacity:.95;}
-
 .trust{
   color:#dcdff3;
   opacity:.9;
@@ -295,7 +300,7 @@ header{
   margin:0 6px;
 }
 
-/* hero info card on the left bottom row */
+/* info card */
 .card-hero{
   grid-column:1;
   grid-row:2;
@@ -322,7 +327,7 @@ header{
   mix-blend-mode:screen;
 }
 
-/* highlight mini-table in card */
+/* highlight mini-table */
 .highlight-table{
   width:100%;
   border-collapse:separate;
@@ -375,7 +380,7 @@ header{
   font-size:12px;
 }
 
-/* text glow helpers */
+/* glows */
 .glow-text{
   animation:ckglow 1.8s ease-in-out infinite alternate;
   color:#FFD700;
@@ -398,7 +403,7 @@ header{
   text-shadow:0 0 6px rgba(255,255,255,.35);
 }
 
-/* ===== HIGHLIGHT GRID ===== */
+/* ===== CONTENT SECTIONS ===== */
 section.wrap{
   max-width:1220px;
   margin:0 auto;
@@ -417,6 +422,8 @@ h2.section{
   margin:0 auto 26px;
   text-align:center;
 }
+
+/* highlight grid (3 col desktop) */
 .highlight-grid{
   display:grid;
   grid-template-columns:repeat(3,1fr);
@@ -426,8 +433,6 @@ h2.section{
   text-align:center;
   align-items:stretch;
 }
-
-/* each highlight box */
 .highlight-box{
   background:#0b0b10;
   border:1px solid rgba(255,215,0,.35);
@@ -438,9 +443,7 @@ h2.section{
   display:flex;
   flex-direction:column;
 }
-.highlight-box:hover{
-  transform:translateY(-4px);
-}
+.highlight-box:hover{transform:translateY(-4px);}
 
 .provider-title-ck{
   margin:4px 0 14px;
@@ -455,7 +458,7 @@ h2.section{
   text-shadow:0 0 10px rgba(255,214,77,.25);
 }
 
-/* provider panel */
+/* providers panel */
 .pp-grid-wrapper{
   background:radial-gradient(120% 100% at 50% 0%, rgba(255,214,77,.06), transparent 60%) #0b0b0f;
   border:1px solid rgba(255,214,77,.55);
@@ -516,7 +519,7 @@ h2.section{
   opacity:1;
 }
 
-/* 3 inner cells */
+/* 3 mini cells under provider logos */
 .pp-grid3{
   width:100%;
   max-width:100%;
@@ -551,7 +554,7 @@ h2.section{
   filter: drop-shadow(0 0 10px rgba(255,214,77,.25));
 }
 
-/* ===== Popular Games ===== */
+/* Popular Games grid */
 .grid-3{
   display:grid;
   grid-template-columns:repeat(3,1fr);
@@ -603,7 +606,7 @@ h2.section{
 }
 @keyframes scan{to{transform: rotate(1turn)}}
 
-/* ===== EVENTS / STEPS ===== */
+/* Events / VIP 30 steps */
 #events .steps-grid{
   max-width:880px;
   margin:18px auto 0;
@@ -650,7 +653,7 @@ h2.section{
   line-height:1.4;
 }
 
-/* ===== FOOTER & FLOAT ACTIONS ===== */
+/* ===== FOOTER & FLOATING ACTIONS ===== */
 footer{
   border-top:1px solid var(--border);
   background:linear-gradient(to top, rgba(0,0,0,.55), rgba(0,0,0,.25));
@@ -669,7 +672,7 @@ footer{
   gap:6px;
 }
 
-/* floating social icons */
+/* social bar floating */
 .social-bar{
   position:fixed;
   right:28px;
@@ -703,7 +706,7 @@ footer{
   fill:currentColor;
 }
 
-/* floating FAB buttons */
+/* CTA fab buttons */
 .fab-wrap{
   position:fixed;
   right:28px;
@@ -726,8 +729,6 @@ footer{
   text-align:center;
   min-width:140px;
   font-family:inherit;
-  transition:transform .16s ease, box-shadow .16s ease, opacity .16s ease;
-  will-change:transform;
 }
 .fab.call{
   background:linear-gradient(135deg,var(--gold),var(--gold2));
@@ -741,19 +742,13 @@ footer{
   background:linear-gradient(135deg,#60a5fa,#3b82f6);
   color:#071a2e;
 }
-.fab:hover{transform:translateY(-1px);}
-.fab:active{transform:translateY(0);opacity:.95;}
 
-/* MOBILE / SMALL VIEWPORT OVERRIDES */
+/* ===== RESPONSIVE ===== */
 
-/* header tweaks */
+/* header tweak mobile */
 @media(max-width:600px){
   header .nav{padding:10px 14px;}
-  .nav .group{
-    gap:8px;
-    flex-wrap:wrap;
-    justify-content:center;
-  }
+  .nav .group{gap:8px;}
   .nav .group .link,
   .nav .group .cta{
     padding:8px 10px;
@@ -762,7 +757,7 @@ footer{
   }
 }
 
-/* hero to single-column and nicer buttons on mobile */
+/* hero single-column on mobile */
 @media(max-width:960px){
   .hero{
     grid-template-columns:1fr;
@@ -800,13 +795,11 @@ footer{
   }
   .actions{
     gap:10px;
-    justify-content:center;
   }
-  /* tombol TIDAK full width, biar kelihatan profesional */
+  /* di HP tombol full width (tetap seperti versi kamu sebelumnya) */
   .actions .btn,
   .actions .btn.secondary{
-    width:auto;
-    min-width:140px;
+    width:100%;
     justify-content:center;
     padding:13px 14px;
     border-radius:12px;
@@ -815,7 +808,7 @@ footer{
   .highlight-table td{padding:8px;font-size:14px}
 }
 
-/* provider grid + highlight grid on phones */
+/* provider / grid / social / fab tweaks on very small screens */
 @media(max-width:600px){
   .highlight-grid{
     grid-template-columns:1fr !important;
@@ -856,7 +849,7 @@ footer{
     flex-wrap:wrap !important;
     justify-content:center !important;
     gap:16px !important;
-    animation:none !important; /* stop marquee on tiny screens */
+    animation:none !important; /* stop marquee on tiny view */
   }
   .pp-track-ck img{height:24px !important}
   .pp-grid3{
@@ -875,7 +868,6 @@ footer{
     text-align:center !important;
   }
 
-  /* steps grid already 1 col, just tighten spacing */
   #events .steps-grid{
     grid-template-columns:1fr !important;
     gap:12px !important;
@@ -891,12 +883,10 @@ footer{
     font-size:14px !important;
   }
 
-  /* hide social bar on very small screen */
   .social-bar{
     display:none !important;
   }
 
-  /* fab wrap smaller & lower-right safe */
   .fab-wrap{
     right:12px !important;
     bottom:14px !important;
@@ -914,7 +904,7 @@ footer{
   }
 }
 
-/* remove underline artifacts under nav buttons */
+/* remove underline/outline weirdness for nav buttons on tap */
 .nav .group .link,
 .nav .group .cta{
   text-decoration:none !important;
@@ -940,7 +930,7 @@ footer{
   border-bottom:0 !important;
 }
 
-/* gold rain canvas */
+/* canvas gold rain base style */
 #goldFX{
   position:fixed;
   inset:0;
@@ -958,23 +948,59 @@ footer{
 @media (max-width:390px){
   #goldFX{opacity:.65;}
 }
+
+/* === FORCE DARK BACKGROUND LIKE EVENT PAGE === */
+.bg-aurora,
+.gold-beams {
+  display: none !important;
+}
+.rain,
+.rain2 {
+  opacity: 0.18 !important;
+  background-image: linear-gradient(180deg, rgba(255,255,255,0.18) 0%, transparent 60%) !important;
+}
+body {
+  background:#000 !important;
+}
 </style>
 
-<!-- schema.org basic -->
+<!-- schema.org -->
 <script type="application/ld+json">
 {
   "@context":"https://schema.org",
-  "@type":"Organization",
-  "name":"CK44 VIP",
-  "url":"https://ck-44-bangladesh.vercel.app",
-  "areaServed":"Bangladesh",
-  "logo":"assets/og-1080x1080.jpg",
-  "contactPoint":[
+  "@graph":[
     {
-      "@type":"ContactPoint",
-      "contactType":"customer support",
-      "availableLanguage":["en","bn"],
-      "areaServed":"BD"
+      "@type":"WebSite",
+      "name":"CK44 VIP Bangladesh",
+      "url":"https://ck-44-bangladesh.vercel.app",
+      "inLanguage":"en",
+      "sameAs":[
+        "https://t.me/yourchannel",
+        "https://instagram.com/yourprofile",
+        "https://twitter.com/yourprofile",
+        "https://www.tiktok.com/@yourprofile"
+      ]
+    },
+    {
+      "@type":"Organization",
+      "name":"CK44 VIP",
+      "url":"https://ck-44-bangladesh.vercel.app",
+      "areaServed":"Bangladesh",
+      "slogan":"Trusted Casino Platform • Mystery Bonus • VIP 30 Event",
+      "knowsAbout":[
+        "Trusted Casino Platform",
+        "Mystery Bonus",
+        "VIP 30 Event",
+        "Fast Withdrawal",
+        "24/7 Support",
+        "PG Soft",
+        "JILI",
+        "Rise of Thunder",
+        "Mahjong Ways 2",
+        "Aztec Empire",
+        "TAKA ALLIANCE"
+      ],
+      "logo":"assets/og-1080x1080.jpg"
     }
   ]
 }
@@ -987,10 +1013,10 @@ footer{
 
 <body>
 
-<!-- optional ambient audio -->
+<!-- optional bg audio -->
 <audio id="ambientAudio" src="assets/ambient.mp3" autoplay loop preload="auto" playsinline></audio>
 
-<!-- background layers -->
+<!-- background stack -->
 <div class="bg-wrap" aria-hidden="true">
   <div class="bg-aurora"></div>
   <div class="gold-beams"></div>
@@ -1059,12 +1085,12 @@ footer{
       </div>
     </div>
 
-    <!-- Right banner -->
+    <!-- Banner image -->
     <figure class="banner">
       <img src="assets/referalck444%20terbaru.jpg" alt="CK44 VIP Deluxe Banner" loading="lazy"/>
     </figure>
 
-    <!-- Info card -->
+    <!-- Highlight card -->
     <div class="card-hero">
       <div class="sigil"></div>
 
@@ -1122,7 +1148,7 @@ footer{
     </div>
   </section>
 
-  <!-- GRID SECTION -->
+  <!-- FEATURE GRID -->
   <section class="highlight-grid">
     <div class="highlight-box left">
       <h3 class="provider-title-ck" style="margin-top:0">Premium Highlights</h3>
@@ -1138,6 +1164,7 @@ footer{
       <div class="pp-grid-wrapper">
         <h3 class="provider-title-ck">Official Game Providers of CK44 VIP</h3>
 
+        <!-- marquee row of providers -->
         <div class="pp-viewport-ck">
           <ul class="pp-track-ck">
             <li><img src="assets/providers/placeholder1.png" alt="PG Soft"/></li>
@@ -1149,6 +1176,7 @@ footer{
           </ul>
         </div>
 
+        <!-- 3 provider cells -->
         <div class="pp-grid3">
           <div class="pp-cell">
             <img src="assets/providers/placeholder1.png" alt="Slot 1"/>
@@ -1167,7 +1195,7 @@ footer{
     </div>
   </section>
 
-  <!-- Popular Games -->
+  <!-- POPULAR GAMES -->
   <section class="wrap" id="games">
     <h2 class="section">Popular Games</h2>
     <p class="sub">
@@ -1203,7 +1231,7 @@ footer{
     </div>
   </section>
 
-  <!-- Events / VIP 30 -->
+  <!-- EVENTS / VIP 30 -->
   <section class="wrap" id="events">
     <h2 class="section">VIP 30 Event</h2>
     <p class="sub">
@@ -1248,7 +1276,7 @@ footer{
     </div>
   </section>
 
-  <!-- Benefits -->
+  <!-- BENEFITS -->
   <section class="wrap" id="benefits">
     <h2 class="section">Why CK44 VIP?</h2>
     <p class="sub">
@@ -1275,14 +1303,14 @@ footer{
 
 </main>
 
-<!-- footer -->
+<!-- FOOTER -->
 <footer>
   <div class="foot">
     © <span id="year"></span> CK44 VIP Bangladesh — Trusted Casino Platform • Play responsibly.
   </div>
 </footer>
 
-<!-- floating socials -->
+<!-- FLOATING SOCIALS -->
 <div class="social-bar" aria-label="Social links">
   <a aria-label="Telegram" href="https://t.me/yourchannel" rel="nofollow" target="_blank">
     <svg viewBox="0 0 24 24"><path d="M9.036 15.804l-.376 5.305c.537 0 .77-.23 1.047-.505l2.512-2.42 5.207 3.81c.955.526 1.636.25 1.895-.884l3.433-16.05c.305-1.42-.512-1.973-1.45-1.625L1.3 9.43c-1.38.537-1.36 1.31-.235 1.66l5.28 1.648 12.28-7.73c.577-.35 1.104-.156.67.195"></path></svg>
@@ -1298,68 +1326,76 @@ footer{
   </a>
 </div>
 
-<!-- floating FAB buttons -->
+<!-- FLOATING CTA FAB -->
 <div class="fab-wrap" aria-label="Quick actions">
   <a class="fab call" href="https://t.me/yourchannel" target="_blank" rel="nofollow">📣 Promotion</a>
   <a class="fab join" href="https://www.wwwck-444.com/" target="_blank" rel="nofollow">Join Now</a>
   <a class="fab register" href="https://www.wwwck-444.com/register" target="_blank" rel="nofollow">Register</a>
 </div>
 
-<!-- GOLD RAIN / SPARKLE SCRIPT (LIGHT MODE) -->
+<!-- GOLD RAIN SUPER LIGHT + DARK BG (NO WARM GLOW) -->
 <script>
 (function(){
-  // canvas gold rain
+  // remove old canvas if exists
+  var old = document.getElementById('goldFX');
+  if (old && old.parentNode) old.parentNode.removeChild(old);
+
+  // create canvas
   var c = document.createElement('canvas');
   c.id = 'goldFX';
   document.body.appendChild(c);
 
   var ctx = c.getContext('2d');
 
-  // === RINGAN VERSION ===
-  var dpr           = 1;     // paksa 1x pixel ratio -> jauh hemat GPU
-  var SPEED_MULT    = 1.4;   // masih cepat tapi tidak brutal
-  var DENSITY_MULT  = 0.55;  // partikel jauh lebih sedikit
-  var STAR_TWINKLE  = 1.0;   // kelap-kelip lebih pelan
+  // super light settings
+  var dpr = 1;          // 1x scale -> ringan
+  var SPEED_MULT   = 1.4;
+  var DENSITY_MULT = 0.28; // sangat sedikit partikel
+  var STAR_TWINKLE = 1.2;
 
-  var W=0,H=0, drops=[], stars=[], last=0;
+  var W=0,H=0,drops=[],stars=[],last=0;
 
   function rnd(a,b){ return a + Math.random()*(b-a); }
 
-  // garis hujan emas
   function makeDrop(){
     return {
-      x: rnd(0, W),
-      y: rnd(-H, 0),
-      len: rnd(22*dpr, 60*dpr),
-      spd: rnd(140*dpr, 320*dpr) * SPEED_MULT,
-      w:  rnd(.9*dpr, 2.2*dpr),
-      glow: rnd(.35,.8)
+      x   : rnd(0, W),
+      y   : rnd(-H, 0),
+      len : rnd(20*dpr, 50*dpr),
+      spd : rnd(80*dpr, 180*dpr) * SPEED_MULT,
+      w   : rnd(0.8*dpr, 1.8*dpr)
     };
   }
 
-  // bintik emas glow
   function makeStar(){
     return {
-      x: rnd(0, W),
-      y: rnd(0, H),
-      r: rnd(.6*dpr, 2.1*dpr),
-      a: rnd(.35,.9),
-      tw: rnd(1.0, 2.2) * STAR_TWINKLE
+      x : rnd(0, W),
+      y : rnd(0, H),
+      r : rnd(0.6*dpr, 1.8*dpr),
+      a : rnd(0.4, 0.9),
+      tw: rnd(0.8, 1.6) * STAR_TWINKLE
     };
   }
 
   function resize(){
     W = c.width  = Math.floor(window.innerWidth  * dpr);
     H = c.height = Math.floor(window.innerHeight * dpr);
+
     c.style.width  = '100vw';
     c.style.height = '100vh';
+    c.style.position = 'fixed';
+    c.style.left = '0';
+    c.style.top  = '0';
+    c.style.zIndex = '-1';
+    c.style.pointerEvents = 'none';
+    c.style.background = 'transparent';
 
-    var rainDensity = (W*H)/(90000)  * 18 * DENSITY_MULT;
-    var starDensity = (W*H)/(120000) * 14 * (DENSITY_MULT*0.9);
+    var rainDensity = (W*H)/(90000)  * 8  * DENSITY_MULT;
+    var starDensity = (W*H)/(120000) * 6  * DENSITY_MULT;
 
     if (window.innerWidth < 700){
-      rainDensity *= 0.8;
-      starDensity *= 0.8;
+      rainDensity *= 0.7;
+      starDensity *= 0.7;
     }
 
     drops = Array.from({length: Math.floor(rainDensity)}, makeDrop);
@@ -1367,46 +1403,38 @@ footer{
   }
 
   function draw(ts){
-    if(!last) last = ts;
+    if (!last) last = ts;
     var dt = Math.min(32, ts - last) / 1000;
     last = ts;
 
+    // clear canvas (keep page black, no warm glow fill)
     ctx.clearRect(0,0,W,H);
 
-    // soft warm glow from top
-    var g = ctx.createRadialGradient(
-      W*0.5, H*0.2, 0,
-      W*0.5, H*0.3, Math.max(W,H)*0.8
-    );
-    g.addColorStop(0, 'rgba(255,215,128,0.05)');
-    g.addColorStop(1, 'rgba(0,0,0,0)');
-    ctx.fillStyle = g;
-    ctx.fillRect(0,0,W,H);
-
-    // sparkle stars
+    // soft twinkle dots
     for (var i=0;i<stars.length;i++){
       var s = stars[i];
-      s.a += (Math.random() - .5) * 0.03 * s.tw;
-      s.a = Math.max(0.15, Math.min(.9, s.a));
+      s.a += (Math.random() - .5) * 0.02 * s.tw;
+      if (s.a < 0.15) s.a = 0.15;
+      if (s.a > 0.9 ) s.a = 0.9;
 
       ctx.beginPath();
       ctx.arc(s.x, s.y, s.r, 0, Math.PI*2);
       ctx.fillStyle = 'rgba(245,217,124,'+s.a+')';
-      ctx.shadowBlur  = 4*dpr; // lebih kecil -> lebih ringan
+      ctx.shadowBlur = 6*dpr;
       ctx.shadowColor = 'rgba(245,217,124,0.5)';
       ctx.fill();
       ctx.shadowBlur = 0;
     }
 
-    // gold rain streaks
+    // falling gold streaks (very few)
     for (var j=0;j<drops.length;j++){
       var d = drops[j];
       d.y += d.spd * dt;
 
       if (d.y - d.len > H){
         d.x   = rnd(0, W);
-        d.y   = rnd(-H*0.15, 0);
-        d.spd = rnd(140*dpr, 320*dpr) * SPEED_MULT;
+        d.y   = rnd(-H*0.2, 0);
+        d.spd = rnd(60*dpr, 140*dpr) * SPEED_MULT;
       }
 
       ctx.lineWidth   = d.w;
@@ -1416,17 +1444,14 @@ footer{
       ctx.lineTo(d.x, d.y);
       ctx.stroke();
 
-      ctx.strokeStyle = 'rgba(245,217,124,0.4)';
+      ctx.strokeStyle = 'rgba(245,217,124,0.3)';
       ctx.beginPath();
-      ctx.moveTo(d.x, d.y - d.len*0.7);
+      ctx.moveTo(d.x, d.y - d.len*0.6);
       ctx.lineTo(d.x, d.y);
       ctx.stroke();
     }
 
-    // throttle sedikit biar HP adem
-    setTimeout(function(){
-      requestAnimationFrame(draw);
-    },30);
+    requestAnimationFrame(draw);
   }
 
   function init(){
@@ -1443,6 +1468,7 @@ footer{
 })();
 </script>
 
+<!-- year in footer -->
 <script>
 document.getElementById("year").textContent = new Date().getFullYear();
 </script>
