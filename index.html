@@ -1377,6 +1377,69 @@ table thead th,
 }
 
 </style>
+
+<style>
+/* === PROVIDER CARD MOBILE FIX (<=600px) === */
+/* tanpa ganggu kode lain; hanya layout provider card di HP */
+@media (max-width:600px){
+
+  /* tiap provider card jadi kolom vertikal rapi */
+  .pp-cell{
+    display:flex !important;
+    flex-direction:column !important;
+    align-items:center !important;
+    justify-content:flex-start !important;
+
+    min-height:auto !important;
+    padding:16px !important;
+    text-align:center !important;
+  }
+
+  /* banner provider / slot banner */
+  .pp-cell img{
+    display:block !important;
+    width:100% !important;
+    max-width:340px !important;
+    height:auto !important;
+    border-radius:10px !important;
+    margin:0 auto 12px auto !important;
+  }
+
+  /* text/desc di dalam cell — jangan vertikal lagi */
+  .pp-cell .pp-desc,
+  .pp-cell .pp-text,
+  .pp-cell .pp-copy{
+    writing-mode:initial !important;
+    text-orientation:initial !important;
+    white-space:normal !important;
+    max-width:340px !important;
+    font-size:14px !important;
+    line-height:1.4 !important;
+    color:#dcdff3 !important;
+    margin:0 0 12px 0 !important;
+    text-align:center !important;
+  }
+
+  /* tombol CTA group (Promotion / Join Now / Register) */
+  .pp-cell .pp-cta-group{
+    display:flex !important;
+    flex-direction:column !important;
+    gap:8px !important;
+    width:100% !important;
+    max-width:240px !important;
+    margin:0 auto !important;
+  }
+
+  .pp-cell .pp-cta-group a{
+    width:100% !important;
+    justify-content:center !important;
+    font-size:14px !important;
+    font-weight:700 !important;
+    border-radius:10px !important;
+    padding:10px 12px !important;
+  }
+}
+</style>
 </head>
 <body>
 <!-- Ambient sound -->
