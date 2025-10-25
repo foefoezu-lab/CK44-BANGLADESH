@@ -1441,43 +1441,76 @@ table thead th,
 }
 </style>
 
-<style id="ck44-nolag-patch">
-/* PATCH: smooth no-lag
-   - background hitam + sedikit emas glow
-   - matikan animasi berat (tapi marquee provider tetap jalan)
-*/
-
-body{
-  background:
-    radial-gradient(circle at 20% 15%, rgba(245,217,124,0.18) 0%, rgba(0,0,0,0) 60%),
-    #000 !important;
-}
-
+<style id="ck44-header-bright-faqbox">
+/* === reduce lag background === */
 .bg-aurora,
 .gold-beams,
 .gold-beams:after,
-.stardust i,
-.tile-anim,
-.tile-anim:before {
-  animation: none !important;
-  transition: none !important;
-  transform: none !important;
-}
-
-/* matiin hujan emas canvas */
-#goldFX{
+.stardust{
   display:none !important;
-  visibility:hidden !important;
-  opacity:0 !important;
-  pointer-events:none !important;
+  animation:none !important;
+  filter:none !important;
+  mix-blend-mode:normal !important;
+  will-change:auto !important;
+  transform:none !important;
 }
 
-/* freeze keyframes berat; ck-scroll (logo jalan) tetap hidup */
-@keyframes aurora{0%{transform:none}100%{transform:none}}
-@keyframes beams{0%{transform:none}100%{transform:none}}
-@keyframes float{0%{transform:none}100%{transform:none}}
-@keyframes floaty{0%{transform:none}100%{transform:none}}
-@keyframes scan{0%{transform:none}100%{transform:none}}
+/* === header anti-lag but still visible === */
+header{
+  position:static !important;
+  top:auto !important;
+
+  backdrop-filter:none !important;
+  -webkit-backdrop-filter:none !important;
+
+  /* slightly brighter than pure black so text shows */
+  background:linear-gradient(
+    to bottom,
+    rgba(32,32,32,.95) 0%,
+    rgba(0,0,0,.85) 60%,
+    rgba(0,0,0,.6) 100%
+  ) !important;
+
+  box-shadow:none !important;
+  border-bottom:1px solid rgba(255,255,255,.12) !important;
+
+  will-change:auto !important;
+}
+
+/* make nav text/buttons readable on darker header */
+.nav .group .link,
+.nav .group .cta,
+.nav .group .header-pill,
+.nav .group .header-countdown{
+  color:#f5f5f7 !important;
+}
+.nav .group .link{
+  background:rgba(0,0,0,.6) !important;
+  border-color:rgba(255,255,255,.18) !important;
+}
+
+/* === FAQ box readable over gold rain === */
+/* we only target faq section so other .sub elsewhere tetap seperti semula */
+#faq .sub{
+  background:#000 !important;
+  border:1px solid rgba(255,255,255,.12) !important;
+  border-radius:12px !important;
+  padding:24px 20px !important;
+  box-shadow:none !important;   /* jangan kasih blur glow supaya gak lag */
+}
+#faq .sub h3{
+  color:#f5d97c !important;       /* gold headings tetap kelihatan */
+  margin-top:24px !important;
+}
+#faq .sub p{
+  color:#dfe2f3 !important;
+}
+
+/* optional: give the FAQ title a little spacing from the box */
+#faq .section{
+  margin-bottom:16px !important;
+  text-align:center !important;
+}
 </style>
 
 </head>
@@ -1977,35 +2010,6 @@ new IntersectionObserver(es=>es.forEach(e=>{ audioEl.muted=!e.isIntersecting }),
     }
   ]
 }
-</script>
-
-
-<script id="ck44-livepatch">
-(function(){
-  function updateLiveOnline(){
-    var pill = document.getElementById('hp-support');
-    if(!pill) return;
-    // baca angka yang ada sekarang
-    var matchNum = pill.textContent.match(/Live\s+(\d+)\s+Online/i);
-    var current = matchNum ? parseInt(matchNum[1],10) : null;
-    if (!current || isNaN(current)) {
-      current = Math.floor(150 + Math.random()*40); // fallback awal 150-190
-    }
-    // random +/- 1..5 biar keliatan hidup pelan
-    var diff = Math.floor(Math.random()*11)-5; // -5..+5
-    var nextVal = current + diff;
-    // clamp supaya keliatan realistis (120-260)
-    if (nextVal < 120) nextVal = 120;
-    if (nextVal > 260) nextVal = 260;
-    pill.innerHTML = '<span class="dot"></span><span>Live ' + nextVal + ' Online</span>';
-  }
-
-  // langsung jalan sekali setelah render
-  setTimeout(updateLiveOnline, 300);
-
-  // lalu update tiap 2 detik
-  setInterval(updateLiveOnline, 2000);
-})();
 </script>
 
 </body>
