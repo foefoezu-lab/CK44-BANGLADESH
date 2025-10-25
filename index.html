@@ -73,43 +73,46 @@ body{background:#000 !important; color:var(--text);}
   to{   transform: translateY(-20vh)  scale(1.1) }
 }
 
-/* Gold rain (lebih sedikit, lebih halus) */
+/* Gold rain */
 .rain,
-.rain2{
-  position:fixed;
-  inset:0;
-  z-index:-3;
-  pointer-events:none;
-  background-repeat:repeat;
+.rain2 {
+  position: fixed;
+  inset: 0;
+  z-index: -3;
+  pointer-events: none;
+  opacity: .35;
+  background-repeat: repeat;
 }
 
-/* garis tipis jarang, transparan */
-.rain{
-  opacity:.10; /* dari .35 jadi .10 */
-  background-image:linear-gradient(
+/* layer garis putih tipis turun cepat */
+.rain {
+  background-image: linear-gradient(
     180deg,
-    rgba(255,255,255,.18) 0%,
+    rgba(255,255,255,.25) 0%,
+    transparent 60%
+  );
+  background-size: 1px 88px;      /* jarak garis */
+  animation: rainA 1.35s linear infinite;
+}
+
+/* layer garis ke-2 warna emas */
+.rain2 {
+  background-image: linear-gradient(
+    180deg,
+    rgba(245,217,124,.22) 0%,
     transparent 70%
   );
-  background-size:1px 140px;        /* garis lebih jarang turun */
-  animation:rainA 2.4s linear infinite; /* jatuh lebih pelan */
+  background-size: 2px 120px;     /* sedikit lebih tebal + jarang */
+  animation: rainB 1.85s linear infinite;
 }
 
-/* layer kedua hampir dimatiin */
-.rain2{
-  opacity:.04;                      /* sangat lembut */
-  background-image:linear-gradient(
-    180deg,
-    rgba(245,217,124,.15) 0%,
-    transparent 80%
-  );
-  background-size:2px 180px;        /* super jarang */
-  animation:rainB 3.2s linear infinite; /* lebih pelan lagi */
+@keyframes rainA {
+  to { background-position: 0 88px; }
+}
+@keyframes rainB {
+  to { background-position: 0 120px; }
 }
 
-/* animasi tetap sama */
-@keyframes rainA{ to{ background-position:0 140px } }
-@keyframes rainB{ to{ background-position:0 180px } }
 
 /* ===== HEADER ===== */
 header{
