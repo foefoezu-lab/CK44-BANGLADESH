@@ -1202,7 +1202,16 @@ table thead th,
 
     <!-- Right banner spans two rows -->
     <figure class="banner">
-      <img src="assets/referalck444%20terbaru.webp" alt="CK44 VIP Deluxe Banner" loading="lazy"/>
+
+      <picture class="banner-picture">
+        <!-- Mobile first -->
+        <source srcset="assets/banner-mobile.webp" type="image/webp" media="(max-width:640px)"/>
+        <!-- Desktop / fallback -->
+        <img src="assets/referalck444%20terbaru.jpg"
+             alt="CK44 VIP Deluxe Banner"
+             loading="lazy"
+             class="banner-img"/>
+      </picture>
     </figure>
 
     <div class="card-hero">
