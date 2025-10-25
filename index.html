@@ -74,45 +74,13 @@ body{background:#000 !important; color:var(--text);}
 }
 
 /* Gold rain */
-.rain,
-.rain2 {
-  position: fixed;
-  inset: 0;
-  z-index: -3;
-  pointer-events: none;
-  opacity: .35;
-  background-repeat: repeat;
+.rain, .rain2{
+  position:fixed; inset:0; z-index:-3; pointer-events:none; opacity:.35; background-repeat:repeat;
 }
-
-/* layer garis putih tipis turun cepat */
-.rain {
-  background-image: linear-gradient(
-    180deg,
-    rgba(255,255,255,.25) 0%,
-    transparent 60%
-  );
-  background-size: 1px 88px;      /* jarak garis */
-  animation: rainA 1.35s linear infinite;
-}
-
-/* layer garis ke-2 warna emas */
-.rain2 {
-  background-image: linear-gradient(
-    180deg,
-    rgba(245,217,124,.22) 0%,
-    transparent 70%
-  );
-  background-size: 2px 120px;     /* sedikit lebih tebal + jarang */
-  animation: rainB 1.85s linear infinite;
-}
-
-@keyframes rainA {
-  to { background-position: 0 88px; }
-}
-@keyframes rainB {
-  to { background-position: 0 120px; }
-}
-
+.rain{  background-image: linear-gradient(180deg, rgba(255,255,255,.25) 0%, transparent 60%); background-size: 1px 88px; animation: rainA 1.35s linear infinite; }
+.rain2{ background-image: linear-gradient(180deg, rgba(245,217,124,.22) 0%, transparent 70%); background-size: 2px 120px; animation: rainB 1.85s linear infinite; }
+@keyframes rainA{ to{ background-position:0 88px } }
+@keyframes rainB{ to{ background-position:0 120px } }
 
 /* ===== HEADER ===== */
 header{
