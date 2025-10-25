@@ -1204,13 +1204,17 @@ table thead th,
     <figure class="banner">
 
       <picture class="banner-picture">
-        <!-- Mobile first -->
+        <!-- Desktop / large screen -->
+        <source srcset="assets/referalck444-terbaru.jpg" media="(min-width:641px)"/>
+        <!-- Mobile / small screen -->
         <source srcset="assets/banner-mobile.webp" type="image/webp" media="(max-width:640px)"/>
-        <!-- Desktop / fallback -->
-        <img src="assets/referalck444%20terbarumobile.webp"
-             alt="CK44 VIP Deluxe Banner"
-             loading="lazy"
-             class="banner-img"/>
+        <!-- Fallback -->
+        <img
+          src="assets/referalck444-terbaru.jpg"
+          alt="CK44 VIP Deluxe Banner"
+          loading="lazy"
+          class="banner-img"
+        />
       </picture>
     </figure>
 
