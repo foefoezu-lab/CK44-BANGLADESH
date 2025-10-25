@@ -1585,27 +1585,50 @@ header{
   </section>
 
   <!-- 3-COLUMN DELUXE GRID -->
-  <h3 style="margin-top:0" class="provider-title-ck">Premium Highlights</h3>
+ <style id="ck44-highlight-layout-fix">
+  /* bikin baris 2 kolom: kiri kecil, kanan lebar */
+  .highlight-grid {
+    display: flex;
+    flex-wrap: nowrap;
+    align-items: flex-start;
+    gap: 24px;
+    /* kalau ada max-width sebelumnya biarin jalan,
+       kalau belum ada, kamu bisa tambahin margin auto
+       biar tetap center di layar besar */
+    justify-content: center;
+  }
 
-<p style="text-align:center;">
-  <img
-    src="assets/premium-banner.png"
-    alt="CK44 VIP Bangladesh promo"
-    style="
-      width:160px;
-      height:160px;
-      object-fit:cover;
-      border-radius:10px;
-      border:1px solid rgba(255,255,255,.12);
-      background:#000;
-      display:block;
-      margin:12px auto 16px auto;
-    "
-  />
-</p>
+  /* kolom kiri: ukuran tetap */
+  .highlight-box.left {
+    flex: 0 0 240px;      /* paksa dia jadi kotak kecil kiri */
+    max-width: 240px;
+  }
 
+  /* kolom kanan: isi sisa ruang */
+  .highlight-box.right {
+    flex: 1 1 auto;
+    min-width: 0;
+  }
 
+  /* biar gambar promo kamu kotak rapi */
+  .premium-thumb {
+    width:160px;
+    height:160px;
+    object-fit:cover;
+    border-radius:10px;
+    border:1px solid rgba(255,255,255,.12);
+    background:#000;
+    display:block;
+    margin:12px auto 16px auto;
+  }
 
+  /* hilangin margin default paragraf yang nempel ke atas/bawah terlalu rapat */
+  .highlight-box.left p {
+    text-align:center;
+    margin:0 0 12px 0;
+    line-height:1.4;
+  }
+</style>
 
 
     <div class="highlight-box right">
