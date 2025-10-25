@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" data-theme="dark">
+<html lang="en-BD" data-theme="dark">
 <head>
 <meta charset="utf-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
@@ -8,7 +8,7 @@
 <meta name="keywords" content="CK44 VIP, CK44VIP Bangladesh, Trusted Casino Platform, Mystery Bonus, VIP 30 Event, Fast Withdrawal, 24/7 Support, PG Soft, JILI, Rise of Thunder, Mahjong Ways 2, Aztec Empire, TAKA ALLIANCE, Bangladesh casino"/>
 <meta name="robots" content="index, follow"/>
 <meta name="theme-color" content="#0a0a0d"/>
-<link rel="canonical" href="https://ck44vip.vercel.app/"/>
+<link rel="canonical" href="https://ck-44-bangladesh.vercel.app/"/>
 <link rel="icon" sizes="32x32" href="assets/favicon-32.png"/>
 <link rel="icon" sizes="192x192" href="assets/favicon-192.png"/>
 <link rel="apple-touch-icon" href="assets/apple-touch-icon.png"/>
@@ -1441,8 +1441,8 @@ table thead th,
 }
 </style>
 
-<style id="ck44-header-bright-faqbox">
-/* === reduce lag background === */
+<style id="ck44-seo-ready-patch">
+/* disable heavy animated background layers */
 .bg-aurora,
 .gold-beams,
 .gold-beams:after,
@@ -1455,21 +1455,15 @@ table thead th,
   transform:none !important;
 }
 
-/* === header anti-lag but still visible === */
+/* lightweight sticky header: black solid, no blur glass, keep CTA visible */
 header{
-  position:static !important;
-  top:auto !important;
+  position:sticky !important;
+  top:0 !important;
+  z-index:40 !important;
 
+  background:#000 !important;
   backdrop-filter:none !important;
   -webkit-backdrop-filter:none !important;
-
-  /* slightly brighter than pure black so text shows */
-  background:linear-gradient(
-    to bottom,
-    rgba(32,32,32,.95) 0%,
-    rgba(0,0,0,.85) 60%,
-    rgba(0,0,0,.6) 100%
-  ) !important;
 
   box-shadow:none !important;
   border-bottom:1px solid rgba(255,255,255,.12) !important;
@@ -1477,39 +1471,32 @@ header{
   will-change:auto !important;
 }
 
-/* make nav text/buttons readable on darker header */
+/* make nav text readable on dark header */
 .nav .group .link,
 .nav .group .cta,
 .nav .group .header-pill,
-.nav .group .header-countdown{
+.nav .group .header-countdown,
+.nav .brand,
+.nav .brand *,
+.nav .group .link *,
+.nav .group .cta *{
   color:#f5f5f7 !important;
 }
-.nav .group .link{
-  background:rgba(0,0,0,.6) !important;
-  border-color:rgba(255,255,255,.18) !important;
-}
 
-/* === FAQ box readable over gold rain === */
-/* we only target faq section so other .sub elsewhere tetap seperti semula */
+/* FAQ box readable over gold rain bg */
 #faq .sub{
   background:#000 !important;
   border:1px solid rgba(255,255,255,.12) !important;
   border-radius:12px !important;
   padding:24px 20px !important;
-  box-shadow:none !important;   /* jangan kasih blur glow supaya gak lag */
+  box-shadow:none !important;
 }
 #faq .sub h3{
-  color:#f5d97c !important;       /* gold headings tetap kelihatan */
+  color:#f5d97c !important;
   margin-top:24px !important;
 }
 #faq .sub p{
   color:#dfe2f3 !important;
-}
-
-/* optional: give the FAQ title a little spacing from the box */
-#faq .section{
-  margin-bottom:16px !important;
-  text-align:center !important;
 }
 </style>
 
