@@ -1058,6 +1058,102 @@ table thead th,
   }
 }
 
+
+/* === CK44 MOBILE HERO BANNER FULL-VIEWPORT PATCH (vFinal 2) === */
+/* override previous banner rules ONLY on mobile, no desktop impact */
+@media (max-width:640px){
+
+  /* wrapper poster/banner on hero */
+  .hero .banner{
+    /* ambil seluruh viewport width */
+    width:100vw !important;
+    max-width:100vw !important;
+
+    /* geser keluar padding container tapi sisakan 8px aman kiri-kanan */
+    margin-left:calc(50% - 50vw + 8px) !important;
+    margin-right:calc(50% - 50vw + 8px) !important;
+
+    /* styling emas elegan */
+    border:2px solid rgba(255,215,0,.6) !important;
+    border-radius:14px !important;
+    overflow:hidden !important;
+    background:#000 !important;
+    padding:0 !important;
+
+    /* rasio aman biar tidak muncul ruang hitam bawah */
+    aspect-ratio:16/9 !important;
+
+    /* glow ringan */
+    box-shadow:
+      0 0 24px rgba(255,215,0,.18),
+      0 18px 32px rgba(0,0,0,.8) !important;
+  }
+
+  .hero .banner img{
+    display:block !important;
+    width:100% !important;
+    height:100% !important;
+    object-fit:cover !important;
+    object-position:center !important;
+    border-radius:14px !important;
+    background:#000 !important;
+    line-height:0 !important;
+  }
+
+  /* sedikit gap bawah sebelum box HIGHLIGHTS */
+  .card-hero{
+    margin-top:12px !important;
+  }
+}
+</style>
+<style>
+
+/* === CK44 MOBILE HERO BANNER PATCH v3 (edge-to-edge, padding fix) === */
+@media (max-width:640px){
+
+  /* kill horizontal padding so banner can truly full-bleed */
+  .hero{
+    padding-left:0 !important;
+    padding-right:0 !important;
+    grid-template-columns:1fr !important;
+  }
+
+  .hero .banner{
+    width:100vw !important;
+    max-width:100vw !important;
+
+    /* shift so left edge of banner = left edge viewport */
+    margin-left:calc(50% - 50vw) !important;
+    margin-right:calc(50% - 50vw) !important;
+
+    border:2px solid rgba(255,215,0,.6) !important;
+    border-radius:14px !important;
+    background:#000 !important;
+    overflow:hidden !important;
+    padding:0 !important;
+    box-shadow:
+      0 0 24px rgba(255,215,0,.18),
+      0 18px 32px rgba(0,0,0,.8) !important;
+  }
+
+  .hero .banner img{
+    display:block !important;
+    width:100% !important;
+    height:auto !important;
+    object-fit:cover !important;
+    object-position:center !important;
+    border-radius:14px !important;
+    background:#000 !important;
+    line-height:0 !important;
+  }
+
+  .card-hero{
+    margin-top:12px !important;
+    padding-left:16px !important;
+    padding-right:16px !important;
+  }
+}
+
 </style>
 
 
