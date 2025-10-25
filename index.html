@@ -1519,6 +1519,33 @@ header{
   }
 }
 
+
+/* === MARQUEE SPEED + ALIGN TWEAK === */
+/* bikin logo jalan lebih cepat dan mulai dari kiri, bukan terlalu center */
+@media (min-width:768px){
+  .pp-viewport-ck{
+    padding-left:0 !important;
+    padding-right:0 !important;
+    text-align:left !important;
+  }
+  .pp-track-ck{
+    animation: ck-scroll 12s linear infinite !important; /* faster than 28s */
+    justify-content:flex-start !important;
+    margin-left:0 !important;
+    gap:24px !important;
+  }
+}
+
+
+/* === MARQUEE ALIGN UPDATE (start from right edge, move left) === */
+@media (min-width:768px){
+  .pp-track-ck{
+    justify-content:flex-end !important;
+    margin-left:auto !important;
+    animation: ck-scroll 12s linear infinite !important;
+  }
+}
+
 </style>
 
 </head>
@@ -1608,13 +1635,94 @@ header{
   <!-- 3-COLUMN DELUXE GRID -->
   <section class="highlight-grid">
     <div class="highlight-box left">
-      <h3 style="margin-top:0" class="provider-title-ck">Premium Highlights</h3>
-      <p>Custom text or image area for key promo.</p>
-    </div>
+  <h3 class="provider-title-ck" style="margin-top:0;text-align:center;">
+    Premium Highlights
+  </h3>
+
+  <!-- gambar promo PG -->
+  <img
+    src="assets/pgkag.webp"
+    alt="PG Soft Bangladesh promo jackpot"
+    style="
+      width:160px;
+      height:160px;
+      object-fit:cover;
+      border-radius:10px;
+      border:1px solid rgba(255,255,255,.12);
+      background:#000;
+      display:block;
+      margin:12px auto 16px auto;
+    "
+  />
+
+  <!-- deskripsi singkat -->
+  <p style="text-align:center;margin:0 0 12px;color:#fff;">
+    VIP 30 Event bonus for active players.
+    Fast withdrawal for Bangladesh.
+  </p>
+
+  <!-- tombol CTA -->
+  <p style="text-align:center;margin:0;">
+    <a
+      href="#register"
+      style="
+        display:inline-block;
+        background:linear-gradient(to right,#f5d97c,#c9a44a);
+        color:#000;
+        font-weight:600;
+        font-size:.8rem;
+        line-height:1;
+        padding:8px 12px;
+        border-radius:6px;
+        text-decoration:none;
+      "
+    >বোনাস নিন</a>
+  </p>
+</div>
     <div class="highlight-box center">
-      <h3 style="margin-top:0" class="provider-title-ck">Main Event</h3>
-      <p>Place your event information or countdown here.</p>
-    </div>
+  <h3 class="provider-title-ck" style="margin-top:0;text-align:center;">
+    Main Event
+  </h3>
+
+  <!-- gambar event / promo utama -->
+  <img
+    src="assets/event-main.webp"
+    alt="Main Event Bangladesh promo"
+    style="
+      width:160px;
+      height:160px;
+      object-fit:cover;
+      border-radius:10px;
+      border:1px solid rgba(255,255,255,.12);
+      background:#000;
+      display:block;
+      margin:12px auto 16px auto;
+    "
+  />
+
+  <!-- info event -->
+  <p style="text-align:center;margin:0 0 12px;color:#fff;">
+    Mystery Bonus Drop — Bangladesh only. Claim before reset.
+  </p>
+
+  <!-- tombol CTA -->
+  <p style="text-align:center;margin:0;">
+    <a
+      href="#register"
+      style="
+        display:inline-block;
+        background:linear-gradient(to right,#f5d97c,#c9a44a);
+        color:#000;
+        font-weight:600;
+        font-size:.8rem;
+        line-height:1;
+        padding:8px 12px;
+        border-radius:6px;
+        text-decoration:none;
+      "
+    >বোনাস নিন</a>
+  </p>
+</div>
     <div class="highlight-box right">
       <div class="pp-grid-wrapper">
         <h3 class="provider-title-ck">Official Game Providers of CK44 VIP</h3>
