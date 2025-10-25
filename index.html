@@ -74,13 +74,11 @@ body{background:#000 !important; color:var(--text);}
 }
 
 /* Gold rain */
-.rain, .rain2{
-  position:fixed; inset:0; z-index:-3; pointer-events:none; opacity:.35; background-repeat:repeat;
-}
-.rain{  background-image: linear-gradient(180deg, rgba(255,255,255,.25) 0%, transparent 60%); background-size: 1px 88px; animation: rainA 1.35s linear infinite; }
-.rain2{ background-image: linear-gradient(180deg, rgba(245,217,124,.22) 0%, transparent 70%); background-size: 2px 120px; animation: rainB 1.85s linear infinite; }
-@keyframes rainA{ to{ background-position:0 88px } }
-@keyframes rainB{ to{ background-position:0 120px } }
+
+
+
+ }
+ }
 
 /* ===== HEADER ===== */
 header{
@@ -1336,105 +1334,6 @@ new IntersectionObserver(es=>es.forEach(e=>{ audioEl.muted=!e.isIntersecting }),
 })();
 </script>
 
-
-<!-- FAST GOLD RAIN PATCH (append-only) -->
-<script>
-(function(){
-  // Remove old canvas instance (if any), then mount a faster one.
-  var old = document.getElementById('goldFX');
-  if (old && old.parentNode) old.parentNode.removeChild(old);
-
-  var c = document.createElement('canvas');
-  c.id = 'goldFX';
-  document.body.appendChild(c);
-
-  var ctx = c.getContext('2d');
-  var dpr = Math.max(1, Math.min(2, window.devicePixelRatio || 1));
-  var W=0,H=0, drops=[], stars=[], last=0;
-
-  // ---- SPEED/DENSITY SETTINGS (tweak here) ----
-  var SPEED_MULT = 2.2;   // overall speed multiplier (default ~2.2x)
-  var DENSITY_MULT = 1.25; // more rain
-  var STAR_TWINKLE = 1.6; // 1 = normal, >1 faster
-  // ---------------------------------------------
-
-  function rnd(a,b){ return a + Math.random()*(b-a); }
-  function makeDrop(){ 
-    return {
-      x:rnd(0,W), y:rnd(-H,0),
-      len:rnd(22*dpr, 60*dpr),
-      spd:rnd(140*dpr, 320*dpr) * SPEED_MULT,   // much faster
-      w:rnd(.9*dpr, 2.2*dpr),
-      glow:rnd(.35,.8)
-    };
-  }
-  function makeStar(){ 
-    return { x:rnd(0,W), y:rnd(0,H), r:rnd(.6*dpr,2.1*dpr), a:rnd(.35,.9), tw:rnd(1.0,2.2)*STAR_TWINKLE };
-  }
-
-  function resize(){
-    W = c.width  = Math.floor(window.innerWidth * dpr);
-    H = c.height = Math.floor(window.innerHeight * dpr);
-    c.style.width = '100vw'; c.style.height = '100vh';
-    var rainDensity = (W*H)/(90000) * 18 * DENSITY_MULT;
-    var starDensity = (W*H)/(120000) * 14 * (DENSITY_MULT*0.9);
-    if (window.innerWidth < 700){
-      rainDensity *= 0.85; starDensity *= 0.85; // still lighter on phones
-    }
-    drops = Array.from({length: Math.floor(rainDensity)}, makeDrop);
-    stars = Array.from({length: Math.floor(starDensity)}, makeStar);
-  }
-
-  function draw(ts){
-    if(!last) last = ts;
-    var dt = Math.min(32, ts - last) / 1000; // cap
-    last = ts;
-
-    ctx.clearRect(0,0,W,H);
-
-    // warm vignette
-    var g = ctx.createRadialGradient(W*.5, H*.2, 0, W*.5, H*.3, Math.max(W,H)*.8);
-    g.addColorStop(0, 'rgba(255,215,128,0.05)');
-    g.addColorStop(1, 'rgba(0,0,0,0)');
-    ctx.fillStyle = g; ctx.fillRect(0,0,W,H);
-
-    // stars
-    for (var i=0;i<stars.length;i++){
-      var s = stars[i];
-      s.a += (Math.random()-.5)*0.03*s.tw;
-      s.a = Math.max(0.15, Math.min(.95, s.a));
-      ctx.beginPath();
-      ctx.arc(s.x, s.y, s.r, 0, Math.PI*2);
-      ctx.fillStyle = 'rgba(245,217,124,'+s.a+')';
-      ctx.shadowBlur = 10*dpr; ctx.shadowColor = 'rgba(245,217,124,0.7)';
-      ctx.fill(); ctx.shadowBlur = 0;
-    }
-
-    // fast rain
-    for (var j=0;j<drops.length;j++){
-      var d = drops[j];
-      d.y += d.spd * dt;
-      if (d.y - d.len > H){ d.x = rnd(0,W); d.y = rnd(-H*0.15, 0); d.spd = rnd(140*dpr,320*dpr) * SPEED_MULT; }
-      ctx.lineWidth = d.w;
-      ctx.strokeStyle = 'rgba(245,217,124,0.9)';
-      ctx.beginPath(); ctx.moveTo(d.x, d.y - d.len); ctx.lineTo(d.x, d.y); ctx.stroke();
-      // trailing glow
-      ctx.strokeStyle = 'rgba(245,217,124,0.45)';
-      ctx.beginPath(); ctx.moveTo(d.x, d.y - d.len*0.7); ctx.lineTo(d.x, d.y); ctx.stroke();
-    }
-
-    requestAnimationFrame(draw);
-  }
-
-  function init(){
-    if (window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches){ return; }
-    resize();
-    window.addEventListener('resize', resize, {passive:true});
-    requestAnimationFrame(draw);
-  }
-  init();
-})();
-</script>
 
 </body>
 </html>
