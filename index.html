@@ -1035,10 +1035,33 @@ table thead th,
 }
 /* ===================================================================== */
 
+
+/* === MOBILE BANNER FULL-BLEED SAFETY PATCH (final override) === */
+@media (max-width: 640px){
+  .hero .banner{
+    padding:0 !important;
+    background:transparent !important;
+    border:1px solid rgba(255,215,0,.6) !important;
+    border-radius:14px !important;
+    overflow:hidden !important;
+    max-width:100% !important;
+    width:100% !important;
+    aspect-ratio:16/9 !important;
+  }
+  .hero .banner img{
+    width:100% !important;
+    height:100% !important;
+    object-fit:cover !important;
+    object-position:center !important;
+    display:block !important;
+    border-radius:14px !important;
+  }
+}
+
 </style>
 
 
-<link rel="preload" as="image" href="assets/referalck444%20terbaru.web">
+<link rel="preload" as="image" href="assets/referalck444%20terbaru.webp">
 </head>
 <body>
 <!-- Ambient sound -->
@@ -1083,7 +1106,7 @@ table thead th,
 
     <!-- Right banner spans two rows -->
     <figure class="banner">
-      <img src="assets/referalck444%20terbaru.webp" alt="CK44 VIP Deluxe Banner" loading="lazy"/>
+      <img src="assets/referalck444%20terbaru.jpg" alt="CK44 VIP Deluxe Banner" loading="lazy"/>
     </figure>
 
     <div class="card-hero">
