@@ -19,7 +19,7 @@
 
 <style>
 /* =========================
-   CK44 VIP — DELUXE GOLD v32
+   CK44 VIP — DELUXE GOLD v33 (light mobile perf)
    ========================= */
 :root{
   --bg:#000;
@@ -42,13 +42,10 @@ body{
   font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;
   letter-spacing:.2px;
   overflow-x:hidden;
+  background:#000 !important;
 }
 
 /* ===== STATIC BLACK BACKGROUND LAYER ===== */
-body{
-  background:#000 !important;
-  color:var(--text);
-}
 .bg-wrap{
   position:fixed;
   inset:0;
@@ -71,8 +68,6 @@ body{
   0%   { transform: translate3d(0,0,0) scale(1.02) }
   100% { transform: translate3d(0,-1.2%,0) scale(1.04) }
 }
-
-/* slow rotating soft beams */
 .gold-beams,
 .gold-beams:after{
   position:absolute;
@@ -96,45 +91,32 @@ body{
 }
 @keyframes beams{ to{ transform: rotate(1turn) } }
 
-/* background "stardust" glow specks (slow float) */
+/* background stardust wrapper (static container, no JS spawn here) */
 .stardust{
   position:absolute;
   inset:0;
   background:transparent;
-  overflow:hidden;
   pointer-events:none;
-}
-.stardust i{
-  position:absolute;
-  width:3px;
-  height:3px;
-  border-radius:50%;
-  background:rgba(255,215,0,.9);
-  box-shadow:0 0 8px rgba(255,215,0,.8);
-  animation: float 10s linear infinite;
-}
-@keyframes float{
-  from{ transform: translateY(120vh) scale(1) }
-  to  { transform: translateY(-20vh)  scale(1.1) }
+  overflow:hidden;
 }
 
-/* fallback css "rain" shimmer (kept for graceful layering) */
+/* fallback css line rain shimmer */
 .rain,
 .rain2{
   position:fixed;
   inset:0;
   z-index:-3;
   pointer-events:none;
-  opacity:.35;
+  opacity:.28;
   background-repeat:repeat;
 }
 .rain{
-  background-image: linear-gradient(180deg, rgba(255,255,255,.25) 0%, transparent 60%);
+  background-image: linear-gradient(180deg, rgba(255,255,255,.22) 0%, transparent 60%);
   background-size: 1px 88px;
   animation: rainA 1.35s linear infinite;
 }
 .rain2{
-  background-image: linear-gradient(180deg, rgba(245,217,124,.22) 0%, transparent 70%);
+  background-image: linear-gradient(180deg, rgba(245,217,124,.18) 0%, transparent 70%);
   background-size: 2px 120px;
   animation: rainB 1.85s linear infinite;
 }
@@ -283,12 +265,34 @@ header{
   background:linear-gradient(135deg,var(--gold),var(--gold2));
   color:#0b0b10;
   box-shadow:var(--ring);
+  transition:transform .16s ease, box-shadow .16s ease, opacity .16s ease;
+  will-change:transform;
 }
 .btn.secondary{
   background:transparent;
   border:1px solid rgba(245,217,124,.38);
   color:var(--gold);
   font-weight:700;
+}
+.btn:hover,
+.cta:hover{transform:translateY(-1px);}
+.btn:active,
+.cta:active{transform:translateY(0);opacity:.95;}
+
+.trust{
+  color:#dcdff3;
+  opacity:.9;
+  font-size:14px;
+  line-height:1.4;
+}
+.trust .dot{
+  display:inline-block;
+  width:6px;
+  height:6px;
+  border-radius:999px;
+  background:#f5d97c;
+  box-shadow:0 0 8px #f5d97c;
+  margin:0 6px;
 }
 
 /* hero info card on the left bottom row */
@@ -346,7 +350,7 @@ header{
   border-radius:14px 14px 0 0;
 }
 
-/* small KPI row */
+/* KPI row */
 .kpi{
   display:grid;
   grid-template-columns:repeat(3,1fr);
@@ -371,7 +375,30 @@ header{
   font-size:12px;
 }
 
-/* ===== HIGHLIGHT GRID (3 COL) ===== */
+/* text glow helpers */
+.glow-text{
+  animation:ckglow 1.8s ease-in-out infinite alternate;
+  color:#FFD700;
+}
+@keyframes ckglow{
+  0%{
+    text-shadow:0 0 4px #FFD700,0 0 8px #FFD700,0 0 12px #FFD700,0 0 16px #FFD700;
+    color:#FFD700
+  }
+  50%{
+    text-shadow:0 0 6px #FFD700,0 0 12px #FFD700,0 0 18px #FFD700,0 0 24px #FFD700;
+    color:#FFE066
+  }
+  100%{
+    text-shadow:0 0 4px #FFD700,0 0 8px #FFD700,0 0 12px #FFD700,0 0 16px #FFD700;
+    color:#FFD700
+  }
+}
+.subtle-glow{
+  text-shadow:0 0 6px rgba(255,255,255,.35);
+}
+
+/* ===== HIGHLIGHT GRID ===== */
 section.wrap{
   max-width:1220px;
   margin:0 auto;
@@ -399,10 +426,8 @@ h2.section{
   text-align:center;
   align-items:stretch;
 }
-@media(max-width:960px){
-  .highlight-grid{grid-template-columns:1fr}
-}
 
+/* each highlight box */
 .highlight-box{
   background:#0b0b10;
   border:1px solid rgba(255,215,0,.35);
@@ -417,7 +442,6 @@ h2.section{
   transform:translateY(-4px);
 }
 
-/* Providers panel in the 3rd col */
 .provider-title-ck{
   margin:4px 0 14px;
   font-weight:800;
@@ -430,6 +454,8 @@ h2.section{
   color:transparent;
   text-shadow:0 0 10px rgba(255,214,77,.25);
 }
+
+/* provider panel */
 .pp-grid-wrapper{
   background:radial-gradient(120% 100% at 50% 0%, rgba(255,214,77,.06), transparent 60%) #0b0b0f;
   border:1px solid rgba(255,214,77,.55);
@@ -490,7 +516,7 @@ h2.section{
   opacity:1;
 }
 
-/* 3 inner slot cells */
+/* 3 inner cells */
 .pp-grid3{
   width:100%;
   max-width:100%;
@@ -525,14 +551,11 @@ h2.section{
   filter: drop-shadow(0 0 10px rgba(255,214,77,.25));
 }
 
-/* ===== POPULAR GAMES GRID ===== */
+/* ===== Popular Games ===== */
 .grid-3{
   display:grid;
   grid-template-columns:repeat(3,1fr);
   gap:18px;
-}
-@media(max-width:960px){
-  .grid-3{grid-template-columns:1fr}
 }
 .card{
   background:#0b0b10;
@@ -580,120 +603,7 @@ h2.section{
 }
 @keyframes scan{to{transform: rotate(1turn)}}
 
-/* ===== FOOTER & FLOATING BUTTONS ===== */
-footer{
-  border-top:1px solid var(--border);
-  background:linear-gradient(to top, rgba(0,0,0,.55), rgba(0,0,0,.25));
-}
-.foot{
-  max-width:1220px;
-  margin:0 auto;
-  padding:24px 20px;
-  color:#bfc2da;
-  font-size:13px;
-  display:flex;
-  justify-content:center;
-  align-items:center;
-  text-align:center;
-  flex-wrap:wrap;
-  gap:6px;
-}
-
-/* floating social icons column */
-.social-bar{
-  position:fixed;
-  right:28px;
-  bottom:250px;
-  display:flex;
-  flex-direction:column;
-  gap:14px;
-  z-index:90;
-}
-.social-bar a{
-  display:inline-flex;
-  align-items:center;
-  justify-content:center;
-  width:42px;
-  height:42px;
-  border-radius:999px;
-  border:1px solid var(--border);
-  background:rgba(255,255,255,.05);
-  color:var(--text);
-  box-shadow:var(--ring);
-  text-decoration:none;
-  transition: transform .18s ease, box-shadow .18s ease;
-}
-.social-bar a:hover{
-  transform:translateY(-3px);
-  box-shadow:0 10px 24px rgba(245,217,124,.18);
-}
-.social-bar svg{
-  width:20px;
-  height:20px;
-  fill:currentColor;
-}
-
-/* floating CTA buttons (bottom right stack) */
-.fab-wrap{
-  position:fixed;
-  right:28px;
-  bottom:28px;
-  display:flex;
-  flex-direction:column;
-  gap:16px;
-  z-index:90;
-}
-.fab{
-  border:none;
-  cursor:pointer;
-  padding:14px 16px;
-  border-radius:999px;
-  font-weight:900;
-  font-size:14px;
-  line-height:1.2;
-  box-shadow:var(--ring);
-  text-decoration:none;
-  text-align:center;
-  min-width:140px;
-  font-family:inherit;
-}
-.fab.call{
-  background:linear-gradient(135deg,var(--gold),var(--gold2));
-  color:#0b0b10;
-}
-.fab.join{
-  background:linear-gradient(135deg,#4ade80,#22c55e);
-  color:#062612;
-}
-.fab.register{
-  background:linear-gradient(135deg,#60a5fa,#3b82f6);
-  color:#071a2e;
-}
-
-/* === glow helper === */
-.glow-text{
-  animation:ckglow 1.8s ease-in-out infinite alternate;
-  color:#FFD700;
-}
-@keyframes ckglow{
-  0%{
-    text-shadow:0 0 4px #FFD700,0 0 8px #FFD700,0 0 12px #FFD700,0 0 16px #FFD700;
-    color:#FFD700
-  }
-  50%{
-    text-shadow:0 0 6px #FFD700,0 0 12px #FFD700,0 0 18px #FFD700,0 0 24px #FFD700;
-    color:#FFE066
-  }
-  100%{
-    text-shadow:0 0 4px #FFD700,0 0 8px #FFD700,0 0 12px #FFD700,0 0 16px #FFD700;
-    color:#FFD700
-  }
-}
-.subtle-glow{
-  text-shadow:0 0 6px rgba(255,255,255,.35);
-}
-
-/* === EVENTS SECTION STEPS (VIP 30) === */
+/* ===== EVENTS / STEPS ===== */
 #events .steps-grid{
   max-width:880px;
   margin:18px auto 0;
@@ -740,23 +650,119 @@ footer{
   line-height:1.4;
 }
 
-/* ===================================== */
-/* MOBILE / SMALL VIEWPORT OVERRIDES     */
-/* ===================================== */
+/* ===== FOOTER & FLOAT ACTIONS ===== */
+footer{
+  border-top:1px solid var(--border);
+  background:linear-gradient(to top, rgba(0,0,0,.55), rgba(0,0,0,.25));
+}
+.foot{
+  max-width:1220px;
+  margin:0 auto;
+  padding:24px 20px;
+  color:#bfc2da;
+  font-size:13px;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  text-align:center;
+  flex-wrap:wrap;
+  gap:6px;
+}
 
-/* responsive header tweaks */
+/* floating social icons */
+.social-bar{
+  position:fixed;
+  right:28px;
+  bottom:250px;
+  display:flex;
+  flex-direction:column;
+  gap:14px;
+  z-index:90;
+}
+.social-bar a{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  width:42px;
+  height:42px;
+  border-radius:999px;
+  border:1px solid var(--border);
+  background:rgba(255,255,255,.05);
+  color:var(--text);
+  box-shadow:var(--ring);
+  text-decoration:none;
+  transition: transform .18s ease, box-shadow .18s ease;
+}
+.social-bar a:hover{
+  transform:translateY(-3px);
+  box-shadow:0 10px 24px rgba(245,217,124,.18);
+}
+.social-bar svg{
+  width:20px;
+  height:20px;
+  fill:currentColor;
+}
+
+/* floating FAB buttons */
+.fab-wrap{
+  position:fixed;
+  right:28px;
+  bottom:28px;
+  display:flex;
+  flex-direction:column;
+  gap:16px;
+  z-index:90;
+}
+.fab{
+  border:none;
+  cursor:pointer;
+  padding:14px 16px;
+  border-radius:999px;
+  font-weight:900;
+  font-size:14px;
+  line-height:1.2;
+  box-shadow:var(--ring);
+  text-decoration:none;
+  text-align:center;
+  min-width:140px;
+  font-family:inherit;
+  transition:transform .16s ease, box-shadow .16s ease, opacity .16s ease;
+  will-change:transform;
+}
+.fab.call{
+  background:linear-gradient(135deg,var(--gold),var(--gold2));
+  color:#0b0b10;
+}
+.fab.join{
+  background:linear-gradient(135deg,#4ade80,#22c55e);
+  color:#062612;
+}
+.fab.register{
+  background:linear-gradient(135deg,#60a5fa,#3b82f6);
+  color:#071a2e;
+}
+.fab:hover{transform:translateY(-1px);}
+.fab:active{transform:translateY(0);opacity:.95;}
+
+/* MOBILE / SMALL VIEWPORT OVERRIDES */
+
+/* header tweaks */
 @media(max-width:600px){
   header .nav{padding:10px 14px;}
+  .nav .group{
+    gap:8px;
+    flex-wrap:wrap;
+    justify-content:center;
+  }
   .nav .group .link,
   .nav .group .cta{
     padding:8px 10px;
     border-radius:10px;
     font-weight:700;
   }
-  .nav .group{gap:8px;}
 }
 
-/* hero becomes single-column */
+/* hero to single-column and nicer buttons on mobile */
 @media(max-width:960px){
   .hero{
     grid-template-columns:1fr;
@@ -772,7 +778,7 @@ footer{
     justify-self:center;
     margin:0;
     border-radius:14px;
-    aspect-ratio:16/9; /* nicer on phone */
+    aspect-ratio:16/9;
   }
   .hero .banner img{
     object-position:center;
@@ -794,10 +800,13 @@ footer{
   }
   .actions{
     gap:10px;
+    justify-content:center;
   }
+  /* tombol TIDAK full width, biar kelihatan profesional */
   .actions .btn,
   .actions .btn.secondary{
-    width:100%;
+    width:auto;
+    min-width:140px;
     justify-content:center;
     padding:13px 14px;
     border-radius:12px;
@@ -847,7 +856,7 @@ footer{
     flex-wrap:wrap !important;
     justify-content:center !important;
     gap:16px !important;
-    animation:none !important; /* stop marquee on tiny view, become static grid */
+    animation:none !important; /* stop marquee on tiny screens */
   }
   .pp-track-ck img{height:24px !important}
   .pp-grid3{
@@ -866,7 +875,7 @@ footer{
     text-align:center !important;
   }
 
-  /* events list single col */
+  /* steps grid already 1 col, just tighten spacing */
   #events .steps-grid{
     grid-template-columns:1fr !important;
     gap:12px !important;
@@ -882,7 +891,7 @@ footer{
     font-size:14px !important;
   }
 
-  /* social bar out of the way on phone */
+  /* hide social bar on very small screen */
   .social-bar{
     display:none !important;
   }
@@ -905,7 +914,7 @@ footer{
   }
 }
 
-/* header button polish / remove underline artifacts on mobile */
+/* remove underline artifacts under nav buttons */
 .nav .group .link,
 .nav .group .cta{
   text-decoration:none !important;
@@ -930,14 +939,8 @@ footer{
   box-shadow:none !important;
   border-bottom:0 !important;
 }
-.btn, .link, .cta{
-  transition:transform .16s ease, box-shadow .16s ease, opacity .16s ease;
-  will-change:transform;
-}
-.btn:hover, .cta:hover{transform:translateY(-1px);}
-.btn:active, .cta:active{transform:translateY(0);opacity:.95;}
 
-/* === CANVAS for gold rain === */
+/* gold rain canvas */
 #goldFX{
   position:fixed;
   inset:0;
@@ -949,7 +952,6 @@ footer{
 @media (prefers-reduced-motion: reduce){
   #goldFX{display:none!important;}
 }
-/* reduce brightness slightly on very small phones */
 @media (max-width:640px){
   #goldFX{opacity:.8;}
 }
@@ -958,49 +960,26 @@ footer{
 }
 </style>
 
-<!-- SCHEMA.ORG JSON-LD -->
+<!-- schema.org basic -->
 <script type="application/ld+json">
 {
-  "@context": "https://schema.org",
-  "@graph": [
+  "@context":"https://schema.org",
+  "@type":"Organization",
+  "name":"CK44 VIP",
+  "url":"https://ck-44-bangladesh.vercel.app",
+  "areaServed":"Bangladesh",
+  "logo":"assets/og-1080x1080.jpg",
+  "contactPoint":[
     {
-      "@type": "WebSite",
-      "name": "CK44 VIP Bangladesh",
-      "url": "https://ck-44-bangladesh.vercel.app",
-      "inLanguage": "en",
-      "sameAs": [
-        "https://t.me/yourchannel",
-        "https://instagram.com/yourprofile",
-        "https://twitter.com/yourprofile",
-        "https://www.tiktok.com/@yourprofile"
-      ]
-    },
-    {
-      "@type": "Organization",
-      "name": "CK44 VIP",
-      "url": "https://ck-44-bangladesh.vercel.app",
-      "areaServed": "Bangladesh",
-      "slogan": "Trusted Casino Platform • Mystery Bonus • VIP 30 Event",
-      "knowsAbout": [
-        "Trusted Casino Platform",
-        "Mystery Bonus",
-        "VIP 30 Event",
-        "Fast Withdrawal",
-        "24/7 Support",
-        "PG Soft",
-        "JILI",
-        "Rise of Thunder",
-        "Mahjong Ways 2",
-        "Aztec Empire",
-        "TAKA ALLIANCE"
-      ],
-      "logo": "assets/og-1080x1080.jpg"
+      "@type":"ContactPoint",
+      "contactType":"customer support",
+      "availableLanguage":["en","bn"],
+      "areaServed":"BD"
     }
   ]
 }
 </script>
 
-<!-- performance hint -->
 <link rel="preload" as="image" href="assets/referalck444%20terbaru.jpg"/>
 <link rel="preconnect" href="https://fonts.googleapis.com" crossorigin>
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -1008,10 +987,10 @@ footer{
 
 <body>
 
-<!-- OPTIONAL ambient audio -->
+<!-- optional ambient audio -->
 <audio id="ambientAudio" src="assets/ambient.mp3" autoplay loop preload="auto" playsinline></audio>
 
-<!-- soft glow background base (static layers) -->
+<!-- background layers -->
 <div class="bg-wrap" aria-hidden="true">
   <div class="bg-aurora"></div>
   <div class="gold-beams"></div>
@@ -1020,7 +999,7 @@ footer{
   <div class="rain2"></div>
 </div>
 
-<!-- HEADER / NAV -->
+<!-- HEADER -->
 <header>
   <nav class="nav">
     <a class="brand" href="#top" aria-label="CK44 VIP Home">
@@ -1073,17 +1052,14 @@ footer{
         </a>
       </div>
 
-      <div class="trust" style="color:#dcdff3;opacity:.9;font-size:14px;line-height:1.4;">
-        <span class="dot" style="display:inline-block;width:6px;height:6px;border-radius:999px;background:#f5d97c;box-shadow:0 0 8px #f5d97c;"></span>
-        Mystery Bonus
-        <span class="dot" style="display:inline-block;width:6px;height:6px;border-radius:999px;background:#f5d97c;box-shadow:0 0 8px #f5d97c;margin-left:6px;margin-right:6px;"></span>
-        VIP 30 Event
-        <span class="dot" style="display:inline-block;width:6px;height:6px;border-radius:999px;background:#f5d97c;box-shadow:0 0 8px #f5d97c;margin-left:6px;margin-right:6px;"></span>
-        Bangladesh
+      <div class="trust">
+        <span class="dot"></span> Mystery Bonus
+        <span class="dot"></span> VIP 30 Event
+        <span class="dot"></span> Bangladesh
       </div>
     </div>
 
-    <!-- Right banner spans two rows -->
+    <!-- Right banner -->
     <figure class="banner">
       <img src="assets/referalck444%20terbaru.jpg" alt="CK44 VIP Deluxe Banner" loading="lazy"/>
     </figure>
@@ -1146,7 +1122,7 @@ footer{
     </div>
   </section>
 
-  <!-- 3-COLUMN GRID -->
+  <!-- GRID SECTION -->
   <section class="highlight-grid">
     <div class="highlight-box left">
       <h3 class="provider-title-ck" style="margin-top:0">Premium Highlights</h3>
@@ -1162,7 +1138,6 @@ footer{
       <div class="pp-grid-wrapper">
         <h3 class="provider-title-ck">Official Game Providers of CK44 VIP</h3>
 
-        <!-- marquee logos -->
         <div class="pp-viewport-ck">
           <ul class="pp-track-ck">
             <li><img src="assets/providers/placeholder1.png" alt="PG Soft"/></li>
@@ -1174,7 +1149,6 @@ footer{
           </ul>
         </div>
 
-        <!-- 3 cells -->
         <div class="pp-grid3">
           <div class="pp-cell">
             <img src="assets/providers/placeholder1.png" alt="Slot 1"/>
@@ -1331,26 +1305,27 @@ footer{
   <a class="fab register" href="https://www.wwwck-444.com/register" target="_blank" rel="nofollow">Register</a>
 </div>
 
-<!-- FAST GOLD RAIN CANVAS SCRIPT (kecepatan tinggi, bintik emas) -->
+<!-- GOLD RAIN / SPARKLE SCRIPT (LIGHT MODE) -->
 <script>
 (function(){
-  // canvas for rain/bokeh
+  // canvas gold rain
   var c = document.createElement('canvas');
   c.id = 'goldFX';
   document.body.appendChild(c);
 
   var ctx = c.getContext('2d');
 
-  // tuning
-  var dpr           = Math.max(1, Math.min(2, window.devicePixelRatio || 1));
-  var SPEED_MULT    = 2.2;   // jatuh cepat
-  var DENSITY_MULT  = 1.25;  // lebih banyak partikel
-  var STAR_TWINKLE  = 1.6;   // kelap-kelip aktif
+  // === RINGAN VERSION ===
+  var dpr           = 1;     // paksa 1x pixel ratio -> jauh hemat GPU
+  var SPEED_MULT    = 1.4;   // masih cepat tapi tidak brutal
+  var DENSITY_MULT  = 0.55;  // partikel jauh lebih sedikit
+  var STAR_TWINKLE  = 1.0;   // kelap-kelip lebih pelan
 
   var W=0,H=0, drops=[], stars=[], last=0;
 
   function rnd(a,b){ return a + Math.random()*(b-a); }
 
+  // garis hujan emas
   function makeDrop(){
     return {
       x: rnd(0, W),
@@ -1362,6 +1337,7 @@ footer{
     };
   }
 
+  // bintik emas glow
   function makeStar(){
     return {
       x: rnd(0, W),
@@ -1382,8 +1358,8 @@ footer{
     var starDensity = (W*H)/(120000) * 14 * (DENSITY_MULT*0.9);
 
     if (window.innerWidth < 700){
-      rainDensity *= 0.85;
-      starDensity *= 0.85;
+      rainDensity *= 0.8;
+      starDensity *= 0.8;
     }
 
     drops = Array.from({length: Math.floor(rainDensity)}, makeDrop);
@@ -1392,12 +1368,12 @@ footer{
 
   function draw(ts){
     if(!last) last = ts;
-    var dt = Math.min(32, ts - last) / 1000; // cap delta
+    var dt = Math.min(32, ts - last) / 1000;
     last = ts;
 
     ctx.clearRect(0,0,W,H);
 
-    // warm radial glow top-ish
+    // soft warm glow from top
     var g = ctx.createRadialGradient(
       W*0.5, H*0.2, 0,
       W*0.5, H*0.3, Math.max(W,H)*0.8
@@ -1407,22 +1383,22 @@ footer{
     ctx.fillStyle = g;
     ctx.fillRect(0,0,W,H);
 
-    // sparkle / stars
+    // sparkle stars
     for (var i=0;i<stars.length;i++){
       var s = stars[i];
       s.a += (Math.random() - .5) * 0.03 * s.tw;
-      s.a = Math.max(0.15, Math.min(.95, s.a));
+      s.a = Math.max(0.15, Math.min(.9, s.a));
 
       ctx.beginPath();
       ctx.arc(s.x, s.y, s.r, 0, Math.PI*2);
       ctx.fillStyle = 'rgba(245,217,124,'+s.a+')';
-      ctx.shadowBlur  = 10*dpr;
-      ctx.shadowColor = 'rgba(245,217,124,0.7)';
+      ctx.shadowBlur  = 4*dpr; // lebih kecil -> lebih ringan
+      ctx.shadowColor = 'rgba(245,217,124,0.5)';
       ctx.fill();
       ctx.shadowBlur = 0;
     }
 
-    // falling gold streaks
+    // gold rain streaks
     for (var j=0;j<drops.length;j++){
       var d = drops[j];
       d.y += d.spd * dt;
@@ -1440,14 +1416,17 @@ footer{
       ctx.lineTo(d.x, d.y);
       ctx.stroke();
 
-      ctx.strokeStyle = 'rgba(245,217,124,0.45)';
+      ctx.strokeStyle = 'rgba(245,217,124,0.4)';
       ctx.beginPath();
       ctx.moveTo(d.x, d.y - d.len*0.7);
       ctx.lineTo(d.x, d.y);
       ctx.stroke();
     }
 
-    requestAnimationFrame(draw);
+    // throttle sedikit biar HP adem
+    setTimeout(function(){
+      requestAnimationFrame(draw);
+    },30);
   }
 
   function init(){
@@ -1464,7 +1443,6 @@ footer{
 })();
 </script>
 
-<!-- tiny script: update footer year -->
 <script>
 document.getElementById("year").textContent = new Date().getFullYear();
 </script>
