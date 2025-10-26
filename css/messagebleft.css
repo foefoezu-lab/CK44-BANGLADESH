@@ -1,15 +1,7 @@
-
 // messagebleft.js
-// FINAL STABLE VERSION
-// - Tidak bikin hang
-// - Loop rapi tiap 5 detik
-// - Maks 3 kartu aktif
-// - Pakai inline style hijau/glow seperti kartu aslinya
-// - Tidak bergantung ke CSS eksternal untuk tampilan kartu
+// Versi stabil anti-freeze
 
-// =====================
-// DATA PEMENANG (edit bebas)
-// =====================
+// Data pemenang (edit sesuka hati)
 const winnerFeed = [
   {
     player: "Shafin***48",
@@ -43,23 +35,19 @@ const winnerFeed = [
   }
 ];
 
-// =====================
-// KONFIG
-// =====================
-const SHOW_INTERVAL = 5000;   // 5 detik antar kartu baru
-const MAX_ACTIVE_CARDS = 3;   // kartu maksimal nongol sekaligus
+// Konfigurasi
+const SHOW_INTERVAL = 5000;   // satu kartu baru tiap 5 detik
+const MAX_ACTIVE_CARDS = 3;   // biar ga numpuk ratusan
 let feedIndex = 0;
 
-// =====================
-// DAPETIN / BIKIN CONTAINER
-// =====================
+// Cari container di halaman. Kedua file HTML kamu punya ini:
+// <div class="message-left-container"></div>
 let wrap = document.querySelector(".message-left-container");
 
-// kalau ga ada container (misal di halaman tertentu), bikin sendiri
+// fallback: kalau belum ada container (misal ada halaman lain), bikin
 if (!wrap) {
   wrap = document.createElement("div");
   wrap.className = "message-left-container";
-  // inline style biar MANTAP meskipun CSS tidak loaded
   wrap.setAttribute(
     "style",
     [
@@ -77,15 +65,11 @@ if (!wrap) {
   document.body.appendChild(wrap);
 }
 
-// =====================
-// FUNGSI BIKIN KARTU
-// Kartu langsung styled inline: gradient hijau gelap + glow hijau,
-// tulisan hijau neon di header, amount hijau tebal, dsb.
-// =====================
+// bikin kartu popup hijau
 function createCard(dataObj) {
   const card = document.createElement("div");
 
-  // style base kartu
+  // style kartu hijau glow langsung inline
   card.setAttribute(
     "style",
     [
@@ -108,7 +92,7 @@ function createCard(dataObj) {
     ].join(";")
   );
 
-  // isi kartu
+  // isi teks popup
   card.innerHTML = `
     <div style="
       font-size:.7rem;
@@ -137,7 +121,7 @@ function createCard(dataObj) {
     </div>
   `;
 
-  // animasi fade/slide in
+  // animasi masuk
   requestAnimationFrame(() => {
     card.style.opacity = "1";
     card.style.transform = "translateY(0) scale(1)";
@@ -146,9 +130,7 @@ function createCard(dataObj) {
   return card;
 }
 
-// =====================
-// FUNGSI PUSH KARTU
-// =====================
+// masukin satu kartu popup
 function pushCard() {
   const dataObj = winnerFeed[feedIndex % winnerFeed.length];
   feedIndex++;
@@ -156,10 +138,11 @@ function pushCard() {
   const card = createCard(dataObj);
   wrap.appendChild(card);
 
-  // limit jumlah kartu
+  // cek jumlah kartu aktif
   const cards = wrap.children;
   if (cards.length > MAX_ACTIVE_CARDS) {
     const first = cards[0];
+    // animasi keluar halus
     first.style.opacity = "0";
     first.style.transform = "translateY(20px) scale(.96)";
     first.style.transition = "all .3s ease";
@@ -172,12 +155,10 @@ function pushCard() {
   }
 }
 
-// =====================
-// START LOOP
-// =====================
+// start loop aman
 function startFeed() {
-  pushCard(); // tampilkan pertama langsung
-  setInterval(pushCard, SHOW_INTERVAL);
+  pushCard(); // tampilkan 1 pertama
+  setInterval(pushCard, SHOW_INTERVAL); // lalu tiap 5 detik
 }
 
 // jalanin setelah DOM siap
