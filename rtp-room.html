@@ -13,27 +13,21 @@
   <style>
     /* ==== GLOBAL ==== */
     body {
-      /* base dark */
       background-color:#0a0a0a;
       color:#fff;
       font-family:system-ui,-apple-system,BlinkMacSystemFont,'Inter','Segoe UI',Roboto,Helvetica,Arial,sans-serif;
       margin:0;
 
-      /* --- layered background glow --- */
+      /* Glow background (lebih ringan tapi tetap VIP) */
       background-image:
         radial-gradient(
           circle at 50% 0%,
-          rgba(255,215,80,0.12) 0%,
+          rgba(255,215,80,0.10) 0%,
           rgba(0,0,0,0) 60%
         ),
         radial-gradient(
           circle at 50% 40%,
-          rgba(0,255,120,0.07) 0%,
-          rgba(0,0,0,0) 70%
-        ),
-        radial-gradient(
-          circle at 80% 20%,
-          rgba(255,255,255,0.04) 0%,
+          rgba(0,255,120,0.05) 0%,
           rgba(0,0,0,0) 70%
         ),
         linear-gradient(
@@ -44,9 +38,8 @@
 
       background-repeat:no-repeat;
       background-size:
-        800px 600px,
-        900px 900px,
-        700px 700px,
+        700px 520px,
+        800px 800px,
         100% 100%;
       background-attachment:fixed;
     }
@@ -61,7 +54,7 @@
       background:#111;
       border:1px solid rgba(255,255,255,.07);
       border-radius:16px;
-      box-shadow:0 30px 60px rgba(0,0,0,.9);
+      box-shadow:0 16px 32px rgba(0,0,0,.8);
       padding:16px;
       color:#fff;
       font-size:.8rem;
@@ -171,9 +164,8 @@
       cursor:pointer;
     }
 
-    /* ===== HERO LAYOUT BARU ===== */
+    /* ===== HERO LAYOUT ===== */
 
-    /* Desktop: 3 kolom (kiri stack 2 card, tengah card RTP gede, kanan stack 2 card) */
     .ck-hero-layout{
       display:grid;
       grid-template-columns:1fr 1.2fr 1fr;
@@ -188,33 +180,67 @@
       min-width:0;
     }
 
-    /* Card RTP utama di tengah kita kasih style tambahan biar standout */
+    /* ===== RTP MAIN CARD (tengah) ===== */
+
     .ck-rtp-main-card{
-      background:#111;
-      border:1px solid rgba(255,255,255,.18);
-      box-shadow:
-        0 30px 60px rgba(0,0,0,.9),
-        0 0 20px rgba(255,210,74,.08);
+      background:#181818;
+      border:1px solid rgba(255,255,255,.12);
       border-radius:16px;
+      box-shadow:
+        0 20px 40px rgba(0,0,0,.8),
+        0 0 16px rgba(0,255,98,.08);
       padding:16px;
     }
 
-    .ck-rtp-main-header{
+    /* header atas rtp + indikator live */
+    .ck-rtp-main-header-top{
       display:flex;
+      flex-wrap:wrap;
+      justify-content:space-between;
+      align-items:flex-start;
+      gap:8px;
+      margin-bottom:8px;
+    }
+
+    .ck-rtp-main-title{
+      display:flex;
+      flex-wrap:wrap;
       align-items:flex-start;
       gap:.5rem;
-      flex-wrap:wrap;
-      margin:0 0 8px;
       font-size:1rem;
       line-height:1.3;
       font-weight:600;
       color:#ffd24a;
       text-shadow:0 0 8px rgba(212,175,55,.7);
     }
-    .ck-rtp-main-header .emoji{
+    .ck-rtp-main-title .emoji{
       line-height:1;
       font-size:1rem;
     }
+
+    .ck-live-wrap{
+      display:flex;
+      align-items:center;
+      gap:6px;
+      font-size:.7rem;
+      line-height:1.2;
+      font-weight:600;
+      color:#00ff62;
+      text-shadow:0 0 6px rgba(0,255,98,.6);
+    }
+    .ck-live-dot{
+      width:8px;
+      height:8px;
+      border-radius:50%;
+      background:#00ff62;
+      box-shadow:0 0 8px rgba(0,255,98,.8);
+      animation:ck-pulse 1.5s infinite;
+    }
+    @keyframes ck-pulse{
+      0%,100%{opacity:1;box-shadow:0 0 6px rgba(0,255,98,.8);}
+      50%{opacity:.4;box-shadow:0 0 2px rgba(0,255,98,.2);}
+    }
+
     .ck-rtp-main-desc{
       font-size:.8rem;
       line-height:1.4;
@@ -222,31 +248,36 @@
       margin-bottom:12px;
     }
 
-    /* list RTP hot di tengah (top gacha) */
+    /* list RTP hot (top game live) */
     .ck-rtp-hot-list{
       display:grid;
       gap:12px;
     }
 
+    /* row game dalam live RTP */
     .ck-card-row{
       display:flex;
       align-items:flex-start;
-      background:#1a1a1a;
-      border:1px solid rgba(255,255,255,.08);
-      border-radius:10px;
-      box-shadow:0 20px 40px rgba(0,0,0,.9);
-      overflow:hidden;
+      background:linear-gradient(#1f1f1f 0%, #2a2a2a 100%);
+      border:1px solid rgba(255,255,255,.12);
+      border-radius:8px;
+      box-shadow:0 12px 24px rgba(0,0,0,.8);
+      padding:10px 12px;
     }
+
+    /* thumbnail game */
     .ck-game-thumb{
       flex-shrink:0;
-      width:90px;
-      height:90px;
-      background:radial-gradient(circle at 50% 35%, #2a2a2a 0%, #000 70%);
-      border-right:1px solid rgba(255,255,255,.08);
+      width:64px;
+      height:64px;
+      background:#000;
+      border-radius:6px;
+      border:1px solid rgba(255,255,255,.15);
       display:flex;
       align-items:center;
       justify-content:center;
       overflow:hidden;
+      margin-right:12px;
     }
     .ck-game-thumb img{
       max-width:100%;
@@ -258,8 +289,10 @@
       display:block;
       margin:auto;
     }
+
+    /* info game */
     .ck-game-info{
-      padding:10px 12px;
+      flex:1 1 auto;
       font-size:.75rem;
       line-height:1.4;
       color:#ccc;
@@ -272,11 +305,16 @@
       margin-bottom:2px;
     }
     .ck-game-rtp{
+      display:flex;
+      flex-wrap:wrap;
+      align-items:center;
+      gap:6px;
       color:#00ff62;
       font-weight:600;
       font-size:.7rem;
       line-height:1.2;
       margin-bottom:4px;
+      text-shadow:0 0 6px rgba(0,255,98,.6);
     }
     .ck-rtp-val{
       background:#003b14;
@@ -286,6 +324,8 @@
       color:#00ff62;
       font-weight:700;
       text-shadow:0 0 4px rgba(0,255,98,.4);
+      font-size:.7rem;
+      line-height:1.2;
     }
     .ck-game-provider{
       color:#999;
@@ -300,7 +340,7 @@
       margin-top:12px;
     }
 
-    /* ===== PROVIDER TABS / TABEL RTP SECTION (bawah hero) ===== */
+    /* ===== TABLE RTP SECTION ===== */
     .ck-rtp-table-wrap{
       width:100%;
       overflow-x:auto;
@@ -315,7 +355,7 @@
       background:#1a1a1a;
       border:1px solid rgba(255,255,255,.07);
       border-radius:12px;
-      box-shadow:0 30px 60px rgba(0,0,0,.9);
+      box-shadow:0 20px 40px rgba(0,0,0,.8);
     }
     .ck-rtp-table thead th{
       text-align:left;
@@ -351,18 +391,18 @@
       font-weight:600;
     }
 
-    /* ===== PROVIDER DETAIL WRAP (grid kartu game per provider) ===== */
+    /* ===== PROVIDER DETAIL SECTION ===== */
     #ck-provider-detail-wrap{
       background:#111;
       border:1px solid rgba(255,255,255,.07);
       border-radius:16px;
-      box-shadow:0 30px 60px rgba(0,0,0,.9);
+      box-shadow:0 20px 40px rgba(0,0,0,.8);
       padding:16px;
       margin-top:24px;
       color:#fff;
       font-size:.8rem;
       line-height:1.4;
-      display:none; /* hidden saat tab = all */
+      display:none;
     }
 
     .ck-provider-detail-head{
@@ -392,7 +432,7 @@
       background:#1a1a1a;
       border:1px solid rgba(255,255,255,0.08);
       border-radius:10px;
-      box-shadow:0 20px 40px rgba(0,0,0,.9);
+      box-shadow:0 16px 32px rgba(0,0,0,.8);
       overflow:hidden;
       display:flex;
       flex-direction:column;
@@ -447,11 +487,11 @@
       margin-bottom:8px;
     }
 
-    /* RTP progress bar di kartu game */
+    /* RTP progress bar di kartu game detail */
     .ck-rtp-bar-wrap{
       position:relative;
       width:100%;
-      height:32px;
+      height:28px;
       background:#003b14;
       border-radius:6px;
       border:1px solid rgba(0,255,98,.4);
@@ -489,7 +529,7 @@
       50%     {opacity:.8;}
     }
 
-    /* provider tabs (di atas tabel RTP) */
+    /* provider tabs */
     #ck-provider-tabs{
       display:flex;
       flex-wrap:wrap;
@@ -521,7 +561,7 @@
       font-weight:700;
     }
 
-    /* ===== BACK BUTTON STRIP TOP ===== */
+    /* ===== BACK BUTTON TOP ===== */
     .ck-back-strip{
       max-width:1400px;
       margin:0 auto 16px;
@@ -567,7 +607,7 @@
       background:#111;
       border:1px solid rgba(255,255,255,.15);
       border-radius:16px;
-      box-shadow:0 40px 80px rgba(0,0,0,.9);
+      box-shadow:0 32px 64px rgba(0,0,0,.9);
       max-width:360px;
       width:100%;
       color:#fff;
@@ -621,7 +661,7 @@
       background:#111;
       border:1px solid rgba(255,255,255,.15);
       border-radius:16px;
-      box-shadow:0 40px 80px rgba(0,0,0,.9);
+      box-shadow:0 32px 64px rgba(0,0,0,.9);
       width:100%;
       max-width:360px;
       color:#fff;
@@ -661,7 +701,7 @@
       background:#1a1a1a;
       border:1px solid rgba(255,255,255,.07);
       border-radius:8px;
-      box-shadow:0 20px 40px rgba(0,0,0,.8);
+      box-shadow:0 16px 32px rgba(0,0,0,.8);
       padding:12px;
       font-size:.75rem;
       line-height:1.4;
@@ -677,7 +717,7 @@
       background:#151515;
       border:1px solid rgba(255,255,255,.07);
       border-radius:6px;
-      box-shadow:0 20px 40px rgba(0,0,0,.8);
+      box-shadow:0 16px 32px rgba(0,0,0,.8);
       padding:8px 10px;
       font-size:.75rem;
       line-height:1.4;
@@ -695,7 +735,7 @@
       background:#1a1a1a;
       border:1px solid rgba(255,255,255,.07);
       border-radius:6px;
-      box-shadow:0 20px 40px rgba(0,0,0,.8);
+      box-shadow:0 16px 32px rgba(0,0,0,.8);
       padding:10px;
       font-size:.7rem;
       line-height:1.4;
@@ -757,7 +797,7 @@
 
   <div class="ck-page-wrap">
 
-    <!-- HERO LAYOUT BARU -->
+    <!-- HERO LAYOUT -->
     <div class="ck-hero-layout">
 
       <!-- KIRI: VIP CARD + DAILY BONUS -->
@@ -852,9 +892,15 @@
       <!-- TENGAH: RTP MAIN BIG CARD -->
       <div class="ck-col">
         <div class="ck-rtp-main-card">
-          <div class="ck-rtp-main-header">
-            <span class="emoji">📊</span>
-            <span>আজকের RTP / হট প্যাটার্ন</span>
+          <div class="ck-rtp-main-header-top">
+            <div class="ck-rtp-main-title">
+              <span class="emoji">📊</span>
+              <span>আজকের RTP / হট প্যাটার্ন</span>
+            </div>
+            <div class="ck-live-wrap">
+              <span class="ck-live-dot"></span>
+              <span>LIVE এখন আপডেট</span>
+            </div>
           </div>
 
           <div class="ck-rtp-main-desc">
@@ -863,7 +909,7 @@
           </div>
 
           <div class="ck-rtp-hot-list" id="ck-hero-card-list">
-            <!-- main.js akan inject top 3 game RTP panas -->
+            <!-- main.js inject top live RTP games -->
           </div>
 
           <div class="ck-rtp-main-footnote">
