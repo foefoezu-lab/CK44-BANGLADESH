@@ -1,0 +1,107 @@
+/* Floating winner popup bottom-left – Bangladesh Edition */
+.message-left-container {
+  position: fixed;
+  left: 1rem;
+  bottom: 1rem;
+  z-index: 9999;
+  display: flex;
+  flex-direction: column;
+  gap: .5rem;
+  pointer-events: none;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Inter', 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+}
+
+.message-left-card {
+  min-width: 240px;
+  max-width: 260px;
+  background: radial-gradient(circle at 15% 15%, rgba(0,80,40,.55) 0%, rgba(0,20,10,.9) 60%);
+  border: 1px solid rgba(0,255,128,.35);
+  box-shadow:
+    0 20px 40px rgba(0,0,0,.9),
+    0 0 20px rgba(0,255,128,.25),
+    0 0 60px rgba(255,0,0,.15);
+  border-radius: 12px;
+  padding: .75rem .9rem;
+  display: flex;
+  align-items: flex-start;
+  gap: .75rem;
+  color: #fff;
+  font-size: .8rem;
+  line-height: 1.4;
+  opacity: 0;
+  transform: translateX(-20px) translateY(20px) scale(.96);
+  animation: msgFade .4s forwards ease;
+}
+
+.message-left-card .thumb-mini {
+  flex:0 0 44px;
+  height:44px;
+  border-radius:8px;
+  background:#0f0f0f center/cover no-repeat;
+  border:1px solid rgba(0,255,128,.4);
+  box-shadow:
+    0 0 8px rgba(0,255,128,.6),
+    0 0 16px rgba(255,0,0,.4);
+}
+
+.message-left-card .texts {
+  flex:1;
+  color:#fff;
+  font-weight:500;
+  text-shadow:0 0 6px rgba(0,0,0,.8);
+}
+
+.message-left-card .texts .player {
+  color:#00ff6a;
+  font-weight:600;
+  font-size:.8rem;
+  line-height:1.25;
+  text-shadow:
+    0 0 8px rgba(0,255,128,.8),
+    0 0 16px rgba(0,255,128,.4);
+}
+
+.message-left-card .texts .game {
+  font-size:.7rem;
+  line-height:1.2;
+  color:#ccc;
+  text-shadow:0 0 4px rgba(0,0,0,.8);
+}
+
+.message-left-card .texts .amount {
+  margin-top:.35rem;
+  font-size:.8rem;
+  font-weight:700;
+  line-height:1.2;
+  color:#ffd84a;
+  text-shadow:
+    0 0 6px rgba(255,216,74,.6),
+    0 0 14px rgba(255,0,0,.4);
+}
+
+@keyframes msgFade {
+  to {
+    opacity:1;
+    transform: translateX(0) translateY(0) scale(1);
+  }
+}
+@keyframes msgHide {
+  to {
+    opacity:0;
+    transform: translateX(-20px) translateY(20px) scale(.96);
+  }
+}
+
+@media(max-width:480px){
+  .message-left-card{
+    min-width:200px;
+    max-width:220px;
+    font-size:.7rem;
+  }
+  .message-left-card .texts .player{
+    font-size:.7rem;
+  }
+  .message-left-card .texts .amount{
+    font-size:.7rem;
+  }
+}
