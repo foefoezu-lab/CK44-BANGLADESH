@@ -171,7 +171,7 @@
       name: gameName,
       provider: providerLabel,
       providerKey: providerKey,
-      img: `./img/${imgFolder}/${num}.jpg`,
+      img: `./img/${imgFolder}/${num}.png`,
       baseRTP: baseRtpDefault,
       stake: "1K - 10K",
       polaSteps: [
