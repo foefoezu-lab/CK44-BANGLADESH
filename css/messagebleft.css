@@ -1,133 +1,137 @@
 
 // messagebleft.js
-// versi stabil looping smooth, tidak bikin freeze
-// tampilan (warna hijau dsb) tetap ngikutin CSS lama kamu: messagebleft.css
+// versi stable looping, tampilan hijau seperti sebelumnya (inline style)
+// kita pakai inline style supaya tampilannya tetap hijau/glow walau CSS custom berubah
 
-// Data pemenang, kamu bisa ganti/extend manual
 const winnerFeed = [
   {
-    name: "Safi***85",
-    game: "Sweet Bonanza",
-    amount: "৳22,116 BDT",
+    name: "Shafin***48",
+    game: "Mega Moolah",
+    amount: "৳9,694 BDT",
     note: "menang besar di Bangladesh!"
   },
   {
-    name: "Sadi***98",
+    name: "Arif***16",
+    game: "Big Bass Bonanza",
+    amount: "৳10,284 BDT",
+    note: "menang besar di Bangladesh!"
+  },
+  {
+    name: "Nadia***33",
     game: "Sugar Rush",
     amount: "৳19,410 BDT",
-    note: "menang besar di Bangladesh!"
+    note: "payout cepat & aman!"
   },
   {
-    name: "Roha***72",
+    name: "Rohan***72",
     game: "Wild West Gold",
     amount: "৳14,216 BDT",
-    note: "menang besar di Bangladesh!"
+    note: "WD sukses 24/7!"
   },
   {
     name: "Amin***44",
     game: "Gates of Olympus",
     amount: "৳11,880 BDT",
-    note: "payout cepat & aman!"
-  },
-  {
-    name: "Nadi***33",
-    game: "Big Bass Bonanza",
-    amount: "৳46,169 BDT",
-    note: "WD sukses 24/7!"
+    note: "bonus aktif VIP 30!"
   }
 ];
 
-// durasi antar popup baru (ms)
-const SHOW_INTERVAL = 5000; // 5 detik
-// maksimum kartu aktif yang boleh nongol barengan
+const SHOW_INTERVAL = 5000; // ms
 const MAX_ACTIVE_CARDS = 3;
-
-// index untuk muter data winnerFeed
 let feedIndex = 0;
 
-// container utama (harus sudah ada di HTML kamu):
-// <div class="message-left-container"></div>
-const wrap = document.querySelector(".message-left-container");
+// pastikan container ada
+let wrap = document.querySelector(".message-left-container");
+if (!wrap) {
+  wrap = document.createElement("div");
+  wrap.className = "message-left-container";
+  // inline fallback positioning in case CSS missing
+  wrap.setAttribute(
+    "style",
+    "position:fixed;left:16px;bottom:16px;z-index:9999;display:flex;flex-direction:column;gap:8px;font-family:system-ui,-apple-system,BlinkMacSystemFont,'Inter','Segoe UI',Roboto,Helvetica,Arial,sans-serif;pointer-events:none;"
+  );
+  document.body.appendChild(wrap);
+}
 
-// helper bikin elemen 1 kartu popup
-function makeCard(data) {
-  // NOTE:
-  // Di CSS lama kamu, kartu popup biasanya pakai class seperti `.message-left-card`
-  // dan di dalamnya ada struktur teks hijau dsb.
-  // Di sini kita bikin markup generik yang aman.
-
+function makeCard(data){
   const card = document.createElement("div");
   card.className = "message-left-card";
 
-  card.innerHTML = \`
-    <div class="msg-header" style="font-size:.7rem; line-height:1.4; font-weight:600; color:#00ff6a;">
-      \${data.name} menang besar di Bangladesh!
-    </div>
-    <div class="msg-body" style="font-size:.7rem; line-height:1.4; color:#fff;">
-      Game: \${data.game}<br/>
-      \${data.note}
-    </div>
-    <div class="msg-amount" style="font-size:.75rem; font-weight:700; color:#00ff6a; margin-top:4px;">
-      \${data.amount}
-    </div>
-  \`;
+  // inline styling to mimic the original green glow card
+  card.setAttribute(
+    "style",
+    [
+      "min-width:240px",
+      "max-width:260px",
+      "border-radius:12px",
+      "background:radial-gradient(circle at 0% 0%,rgba(0,255,128,.08)0%,rgba(0,0,0,0)60%),rgba(0,20,10,.8)",
+      "border:1px solid rgba(0,255,128,.4)",
+      "box-shadow:0 20px 40px rgba(0,0,0,.9),0 0 20px rgba(0,255,128,.3),0 0 60px rgba(0,255,128,.15)",
+      "padding:12px 14px",
+      "color:#fff",
+      "font-size:.7rem",
+      "line-height:1.4",
+      "font-weight:500",
+      "pointer-events:auto",
+      "display:block",
+      "opacity:0",
+      "transform:translateX(-20px) translateY(20px) scale(.96)",
+      "transition:all .3s ease"
+    ].join(";")
+  );
 
-  // animasi masuk halus
-  card.style.opacity = "0";
-  card.style.transform = "translateY(10px) scale(0.96)";
-  requestAnimationFrame(() => {
-    card.style.transition = "all .3s ease";
+  // inner html markup simple 3-line text
+  card.innerHTML = `
+    <div style="color:#00ff6a;font-weight:600;margin-bottom:4px;">
+      ${data.name} ${data.note}
+    </div>
+    <div style="color:#fff;">
+      Game: ${data.game}
+    </div>
+    <div style="color:#00ff6a;font-weight:700;margin-top:4px;">
+      ${data.amount}
+    </div>
+  `;
+
+  // animate in next tick
+  requestAnimationFrame(()=>{
     card.style.opacity = "1";
-    card.style.transform = "translateY(0) scale(1)";
+    card.style.transform = "translateX(0) translateY(0) scale(1)";
   });
 
   return card;
 }
 
-// tambahkan satu popup baru
-function pushCard() {
-  if (!wrap) return;
+function pushCard(){
+  if(!wrap) return;
 
-  // ambil winner berikutnya
   const data = winnerFeed[feedIndex % winnerFeed.length];
   feedIndex++;
 
-  // buat elemen kartu
   const card = makeCard(data);
-
-  // tempel ke container
   wrap.appendChild(card);
 
-  // kalau jumlah kartu melebihi MAX_ACTIVE_CARDS -> hapus yang paling lama (atas)
   const cards = wrap.querySelectorAll(".message-left-card");
-  if (cards.length > MAX_ACTIVE_CARDS) {
+  if(cards.length > MAX_ACTIVE_CARDS){
     const first = cards[0];
-
-    // animasi keluar halus dulu sebelum remove
-    first.style.transition = "all .3s ease";
     first.style.opacity = "0";
-    first.style.transform = "translateY(10px) scale(0.96)";
-
-    setTimeout(() => {
-      if (first && first.parentNode) {
+    first.style.transform = "translateX(-20px) translateY(20px) scale(.96)";
+    first.style.transition = "all .3s ease";
+    setTimeout(()=>{
+      if(first && first.parentNode){
         first.parentNode.removeChild(first);
       }
-    }, 300);
+    },300);
   }
 }
 
-// start loop ringan (tiap 5 detik buat popup baru)
-function startFeed() {
-  // pertama langsung tampil satu
+function startFeed(){
   pushCard();
-
-  // setelah itu interval
   setInterval(pushCard, SHOW_INTERVAL);
 }
 
-// jalanin setelah DOM siap
-if (document.readyState === "loading") {
+if(document.readyState === "loading"){
   document.addEventListener("DOMContentLoaded", startFeed);
-} else {
+}else{
   startFeed();
 }
