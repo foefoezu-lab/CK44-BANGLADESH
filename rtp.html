@@ -1,3 +1,4 @@
+<!-- rtp-room.html -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -7,10 +8,72 @@
 
   <!-- THEME / LAYOUT -->
   <link rel="stylesheet" href="./css/style.css" />
-  <link rel="stylesheet" href="./css/messagebleft.css">
-<div class="message-left-container"></div>
-<script src="./js/messagebleft.js?v=3"></script>
-  
+  <link rel="stylesheet" href="./css/messagebleft.css" />
+
+  <style>
+    /* === OVERRIDE POPUP STYLE (sama dengan rtp-live.html) === */
+    .message-left-container {
+      position: fixed;
+      left: 16px;
+      bottom: 16px;
+      z-index: 9999;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      pointer-events: none;
+      font-family: inherit;
+    }
+    .message-left-card {
+      min-width: 240px;
+      max-width: 260px;
+      border-radius: 12px;
+      background: radial-gradient(circle at 15% 15%, rgba(0,80,40,.55) 0%, rgba(0,20,10,.9) 60%);
+      border: 1px solid rgba(0,255,128,.35);
+      box-shadow:
+        0 20px 40px rgba(0,0,0,.9),
+        0 0 20px rgba(0,255,128,.25),
+        0 0 60px rgba(0,255,128,.15);
+      color: #fff;
+      font-size: .7rem;
+      line-height: 1.4;
+      font-weight: 500;
+      padding: 12px 14px;
+      pointer-events: auto;
+
+      opacity: 0;
+      transform: translateY(20px) scale(.96);
+      transition: all .3s ease;
+    }
+    .message-left-card .player {
+      font-size: .7rem;
+      line-height: 1.4;
+      font-weight: 600;
+      color: #00ff6a;
+      text-shadow:
+        0 0 8px rgba(0,255,128,.8),
+        0 0 16px rgba(0,255,128,.4);
+      margin-bottom: 4px;
+    }
+    .message-left-card .game {
+      color: #fff;
+      font-size: .7rem;
+      line-height: 1.4;
+    }
+    .message-left-card .amount {
+      color: #00ff6a;
+      font-weight: 700;
+      font-size: .75rem;
+      line-height: 1.3;
+      margin-top: 4px;
+      text-shadow:
+        0 0 8px rgba(0,255,128,.8),
+        0 0 16px rgba(0,255,128,.4);
+    }
+    .message-left-card.hide {
+      opacity: 0 !important;
+      transform: translateY(20px) scale(.96) !important;
+    }
+  </style>
 </head>
 <body>
   <div class="ck-page-wrap">
@@ -241,7 +304,6 @@
 
     <!-- ================================ -->
     <!-- POPUP OVERLAY: DAILY BONUS POPUP -->
-    <!-- dipanggil dari tombol data-open-popup="bonus-popup" -->
     <!-- ================================ -->
     <div class="ck-popup-overlay" id="bonus-popup">
       <div class="ck-popup-card">
@@ -290,8 +352,76 @@
   <!-- Engine UI RTP / Pola / Tabs (modern version) -->
   <script src="./js/main.js"></script>
 
-  <!-- Popup pemain Bangladesh -->
-  <script src="./js/messagebleft.js"></script>
+  <!-- POPUP PEMENANG (versi stabil anti-freeze, sama seperti rtp-live.html) -->
+  <script>
+  (function(){
+    const WINNERS = [
+      { player:"Shafin***48", game:"Mega Moolah",        amount:"৳9,694 BDT",   note:"menang besar di Bangladesh!" },
+      { player:"Arif***16",   game:"Big Bass Bonanza",  amount:"৳10,284 BDT",  note:"menang besar di Bangladesh!" },
+      { player:"Nadia***33",  game:"Sugar Rush",        amount:"৳19,410 BDT",  note:"payout cepat & aman!" },
+      { player:"Rohan***72",  game:"Wild West Gold",    amount:"৳14,216 BDT",  note:"WD sukses 24/7!" },
+      { player:"Amin***44",   game:"Gates of Olympus",  amount:"৳11,880 BDT",  note:"bonus aktif VIP 30!" }
+    ];
+
+    const POPUP_INTERVAL_MS = 8000;
+    const POPUP_LIFETIME_MS = 5000;
+    const MAX_ACTIVE = 1;
+
+    let indexPointer = 0;
+    const wrap = document.querySelector(".message-left-container");
+
+    function spawnCard(data){
+      const card = document.createElement("div");
+      card.className = "message-left-card";
+      card.innerHTML = `
+        <div class="player">${data.player} ${data.note}</div>
+        <div class="game">Game: ${data.game}</div>
+        <div class="amount">${data.amount}</div>
+      `;
+      requestAnimationFrame(()=>{
+        card.style.opacity = "1";
+        card.style.transform = "translateY(0) scale(1)";
+      });
+      return card;
+    }
+
+    function showPopup(){
+      const actives = wrap.querySelectorAll(".message-left-card");
+      if (actives.length >= MAX_ACTIVE){
+        actives.forEach(el=>{
+          el.classList.add("hide");
+          setTimeout(()=>{
+            if(el && el.parentNode){ el.parentNode.removeChild(el); }
+          },300);
+        });
+      }
+
+      const data = WINNERS[indexPointer % WINNERS.length];
+      indexPointer++;
+
+      const card = spawnCard(data);
+      wrap.appendChild(card);
+
+      setTimeout(()=>{
+        card.classList.add("hide");
+        setTimeout(()=>{
+          if(card && card.parentNode){ card.parentNode.removeChild(card); }
+        },300);
+      }, POPUP_LIFETIME_MS);
+    }
+
+    function startLoop(){
+      showPopup();
+      setInterval(showPopup, POPUP_INTERVAL_MS);
+    }
+
+    if (document.readyState === "loading"){
+      document.addEventListener("DOMContentLoaded", startLoop);
+    } else {
+      startLoop();
+    }
+  })();
+  </script>
 
 </body>
 </html>
