@@ -1,7 +1,15 @@
-// messagebleft.js
-// Loop popup kemenangan besar - versi stabil & cocok sama CSS messagebleft.css
 
-// Data menang sample, silakan edit / tambah
+// messagebleft.js
+// FINAL STABLE VERSION
+// - Tidak bikin hang
+// - Loop rapi tiap 5 detik
+// - Maks 3 kartu aktif
+// - Pakai inline style hijau/glow seperti kartu aslinya
+// - Tidak bergantung ke CSS eksternal untuk tampilan kartu
+
+// =====================
+// DATA PEMENANG (edit bebas)
+// =====================
 const winnerFeed = [
   {
     player: "Shafin***48",
@@ -35,60 +43,126 @@ const winnerFeed = [
   }
 ];
 
-// berapa lama antar popup baru (ms)
-const SHOW_INTERVAL = 5000; // 5 detik
-// berapa kartu maksimum yang nongol sekaligus
-const MAX_ACTIVE_CARDS = 3;
-
+// =====================
+// KONFIG
+// =====================
+const SHOW_INTERVAL = 5000;   // 5 detik antar kartu baru
+const MAX_ACTIVE_CARDS = 3;   // kartu maksimal nongol sekaligus
 let feedIndex = 0;
 
-// cari container popup dari HTML
+// =====================
+// DAPETIN / BIKIN CONTAINER
+// =====================
 let wrap = document.querySelector(".message-left-container");
 
-// fallback safety: kalau belum ada container, bikin
+// kalau ga ada container (misal di halaman tertentu), bikin sendiri
 if (!wrap) {
   wrap = document.createElement("div");
   wrap.className = "message-left-container";
+  // inline style biar MANTAP meskipun CSS tidak loaded
+  wrap.setAttribute(
+    "style",
+    [
+      "position:fixed",
+      "left:16px",
+      "bottom:16px",
+      "z-index:9999",
+      "display:flex",
+      "flex-direction:column",
+      "gap:8px",
+      "pointer-events:none",
+      "font-family:system-ui,-apple-system,BlinkMacSystemFont,'Inter','Segoe UI',Roboto,Helvetica,Arial,sans-serif"
+    ].join(";")
+  );
   document.body.appendChild(wrap);
 }
 
-// fungsi bikin markup kartu SESUAI STRUCTURE CSS
+// =====================
+// FUNGSI BIKIN KARTU
+// Kartu langsung styled inline: gradient hijau gelap + glow hijau,
+// tulisan hijau neon di header, amount hijau tebal, dsb.
+// =====================
 function createCard(dataObj) {
   const card = document.createElement("div");
-  card.className = "message-left-card";
 
-  // inner HTML harus sesuai sama .thumb-mini, .texts, .player/.game/.amount
+  // style base kartu
+  card.setAttribute(
+    "style",
+    [
+      "min-width:240px",
+      "max-width:260px",
+      "border-radius:12px",
+      "background:radial-gradient(circle at 15% 15%, rgba(0,80,40,.55) 0%, rgba(0,20,10,.9) 60%)",
+      "border:1px solid rgba(0,255,128,.35)",
+      "box-shadow:0 20px 40px rgba(0,0,0,.9),0 0 20px rgba(0,255,128,.25),0 0 60px rgba(0,255,128,.15)",
+      "padding:12px 14px",
+      "color:#fff",
+      "font-size:.7rem",
+      "line-height:1.4",
+      "font-weight:500",
+      "pointer-events:auto",
+      "opacity:0",
+      "transform:translateY(20px) scale(.96)",
+      "transition:all .3s ease",
+      "background-clip:padding-box"
+    ].join(";")
+  );
+
+  // isi kartu
   card.innerHTML = `
-    <div class="thumb-mini"></div>
-    <div class="texts">
-      <div class="player">${dataObj.player} ${dataObj.note}</div>
-      <div class="game">Game: ${dataObj.game}</div>
-      <div class="amount">${dataObj.amount}</div>
+    <div style="
+      font-size:.7rem;
+      line-height:1.4;
+      font-weight:600;
+      color:#00ff6a;
+      text-shadow:0 0 8px rgba(0,255,128,.8),0 0 16px rgba(0,255,128,.4);
+      margin-bottom:4px;
+    ">
+      ${dataObj.player} ${dataObj.note}
+    </div>
+
+    <div style="color:#fff;font-size:.7rem;line-height:1.4;">
+      Game: ${dataObj.game}
+    </div>
+
+    <div style="
+      color:#00ff6a;
+      font-weight:700;
+      font-size:.75rem;
+      line-height:1.3;
+      margin-top:4px;
+      text-shadow:0 0 8px rgba(0,255,128,.8),0 0 16px rgba(0,255,128,.4);
+    ">
+      ${dataObj.amount}
     </div>
   `;
+
+  // animasi fade/slide in
+  requestAnimationFrame(() => {
+    card.style.opacity = "1";
+    card.style.transform = "translateY(0) scale(1)";
+  });
 
   return card;
 }
 
-// fungsi push kartu baru
+// =====================
+// FUNGSI PUSH KARTU
+// =====================
 function pushCard() {
-  // ambil data pemenang berikutnya
-  const d = winnerFeed[feedIndex % winnerFeed.length];
+  const dataObj = winnerFeed[feedIndex % winnerFeed.length];
   feedIndex++;
 
-  // buat kartu sesuai struktur CSS
-  const card = createCard(d);
-
-  // masukin card ke container
+  const card = createCard(dataObj);
   wrap.appendChild(card);
 
-  // kalau udah kebanyakan card yang nongol sekaligus, hapus yang paling lama
-  const cards = wrap.querySelectorAll(".message-left-card");
+  // limit jumlah kartu
+  const cards = wrap.children;
   if (cards.length > MAX_ACTIVE_CARDS) {
     const first = cards[0];
-
-    // kasih animasi keluar pake keyframes msgHide (dari CSS)
-    first.style.animation = "msgHide .3s forwards ease";
+    first.style.opacity = "0";
+    first.style.transform = "translateY(20px) scale(.96)";
+    first.style.transition = "all .3s ease";
 
     setTimeout(() => {
       if (first && first.parentNode) {
@@ -98,16 +172,15 @@ function pushCard() {
   }
 }
 
-// start loop
+// =====================
+// START LOOP
+// =====================
 function startFeed() {
-  // langsung tampil 1 di awal
-  pushCard();
-
-  // lalu tiap interval
+  pushCard(); // tampilkan pertama langsung
   setInterval(pushCard, SHOW_INTERVAL);
 }
 
-// eksekusi saat DOM siap
+// jalanin setelah DOM siap
 if (document.readyState === "loading") {
   document.addEventListener("DOMContentLoaded", startFeed);
 } else {
