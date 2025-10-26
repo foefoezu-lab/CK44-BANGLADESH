@@ -8,8 +8,9 @@
   <meta name="description" content="CK44 VIP Bangladesh RTP লাইভ – রিয়েলটাইম RTP স্যাম্পল, গেম প্যাটার্ন, VIP 30 ইভেন্ট, মিস্ট্রি বোনাস ড্রপ প্রতিদিন। বাংলাদেশ প্লেয়ারের জন্য দ্রুত উইথড্রো & 24/7 সাপোর্ট।" />
 
   <!-- stylesheet luar kamu -->
-  <link rel="stylesheet" href="./css/style.css" />
   <link rel="stylesheet" href="./css/messagebleft.css" />
+  <!-- style.css lama kamu boleh tetap ada kalau dipakai komponen lain; tapi kita override di bawah -->
+  <link rel="stylesheet" href="./css/style.css" />
 
   <style>
     /* ==== PAGE LAYOUT UTAMA ==== */
@@ -144,6 +145,9 @@
       padding:4px 8px;
       line-height:1.2;
     }
+    .ck-daily-close[data-close-popup]{
+      cursor:pointer;
+    }
 
     /* ===== RTP TABLE SECTION ===== */
     .ck-rtp-table-wrap{
@@ -196,7 +200,15 @@
       font-weight:600;
     }
 
-    /* ===== PROVIDER DETAIL WRAP (CARD GRID GAME) ===== */
+    /* ===== PROVIDER DETAIL WRAP =====
+       JS akan isi #ck-provider-detail-wrap dengan:
+       .ck-provider-detail-head,
+       .ck-game-grid,
+       .ck-game-card,
+       .ck-game-card-thumb,
+       .ck-game-card-body
+       + modal .ck-pola-overlay  (lihat file JS). :contentReference[oaicite:1]{index=1}
+    */
     #ck-provider-detail-wrap{
       background:#111;
       border:1px solid rgba(255,255,255,.07);
@@ -207,146 +219,237 @@
       color:#fff;
       font-size:.8rem;
       line-height:1.4;
+      display:none; /* default hidden kalau 'all' */
     }
 
-    .ck-provider-block-title{
+    .ck-provider-detail-head{
+      margin-bottom:12px;
+    }
+    .ck-provider-detail-title{
       font-size:.9rem;
       font-weight:600;
       line-height:1.3;
       color:#ffd24a;
       text-shadow:0 0 8px rgba(212,175,55,.7);
       margin-bottom:4px;
-      display:flex;
-      flex-wrap:wrap;
-      gap:.5rem;
-      align-items:flex-start;
     }
-    .ck-provider-block-desc{
+    .ck-provider-detail-sub{
       font-size:.7rem;
       line-height:1.4;
       color:#ccc;
-      margin-bottom:12px;
     }
 
-    .ck-provider-game-grid{
+    /* grid kartu game dari JS */
+    .ck-game-grid{
       display:grid;
       grid-template-columns:repeat(auto-fit,minmax(min(260px,100%),1fr));
       gap:16px;
     }
 
-    /* ==== KARTU PER GAME ==== */
-    .ck-provider-game-card {
-      background: #1a1a1a;
-      border: 1px solid rgba(255,255,255,0.08);
-      border-radius: 10px;
-      box-shadow: 0 20px 40px rgba(0,0,0,.9);
-      overflow: hidden;
-      display: flex;
-      flex-direction: column;
+    /* ==== KARTU SATU GAME (cocokkan dgn .ck-game-card di JS) ==== */
+    .ck-game-card {
+      background:#1a1a1a;
+      border:1px solid rgba(255,255,255,.08);
+      border-radius:10px;
+      box-shadow:0 20px 40px rgba(0,0,0,.9);
+      overflow:hidden;
+      display:flex;
+      flex-direction:column;
+      cursor:pointer;
     }
 
-    /* >>> FIX BARU UNTUK GAMBAR <<< */
-    .ck-provider-game-thumb {
-      position: relative;
-      width: 100%;
-      height: 140px; /* semua kartu sama tinggi */
-      background: #000;
-      overflow: hidden;
-      border-bottom: 1px solid rgba(255,255,255,.08);
+    /* THUMBNAIL FIX (contain, bukan crop) */
+    .ck-game-card-thumb {
+      position:relative;
+      width:100%;
+      height:140px;         /* semua kartu sama tinggi */
+      background:#000;
+      border-bottom:1px solid rgba(255,255,255,.08);
 
-      display: flex;
-      align-items: center;
-      justify-content: center;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      overflow:hidden;
+    }
+    .ck-game-card-thumb img {
+      max-width:100%;
+      max-height:100%;
+      width:auto;
+      height:auto;
+      object-fit:contain;   /* jaga proporsi, jangan gepeng */
+      object-position:center;
+      display:block;
     }
 
-    .ck-provider-game-thumb img {
-      position: static;          /* jangan absolute lagi */
-      max-width: 100%;
-      max-height: 100%;
-      width: auto;
-      height: auto;
-      object-fit: contain;       /* proporsi asli, tidak crop */
-      object-position: center;
-      display: block;
+    /* body kartu game */
+    .ck-game-card-body {
+      background:linear-gradient(#1a1a1a 0%, #111 100%);
+      border-top:1px solid rgba(255,255,255,.06);
+      padding:12px;
+      font-size:.75rem;
+      line-height:1.4;
+      color:#ccc;
     }
 
-    .ck-provider-game-thumb .ck-win-badge {
-      position: absolute;
-      top: 4px;
-      left: 4px;
-      background: #000;
-      color: #fff;
-      font-size: .6rem;
-      font-weight: 700;
-      line-height:1.2;
-      padding: 4px 6px;
-      border-radius: 4px;
-      border: 1px solid rgba(255,255,255,.3);
-      box-shadow: 0 8px 20px rgba(0,0,0,.8);
-    }
-
-    /* BAGIAN INFO GAME (TITLE, PROVIDER, RTP BAR) */
-    .ck-provider-game-info {
-      background: linear-gradient(#1a1a1a 0%, #111 100%);
-      border-top: 1px solid rgba(255,255,255,.06);
-      padding: 12px;
-      font-size: .75rem;
-      line-height: 1.4;
-      color: #ccc;
-    }
-    .ck-game-title {
+    .ck-game-card-name {
       color:#fff;
       font-size:.8rem;
       font-weight:600;
       line-height:1.3;
       margin-bottom:2px;
     }
-    .ck-game-provider {
+    .ck-game-card-provider {
       color:#9a9a9a;
       font-size:.7rem;
       line-height:1.2;
       margin-bottom:8px;
     }
 
-    .ck-rtp-bar-wrap {
+    /* RTP green bar versi JS:
+       <div class="ck-rtp-bar-wrap">
+         <div class="ck-rtp-bar-fill" data-target-width="94.12%" style="width:0%;">94.12%</div>
+       </div>
+    */
+    .ck-rtp-bar-wrap{
+      width:100%;
+      height:28px;
+      background:#003b14;
+      border-radius:4px;
+      border:1px solid rgba(0,255,98,.4);
+      box-shadow:0 0 8px rgba(0,255,98,.4);
+      overflow:hidden;
       display:flex;
-      flex-direction:column;
-      gap:4px;
-    }
-    .ck-rtp-num {
+      align-items:center;
+      /* gap kecil supaya text di tengah tetap kebaca */
       font-size:.7rem;
       font-weight:600;
-      color:#00ff62;
-      background:#003b14;
-      border:1px solid rgba(0,255,98,.4);
-      border-radius:4px;
-      text-align:center;
-      padding:4px 6px;
       line-height:1.2;
-      width:max-content;
-      max-width:100%;
-      box-shadow:0 0 8px rgba(0,255,98,.4);
+      color:#00ff62;
     }
-    .ck-rtp-bar {
-      width:100%;
-      height:10px;
-      background:#003b14;
-      border-radius:4px;
-      border:1px solid rgba(0,255,98,.4);
-      overflow:hidden;
-      box-shadow:0 0 8px rgba(0,255,98,.4);
-    }
-    .ck-rtp-bar span {
-      display:block;
-      height:100%;
+    .ck-rtp-bar-fill{
       background:linear-gradient(90deg,#00ff62 0%,#007a1f 100%);
+      height:100%;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      white-space:nowrap;
+      color:#000;
+      font-weight:700;
+      text-shadow:0 0 4px rgba(0,0,0,.6);
+      box-shadow:0 0 8px rgba(0,255,98,.4);
+      border-right:1px solid rgba(0,0,0,.4);
+      /* width akan dianimasikan via JS animateRtpBars() */
     }
 
     /* responsive kecil: tinggi thumbnail sedikit turun biar gak terlalu besar di hp */
     @media (max-width:480px){
-      .ck-provider-game-thumb {
+      .ck-game-card-thumb {
         height:110px;
       }
+    }
+
+    /* ===== HERO "TOP 3" LIST (ck-hero-card-list yg di atas tabel) ===== */
+    #ck-hero-card-list{
+      display:grid;
+      grid-template-columns:repeat(auto-fit,minmax(min(220px,100%),1fr));
+      gap:12px;
+    }
+    .ck-card-row{
+      display:flex;
+      align-items:flex-start;
+      background:#1a1a1a;
+      border:1px solid rgba(255,255,255,.08);
+      border-radius:10px;
+      box-shadow:0 20px 40px rgba(0,0,0,.9);
+      overflow:hidden;
+    }
+    .ck-game-thumb{
+      flex-shrink:0;
+      width:90px;
+      height:90px;
+      background:#000;
+      border-right:1px solid rgba(255,255,255,.08);
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      overflow:hidden;
+    }
+    .ck-game-thumb img{
+      max-width:100%;
+      max-height:100%;
+      width:auto;
+      height:auto;
+      object-fit:contain;
+      object-position:center;
+      display:block;
+    }
+    .ck-game-info{
+      padding:10px 12px;
+      font-size:.7rem;
+      line-height:1.4;
+      color:#ccc;
+    }
+    .ck-game-name{
+      color:#fff;
+      font-weight:600;
+      font-size:.8rem;
+      line-height:1.3;
+      margin-bottom:2px;
+    }
+    .ck-game-rtp{
+      color:#00ff62;
+      font-weight:600;
+      font-size:.7rem;
+      line-height:1.2;
+      margin-bottom:4px;
+    }
+    .ck-rtp-val{
+      background:#003b14;
+      border:1px solid rgba(0,255,98,.4);
+      border-radius:4px;
+      padding:2px 4px;
+      color:#00ff62;
+      font-weight:700;
+      text-shadow:0 0 4px rgba(0,255,98,.4);
+    }
+    .ck-game-provider{
+      color:#999;
+      font-size:.7rem;
+      line-height:1.2;
+    }
+
+    /* ===== PROVIDER TAB BUTTONS =====
+       JS bikin <div class="ck-provider-tab-btn ck-active" data-prov="...">... </div>  :contentReference[oaicite:2]{index=2}
+    */
+    #ck-provider-tabs{
+      display:flex;
+      flex-wrap:wrap;
+      gap:8px;
+      margin:12px 0;
+      font-size:.7rem;
+      line-height:1.2;
+      color:#fff;
+    }
+    #ck-provider-tabs .ck-provider-tab-btn{
+      cursor:pointer;
+      background:rgba(255,255,255,.05);
+      border:1px solid rgba(255,255,255,.2);
+      color:#fff;
+      border-radius:8px;
+      padding:8px 12px;
+      font-weight:600;
+      font-size:.7rem;
+      line-height:1.2;
+      text-decoration:none;
+    }
+    #ck-provider-tabs .ck-provider-tab-btn.ck-active{
+      background:linear-gradient(135deg,#ffd24a,#e3b95c);
+      color:#000;
+      box-shadow:
+        0 0 0 2px rgba(245,217,124,.28),
+        0 14px 42px rgba(245,217,124,.12);
+      border:0;
+      font-weight:700;
     }
 
     /* ===== BACK BUTTON STRIP ===== */
@@ -377,7 +480,9 @@
       line-height:1;
     }
 
-    /* ===== POPUP BONUS ===== */
+    /* ===== BONUS POPUP OVERLAY =====
+       JS menambah/men-remove class "active" pada .ck-popup-overlay  :contentReference[oaicite:3]{index=3}
+    */
     .ck-popup-overlay{
       position:fixed;
       inset:0;
@@ -387,6 +492,9 @@
       justify-content:center;
       padding:16px;
       z-index:9999;
+    }
+    .ck-popup-overlay.active{
+      display:flex;
     }
     .ck-popup-card{
       background:#111;
@@ -428,43 +536,128 @@
       color:#fff;
     }
 
-    /* badge close di daily bonus blok kecil */
-    .ck-daily-close[data-close-popup]{
-      cursor:pointer;
+    /* ===== POLA MODAL (ck-pola-overlay) =====
+       JS bikin overlay ini per game dan toggle class "active"  :contentReference[oaicite:4]{index=4}
+    */
+    .ck-pola-overlay{
+      position:fixed;
+      inset:0;
+      background:rgba(0,0,0,.7);
+      display:none;
+      align-items:center;
+      justify-content:center;
+      padding:16px;
+      z-index:10000;
     }
-
-    /* provider tabs container (akan diisi main.js) */
-    #ck-provider-tabs{
+    .ck-pola-overlay.active{
       display:flex;
-      flex-wrap:wrap;
-      gap:8px;
-      margin:12px 0;
-      font-size:.7rem;
-      line-height:1.2;
-      color:#fff;
     }
-
-    /* tombol provider tab */
-    #ck-provider-tabs .ck-provider-tab-btn{
-      cursor:pointer;
+    .ck-pola-card{
+      background:#111;
+      border:1px solid rgba(255,255,255,.15);
+      border-radius:16px;
+      box-shadow:0 40px 80px rgba(0,0,0,.9);
+      width:100%;
+      max-width:360px;
+      color:#fff;
+      font-size:.8rem;
+      line-height:1.4;
+      padding:16px;
+    }
+    .ck-pola-head{
+      font-size:.8rem;
+      font-weight:600;
+      color:#ffd24a;
+      text-shadow:0 0 8px rgba(212,175,55,.7);
+      display:flex;
+      align-items:flex-start;
+      justify-content:space-between;
+      gap:8px;
+      margin-bottom:8px;
+    }
+    .ck-pola-close{
       background:rgba(255,255,255,.05);
       border:1px solid rgba(255,255,255,.2);
-      color:#fff;
-      border-radius:8px;
-      padding:8px 12px;
-      font-weight:600;
+      border-radius:6px;
+      padding:4px 8px;
       font-size:.7rem;
       line-height:1.2;
-      text-decoration:none;
+      font-weight:600;
+      color:#999;
+      cursor:pointer;
     }
-    #ck-provider-tabs .ck-provider-tab-btn.active{
-      background:linear-gradient(135deg,#ffd24a,#e3b95c);
+    .ck-pola-body{
+      font-size:.75rem;
+      color:#fff;
+      line-height:1.4;
+      margin-bottom:8px;
+    }
+    .ck-pola-provider{
+      background:#1a1a1a;
+      border:1px solid rgba(255,255,255,.07);
+      border-radius:8px;
+      box-shadow:0 20px 40px rgba(0,0,0,.8);
+      padding:12px;
+      font-size:.75rem;
+      line-height:1.4;
+      color:#ccc;
+    }
+    .ck-pola-steps{
+      font-size:.75rem;
+      line-height:1.4;
+      color:#fff;
+      margin-top:12px;
+    }
+    .ck-pola-steps div{
+      background:#151515;
+      border:1px solid rgba(255,255,255,.07);
+      border-radius:6px;
+      box-shadow:0 20px 40px rgba(0,0,0,.8);
+      padding:8px 10px;
+      font-size:.75rem;
+      line-height:1.4;
+      color:#ccc;
+      margin-bottom:6px;
+    }
+    .ck-pola-warning{
+      color:#ffd24a;
+      font-size:.7rem;
+      line-height:1.4;
+      font-weight:600;
+      margin-top:12px;
+    }
+    .ck-pola-note{
+      background:#1a1a1a;
+      border:1px solid rgba(255,255,255,.07);
+      border-radius:6px;
+      box-shadow:0 20px 40px rgba(0,0,0,.8);
+      padding:10px;
+      font-size:.7rem;
+      line-height:1.4;
+      color:#ccc;
+      margin-top:12px;
+    }
+    .ck-pola-actions{
+      display:flex;
+      gap:8px;
+      flex-wrap:wrap;
+      margin-top:16px;
+      justify-content:center;
+    }
+    .ck-pola-btn{
+      flex:1 1 auto;
+      text-align:center;
+      font-size:.75rem;
+      line-height:1.2;
+      font-weight:700;
+      text-decoration:none;
+      border-radius:8px;
+      padding:10px 12px;
       color:#000;
+      background:linear-gradient(135deg,#ffd24a,#e3b95c);
       box-shadow:
         0 0 0 2px rgba(245,217,124,.28),
         0 14px 42px rgba(245,217,124,.12);
-      border:0;
-      font-weight:700;
     }
 
     /* RESPONSIVE EXTRA */
@@ -476,11 +669,10 @@
         justify-content:center;
         text-align:center;
       }
-      .ck-provider-game-grid{
+      .ck-game-grid{
         grid-template-columns:1fr 1fr;
       }
     }
-
   </style>
 </head>
 <body>
@@ -495,10 +687,10 @@
 
   <div class="ck-page-wrap">
 
-    <!-- GRID ATAS: 4 CARD INFO + daily bonus -->
+    <!-- GRID ATAS -->
     <div class="ck-hero-grid">
 
-      <!-- CARD 1: VIP & BONUS INTRO -->
+      <!-- CARD 1 -->
       <div class="ck-hero-col ck-section-card">
         <div style="margin-bottom:12px;">
           <a href="https://ck-44-bangladesh.vercel.app/" class="ck-btn-ghost" style="text-decoration:none;display:inline-flex;align-items:center;gap:6px;">
@@ -552,7 +744,7 @@
       </div>
       <!-- /CARD 1 -->
 
-      <!-- CARD 2: ACTIVE PROMO -->
+      <!-- CARD 2 -->
       <div class="ck-hero-col ck-section-card">
         <h2 style="margin:0 0 8px;font-size:.9rem;line-height:1.3;font-weight:600;color:#ffd24a;text-shadow:0 0 8px rgba(212,175,55,.7);display:flex;flex-wrap:wrap;gap:.5rem;align-items:flex-start;">
           <span class="ck-section-title-emoji">🔥</span>
@@ -596,7 +788,7 @@
       </div>
       <!-- /CARD 2 -->
 
-      <!-- CARD 3: RTP SNAPSHOT -->
+      <!-- CARD 3 -->
       <div class="ck-hero-col ck-section-card">
         <h2 style="margin:0 0 8px;font-size:.9rem;line-height:1.3;font-weight:600;color:#ffd24a;text-shadow:0 0 8px rgba(212,175,55,.7);display:flex;flex-wrap:wrap;gap:.5rem;align-items:flex-start;">
           <span class="ck-section-title-emoji">📊</span>
@@ -613,7 +805,7 @@
             <div style="font-weight:600;color:#fff;margin-bottom:4px;font-size:.75rem;line-height:1.4;">
               🔥 লাইভ RTP স্যাম্পল
             </div>
-            <div id="ck-hero-card-list"><!-- main.js inject highlight card kecil di sini --></div>
+            <div id="ck-hero-card-list"><!-- main.js isi top 3 RTP --></div>
           </div>
 
           <div style="margin-top:12px;font-size:.7rem;color:#999;line-height:1.4;">
@@ -623,7 +815,7 @@
       </div>
       <!-- /CARD 3 -->
 
-      <!-- CARD 4: PROVIDERS -->
+      <!-- CARD 4 -->
       <div class="ck-hero-col ck-section-card">
         <h2 style="margin:0 0 8px;font-size:.9rem;line-height:1.3;font-weight:600;color:#ffd24a;text-shadow:0 0 8px rgba(212,175,55,.7);display:flex;flex-wrap:wrap;gap:.5rem;align-items:flex-start;">
           <span class="ck-section-title-emoji">🎮</span>
@@ -650,7 +842,7 @@
       </div>
       <!-- /CARD 4 -->
 
-      <!-- CARD 5: DAILY BONUS REMINDER -->
+      <!-- CARD 5 -->
       <div class="ck-hero-col ck-daily-bonus ck-section-card">
         <div style="display:flex;justify-content:space-between;align-items:flex-start;gap:8px;">
           <h3 style="margin:0;">
@@ -695,7 +887,7 @@
         রিয়েলটাইম RTP স্যাম্পল &amp; হট গেম প্যাটার্ন। প্রোভাইডার ক্লিক করে ফিল্টার করো.
       </div>
 
-      <!-- Tabs provider -> main.js akan inject tombol2 -->
+      <!-- Tabs provider -> JS inject -->
       <div id="ck-provider-tabs"></div>
 
       <div class="ck-line"></div>
@@ -705,13 +897,13 @@
           <thead>
             <tr>
               <th>গেম</th>
-              <th>প্রোভাইডার</th>
+              <th>прোভাইডার</th>
               <th>RTP লাইভ</th>
               <th>স্ট্যাটাস</th>
             </tr>
           </thead>
           <tbody id="ck-rtp-tbody">
-            <!-- main.js inject rows -->
+            <!-- JS inject rows -->
           </tbody>
         </table>
       </div>
@@ -721,27 +913,28 @@
 
     <!-- ===== SECTION: PROVIDER DETAIL CARDS LIST ===== -->
     <div id="ck-provider-detail-wrap">
-      <!-- main.js inject contoh struktur:
-        <div class="ck-provider-block">
-          <div class="ck-provider-block-title">Pragmatic Play • Hot RTP &amp; Pola</div>
-          <div class="ck-provider-block-desc">Klik game untuk lihat pola / step bermain. RTP bar hijau = performa live sekarang.</div>
+      <!-- JS akan isi:
+        <div class="ck-provider-detail-head">
+          <div class="ck-provider-detail-title">Pragmatic Play • Hot RTP & Pola</div>
+          <div class="ck-provider-detail-sub">Klik game untuk lihat pola / step bermain. RTP bar hijau = performa live sekarang.</div>
+        </div>
 
-          <div class="ck-provider-game-grid">
-            <div class="ck-provider-game-card">
-              <div class="ck-provider-game-thumb">
-                <img src="img/pragmatic/big-juan.jpg" alt="Big Juan" />
-                <div class="ck-win-badge">WIN%</div>
-              </div>
-              <div class="ck-provider-game-info">
-                <div class="ck-game-title">Big Juan</div>
-                <div class="ck-game-provider">Pragmatic Play</div>
-                <div class="ck-rtp-bar-wrap">
-                  <div class="ck-rtp-num">97.20%</div>
-                  <div class="ck-rtp-bar"><span style="width:97.20%"></span></div>
-                </div>
+        <div class="ck-game-grid">
+          <div class="ck-game-card" data-game-modal="pragmatic-0">
+            <div class="ck-game-card-thumb">
+              <img src=".../1.png" alt="Big Juan" />
+            </div>
+            <div class="ck-game-card-body">
+              <div class="ck-game-card-name">Big Juan</div>
+              <div class="ck-game-card-provider">Pragmatic Play</div>
+              <div class="ck-rtp-bar-wrap">
+                <div class="ck-rtp-bar-fill" data-target-width="97.20%" style="width:0%;">97.20%</div>
               </div>
             </div>
-            <!-- dst -->
+          </div>
+
+          <div class="ck-pola-overlay active" id="pola-pragmatic-0">
+            <!-- modal pola card -->
           </div>
         </div>
       -->
@@ -749,6 +942,7 @@
     <!-- /PROVIDER DETAIL -->
 
   </div><!-- /.ck-page-wrap -->
+
 
   <!-- BONUS POPUP (klik "বোনাস দেখুন") -->
   <div class="ck-popup-overlay" id="bonus-popup">
@@ -781,6 +975,7 @@
   <div class="message-left-container"></div>
 
   <!-- ==== JS ASSETS ==== -->
+  <!-- Ganti nama file ini sesuai nama file JS kamu (isinya sama seperti yg kamu kirim /turn3file0) -->
   <script src="./js/main.js"></script>
 
   <!-- LIMIT TOP 10 ROW + TOGGLE -->
@@ -896,49 +1091,8 @@
   })();
   </script>
 
-  <!-- POPUP WINNER -->
+  <!-- POPUP WINNER (nama pemenang di kiri bawah) -->
   <script src="./js/messagebleft.js"></script>
-
-  <!-- SIMPLE POPUP HANDLER UNTUK BONUS -->
-  <script>
-    // buka popup bonus
-    document.addEventListener('click', function(e){
-      const openBtn = e.target.closest('[data-open-popup]');
-      if(openBtn){
-        const id = openBtn.getAttribute('data-open-popup');
-        const target = document.getElementById(id);
-        if(target){
-          target.style.display='flex';
-        }
-      }
-
-      const closeBtn = e.target.closest('[data-close-popup]');
-      if(closeBtn){
-        // tutup card kecil daily bonus
-        const which = closeBtn.getAttribute('data-close-popup');
-        if(which === 'bonus-info'){
-          const parentCard = closeBtn.closest('.ck-daily-bonus');
-          if(parentCard){
-            parentCard.style.display='none';
-          }
-        }
-
-        // tutup overlay popup
-        const popupOverlay = closeBtn.closest('.ck-popup-overlay');
-        if(popupOverlay){
-          popupOverlay.style.display='none';
-        }
-      }
-    });
-
-    // klik luar card popup -> close
-    document.addEventListener('click', function(e){
-      const ov = e.target.closest('.ck-popup-overlay');
-      if(ov && e.target === ov){
-        ov.style.display='none';
-      }
-    });
-  </script>
 
 </body>
 </html>
