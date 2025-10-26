@@ -7,12 +7,11 @@
 
   <meta name="description" content="CK44 VIP Bangladesh RTP লাইভ – রিয়েলটাইম RTP স্যাম্পল, গেম প্যাটার্ন, VIP 30 ইভেন্ট, মিস্ট্রি বোনাস ড্রপ প্রতিদিন। বাংলাদেশ প্লেয়ারের জন্য দ্রুত উইথড্রো & 24/7 সাপোর্ট।" />
 
-  <!-- stylesheet luar kamu (biar komponen lain tetap jalan) -->
   <link rel="stylesheet" href="./css/messagebleft.css" />
   <link rel="stylesheet" href="./css/style.css" />
 
   <style>
-    /* ==== PAGE LAYOUT UTAMA ==== */
+    /* ==== GLOBAL ==== */
     body {
       background-color:#0a0a0a;
       color:#fff;
@@ -24,14 +23,6 @@
       max-width:1400px;
       margin:0 auto;
       padding:16px;
-    }
-
-    /* grid kartu info atas */
-    .ck-hero-grid{
-      display:grid;
-      grid-template-columns:repeat(auto-fit,minmax(min(320px,100%),1fr));
-      grid-gap:16px;
-      align-items:start;
     }
 
     .ck-section-card{
@@ -148,7 +139,136 @@
       cursor:pointer;
     }
 
-    /* ===== RTP TABLE SECTION ===== */
+    /* ===== HERO LAYOUT BARU ===== */
+
+    /* Desktop: 3 kolom (kiri stack 2 card, tengah card RTP gede, kanan stack 2 card) */
+    .ck-hero-layout{
+      display:grid;
+      grid-template-columns:1fr 1.2fr 1fr;
+      gap:16px;
+      align-items:start;
+    }
+
+    .ck-col{
+      display:flex;
+      flex-direction:column;
+      gap:16px;
+      min-width:0;
+    }
+
+    /* Card RTP utama di tengah kita kasih style tambahan biar standout */
+    .ck-rtp-main-card{
+      background:#111;
+      border:1px solid rgba(255,255,255,.18);
+      box-shadow:
+        0 30px 60px rgba(0,0,0,.9),
+        0 0 20px rgba(255,210,74,.08);
+      border-radius:16px;
+      padding:16px;
+    }
+
+    .ck-rtp-main-header{
+      display:flex;
+      align-items:flex-start;
+      gap:.5rem;
+      flex-wrap:wrap;
+      margin:0 0 8px;
+      font-size:1rem;
+      line-height:1.3;
+      font-weight:600;
+      color:#ffd24a;
+      text-shadow:0 0 8px rgba(212,175,55,.7);
+    }
+    .ck-rtp-main-header .emoji{
+      line-height:1;
+      font-size:1rem;
+    }
+    .ck-rtp-main-desc{
+      font-size:.8rem;
+      line-height:1.4;
+      color:#ccc;
+      margin-bottom:12px;
+    }
+
+    /* list RTP hot di tengah (top gacha) */
+    .ck-rtp-hot-list{
+      display:grid;
+      gap:12px;
+    }
+
+    .ck-card-row{
+      display:flex;
+      align-items:flex-start;
+      background:#1a1a1a;
+      border:1px solid rgba(255,255,255,.08);
+      border-radius:10px;
+      box-shadow:0 20px 40px rgba(0,0,0,.9);
+      overflow:hidden;
+    }
+    .ck-game-thumb{
+      flex-shrink:0;
+      width:90px;
+      height:90px;
+      background:radial-gradient(circle at 50% 35%, #2a2a2a 0%, #000 70%);
+      border-right:1px solid rgba(255,255,255,.08);
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      overflow:hidden;
+    }
+    .ck-game-thumb img{
+      max-width:100%;
+      max-height:100%;
+      width:auto;
+      height:auto;
+      object-fit:contain;
+      object-position:center;
+      display:block;
+      margin:auto;
+    }
+    .ck-game-info{
+      padding:10px 12px;
+      font-size:.75rem;
+      line-height:1.4;
+      color:#ccc;
+    }
+    .ck-game-name{
+      color:#fff;
+      font-weight:600;
+      font-size:.8rem;
+      line-height:1.3;
+      margin-bottom:2px;
+    }
+    .ck-game-rtp{
+      color:#00ff62;
+      font-weight:600;
+      font-size:.7rem;
+      line-height:1.2;
+      margin-bottom:4px;
+    }
+    .ck-rtp-val{
+      background:#003b14;
+      border:1px solid rgba(0,255,98,.4);
+      border-radius:4px;
+      padding:2px 4px;
+      color:#00ff62;
+      font-weight:700;
+      text-shadow:0 0 4px rgba(0,255,98,.4);
+    }
+    .ck-game-provider{
+      color:#999;
+      font-size:.7rem;
+      line-height:1.2;
+    }
+
+    .ck-rtp-main-footnote{
+      font-size:.7rem;
+      line-height:1.4;
+      color:#999;
+      margin-top:12px;
+    }
+
+    /* ===== PROVIDER TABS / TABEL RTP SECTION (bawah hero) ===== */
     .ck-rtp-table-wrap{
       width:100%;
       overflow-x:auto;
@@ -199,7 +319,7 @@
       font-weight:600;
     }
 
-    /* ===== PROVIDER DETAIL WRAP ===== */
+    /* ===== PROVIDER DETAIL WRAP (grid kartu game per provider) ===== */
     #ck-provider-detail-wrap{
       background:#111;
       border:1px solid rgba(255,255,255,.07);
@@ -210,7 +330,7 @@
       color:#fff;
       font-size:.8rem;
       line-height:1.4;
-      display:none; /* hidden when provider=all */
+      display:none; /* hidden saat tab = all */
     }
 
     .ck-provider-detail-head{
@@ -230,14 +350,12 @@
       color:#ccc;
     }
 
-    /* GRID KARTU GAME (isi dari JS) */
     .ck-game-grid{
       display:grid;
       grid-template-columns:repeat(auto-fit,minmax(min(260px,100%),1fr));
       gap:16px;
     }
 
-    /* ==== KARTU GAME ==== */
     .ck-game-card {
       background:#1a1a1a;
       border:1px solid rgba(255,255,255,0.08);
@@ -249,19 +367,17 @@
       cursor:pointer;
     }
 
-    /* >>> THUMBNAIL (DIPERBAIKI) <<< */
     .ck-game-card-thumb {
       position:relative;
       width:100%;
-      height:140px; /* tinggi konsisten buat grid rapi */
-      /* ganti background hitam flat -> radial glow biar ga keliatan kosong */
+      height:140px;
       background:radial-gradient(circle at 50% 35%, #2a2a2a 0%, #000 70%);
       border-bottom:1px solid rgba(255,255,255,.08);
 
       display:flex;
       align-items:center;
       justify-content:center;
-      text-align:center; /* buat kasus gambar broken supaya alt text tetep tengah */
+      text-align:center;
       overflow:hidden;
     }
     .ck-game-card-thumb img {
@@ -271,12 +387,11 @@
       max-height:100%;
       width:auto;
       height:auto;
-      object-fit:contain;   /* jangan gepeng */
+      object-fit:contain;
       object-position:center;
       image-rendering:auto;
     }
 
-    /* BODY GAME CARD */
     .ck-game-card-body {
       background:linear-gradient(#1a1a1a 0%, #111 100%);
       border-top:1px solid rgba(255,255,255,.06);
@@ -300,17 +415,7 @@
       margin-bottom:8px;
     }
 
-    /* ==== RTP BAR (DIPERBAIKI) ====
-       Struktur markup dari JS kamu:
-       <div class="ck-rtp-bar-wrap">
-         <div class="ck-rtp-bar-fill" data-target-width="97.20%" style="width:0%;">97.20%</div>
-       </div>
-
-       Sekarang:
-       - .ck-rtp-bar-wrap = frame / track
-       - .ck-rtp-bar-fill = isi hijau yg kita animasikan width nya
-       - plus efek glow pulse looping supaya keliatan "hidup"
-    */
+    /* RTP progress bar di kartu game */
     .ck-rtp-bar-wrap{
       position:relative;
       width:100%;
@@ -326,7 +431,6 @@
       top:0;
       left:0;
       bottom:0;
-      /* width di-set via JS animateRtpBars() */
       background:linear-gradient(90deg,#00ff62 0%,#007a1f 100%);
       border-right:1px solid rgba(0,0,0,.4);
       box-shadow:0 0 10px rgba(0,255,98,.5);
@@ -339,7 +443,6 @@
       line-height:1.2;
       text-shadow:0 0 4px rgba(0,0,0,.6);
     }
-    /* efek glow berdenyut biar bar keliatan "aktif" terus */
     .ck-rtp-bar-fill::after{
       content:'';
       position:absolute;
@@ -354,81 +457,7 @@
       50%     {opacity:.8;}
     }
 
-    /* ===== HERO "TOP 3" LIST DI ATAS TABEL ===== */
-    #ck-hero-card-list{
-      display:grid;
-      grid-template-columns:repeat(auto-fit,minmax(min(220px,100%),1fr));
-      gap:12px;
-    }
-    .ck-card-row{
-      display:flex;
-      align-items:flex-start;
-      background:#1a1a1a;
-      border:1px solid rgba(255,255,255,.08);
-      border-radius:10px;
-      box-shadow:0 20px 40px rgba(0,0,0,.9);
-      overflow:hidden;
-    }
-    .ck-game-thumb{
-      flex-shrink:0;
-      width:90px;
-      height:90px;
-      background:radial-gradient(circle at 50% 35%, #2a2a2a 0%, #000 70%);
-      border-right:1px solid rgba(255,255,255,.08);
-      display:flex;
-      align-items:center;
-      justify-content:center;
-      overflow:hidden;
-    }
-    .ck-game-thumb img{
-      max-width:100%;
-      max-height:100%;
-      width:auto;
-      height:auto;
-      object-fit:contain;
-      object-position:center;
-      display:block;
-      margin:auto;
-    }
-    .ck-game-info{
-      padding:10px 12px;
-      font-size:.7rem;
-      line-height:1.4;
-      color:#ccc;
-    }
-    .ck-game-name{
-      color:#fff;
-      font-weight:600;
-      font-size:.8rem;
-      line-height:1.3;
-      margin-bottom:2px;
-    }
-    .ck-game-rtp{
-      color:#00ff62;
-      font-weight:600;
-      font-size:.7rem;
-      line-height:1.2;
-      margin-bottom:4px;
-    }
-    .ck-rtp-val{
-      background:#003b14;
-      border:1px solid rgba(0,255,98,.4);
-      border-radius:4px;
-      padding:2px 4px;
-      color:#00ff62;
-      font-weight:700;
-      text-shadow:0 0 4px rgba(0,255,98,.4);
-    }
-    .ck-game-provider{
-      color:#999;
-      font-size:.7rem;
-      line-height:1.2;
-    }
-
-    /* ===== PROVIDER TABS =====
-       JS bikin tombol:
-       <div class="ck-provider-tab-btn ck-active" data-prov="pragmatic">Pragmatic Play</div>
-    */
+    /* provider tabs (di atas tabel RTP) */
     #ck-provider-tabs{
       display:flex;
       flex-wrap:wrap;
@@ -460,10 +489,10 @@
       font-weight:700;
     }
 
-    /* ===== BACK BUTTON STRIP ===== */
+    /* ===== BACK BUTTON STRIP TOP ===== */
     .ck-back-strip{
       max-width:1400px;
-      margin:0 auto;
+      margin:0 auto 16px;
       padding:16px;
       font-size:.7rem;
       line-height:1.2;
@@ -488,7 +517,7 @@
       line-height:1;
     }
 
-    /* ===== BONUS POPUP (data-open-popup / data-close-popup) ===== */
+    /* POPUP BONUS */
     .ck-popup-overlay{
       position:fixed;
       inset:0;
@@ -542,7 +571,7 @@
       color:#fff;
     }
 
-    /* ===== MODAL POLA GAME ===== */
+    /* MODAL POLA GAME */
     .ck-pola-overlay{
       position:fixed;
       inset:0;
@@ -664,7 +693,12 @@
         0 14px 42px rgba(245,217,124,.12);
     }
 
-    /* RESPONSIVE EXTRA */
+    /* RESPONSIVE */
+    @media(max-width:1024px){
+      .ck-hero-layout{
+        grid-template-columns:1fr;
+      }
+    }
     @media(max-width:480px){
       .ck-btn,
       .ck-btn-ghost{
@@ -681,9 +715,9 @@
 </head>
 <body>
 
-  <!-- STRIP BACK KE LANDING UTAMA -->
+  <!-- BACK TO MAIN -->
   <div class="ck-back-strip">
-    <a href="https://ck-44-bangladesh.vercel.app/rtp-live.html" class="ck-back-btn">
+    <a href="https://ck-44-bangladesh.vercel.app/" class="ck-back-btn">
       <span>⬅</span>
       <span>Back to CK44 VIP Bangladesh</span>
     </a>
@@ -691,193 +725,197 @@
 
   <div class="ck-page-wrap">
 
-    <!-- GRID ATAS -->
-    <div class="ck-hero-grid">
+    <!-- HERO LAYOUT BARU -->
+    <div class="ck-hero-layout">
 
-      <!-- CARD 1 -->
-      <div class="ck-hero-col ck-section-card">
-        <div style="margin-bottom:12px;">
-          <a href="https://ck-44-bangladesh.vercel.app/" class="ck-btn-ghost" style="text-decoration:none;display:inline-flex;align-items:center;gap:6px;">
-            <span style="font-size:.8rem;line-height:1;">⬅</span>
-            <span>হোমে ফিরুন</span>
-          </a>
+      <!-- KIRI: VIP CARD + DAILY BONUS -->
+      <div class="ck-col">
+
+        <!-- VIP CARD -->
+        <div class="ck-section-card">
+          <div style="margin-bottom:12px;">
+            <a href="https://ck-44-bangladesh.vercel.app/rtp-live.html" class="ck-btn-ghost" style="text-decoration:none;display:inline-flex;align-items:center;gap:6px;">
+              <span style="font-size:.8rem;line-height:1;">⬅</span>
+              <span>হোমে ফিরুন</span>
+            </a>
+          </div>
+
+          <h2 style="margin:0 0 8px;font-size:.9rem;line-height:1.3;font-weight:600;color:#ffd24a;text-shadow:0 0 8px rgba(212,175,55,.7);display:flex;flex-wrap:wrap;gap:.5rem;align-items:flex-start;">
+            <span class="ck-section-title-emoji">🏆</span>
+            <span>VIP 30 ইভেন্ট &amp; মিস্ট্রি বোনাস ড্রপ</span>
+          </h2>
+
+          <div class="ck-hero-text-block">
+            <p style="margin:0 0 8px;">
+              <b>CK44 VIP Bangladesh</b><br/>
+              Trusted • Mystery Bonus • VIP 30 • Bangladesh
+            </p>
+
+            <p style="margin:0 0 8px;">
+              <span class="ck-accent">দ্রুত উইথড্রো</span>, ২৪/৭ সাপোর্ট, সেফ &amp; প্রাইভেট হ্যান্ডলিং।<br/>
+              প্রতিদিনের বোনাস অবশ্যই <b>রিসেটের আগে</b> ক্লেইম করুন!
+            </p>
+
+            <p style="margin:0 0 12px;">
+              Bangladesh • Global • CK44 VIP Standard.
+            </p>
+
+            <div class="ck-line"></div>
+
+            <ul class="ck-list">
+              <li><span class="ck-list-emoji">🎁</span> <span>ডেইলি মিস্ট্রি বোনাস</span></li>
+              <li><span class="ck-list-emoji">⚡</span> <span>VIP 30 বুস্ট (অ্যাকটিভ প্লেয়ারের জন্য)</span></li>
+              <li><span class="ck-list-emoji">🚀</span> <span>ফাস্ট WD &amp; সেফ চ্যানেল</span></li>
+              <li><span class="ck-list-emoji">💬</span> <span>২৪/৭ লাইভ সাপোর্ট</span></li>
+            </ul>
+
+            <div style="margin-top:12px;display:flex;flex-wrap:wrap;gap:8px;">
+              <a class="ck-btn"
+                 href="https://www.wwwck-444.com/register"
+                 target="_blank" rel="nofollow noopener">
+                এখনই রেজিস্টার করুন
+              </a>
+
+              <a class="ck-btn-ghost"
+                 data-open-popup="bonus-popup">
+                বোনাস দেখুন
+              </a>
+            </div>
+          </div>
         </div>
 
-        <h2 style="margin:0 0 8px;font-size:.9rem;line-height:1.3;font-weight:600;color:#ffd24a;text-shadow:0 0 8px rgba(212,175,55,.7);display:flex;flex-wrap:wrap;gap:.5rem;align-items:flex-start;">
-          <span class="ck-section-title-emoji">🏆</span>
-          <span>VIP 30 ইভেন্ট &amp; মিস্ট্রি বোনাস ড্রপ</span>
-        </h2>
+        <!-- DAILY BONUS CARD -->
+        <div class="ck-section-card ck-daily-bonus">
+          <div style="display:flex;justify-content:space-between;align-items:flex-start;gap:8px;">
+            <h3 style="margin:0;font-size:.9rem;line-height:1.3;font-weight:600;color:#ffd24a;text-shadow:0 0 8px rgba(212,175,55,.7);display:flex;flex-wrap:wrap;gap:.5rem;align-items:flex-start;">
+              <span class="ck-section-title-emoji">🎁</span>
+              <span>ডেইলি বোনাস নোটিস</span>
+            </h3>
+            <div class="ck-daily-close" data-close-popup="bonus-info">X</div>
+          </div>
 
-        <div class="ck-hero-text-block">
-          <p style="margin:0 0 8px;">
-            <b>CK44 VIP Bangladesh</b><br/>
-            Trusted • Mystery Bonus • VIP 30 • Bangladesh
-          </p>
+          <div style="font-size:.75rem;line-height:1.4;color:#fff;margin-top:8px;">
+            "মিস্ট্রি বোনাস ড্রপ" &amp; "VIP 30 রিওয়ার্ড"
+            <b>প্রতিদিন লিমিটেড</b>।<br/>
+            অবশ্যই সেইদিনেই ক্লেইম করে ব্যবহার করুন।
+            একদিন পেরিয়ে গেলে আর ইউজ না করলে —
+            বোনাস <b>এক্সপায়ার</b> হবে।
 
-          <p style="margin:0 0 8px;">
-            <span class="ck-accent">দ্রুত উইথড্রো</span>, ২৪/৭ সাপোর্ট, সেফ &amp; প্রাইভেট হ্যান্ডলিং।<br/>
-            প্রতিদিনের বোনাস অবশ্যই <b>রিসেটের আগে</b> ক্লেইম করুন!
-          </p>
+            <div class="ck-line" style="margin:10px 0;"></div>
 
-          <p style="margin:0 0 12px;">
-            Bangladesh • Global • CK44 VIP Standard.
-          </p>
-
-          <div class="ck-line"></div>
-
-          <ul class="ck-list">
-            <li><span class="ck-list-emoji">🎁</span> <span>ডেইলি মিস্ট্রি বোনাস</span></li>
-            <li><span class="ck-list-emoji">⚡</span> <span>VIP 30 বুস্ট (অ্যাকটিভ প্লেয়ারের জন্য)</span></li>
-            <li><span class="ck-list-emoji">🚀</span> <span>ফাস্ট WD &amp; সেফ চ্যানেল</span></li>
-            <li><span class="ck-list-emoji">💬</span> <span>২৪/৭ লাইভ সাপোর্ট</span></li>
-          </ul>
-
-          <div style="margin-top:12px;display:flex;flex-wrap:wrap;gap:8px;">
+            এখনই নাও। এখনই ইউজ করো। কাল পর্যন্ত অপেক্ষা কোরো না।
+            <br/><br/>
             <a class="ck-btn"
                href="https://www.wwwck-444.com/register"
-               target="_blank" rel="nofollow noopener">
-              এখনই রেজিস্টার করুন
-            </a>
-
-            <a class="ck-btn-ghost"
-               data-open-popup="bonus-popup">
-              বোনাস দেখুন
+               target="_blank"
+               rel="nofollow noopener">
+              এখনই ক্লেইম করো
             </a>
           </div>
         </div>
-      </div>
-      <!-- /CARD 1 -->
 
-      <!-- CARD 2 -->
-      <div class="ck-hero-col ck-section-card">
-        <h2 style="margin:0 0 8px;font-size:.9rem;line-height:1.3;font-weight:600;color:#ffd24a;text-shadow:0 0 8px rgba(212,175,55,.7);display:flex;flex-wrap:wrap;gap:.5rem;align-items:flex-start;">
-          <span class="ck-section-title-emoji">🔥</span>
-          <span>চলমান প্রোমো (Active Promo)</span>
-        </h2>
+      </div><!-- /ck-col kiri -->
 
-        <div class="ck-hero-text-block">
-          <p style="margin:0 0 8px;"><b>CK44 VIP Bangladesh স্পেশাল ইভেন্ট</b></p>
 
-          <p style="margin:0 0 12px;">
-            <b>VIP 30 / VIP 30 EVENT</b><br/>
-            যত বেশি তুমি খেলো, তত উঁচু VIP র্যাঙ্ক।
-            VIP লেভেল আপ মানে এক্সক্লুসিভ মাল্টিপ্লায়ার রিওয়ার্ড &amp; প্রায়োরিটি WD।
-          </p>
-
-          <div class="ck-line"></div>
-
-          <p style="margin:0 0 12px;">
-            <b>MYSTERY BONUS DROP</b><br/>
-            র‍্যান্ডম বোনাস শুধু অ্যাকটিভ ডেইলি প্লেয়ারের জন্য।
-            অবশ্যই সেইদিনেই ক্লেইম করে ইউজ করতে হবে —
-            <span class="ck-accent">মিস কোরো না।</span>
-          </p>
-
-          <div class="ck-line"></div>
-
-          <p style="margin:0 0 12px;">
-            <b>ফাস্ট WD</b><br/>
-            দ্রুত পেআউট, কোন ড্রামা নেই। বাংলাদেশ + গ্লোবাল চ্যানেল সাপোর্ট।
-            লাইভ হেল্প ২৪/৭।
-          </p>
-
-          <div style="margin-top:12px">
-            <a class="ck-btn-ghost"
-               href="https://www.wwwck-444.com/"
-               target="_blank" rel="nofollow noopener">
-              ২৪/৭ কন্টাক্ট
-            </a>
+      <!-- TENGAH: RTP MAIN BIG CARD -->
+      <div class="ck-col">
+        <div class="ck-rtp-main-card">
+          <div class="ck-rtp-main-header">
+            <span class="emoji">📊</span>
+            <span>আজকের RTP / হট প্যাটার্ন</span>
           </div>
-        </div>
-      </div>
-      <!-- /CARD 2 -->
 
-      <!-- CARD 3 -->
-      <div class="ck-hero-col ck-section-card">
-        <h2 style="margin:0 0 8px;font-size:.9rem;line-height:1.3;font-weight:600;color:#ffd24a;text-shadow:0 0 8px rgba(212,175,55,.7);display:flex;flex-wrap:wrap;gap:.5rem;align-items:flex-start;">
-          <span class="ck-section-title-emoji">📊</span>
-          <span>আজকের RTP / হট প্যাটার্ন</span>
-        </h2>
-
-        <div class="ck-hero-text-block">
-          <div class="ck-section-desc">
+          <div class="ck-rtp-main-desc">
             রিয়েলটাইম RTP স্যাম্পল &amp; হট গেম প্যাটার্ন।
             এখানে তুমি দেখবে আজকে কোন গেম paling panas।
           </div>
 
-          <div>
-            <div style="font-weight:600;color:#fff;margin-bottom:4px;font-size:.75rem;line-height:1.4;">
-              🔥 লাইভ RTP স্যাম্পল
-            </div>
-            <div id="ck-hero-card-list"><!-- diisi top 3 RTP dari main.js --></div>
+          <div class="ck-rtp-hot-list" id="ck-hero-card-list">
+            <!-- main.js akan inject top 3 game RTP panas -->
           </div>
 
-          <div style="margin-top:12px;font-size:.7rem;color:#999;line-height:1.4;">
+          <div class="ck-rtp-main-footnote">
             *নিচের প্রোভাইডার ক্লিক করো → পুরো টেবিল &amp; বিস্তারিত প্যাটার্ন দেখবে।
           </div>
         </div>
-      </div>
-      <!-- /CARD 3 -->
+      </div><!-- /ck-col tengah -->
 
-      <!-- CARD 4 -->
-      <div class="ck-hero-col ck-section-card">
-        <h2 style="margin:0 0 8px;font-size:.9rem;line-height:1.3;font-weight:600;color:#ffd24a;text-shadow:0 0 8px rgba(212,175,55,.7);display:flex;flex-wrap:wrap;gap:.5rem;align-items:flex-start;">
-          <span class="ck-section-title-emoji">🎮</span>
-          <span>প্রোভাইডারস</span>
-        </h2>
 
-        <div class="ck-hero-text-block">
-          <p style="margin:0 0 8px;">
-            PG Soft • JILI • Pragmatic • Joker • Microgaming • Top Trend Gaming
-          </p>
+      <!-- KANAN: PROMO + PROVIDERS -->
+      <div class="ck-col">
 
-          <p style="font-size:.75rem;color:#999;line-height:1.4;margin:0 0 12px;">
-            সব ফেভারিট প্রোভাইডার এক ড্যাশবোর্ডে।
-            লাইভ RTP দেখো, স্পিন প্যাটার্ন দেখো, আর কোন গেম এখন হিট সেটা ধরো।
-          </p>
+        <!-- PROMO CARD -->
+        <div class="ck-section-card">
+          <h2 style="margin:0 0 8px;font-size:.9rem;line-height:1.3;font-weight:600;color:#ffd24a;text-shadow:0 0 8px rgba(212,175,55,.7);display:flex;flex-wrap:wrap;gap:.5rem;align-items:flex-start;">
+            <span class="ck-section-title-emoji">🔥</span>
+            <span>চলমান প্রোমো (Active Promo)</span>
+          </h2>
 
-          <div class="ck-line"></div>
+          <div class="ck-hero-text-block">
+            <p style="margin:0 0 8px;"><b>CK44 VIP Bangladesh স্পেশাল ইভেন্ট</b></p>
 
-          <p class="ck-muted" style="font-size:.7rem;line-height:1.4;margin:0;">
-            নিচের ট্যাব থেকে প্রোভাইডার সিলেক্ট করো → তারপর গেমে ক্লিক করো →
-            তুমি পাবে <b>“SLOT TIP / TACTIC”</b> (স্পিন স্টেপ / প্যাটার্ন সাজেশন)।
-          </p>
+            <p style="margin:0 0 12px;">
+              <b>VIP 30 / VIP 30 EVENT</b><br/>
+              যত বেশি তুমি খেলো, তত উঁচু VIP র্যাঙ্ক।
+              VIP লেভেল আপ মানে এক্সক্লুসিভ মাল্টিপ্লায়ার রিওয়ার্ড &amp; প্রায়োরিটি WD।
+            </p>
+
+            <div class="ck-line"></div>
+
+            <p style="margin:0 0 12px;">
+              <b>MYSTERY BONUS DROP</b><br/>
+              র‍্যান্ডম বোনাস শুধু অ্যাকটিভ ডেইলি প্লেয়ারের জন্য।
+              অবশ্যই সেইদিনেই ক্লেইম করে ইউজ করতে হবে —
+              <span class="ck-accent">মিস কোরো না।</span>
+            </p>
+
+            <div class="ck-line"></div>
+
+            <p style="margin:0 0 12px;">
+              <b>ফাস্ট WD</b><br/>
+              দ্রুত পেআউট, কোন ড্রামা নেই। বাংলাদেশ + গ্লোবাল চ্যানেল সাপোর্ট।
+              লাইভ হেল্প ২৪/৭।
+            </p>
+
+            <div style="margin-top:12px">
+              <a class="ck-btn-ghost"
+                 href="https://www.wwwck-444.com/"
+                 target="_blank" rel="nofollow noopener">
+                ২৪/৭ কন্টাক্ট
+              </a>
+            </div>
+          </div>
         </div>
-      </div>
-      <!-- /CARD 4 -->
 
-      <!-- CARD 5 -->
-      <div class="ck-hero-col ck-daily-bonus ck-section-card">
-        <div style="display:flex;justify-content:space-between;align-items:flex-start;gap:8px;">
-          <h3 style="margin:0;">
-            <span class="ck-section-title-emoji">🎁</span>
-            <span>ডেইলি বোনাস নোটিস</span>
-          </h3>
-          <div class="ck-daily-close" data-close-popup="bonus-info">X</div>
+        <!-- PROVIDERS CARD -->
+        <div class="ck-section-card">
+          <h2 style="margin:0 0 8px;font-size:.9rem;line-height:1.3;font-weight:600;color:#ffd24a;text-shadow:0 0 8px rgba(212,175,55,.7);display:flex;flex-wrap:wrap;gap:.5rem;align-items:flex-start;">
+            <span class="ck-section-title-emoji">🎮</span>
+            <span>প্রোভাইডারস</span>
+          </h2>
+
+          <div class="ck-hero-text-block">
+            <p style="margin:0 0 8px;">
+              PG Soft • JILI • Pragmatic • Joker • Microgaming • Top Trend Gaming
+            </p>
+
+            <p style="font-size:.75rem;color:#999;line-height:1.4;margin:0 0 12px;">
+              সব ফেভারিট প্রোভাইডার এক ড্যাশবোর্ডে।
+              লাইভ RTP দেখো, স্পিন প্যাটার্ন দেখো, আর কোন গেম এখন হিট সেটা ধরো।
+            </p>
+
+            <div class="ck-line"></div>
+
+            <p class="ck-muted" style="font-size:.7rem;line-height:1.4;margin:0;">
+              নিচের ট্যাব থেকে প্রোভাইডার সিলেক্ট করো → তারপর গেমে ক্লিক করো →
+              তুমি পাবে <b>“SLOT TIP / TACTIC”</b> (স্পিন স্টেপ / প্যাটার্ন সাজেশন)।
+            </p>
+          </div>
         </div>
 
-        <div style="font-size:.75rem;line-height:1.4;color:#fff;margin-top:8px;">
-          "মিস্ট্রি বোনাস ড্রপ" &amp; "VIP 30 রিওয়ার্ড"
-          <b>প্রতিদিন লিমিটেড</b>।<br/>
-          অবশ্যই সেইদিনেই ক্লেইম করে ব্যবহার করুন।
-          একদিন পেরিয়ে গেলে আর ইউজ না করলে —
-          বোনাস <b>এক্সপায়ার</b> হবে।
+      </div><!-- /ck-col kanan -->
 
-          <div class="ck-line" style="margin:10px 0;"></div>
-
-          এখনই নাও। এখনই ইউজ করো। কাল পর্যন্ত অপেক্ষা কোরো না।
-          <br/><br/>
-          <a class="ck-btn"
-             href="https://www.wwwck-444.com/register"
-             target="_blank"
-             rel="nofollow noopener">
-            এখনই ক্লেইম করো
-          </a>
-        </div>
-      </div>
-      <!-- /CARD 5 -->
-
-    </div><!-- /.ck-hero-grid -->
+    </div><!-- /.ck-hero-layout -->
 
 
     <!-- ===== SECTION: RTP TABLE + PROVIDER FILTER ===== -->
@@ -891,7 +929,6 @@
         রিয়েলটাইম RTP স্যাম্পল &amp; হট গেম প্যাটার্ন। প্রোভাইডার ক্লিক করে ফিল্টার করো.
       </div>
 
-      <!-- tombol filter provider dari JS -->
       <div id="ck-provider-tabs"></div>
 
       <div class="ck-line"></div>
@@ -906,22 +943,19 @@
               <th>স্ট্যাটাস</th>
             </tr>
           </thead>
-          <tbody id="ck-rtp-tbody">
-            <!-- rows by JS -->
-          </tbody>
+          <tbody id="ck-rtp-tbody"><!-- rows by JS --></tbody>
         </table>
       </div>
     </div>
-    <!-- /RTP TABLE SECTION -->
 
 
     <!-- ===== SECTION: PROVIDER DETAIL GAME CARDS ===== -->
     <div id="ck-provider-detail-wrap">
-      <!-- diisi full oleh main.js:
-        - .ck-provider-detail-head
-        - .ck-game-grid
-        - .ck-game-card (tiap game)
-        - .ck-pola-overlay (tiap game modal)
+      <!-- main.js inject:
+           .ck-provider-detail-head
+           .ck-game-grid
+           .ck-game-card (tiap game)
+           .ck-pola-overlay (tiap modal pola)
       -->
     </div>
 
@@ -955,13 +989,13 @@
     </div>
   </div>
 
-  <!-- POPUP WINNER HIJAU KIRI BAWAH -->
+  <!-- POPUP WINNER FEED KIRI BAWAH -->
   <div class="message-left-container"></div>
 
-  <!-- ==== JS ASSETS ==== -->
+  <!-- ==== JS ==== -->
   <script src="./js/main.js"></script>
 
-  <!-- LIMIT TOP 10 ROW + TOGGLE DI TABEL -->
+  <!-- LIMIT TOP 10 ROW + TOGGLE -->
   <script>
   (function() {
     const MAX_VISIBLE = 10;
@@ -1050,7 +1084,6 @@
       attachObserver();
     }
 
-    // kalau ganti tab provider, kasih delay lalu limit ulang
     document.addEventListener('click', (e) => {
       const tabBtn = e.target.closest('#ck-provider-tabs .ck-provider-tab-btn');
       if (tabBtn) {
@@ -1064,7 +1097,7 @@
   })();
   </script>
 
-  <!-- AUTO REFRESH PER 15 MENIT -->
+  <!-- AUTO REFRESH PER 15 MENিট -->
   <script>
   (function(){
     const FIFTEEN_MIN_MS = 900000; // 15 * 60 * 1000
@@ -1075,10 +1108,10 @@
   })();
   </script>
 
-  <!-- WINNER FEED KIRI BAWAH -->
+  <!-- WINNER FEED -->
   <script src="./js/messagebleft.js"></script>
 
-  <!-- POPUP BONUS OPEN/CLOSE -->
+  <!-- POPUP BONUS OPEN/CLOSE HANDLER -->
   <script>
     document.addEventListener('click', function(e){
       const openBtn = e.target.closest('[data-open-popup]');
@@ -1108,7 +1141,7 @@
       }
     });
 
-    // klik luar card popup -> close
+    // click outside popup to close
     document.addEventListener('click', function(e){
       const ov = e.target.closest('.ck-popup-overlay');
       if(ov && e.target === ov){
