@@ -1,5 +1,5 @@
 // main.js
-// CK44 VIP Bangladesh
+// CK44 VIP Bangladesh (improved RTP animation + randomization 30-98%)
 (function(){
 
   // 1. PROVIDER MAPS
@@ -176,7 +176,7 @@
     170: "Gold Train",
     171: "Vegas Nights",
     172: "3 genie Wishes",
-    173: "Dwarven Gold",
+    173:  "Dwarven Gold",
     174: "Busy Bees",
     175: "Devil's 13",
     176: "Pixie Wings",
@@ -225,45 +225,38 @@
     3:  "Leprechaun Riches",
     4:  "Captain's Bounty",
     5:  "Hercules (icon #5)"
-    // ... lanjutkan sesuai aset kamu
+    // lanjutkan sesuai aset kamu
   };
 
   const JILI_NAME_MAP = {
-    1:  "Game 1",
-    2:  "Game 2",
-    3:  "Game 3"
-    // ... lanjutkan
+    1: "Game 1",
+    2: "Game 2",
+    3: "Game 3"
   };
-
   const JOKER_NAME_MAP = {
-    1:  "Game 1",
-    2:  "Game 2",
-    3:  "Game 3"
-    // ... lanjutkan
+    1: "Game 1",
+    2: "Game 2",
+    3: "Game 3"
   };
-
   const MICROGAMING_NAME_MAP = {
-    1:  "Game 1",
-    2:  "Game 2",
-    3:  "Game 3"
-    // ... lanjutkan
+    1: "Game 1",
+    2: "Game 2",
+    3: "Game 3"
   };
-
   const TOPTREND_NAME_MAP = {
-    1:  "Game 1",
-    2:  "Game 2",
-    3:  "Game 3"
-    // ... lanjutkan
+    1: "Game 1",
+    2: "Game 2",
+    3: "Game 3"
   };
 
-  // 2. helper untuk build data game (semua provider)
-  function generateGamesFromMap(nameMap, providerLabel, providerKey, imgFolder, baseRtpDefault){
+  // 2. helper untuk build array game per provider
+  // NOTE: default pakai .png; kalau aset kamu .jpg ganti ".png" jadi ".jpg"
+  function generateGamesFromMap(nameMap, providerLabel, providerKey, imgFolder){
     return Object.entries(nameMap).map(([num, gameName]) => ({
       name: gameName,
       provider: providerLabel,
       providerKey: providerKey,
-      img: `./img/${imgFolder}/${num}.png`,   // NOTE: jpg/png bebas, nanti kamu samakan dengan asetmu
-      baseRTP: baseRtpDefault,
+      img: `./img/${imgFolder}/${num}.png`,
       stake: "1K - 10K",
       polaSteps: [
         "50X Spin Normal Manual",
@@ -277,33 +270,34 @@
 
   const PRAGMATIC_GAMES = generateGamesFromMap(
     PRAGMATIC_NAME_MAP,
-    "Pragmatic Play","pragmatic","pragmatic",96.50
+    "Pragmatic Play","pragmatic","pragmatic"
   );
   const PGSOFT_GAMES   = generateGamesFromMap(
     PGSOFT_NAME_MAP,
-    "PG Soft","pgsoft","pgsoft",96.50
+    "PG Soft","pgsoft","pgsoft"
   );
   const JILI_GAMES     = generateGamesFromMap(
     JILI_NAME_MAP,
-    "JILI","jili","jili",97.00
+    "JILI","jili","jili"
   );
   const JOKER_GAMES    = generateGamesFromMap(
     JOKER_NAME_MAP,
-    "Joker","joker","joker",96.20
+    "Joker","joker","joker"
   );
   const MICRO_GAMES    = generateGamesFromMap(
     MICROGAMING_NAME_MAP,
-    "Microgaming","microgaming","microgaming",96.10
+    "Microgaming","microgaming","microgaming"
   );
   const TTG_GAMES      = generateGamesFromMap(
     TOPTREND_NAME_MAP,
-    "Top Trend Gaming","toptrend","toptrend",96.30
+    "Top Trend Gaming","toptrend","toptrend"
   );
 
   const EXTRA_GAMES = [
-    // kalau ada promosi khusus kamu bisa injek di sini
+    // kamu bisa tambah manual di sini kalau mau
   ];
 
+  // gabungkan semua provider
   const CK_GAMES = []
     .concat(PRAGMATIC_GAMES)
     .concat(PGSOFT_GAMES)
@@ -313,7 +307,7 @@
     .concat(TTG_GAMES)
     .concat(EXTRA_GAMES);
 
-  // 3. POPUP BONUS DAILY (open/close)
+  // 3. popup daily bonus open/close
   const openButtons = document.querySelectorAll("[data-open-popup]");
   const closeButtons = document.querySelectorAll("[data-close-popup]");
   const popups = {};
@@ -343,26 +337,31 @@
   });
 
   // 4. RTP logic / rendering
-
-  // kecilin random jitter biar stabil kelihatan "live" tapi gak lompat jauh
-  function randOffset(){
-    return (Math.random() * 0.6 - 0.3); // +/-0.3
+  // Sekarang kita mau nilai RTP random di range 30% - 98%
+  // supaya variasi besar (ada jelek, ada bagus).
+  function getRandomRTP() {
+    // 30 sampai 98
+    const val = 30 + Math.random() * 68;
+    // potong 2 decimal
+    return parseFloat(val.toFixed(2));
   }
 
   function getSnapshot(){
     return CK_GAMES.map(g => {
-      const rtpNow = g.baseRTP + randOffset();
+      const rtpNow = getRandomRTP();
       return Object.assign({}, g, { rtpNow });
     });
   }
 
+  // HOT kalau >= 80% sekarang
   function badge(rtp){
-    if (rtp >= 96.5) {
+    if (rtp >= 80) {
       return '<span class="ck-hot">HOT</span>';
     }
     return '<span class="ck-hot" style="opacity:.5">WARM</span>';
   }
 
+  // state tab provider
   let currentProvider = "all";
 
   function getProviders(){
@@ -396,7 +395,7 @@
     holder.querySelectorAll(".ck-provider-tab-btn").forEach(btn => {
       btn.addEventListener("click", () => {
         currentProvider = btn.getAttribute("data-prov") || "all";
-        renderAll(); // re-render pas ganti tab
+        renderAll(); // re-render saat ganti tab
       });
     });
   }
@@ -404,6 +403,7 @@
   function renderHeroCard(ss){
     const heroListEl = document.getElementById("ck-hero-card-list");
     if (!heroListEl) return;
+    // urut RTP tertinggi -> ambil 3 teratas
     const sorted = ss.slice().sort((a,b) => b.rtpNow - a.rtpNow);
     const top3 = sorted.slice(0,3);
     heroListEl.innerHTML = top3.map(g => `
@@ -441,20 +441,24 @@
     `).join("");
   }
 
-  // helper: setelah kita inject cards ke DOM, animate bar hijau
+  // Animasi bar hijau
+  // - setiap kartu punya .ck-rtp-bar-fill dengan data-target-width
+  // - kita paksa width=0% dulu TANPA transition
+  // - lalu kasih transition dan set width target -> akan nge-fill halus
   function animateRtpBars(rootEl){
     const bars = rootEl.querySelectorAll('.ck-rtp-bar-fill');
     bars.forEach(bar => {
       const target = bar.getAttribute('data-target-width');
-      // mulai dari 0%, lalu animasikan ke target
+
+      // start state
+      bar.style.transition = 'none';
       bar.style.width = '0%';
-      bar.style.transition = 'width 1s ease';
-      // trigger async agar browser apply transition
-      requestAnimationFrame(() => {
-        requestAnimationFrame(() => {
-          bar.style.width = target;
-        });
-      });
+
+      // async apply animasi
+      setTimeout(() => {
+        bar.style.transition = 'width 1s ease';
+        bar.style.width = target;
+      }, 50);
     });
   }
 
@@ -541,7 +545,7 @@
       </div>
     `;
 
-    // buka modal
+    // open pola modal
     wrap.querySelectorAll("[data-game-modal]").forEach(card => {
       card.addEventListener("click", () => {
         const id = "pola-" + card.getAttribute("data-game-modal");
@@ -552,7 +556,7 @@
       });
     });
 
-    // tutup modal
+    // close pola modal
     document.querySelectorAll("[data-close-pola]").forEach(btn=>{
       btn.addEventListener("click", ()=>{
         const targetId = btn.getAttribute("data-close-pola");
@@ -570,7 +574,7 @@
       });
     });
 
-    // setelah kartu masuk DOM -> animasikan progress bar hijau
+    // animate bar hijau sesudah DOM jadi
     animateRtpBars(wrap);
   }
 
@@ -582,18 +586,15 @@
     renderProviderDetail(snap);
   }
 
-  // ======== RENDER PERTAMA KALI ========
+  // ======== RENDER PERTAMA ========
   renderAll();
 
   // ======== AUTO-REFRESH PELAN ========
-  // tadinya 10000 (10 detik), bikin kedip dan berat.
-  // sekarang kita lambatkan 15 menit (900000 ms),
-  // biar nggak ganggu mata dan lebih hemat.
+  // tadinya 10 detik → bikin flicker
+  // sekarang kita tetap refresh tapi santai, 15 menit.
   setInterval(renderAll, 900000);
 
-  // NOTE:
-  // Kalo kamu MAU render sekali aja tanpa refresh dinamis,
-  // HAPUS setInterval di atas.
-  // Kalau mau 5 menit misalnya, ganti 900000 jadi 300000.
-
+  // CATATAN:
+  // kalau kamu mau TANPA refresh otomatis sama sekali,
+  // hapus saja baris setInterval di atas.
 })();
