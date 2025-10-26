@@ -1,107 +1,133 @@
-/* Floating winner popup bottom-left – Bangladesh Edition */
-.message-left-container {
-  position: fixed;
-  left: 1rem;
-  bottom: 1rem;
-  z-index: 9999;
-  display: flex;
-  flex-direction: column;
-  gap: .5rem;
-  pointer-events: none;
-  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Inter', 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+
+// messagebleft.js
+// versi stabil looping smooth, tidak bikin freeze
+// tampilan (warna hijau dsb) tetap ngikutin CSS lama kamu: messagebleft.css
+
+// Data pemenang, kamu bisa ganti/extend manual
+const winnerFeed = [
+  {
+    name: "Safi***85",
+    game: "Sweet Bonanza",
+    amount: "৳22,116 BDT",
+    note: "menang besar di Bangladesh!"
+  },
+  {
+    name: "Sadi***98",
+    game: "Sugar Rush",
+    amount: "৳19,410 BDT",
+    note: "menang besar di Bangladesh!"
+  },
+  {
+    name: "Roha***72",
+    game: "Wild West Gold",
+    amount: "৳14,216 BDT",
+    note: "menang besar di Bangladesh!"
+  },
+  {
+    name: "Amin***44",
+    game: "Gates of Olympus",
+    amount: "৳11,880 BDT",
+    note: "payout cepat & aman!"
+  },
+  {
+    name: "Nadi***33",
+    game: "Big Bass Bonanza",
+    amount: "৳46,169 BDT",
+    note: "WD sukses 24/7!"
+  }
+];
+
+// durasi antar popup baru (ms)
+const SHOW_INTERVAL = 5000; // 5 detik
+// maksimum kartu aktif yang boleh nongol barengan
+const MAX_ACTIVE_CARDS = 3;
+
+// index untuk muter data winnerFeed
+let feedIndex = 0;
+
+// container utama (harus sudah ada di HTML kamu):
+// <div class="message-left-container"></div>
+const wrap = document.querySelector(".message-left-container");
+
+// helper bikin elemen 1 kartu popup
+function makeCard(data) {
+  // NOTE:
+  // Di CSS lama kamu, kartu popup biasanya pakai class seperti `.message-left-card`
+  // dan di dalamnya ada struktur teks hijau dsb.
+  // Di sini kita bikin markup generik yang aman.
+
+  const card = document.createElement("div");
+  card.className = "message-left-card";
+
+  card.innerHTML = \`
+    <div class="msg-header" style="font-size:.7rem; line-height:1.4; font-weight:600; color:#00ff6a;">
+      \${data.name} menang besar di Bangladesh!
+    </div>
+    <div class="msg-body" style="font-size:.7rem; line-height:1.4; color:#fff;">
+      Game: \${data.game}<br/>
+      \${data.note}
+    </div>
+    <div class="msg-amount" style="font-size:.75rem; font-weight:700; color:#00ff6a; margin-top:4px;">
+      \${data.amount}
+    </div>
+  \`;
+
+  // animasi masuk halus
+  card.style.opacity = "0";
+  card.style.transform = "translateY(10px) scale(0.96)";
+  requestAnimationFrame(() => {
+    card.style.transition = "all .3s ease";
+    card.style.opacity = "1";
+    card.style.transform = "translateY(0) scale(1)";
+  });
+
+  return card;
 }
 
-.message-left-card {
-  min-width: 240px;
-  max-width: 260px;
-  background: radial-gradient(circle at 15% 15%, rgba(0,80,40,.55) 0%, rgba(0,20,10,.9) 60%);
-  border: 1px solid rgba(0,255,128,.35);
-  box-shadow:
-    0 20px 40px rgba(0,0,0,.9),
-    0 0 20px rgba(0,255,128,.25),
-    0 0 60px rgba(255,0,0,.15);
-  border-radius: 12px;
-  padding: .75rem .9rem;
-  display: flex;
-  align-items: flex-start;
-  gap: .75rem;
-  color: #fff;
-  font-size: .8rem;
-  line-height: 1.4;
-  opacity: 0;
-  transform: translateX(-20px) translateY(20px) scale(.96);
-  animation: msgFade .4s forwards ease;
-}
+// tambahkan satu popup baru
+function pushCard() {
+  if (!wrap) return;
 
-.message-left-card .thumb-mini {
-  flex:0 0 44px;
-  height:44px;
-  border-radius:8px;
-  background:#0f0f0f center/cover no-repeat;
-  border:1px solid rgba(0,255,128,.4);
-  box-shadow:
-    0 0 8px rgba(0,255,128,.6),
-    0 0 16px rgba(255,0,0,.4);
-}
+  // ambil winner berikutnya
+  const data = winnerFeed[feedIndex % winnerFeed.length];
+  feedIndex++;
 
-.message-left-card .texts {
-  flex:1;
-  color:#fff;
-  font-weight:500;
-  text-shadow:0 0 6px rgba(0,0,0,.8);
-}
+  // buat elemen kartu
+  const card = makeCard(data);
 
-.message-left-card .texts .player {
-  color:#00ff6a;
-  font-weight:600;
-  font-size:.8rem;
-  line-height:1.25;
-  text-shadow:
-    0 0 8px rgba(0,255,128,.8),
-    0 0 16px rgba(0,255,128,.4);
-}
+  // tempel ke container
+  wrap.appendChild(card);
 
-.message-left-card .texts .game {
-  font-size:.7rem;
-  line-height:1.2;
-  color:#ccc;
-  text-shadow:0 0 4px rgba(0,0,0,.8);
-}
+  // kalau jumlah kartu melebihi MAX_ACTIVE_CARDS -> hapus yang paling lama (atas)
+  const cards = wrap.querySelectorAll(".message-left-card");
+  if (cards.length > MAX_ACTIVE_CARDS) {
+    const first = cards[0];
 
-.message-left-card .texts .amount {
-  margin-top:.35rem;
-  font-size:.8rem;
-  font-weight:700;
-  line-height:1.2;
-  color:#ffd84a;
-  text-shadow:
-    0 0 6px rgba(255,216,74,.6),
-    0 0 14px rgba(255,0,0,.4);
-}
+    // animasi keluar halus dulu sebelum remove
+    first.style.transition = "all .3s ease";
+    first.style.opacity = "0";
+    first.style.transform = "translateY(10px) scale(0.96)";
 
-@keyframes msgFade {
-  to {
-    opacity:1;
-    transform: translateX(0) translateY(0) scale(1);
+    setTimeout(() => {
+      if (first && first.parentNode) {
+        first.parentNode.removeChild(first);
+      }
+    }, 300);
   }
 }
-@keyframes msgHide {
-  to {
-    opacity:0;
-    transform: translateX(-20px) translateY(20px) scale(.96);
-  }
+
+// start loop ringan (tiap 5 detik buat popup baru)
+function startFeed() {
+  // pertama langsung tampil satu
+  pushCard();
+
+  // setelah itu interval
+  setInterval(pushCard, SHOW_INTERVAL);
 }
 
-@media(max-width:480px){
-  .message-left-card{
-    min-width:200px;
-    max-width:220px;
-    font-size:.7rem;
-  }
-  .message-left-card .texts .player{
-    font-size:.7rem;
-  }
-  .message-left-card .texts .amount{
-    font-size:.7rem;
-  }
+// jalanin setelah DOM siap
+if (document.readyState === "loading") {
+  document.addEventListener("DOMContentLoaded", startFeed);
+} else {
+  startFeed();
 }
