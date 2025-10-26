@@ -7,18 +7,21 @@
 
   <meta name="description" content="CK44 VIP Bangladesh RTP লাইভ – রিয়েলটাইম RTP স্যাম্পল, গেম প্যাটার্ন, VIP 30 ইভেন্ট, মিস্ট্রি বোনাস ড্রপ প্রতিদিন। বাংলাদেশ প্লেয়ারের জন্য দ্রুত উইথড্রো & 24/7 সাপোর্ট।" />
 
+  <!-- external css (tetap sama dengan setup kamu) -->
   <link rel="stylesheet" href="./css/messagebleft.css" />
   <link rel="stylesheet" href="./css/style.css" />
 
   <style>
-    /* ==== GLOBAL ==== */
+    /* =========================================================
+       GLOBAL PAGE
+    ==========================================================*/
     body {
       background-color:#0a0a0a;
       color:#fff;
       font-family:system-ui,-apple-system,BlinkMacSystemFont,'Inter','Segoe UI',Roboto,Helvetica,Arial,sans-serif;
       margin:0;
 
-      /* Glow background (lebih ringan tapi tetap VIP) */
+      /* glow background ringan */
       background-image:
         radial-gradient(
           circle at 50% 0%,
@@ -45,13 +48,13 @@
     }
 
     .ck-page-wrap{
-      max-width:1400px;
+      max-width:1280px;   /* dibatasi agar konten tidak terlalu melebar */
       margin:0 auto;
       padding:16px;
     }
 
     .ck-section-card{
-      background:#111;
+      background:#1a1a1a;
       border:1px solid rgba(255,255,255,.07);
       border-radius:16px;
       box-shadow:0 16px 32px rgba(0,0,0,.8);
@@ -136,7 +139,9 @@
       color:#999;
     }
 
-    /* ===== DAILY BONUS MINI CARD ===== */
+    /* =========================================================
+       DAILY BONUS MINI CARD
+    ==========================================================*/
     .ck-daily-bonus h3{
       margin:0 0 8px;
       font-size:.9rem;
@@ -160,12 +165,11 @@
       padding:4px 8px;
       line-height:1.2;
     }
-    .ck-daily-close[data-close-popup]{
-      cursor:pointer;
-    }
 
-    /* ===== HERO LAYOUT ===== */
-
+    /* =========================================================
+       HERO LAYOUT (ATAS): 3 kolom
+       kiri: bonus/vip | tengah: live RTP | kanan: promo/provider
+    ==========================================================*/
     .ck-hero-layout{
       display:grid;
       grid-template-columns:1fr 1.2fr 1fr;
@@ -180,8 +184,9 @@
       min-width:0;
     }
 
-    /* ===== RTP MAIN CARD (tengah) ===== */
-
+    /* =========================================================
+       CARD TENGAH LIVE RTP
+    ==========================================================*/
     .ck-rtp-main-card{
       background:#181818;
       border:1px solid rgba(255,255,255,.12);
@@ -192,7 +197,7 @@
       padding:16px;
     }
 
-    /* header atas rtp + indikator live */
+    /* header atas: judul + indikator LIVE */
     .ck-rtp-main-header-top{
       display:flex;
       flex-wrap:wrap;
@@ -248,13 +253,13 @@
       margin-bottom:12px;
     }
 
-    /* list RTP hot (top game live) */
+    /* list game RTP panas (top live list) */
     .ck-rtp-hot-list{
       display:grid;
       gap:12px;
     }
 
-    /* row game dalam live RTP */
+    /* row 1 game di list live tengah */
     .ck-card-row{
       display:flex;
       align-items:flex-start;
@@ -265,7 +270,6 @@
       padding:10px 12px;
     }
 
-    /* thumbnail game */
     .ck-game-thumb{
       flex-shrink:0;
       width:64px;
@@ -290,7 +294,6 @@
       margin:auto;
     }
 
-    /* info game */
     .ck-game-info{
       flex:1 1 auto;
       font-size:.75rem;
@@ -340,7 +343,9 @@
       margin-top:12px;
     }
 
-    /* ===== TABLE RTP SECTION ===== */
+    /* =========================================================
+       TABEL RTP (Provider & RTP live section)
+    ==========================================================*/
     .ck-rtp-table-wrap{
       width:100%;
       overflow-x:auto;
@@ -391,22 +396,25 @@
       font-weight:600;
     }
 
-    /* ===== PROVIDER DETAIL SECTION ===== */
+    /* =========================================================
+       PROVIDER DETAIL GRID (kartu game per provider - daftar panjang)
+    ==========================================================*/
     #ck-provider-detail-wrap{
-      background:#111;
+      background:#1a1a1a;
       border:1px solid rgba(255,255,255,.07);
       border-radius:16px;
-      box-shadow:0 20px 40px rgba(0,0,0,.8);
+      box-shadow:0 16px 32px rgba(0,0,0,.8);
       padding:16px;
       margin-top:24px;
       color:#fff;
       font-size:.8rem;
       line-height:1.4;
-      display:none;
+      display:none; /* hidden sampai tab provider dipilih */
     }
 
     .ck-provider-detail-head{
       margin-bottom:12px;
+      text-align:left;
     }
     .ck-provider-detail-title{
       font-size:.9rem;
@@ -422,34 +430,42 @@
       color:#ccc;
     }
 
+    /* GRID: kartu game */
     .ck-game-grid{
       display:grid;
-      grid-template-columns:repeat(auto-fit,minmax(min(260px,100%),1fr));
-      gap:16px;
+      grid-template-columns:repeat(auto-fit,minmax(220px,1fr)); /* lebih kecil biar rapat */
+      gap:12px;
     }
 
+    /* Kartu game individual */
     .ck-game-card {
       background:#1a1a1a;
-      border:1px solid rgba(255,255,255,0.08);
-      border-radius:10px;
-      box-shadow:0 16px 32px rgba(0,0,0,.8);
+      border:1px solid rgba(255,255,255,.05);
+      border-radius:8px;
+      box-shadow:0 8px 16px rgba(0,0,0,.6); /* shadow ringan */
       overflow:hidden;
       display:flex;
       flex-direction:column;
       cursor:pointer;
+      max-width:240px;      /* batasi lebar per kartu */
+      margin:0 auto;        /* center di kolom */
+      text-align:center;    /* semua isi center */
     }
 
+    /* blok thumbnail: kecil & center, bukan full lebar */
     .ck-game-card-thumb {
-      position:relative;
-      width:100%;
-      height:140px;
-      background:radial-gradient(circle at 50% 35%, #2a2a2a 0%, #000 70%);
-      border-bottom:1px solid rgba(255,255,255,.08);
+      width:auto;
+      max-width:140px;
+      margin:16px auto 12px;
+      padding:8px;
+
+      background:#000;
+      border:1px solid rgba(255,255,255,.15);
+      border-radius:8px;
 
       display:flex;
       align-items:center;
       justify-content:center;
-      text-align:center;
       overflow:hidden;
     }
     .ck-game-card-thumb img {
@@ -464,13 +480,15 @@
       image-rendering:auto;
     }
 
+    /* body kartu game (judul, provider, bar RTP) */
     .ck-game-card-body {
       background:linear-gradient(#1a1a1a 0%, #111 100%);
       border-top:1px solid rgba(255,255,255,.06);
-      padding:12px;
+      padding:10px 12px;
       font-size:.75rem;
       line-height:1.4;
       color:#ccc;
+      text-align:center;
     }
 
     .ck-game-card-name {
@@ -479,24 +497,26 @@
       font-weight:600;
       line-height:1.3;
       margin-bottom:2px;
+      text-align:center;
     }
     .ck-game-card-provider {
       color:#9a9a9a;
       font-size:.7rem;
       line-height:1.2;
-      margin-bottom:8px;
+      margin-bottom:6px;
+      text-align:center;
     }
 
-    /* RTP progress bar di kartu game detail */
+    /* RTP progress bar hijau (slimmer) */
     .ck-rtp-bar-wrap{
       position:relative;
       width:100%;
-      height:28px;
+      height:24px; /* lebih pendek */
       background:#003b14;
-      border-radius:6px;
+      border-radius:4px;
       border:1px solid rgba(0,255,98,.4);
       overflow:hidden;
-      box-shadow:0 0 10px rgba(0,255,98,.4);
+      box-shadow:0 0 6px rgba(0,255,98,.3);
     }
     .ck-rtp-bar-fill{
       position:absolute;
@@ -505,13 +525,13 @@
       bottom:0;
       background:linear-gradient(90deg,#00ff62 0%,#007a1f 100%);
       border-right:1px solid rgba(0,0,0,.4);
-      box-shadow:0 0 10px rgba(0,255,98,.5);
+      box-shadow:0 0 6px rgba(0,255,98,.4);
       display:flex;
       align-items:center;
       justify-content:center;
       color:#000;
       font-weight:700;
-      font-size:.8rem;
+      font-size:.75rem;
       line-height:1.2;
       text-shadow:0 0 4px rgba(0,0,0,.6);
     }
@@ -529,7 +549,9 @@
       50%     {opacity:.8;}
     }
 
-    /* provider tabs */
+    /* =========================================================
+       PROVIDER TABS (filter provider)
+    ==========================================================*/
     #ck-provider-tabs{
       display:flex;
       flex-wrap:wrap;
@@ -561,9 +583,11 @@
       font-weight:700;
     }
 
-    /* ===== BACK BUTTON TOP ===== */
+    /* =========================================================
+       STRIP "BACK" ATAS
+    ==========================================================*/
     .ck-back-strip{
-      max-width:1400px;
+      max-width:1280px;
       margin:0 auto 16px;
       padding:16px;
       font-size:.7rem;
@@ -589,7 +613,9 @@
       line-height:1;
     }
 
-    /* POPUP BONUS */
+    /* =========================================================
+       POPUP BONUS
+    ==========================================================*/
     .ck-popup-overlay{
       position:fixed;
       inset:0;
@@ -643,7 +669,9 @@
       color:#fff;
     }
 
-    /* MODAL POLA GAME */
+    /* =========================================================
+       MODAL POLA GAME (step / tactic)
+    ==========================================================*/
     .ck-pola-overlay{
       position:fixed;
       inset:0;
@@ -765,7 +793,9 @@
         0 14px 42px rgba(245,217,124,.12);
     }
 
-    /* RESPONSIVE */
+    /* =========================================================
+       RESPONSIVE
+    ==========================================================*/
     @media(max-width:1024px){
       .ck-hero-layout{
         grid-template-columns:1fr;
@@ -787,7 +817,7 @@
 </head>
 <body>
 
-  <!-- BACK TO MAIN -->
+  <!-- STRIP BACK KE LANDING PAGE UTAMA -->
   <div class="ck-back-strip">
     <a href="https://ck-44-bangladesh.vercel.app/" class="ck-back-btn">
       <span>⬅</span>
@@ -797,7 +827,7 @@
 
   <div class="ck-page-wrap">
 
-    <!-- HERO LAYOUT -->
+    <!-- ================= HERO LAYOUT (3 kolom) ================= -->
     <div class="ck-hero-layout">
 
       <!-- KIRI: VIP CARD + DAILY BONUS -->
@@ -889,7 +919,7 @@
       </div><!-- /ck-col kiri -->
 
 
-      <!-- TENGAH: RTP MAIN BIG CARD -->
+      <!-- TENGAH: LIVE RTP BIG CARD -->
       <div class="ck-col">
         <div class="ck-rtp-main-card">
           <div class="ck-rtp-main-header-top">
@@ -996,7 +1026,7 @@
     </div><!-- /.ck-hero-layout -->
 
 
-    <!-- ===== SECTION: RTP TABLE + PROVIDER FILTER ===== -->
+    <!-- ================= PROVIDER & RTP TABLE ================= -->
     <div class="ck-section-card" style="margin-top:24px;">
       <h3 style="margin:0 0 8px;font-size:.9rem;line-height:1.3;font-weight:600;color:#ffd24a;text-shadow:0 0 8px rgba(212,175,55,.7);display:flex;flex-wrap:wrap;gap:.5rem;align-items:flex-start;">
         <span class="ck-section-title-emoji">⚡</span>
@@ -1021,26 +1051,26 @@
               <th>স্ট্যাটাস</th>
             </tr>
           </thead>
-          <tbody id="ck-rtp-tbody"><!-- rows by JS --></tbody>
+          <tbody id="ck-rtp-tbody"><!-- rows injected by main.js --></tbody>
         </table>
       </div>
     </div>
 
 
-    <!-- ===== SECTION: PROVIDER DETAIL GAME CARDS ===== -->
+    <!-- ================= PROVIDER DETAIL GRID (KARTU GAME) ================= -->
     <div id="ck-provider-detail-wrap">
-      <!-- main.js inject:
+      <!-- main.js akan inject:
            .ck-provider-detail-head
            .ck-game-grid
            .ck-game-card (tiap game)
-           .ck-pola-overlay (tiap modal pola)
+           .ck-pola-overlay (tiap modal pola / tactic)
       -->
     </div>
 
   </div><!-- /.ck-page-wrap -->
 
 
-  <!-- BONUS POPUP -->
+  <!-- POPUP BONUS (GLOBAL MODAL) -->
   <div class="ck-popup-overlay" id="bonus-popup">
     <div class="ck-popup-card">
       <div class="ck-popup-head">
@@ -1067,13 +1097,13 @@
     </div>
   </div>
 
-  <!-- POPUP WINNER FEED KIRI BAWAH -->
+  <!-- FEED POPUP LEFT BOTTOM (WINNER FEED) -->
   <div class="message-left-container"></div>
 
-  <!-- ==== JS ==== -->
+  <!-- ================= JS ================= -->
   <script src="./js/main.js"></script>
 
-  <!-- LIMIT TOP 10 ROW + TOGGLE -->
+  <!-- LIMIT TOP 10 ROW + TOGGLE BUTTON DI TABEL RTP -->
   <script>
   (function() {
     const MAX_VISIBLE = 10;
@@ -1175,7 +1205,7 @@
   })();
   </script>
 
-  <!-- AUTO REFRESH PER 15 MENIT -->
+  <!-- AUTO REFRESH (setiap 15 menit untuk update RTP live) -->
   <script>
   (function(){
     const FIFTEEN_MIN_MS = 900000; // 15 * 60 * 1000
@@ -1186,7 +1216,7 @@
   })();
   </script>
 
-  <!-- WINNER FEED -->
+  <!-- WINNER FEED SCRIPT -->
   <script src="./js/messagebleft.js"></script>
 
   <!-- POPUP BONUS OPEN/CLOSE HANDLER -->
@@ -1219,7 +1249,7 @@
       }
     });
 
-    // click outside popup to close
+    // klik area gelap di luar modal untuk close
     document.addEventListener('click', function(e){
       const ov = e.target.closest('.ck-popup-overlay');
       if(ov && e.target === ov){
