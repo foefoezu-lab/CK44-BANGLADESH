@@ -10,7 +10,7 @@
   <link rel="stylesheet" href="./css/messagebleft.css" />
 
   <style>
-    /* === OVERRIDE POPUP STYLE (sama seperti rtp-live.html) === */
+    /* === POPUP WINNERS BANGLADESH STYLE (stabil) === */
     .message-left-container {
       position: fixed;
       left: 16px;
@@ -78,14 +78,13 @@
   <div class="ck-page-wrap">
 
     <!-- ================================ -->
-    <!-- TOP GRID (5 KOTAK UTAMA)         -->
+    <!-- TOP GRID (5 BOX UTAMA)           -->
     <!-- ================================ -->
 
     <div class="ck-hero-grid">
 
       <!-- COL 1 -->
       <div class="ck-hero-col ck-section-card">
-        <!-- tombol balik ke landing / promo -->
         <div style="margin-bottom:12px;">
           <a
             href="rtp-live.html"
@@ -104,7 +103,7 @@
           <p><b>CK44 VIP Bangladesh</b><br/>
           Trusted • Mystery Bonus • VIP 30</p>
 
-          <p><span class="ck-accent">Withdraw cepat</span>, support 24/7, aman & private.<br/>
+          <p><span class="ck-accent">Withdraw cepat</span>, support 24/7, aman &amp; private.<br/>
           Klaim bonus harian <b>sebelum reset harian</b>!</p>
 
           <p>Bangladesh • Global • CK44 VIP Standard.</p>
@@ -114,7 +113,7 @@
           <ul class="ck-list">
             <li><span class="ck-list-emoji">🎁</span> Mystery Bonus harian</li>
             <li><span class="ck-list-emoji">⚡</span> VIP 30 boost untuk pemain aktif</li>
-            <li><span class="ck-list-emoji">🚀</span> WD cepat & aman</li>
+            <li><span class="ck-list-emoji">🚀</span> WD cepat &amp; aman</li>
             <li><span class="ck-list-emoji">💬</span> Support nonstop 24/7</li>
           </ul>
 
@@ -270,7 +269,7 @@
         Realtime sample RTP &amp; pola game panas. Klik provider untuk filter.
       </div>
 
-      <!-- Tabs provider akan diisi JS -->
+      <!-- Tabs provider (Pragmatic Play, PG Soft, dll) -> diisi main.js -->
       <div id="ck-provider-tabs"></div>
 
       <div class="ck-line"></div>
@@ -287,22 +286,22 @@
             </tr>
           </thead>
           <tbody id="ck-rtp-tbody">
-            <!-- JS (main.js) akan inject <tr> list game di sini -->
+            <!-- main.js akan inject <tr> daftar game di sini -->
           </tbody>
         </table>
       </div>
     </div>
 
     <!-- ================================ -->
-    <!-- PROVIDER DETAIL GRID + POLA MODAL -->
+    <!-- PROVIDER DETAIL GRID             -->
     <!-- ================================ -->
 
     <div id="ck-provider-detail-wrap" class="ck-section-card" style="margin-top:24px;">
-      <!-- diisi dinamis sama main.js -->
+      <!-- main.js akan fill kartu-kartu game Hot RTP & Pola, dsb -->
     </div>
 
     <!-- ================================ -->
-    <!-- POPUP OVERLAY: DAILY BONUS POPUP -->
+    <!-- POPUP BONUS                      -->
     <!-- ================================ -->
     <div class="ck-popup-overlay" id="bonus-popup">
       <div class="ck-popup-card">
@@ -344,32 +343,20 @@
   <script src="./js/jquery.min.js"></script>
   <script src="./js/popper.min.js"></script>
 
-  <!-- property data provider -->
+  <!-- Data provider -->
   <script src="./property/pragmatic.js"></script>
   <script src="./property/slide.js"></script>
 
-  <!-- Engine UI RTP / Pola / Tabs -->
+  <!-- Engine UI RTP / Pola / Tabs (INI PUNYA KAMU) -->
   <script src="./js/main.js"></script>
 
-  <!-- PATCH: batasi tabel jadi Top 10 + tombol "Lihat semua game" -->
+  <!-- LIMIT TOP 10 ROW + TOGGLE LIHAT SEMUA -->
   <script>
   (function() {
-    // berapa banyak row yang keliatan awal
     const MAX_VISIBLE = 10;
 
-    function applyLimit() {
-      const tbody = document.getElementById('ck-rtp-tbody');
-      if (!tbody) return;
-
-      const rows = Array.from(tbody.querySelectorAll('tr'));
-      if (rows.length <= MAX_VISIBLE) return; // kalau data sedikit, ga usah apa2
-
-      // Sembunyikan semua row setelah batas
-      rows.forEach((row, idx) => {
-        row.style.display = (idx < MAX_VISIBLE) ? '' : 'none';
-      });
-
-      // kalau toggle area belum ada → bikin
+    // bikin / update tombol toggle di bawah tabel
+    function ensureToggle(rows) {
       let toggleWrap = document.querySelector('.ck-rtp-toggle-wrap');
       if (!toggleWrap) {
         toggleWrap = document.createElement('div');
@@ -380,7 +367,7 @@
         toggleWrap.style.color = '#ccc';
 
         const btn = document.createElement('button');
-        btn.textContent = `Lihat semua game (${rows.length})`;
+        btn.className = 'ck-rtp-toggle-btn';
         btn.style.background = 'rgba(255,255,255,.05)';
         btn.style.border = '1px solid rgba(255,255,255,.2)';
         btn.style.borderRadius = '8px';
@@ -390,50 +377,120 @@
         btn.style.fontSize = '.75rem';
         btn.style.lineHeight = '1.2';
         btn.style.fontWeight = '600';
-
-        let expanded = false;
-
-        btn.addEventListener('click', () => {
-          expanded = !expanded;
-          if (expanded) {
-            // tampilkan semua row
-            rows.forEach(r => { r.style.display = ''; });
-            btn.textContent = 'Tutup daftar';
-          } else {
-            // balik ke top MAX_VISIBLE
-            rows.forEach((r, idx) => {
-              r.style.display = (idx < MAX_VISIBLE) ? '' : 'none';
-            });
-            btn.textContent = `Lihat semua game (${rows.length})`;
-
-            // scroll balik supaya user gak “nyasar” di bawah
-            const cardTop = document.querySelector('.ck-section-card');
-            if (cardTop) {
-              cardTop.scrollIntoView({ behavior: 'smooth' });
-            }
-          }
-        });
+        btn.dataset.expanded = "false";
 
         toggleWrap.appendChild(btn);
 
-        // sisipin toggleWrap setelah table wrapper
         const tableWrapper = document.querySelector('.ck-rtp-table-wrap');
         if (tableWrapper && tableWrapper.parentNode) {
           tableWrapper.parentNode.appendChild(toggleWrap);
         }
       }
+
+      const btn = toggleWrap.querySelector('.ck-rtp-toggle-btn');
+      if (!btn) return;
+
+      // label awal
+      btn.textContent = `Lihat semua game (${rows.length})`;
+      btn.dataset.expanded = "false";
+
+      // replace click handler lama (clone trick)
+      const newBtn = btn.cloneNode(true);
+      btn.parentNode.replaceChild(newBtn, btn);
+
+      newBtn.addEventListener('click', () => {
+        const expanded = newBtn.dataset.expanded === "true";
+        if (expanded) {
+          // collapse -> cuma tampil 10 teratas
+          rows.forEach((r, idx) => {
+            r.style.display = (idx < MAX_VISIBLE) ? '' : 'none';
+          });
+          newBtn.dataset.expanded = "false";
+          newBtn.textContent = `Lihat semua game (${rows.length})`;
+
+          // scroll balik atas tabel biar user ga nyasar bawah
+          const cardTop = document.querySelector('.ck-section-card');
+          if (cardTop) {
+            cardTop.scrollIntoView({ behavior:'smooth' });
+          }
+        } else {
+          // expand -> tampil semua
+          rows.forEach(r => { r.style.display = ''; });
+          newBtn.dataset.expanded = "true";
+          newBtn.textContent = 'Tutup daftar';
+        }
+      });
     }
 
-    // Kita jalankan setelah main.js sempat render data
-    function initLimiter() {
-      setTimeout(applyLimit, 200);
+    // fungsi utama batasi baris jadi 10
+    function limitRows() {
+      const tbody = document.getElementById('ck-rtp-tbody');
+      if (!tbody) return;
+
+      const rows = Array.from(tbody.querySelectorAll('tr'));
+      if (rows.length === 0) return;
+
+      // default collapsed (10 baris)
+      rows.forEach((row, idx) => {
+        row.style.display = (idx < MAX_VISIBLE) ? '' : 'none';
+      });
+
+      // siapin tombol toggle
+      ensureToggle(rows);
     }
 
+    // scheduleLimit = panggil limitRows sedikit delay,
+    // supaya nunggu main.js selesai render
+    function scheduleLimit() {
+      setTimeout(limitRows, 100);
+    }
+
+    // 1) load pertama kali
     if (document.readyState === 'loading') {
-      document.addEventListener('DOMContentLoaded', initLimiter);
+      document.addEventListener('DOMContentLoaded', scheduleLimit);
     } else {
-      initLimiter();
+      scheduleLimit();
     }
+
+    // 2) setiap kali klik tab provider (All / Pragmatic Play / PG Soft / dll),
+    // main.js kemungkinan rerender tbody -> kita re-limit
+    document.addEventListener('click', (e) => {
+      const tabBtn = e.target.closest('#ck-provider-tabs button, #ck-provider-tabs .ck-tab-btn');
+      if (tabBtn) {
+        scheduleLimit();
+      }
+    });
+
+    // 3) kita expose supaya script refresh 15 menit bisa panggil lagi
+    window.__ckScheduleLimitRows = scheduleLimit;
+  })();
+  </script>
+
+  <!-- AUTO-REFRESH SETIAP 15 MENIT -->
+  <script>
+  (function(){
+    // 15 menit = 900000 ms
+    const FIFTEEN_MIN_MS = 900000;
+
+    // cara aman universal -> reload halaman penuh setiap 15 menit
+    // supaya data RTP terbaru masuk lagi, dan limitRows jalan lagi.
+    function doRefresh(){
+      // Kalau suatu saat kamu punya fungsi ckReloadData() di main.js
+      // kita bisa ganti ini biar gak full reload.
+      // Contoh:
+      //
+      // if (window.ckReloadData) {
+      //   window.ckReloadData().then(() => {
+      //     if (window.__ckScheduleLimitRows) window.__ckScheduleLimitRows();
+      //   });
+      //   return;
+      // }
+      //
+      // fallback sekarang:
+      location.reload();
+    }
+
+    setInterval(doRefresh, FIFTEEN_MIN_MS);
   })();
   </script>
 
@@ -448,9 +505,9 @@
       { player:"Amin***44",   game:"Gates of Olympus",  amount:"৳11,880 BDT",  note:"bonus aktif VIP 30!" }
     ];
 
-    const POPUP_INTERVAL_MS = 8000;
-    const POPUP_LIFETIME_MS = 5000;
-    const MAX_ACTIVE = 1;
+    const POPUP_INTERVAL_MS = 8000;   // jeda antar popup muncul
+    const POPUP_LIFETIME_MS  = 5000;  // berapa lama popup nongol
+    const MAX_ACTIVE         = 1;     // cuma 1 popup aktif sekaligus
 
     let indexPointer = 0;
     const wrap = document.querySelector(".message-left-container");
@@ -471,7 +528,7 @@
     }
 
     function showPopup(){
-      // Bersihkan popup lama kalau MAX_ACTIVE terpenuhi
+      // hapus popup lama jika sudah ada (biar ga numpuk / nge-freeze)
       const actives = wrap.querySelectorAll(".message-left-card");
       if (actives.length >= MAX_ACTIVE){
         actives.forEach(el=>{
@@ -482,14 +539,14 @@
         });
       }
 
-      // data winner berikut
+      // ambil data winner berikutnya
       const data = WINNERS[indexPointer % WINNERS.length];
       indexPointer++;
 
       const card = spawnCard(data);
       wrap.appendChild(card);
 
-      // auto remove setelah lifetime
+      // auto-remove setelah lifetime
       setTimeout(()=>{
         card.classList.add("hide");
         setTimeout(()=>{
