@@ -1,8 +1,11 @@
-// main.js
-// CK44 VIP Bangladesh (improved RTP animation + randomization 30-98%)
+// CK44 VIP Bangladesh RTP engine
+// - Random RTP 30-98%
+// - Animated green bar
+// - Provider tabs, pola modal
+// - Gentle refresh every 15 min
 (function(){
 
-  // 1. PROVIDER MAPS
+  // PROVIDER MAPS (Pragmatic example full list you gave)
   const PRAGMATIC_NAME_MAP = {
     1:  "Christmas big bass bonanza",
     2:  "Gates of Olympus",
@@ -13,244 +16,243 @@
     7:  "Bonanza Gold",
     8:  "Wild West Gold",
     9:  "Joker's Jewels",
-    10:  "Pyramid Bonanza",
-    11:  "Great Rhino Megaways",
-    12:  "Fire Strike",
-    13:  "Candy Village",
-    14:  "Aztec Gems Deluxe",
-    15:  "5 Lions Megaways",
-    16:  "John Hunter and the Tomb of the Scarab Queen",
-    17:  "Christmas Carol Megaways",
-    18:  "The Tweety House",
-    19:  "Aztec Bonanza",
-    20:  "Fire 88",
-    21:  "Chicken Drop",
-    22:  "Rise of Samurai Megaways",
-    23:  "Dog House Megaways",
-    24:  "Fruit Party",
-    25:  "Madame Destiny Megaways",
-    26:  "Buffalo King Megaways",
-    27:  "Gems Bonanza",
-    28:  "Fruit Party 2",
-    29:  "Temujin Treasures",
-    30:  "Lucky Lightning",
-    31:  "The Hand of Midas",
-    32:  "Power of Thor Megaways",
-    33:  "Hot Fiesta",
-    34:  "Empty the Bank",
-    35:  "Juicy Fruits",
-    36:  "Release the Kraken",
-    37:  "7 Wild Booster",
-    38:  "Star Bounty",
-    39:  "Drago Jewels Of Fortune",
-    40:  "John Hunter Book of Tut",
-    41:  "Mysterious Egypt",
-    42:  "Pirate Gold Deluxe",
-    43:  "Curse of the Werewolf Megaways",
-    44:  "Voodoo Magic",
-    45:  "Asgard Jackpot",
-    46:  "Madame Destiny Jackpot",
-    47:  "Sweet Bonanza Jackpot",
-    48:  "Dog House Jackpot",
-    49:  "888 Dragons jackpot",
-    50:  "Aztec Gems Jackpot",
-    51:  "Journey To The West Jackpot",
-    52:  "Monkey Madness Jackpot",
-    53:  "Monkeys",
-    54:  "HoT Safari ",
-    55:  "Big Juan",
-    56:  "John Hunter QUEST for Bermuda Riches",
-    57:  "Star Ditates Code",
-    58:  "Mystic Chief",
-    59:  "Day of Dead",
-    60:  "Piggy Bank Bills",
-    61:  "Cash Bonanza",
-    62:  "Bigger Bass Bonanza",
-    63:  "Treasure Wild",
-    64:  "Yum Yum Powerways",
-    65:  "Raging Bull",
-    66:  "Rize Of Giza Power Nudge",
-    67:  "Chilli Heat Megaways",
-    68:  "Lucky Grace and Charm Mega Hold&Spin",
-    69:  "Aztec King Megaways",
-    70:  "Phionex Forge",
-    71:  "Heart of Rio",
-    72:  "Dragon Hot Hold and Spin",
-    73:  "Cash Elevator",
-    74:  "Hokkaido Wolf",
-    75:  "The Magic Cauldron",
-    76:  "The Amazing Money Machine",
-    77:  "Aztec King",
-    78:  "Panda's Fortune 2",
-    79:  "Floating Dragon Hold and Spin",
-    80:  "Hot to Burn Hold and Spin",
-    81:  "5 Lions",
-    82:  "Chili Heat",
-    83:  "888 Dragons",
-    84:  "5 Lions Gold",
-    85:  "Mustang Gold",
-    86:  "Big Bass Bonanza",
-    87:  "John Hunter Mayan God5",
-    88:  "Spartan King",
-    89:  "Cowboys Gold",
-    90:  "Emerald King",
-    91:  "Dragon Tiger",
-    92:  "Book & Kingdoms",
-    93:  "Return of Dead",
-    94:  "5 Lions Dance",
-    95:  "Ultra Hold and Spin",
-    96:  "Rise Of Samurai",
-    97:  "Wild Walker",
-    98:  "Great Rhino Deluxe",
-    99:  "Wild Wild Riches Lucky Of The Irish",
-    100: "Jungle Gorilla",
-    101: "Tiger Warrior",
-    102: "Street Racer",
-    103: "Fu Fu Fu",
-    104: "Bronco Spirit",
-    105: "Pyramid King",
-    106: "Ultra Burn",
-    107: "Money Money Money",
-    108: "Starz Megaways",
-    109: "Three Star Fortune",
-    110: "Dance Party",
-    111: "7 Hot To Burn",
-    112: "Casher's Gold",
-    113: "Lucky Dragon Ball",
-    114: "Fruit Rainbow",
-    115: "The Wild Machine",
-    116: "Mysterious",
-    117: "Golden Beuty",
-    118: "Master Joker",
-    119: "Super 7",
-    120: "Buffalo King",
-    121: "Magic Journey",
-    122: "Money Mouse",
-    123: "Aladdin and the Sorcerer",
-    124: "Greek Gods",
-    125: "Hercules Pegasus",
-    126: "Three Of Riches",
-    127: "Honey Honey Honey",
-    128: "Super Joker",
-    129: "Hot Chilli",
-    130: "John Aztec Treasure",
-    131: "Monkey Warrior",
-    132: "Cishen's Cash",
-    133: "Chicken Escape",
-    134: "Vampires vs Wolves",
-    135: "Triple Jokers",
-    136: "Wild Primes",
-    137: "Pirate Gold",
-    138: "Egyptian Fortune",
-    139: "Extra Juicy",
-    140: "Wild Gladiators",
-    141: "Golden Pig",
-    142: "Treasure Horse",
-    143: "Safari King",
-    144: "Leprechaun Carol",
-    145: "Triple Dragon's",
-    146: "Ancient Egypt",
-    147: "Master Chen's Fortune",
-    148: "John Hunter and the secret of Day Vincis Treasure",
-    149: "Peking Luck",
-    150: "Leprechan Song",
-    151: "Asgard",
-    152: "Madame Destiny",
-    153: "Jade Butterfly",
-    154: "The Champions",
-    155: "Fairytale Fortune",
-    156: "Ancient Egypt",
-    157: "Lucky New Year",
-    158: "Monkey Madness",
-    159: "Gold Rush",
-    160: "Santa",
-    161: "Panda's Fortune",
-    162: "7 Piggies",
-    163: "Dragon Kingdom",
-    164: "Monkeys",
-    165: "Queen of Gold",
-    166: "Wild Spells",
-    167: "Journey to the West",
-    168: "3 kingdoms Battle of Red Cliffs",
-    169: "Panther Queen",
-    170: "Gold Train",
-    171: "Vegas Nights",
-    172: "3 genie Wishes",
-    173:  "Dwarven Gold",
-    174: "Busy Bees",
-    175: "Devil's 13",
-    176: "Pixie Wings",
-    177: "Jurassic Giants",
-    178: "Wolf Gold",
-    179: "Queen Of Atlantis",
-    180: "Hercules Son Of Zeus",
-    181: "Beowulf",
-    182: "Lucky Dragons",
-    183: "Dwarven Gold Deluxe",
-    184: "Hot Safari",
-    185: "Mighty Kong",
-    186: "lady Godiva",
-    187: "Magic Crystals",
-    188: "Aladdin's Treasure",
-    189: "Glorious Rome",
-    190: "Great Reef",
-    191: "Lady Of The Moon",
-    192: "Sugar Rush",
-    193: "Fishin Reels",
-    194: "Tales Of Egypt",
-    195: "Triple Tigers",
-    196: "Money Roll",
-    197: "Jrish Charma",
-    198: "888 Gold",
-    199: "Diamond Are Forever",
-    200: "Santa's Wonderland",
-    201: "Golden Ox",
-    202: "Eye Strom",
-    203: "Dragon Kingdom Eye Of Fire",
-    204: "Congo Cash",
-    205: "Emerald King Rainbow Road",
-    206: "Vegas Magic",
-    207: "Great Rhino",
-    208: "Diamond Strike",
-    209: "Dragon's",
-    210: "The Dog House",
-    211: "Big Bass Bonanza Megaways",
-    212: "Bounty Gold",
-    213: "Might Of Ra"
+    10: "Pyramid Bonanza",
+    11: "Great Rhino Megaways",
+    12: "Fire Strike",
+    13: "Candy Village",
+    14: "Aztec Gems Deluxe",
+    15: "5 Lions Megaways",
+    16: "John Hunter and the Tomb of the Scarab Queen",
+    17: "Christmas Carol Megaways",
+    18: "The Tweety House",
+    19: "Aztec Bonanza",
+    20: "Fire 88",
+    21: "Chicken Drop",
+    22: "Rise of Samurai Megaways",
+    23: "Dog House Megaways",
+    24: "Fruit Party",
+    25: "Madame Destiny Megaways",
+    26: "Buffalo King Megaways",
+    27: "Gems Bonanza",
+    28: "Fruit Party 2",
+    29: "Temujin Treasures",
+    30: "Lucky Lightning",
+    31: "The Hand of Midas",
+    32: "Power of Thor Megaways",
+    33: "Hot Fiesta",
+    34: "Empty the Bank",
+    35: "Juicy Fruits",
+    36: "Release the Kraken",
+    37: "7 Wild Booster",
+    38: "Star Bounty",
+    39: "Drago Jewels Of Fortune",
+    40: "John Hunter Book of Tut",
+    41: "Mysterious Egypt",
+    42: "Pirate Gold Deluxe",
+    43: "Curse of the Werewolf Megaways",
+    44: "Voodoo Magic",
+    45: "Asgard Jackpot",
+    46: "Madame Destiny Jackpot",
+    47: "Sweet Bonanza Jackpot",
+    48: "Dog House Jackpot",
+    49: "888 Dragons jackpot",
+    50: "Aztec Gems Jackpot",
+    51: "Journey To The West Jackpot",
+    52: "Monkey Madness Jackpot",
+    53: "Monkeys",
+    54: "HoT Safari ",
+    55: "Big Juan",
+    56: "John Hunter QUEST for Bermuda Riches",
+    57: "Star Ditates Code",
+    58: "Mystic Chief",
+    59: "Day of Dead",
+    60: "Piggy Bank Bills",
+    61: "Cash Bonanza",
+    62: "Bigger Bass Bonanza",
+    63: "Treasure Wild",
+    64: "Yum Yum Powerways",
+    65: "Raging Bull",
+    66: "Rize Of Giza Power Nudge",
+    67: "Chilli Heat Megaways",
+    68: "Lucky Grace and Charm Mega Hold&Spin",
+    69: "Aztec King Megaways",
+    70: "Phionex Forge",
+    71: "Heart of Rio",
+    72: "Dragon Hot Hold and Spin",
+    73: "Cash Elevator",
+    74: "Hokkaido Wolf",
+    75: "The Magic Cauldron",
+    76: "The Amazing Money Machine",
+    77: "Aztec King",
+    78: "Panda's Fortune 2",
+    79: "Floating Dragon Hold and Spin",
+    80: "Hot to Burn Hold and Spin",
+    81: "5 Lions",
+    82: "Chili Heat",
+    83: "888 Dragons",
+    84: "5 Lions Gold",
+    85: "Mustang Gold",
+    86: "Big Bass Bonanza",
+    87: "John Hunter Mayan God5",
+    88: "Spartan King",
+    89: "Cowboys Gold",
+    90: "Emerald King",
+    91: "Dragon Tiger",
+    92: "Book & Kingdoms",
+    93: "Return of Dead",
+    94: "5 Lions Dance",
+    95: "Ultra Hold and Spin",
+    96: "Rise Of Samurai",
+    97: "Wild Walker",
+    98: "Great Rhino Deluxe",
+    99: "Wild Wild Riches Lucky Of The Irish",
+    100:"Jungle Gorilla",
+    101:"Tiger Warrior",
+    102:"Street Racer",
+    103:"Fu Fu Fu",
+    104:"Bronco Spirit",
+    105:"Pyramid King",
+    106:"Ultra Burn",
+    107:"Money Money Money",
+    108:"Starz Megaways",
+    109:"Three Star Fortune",
+    110:"Dance Party",
+    111:"7 Hot To Burn",
+    112:"Casher's Gold",
+    113:"Lucky Dragon Ball",
+    114:"Fruit Rainbow",
+    115:"The Wild Machine",
+    116:"Mysterious",
+    117:"Golden Beuty",
+    118:"Master Joker",
+    119:"Super 7",
+    120:"Buffalo King",
+    121:"Magic Journey",
+    122:"Money Mouse",
+    123:"Aladdin and the Sorcerer",
+    124:"Greek Gods",
+    125:"Hercules Pegasus",
+    126:"Three Of Riches",
+    127:"Honey Honey Honey",
+    128:"Super Joker",
+    129:"Hot Chilli",
+    130:"John Aztec Treasure",
+    131:"Monkey Warrior",
+    132:"Cishen's Cash",
+    133:"Chicken Escape",
+    134:"Vampires vs Wolves",
+    135:"Triple Jokers",
+    136:"Wild Primes",
+    137:"Pirate Gold",
+    138:"Egyptian Fortune",
+    139:"Extra Juicy",
+    140:"Wild Gladiators",
+    141:"Golden Pig",
+    142:"Treasure Horse",
+    143:"Safari King",
+    144:"Leprechaun Carol",
+    145:"Triple Dragon's",
+    146:"Ancient Egypt",
+    147:"Master Chen's Fortune",
+    148:"John Hunter and the secret of Day Vincis Treasure",
+    149:"Peking Luck",
+    150:"Leprechan Song",
+    151:"Asgard",
+    152:"Madame Destiny",
+    153:"Jade Butterfly",
+    154:"The Champions",
+    155:"Fairytale Fortune",
+    156:"Ancient Egypt",
+    157:"Lucky New Year",
+    158:"Monkey Madness",
+    159:"Gold Rush",
+    160:"Santa",
+    161:"Panda's Fortune",
+    162:"7 Piggies",
+    163:"Dragon Kingdom",
+    164:"Monkeys",
+    165:"Queen of Gold",
+    166:"Wild Spells",
+    167:"Journey to the West",
+    168:"3 kingdoms Battle of Red Cliffs",
+    169:"Panther Queen",
+    170:"Gold Train",
+    171:"Vegas Nights",
+    172:"3 genie Wishes",
+    173:"Dwarven Gold",
+    174:"Busy Bees",
+    175:"Devil's 13",
+    176:"Pixie Wings",
+    177:"Jurassic Giants",
+    178:"Wolf Gold",
+    179:"Queen Of Atlantis",
+    180:"Hercules Son Of Zeus",
+    181:"Beowulf",
+    182:"Lucky Dragons",
+    183:"Dwarven Gold Deluxe",
+    184:"Hot Safari",
+    185:"Mighty Kong",
+    186:"lady Godiva",
+    187:"Magic Crystals",
+    188:"Aladdin's Treasure",
+    189:"Glorious Rome",
+    190:"Great Reef",
+    191:"Lady Of The Moon",
+    192:"Sugar Rush",
+    193:"Fishin Reels",
+    194:"Tales Of Egypt",
+    195:"Triple Tigers",
+    196:"Money Roll",
+    197:"Jrish Charma",
+    198:"888 Gold",
+    199:"Diamond Are Forever",
+    200:"Santa's Wonderland",
+    201:"Golden Ox",
+    202:"Eye Strom",
+    203:"Dragon Kingdom Eye Of Fire",
+    204:"Congo Cash",
+    205:"Emerald King Rainbow Road",
+    206:"Vegas Magic",
+    207:"Great Rhino",
+    208:"Diamond Strike",
+    209:"Dragon's",
+    210:"The Dog House",
+    211:"Big Bass Bonanza Megaways",
+    212:"Bounty Gold",
+    213:"Might Of Ra"
   };
 
+  // stub maps for other providers (edit / extend as needed)
   const PGSOFT_NAME_MAP = {
-    1:  "Mahjong Ways",
-    2:  "Mahjong Ways 2",
-    3:  "Leprechaun Riches",
-    4:  "Captain's Bounty",
-    5:  "Hercules (icon #5)"
-    // lanjutkan sesuai aset kamu
+    1:"Mahjong Ways",
+    2:"Mahjong Ways 2",
+    3:"Leprechaun Riches",
+    4:"Captain's Bounty",
+    5:"Hercules (icon #5)"
   };
-
   const JILI_NAME_MAP = {
-    1: "Game 1",
-    2: "Game 2",
-    3: "Game 3"
+    1:"Game 1",
+    2:"Game 2",
+    3:"Game 3"
   };
   const JOKER_NAME_MAP = {
-    1: "Game 1",
-    2: "Game 2",
-    3: "Game 3"
+    1:"Game 1",
+    2:"Game 2",
+    3:"Game 3"
   };
   const MICROGAMING_NAME_MAP = {
-    1: "Game 1",
-    2: "Game 2",
-    3: "Game 3"
+    1:"Game 1",
+    2:"Game 2",
+    3:"Game 3"
   };
   const TOPTREND_NAME_MAP = {
-    1: "Game 1",
-    2: "Game 2",
-    3: "Game 3"
+    1:"Game 1",
+    2:"Game 2",
+    3:"Game 3"
   };
 
-  // 2. helper untuk build array game per provider
-  // NOTE: default pakai .png; kalau aset kamu .jpg ganti ".png" jadi ".jpg"
+  // build games array
+  // NOTE: ganti ".png" jadi ".jpg" kalau aset kamu jpg
   function generateGamesFromMap(nameMap, providerLabel, providerKey, imgFolder){
     return Object.entries(nameMap).map(([num, gameName]) => ({
       name: gameName,
@@ -269,35 +271,26 @@
   }
 
   const PRAGMATIC_GAMES = generateGamesFromMap(
-    PRAGMATIC_NAME_MAP,
-    "Pragmatic Play","pragmatic","pragmatic"
+    PRAGMATIC_NAME_MAP,"Pragmatic Play","pragmatic","pragmatic"
   );
-  const PGSOFT_GAMES   = generateGamesFromMap(
-    PGSOFT_NAME_MAP,
-    "PG Soft","pgsoft","pgsoft"
+  const PGSOFT_GAMES = generateGamesFromMap(
+    PGSOFT_NAME_MAP,"PG Soft","pgsoft","pgsoft"
   );
-  const JILI_GAMES     = generateGamesFromMap(
-    JILI_NAME_MAP,
-    "JILI","jili","jili"
+  const JILI_GAMES = generateGamesFromMap(
+    JILI_NAME_MAP,"JILI","jili","jili"
   );
-  const JOKER_GAMES    = generateGamesFromMap(
-    JOKER_NAME_MAP,
-    "Joker","joker","joker"
+  const JOKER_GAMES = generateGamesFromMap(
+    JOKER_NAME_MAP,"Joker","joker","joker"
   );
-  const MICRO_GAMES    = generateGamesFromMap(
-    MICROGAMING_NAME_MAP,
-    "Microgaming","microgaming","microgaming"
+  const MICRO_GAMES = generateGamesFromMap(
+    MICROGAMING_NAME_MAP,"Microgaming","microgaming","microgaming"
   );
-  const TTG_GAMES      = generateGamesFromMap(
-    TOPTREND_NAME_MAP,
-    "Top Trend Gaming","toptrend","toptrend"
+  const TTG_GAMES = generateGamesFromMap(
+    TOPTREND_NAME_MAP,"Top Trend Gaming","toptrend","toptrend"
   );
 
-  const EXTRA_GAMES = [
-    // kamu bisa tambah manual di sini kalau mau
-  ];
+  const EXTRA_GAMES = [];
 
-  // gabungkan semua provider
   const CK_GAMES = []
     .concat(PRAGMATIC_GAMES)
     .concat(PGSOFT_GAMES)
@@ -307,7 +300,7 @@
     .concat(TTG_GAMES)
     .concat(EXTRA_GAMES);
 
-  // 3. popup daily bonus open/close
+  // popup 'bonus' overlay logic
   const openButtons = document.querySelectorAll("[data-open-popup]");
   const closeButtons = document.querySelectorAll("[data-close-popup]");
   const popups = {};
@@ -330,22 +323,15 @@
   });
   Object.values(popups).forEach(overlay => {
     overlay.addEventListener("click", e => {
-      if (e.target === overlay) {
-        overlay.classList.remove("active");
-      }
+      if (e.target === overlay) overlay.classList.remove("active");
     });
   });
 
-  // 4. RTP logic / rendering
-  // Sekarang kita mau nilai RTP random di range 30% - 98%
-  // supaya variasi besar (ada jelek, ada bagus).
+  // RTP random 30-98%
   function getRandomRTP() {
-    // 30 sampai 98
-    const val = 30 + Math.random() * 68;
-    // potong 2 decimal
+    const val = 30 + Math.random()*68; // 30..98
     return parseFloat(val.toFixed(2));
   }
-
   function getSnapshot(){
     return CK_GAMES.map(g => {
       const rtpNow = getRandomRTP();
@@ -353,7 +339,7 @@
     });
   }
 
-  // HOT kalau >= 80% sekarang
+  // badge HOT / WARM
   function badge(rtp){
     if (rtp >= 80) {
       return '<span class="ck-hot">HOT</span>';
@@ -361,15 +347,12 @@
     return '<span class="ck-hot" style="opacity:.5">WARM</span>';
   }
 
-  // state tab provider
+  // provider tabs state
   let currentProvider = "all";
-
   function getProviders(){
     const map = {};
     CK_GAMES.forEach(g => {
-      if (!map[g.providerKey]) {
-        map[g.providerKey] = g.provider;
-      }
+      if (!map[g.providerKey]) map[g.providerKey] = g.provider;
     });
     return map;
   }
@@ -395,7 +378,7 @@
     holder.querySelectorAll(".ck-provider-tab-btn").forEach(btn => {
       btn.addEventListener("click", () => {
         currentProvider = btn.getAttribute("data-prov") || "all";
-        renderAll(); // re-render saat ganti tab
+        renderAll();
       });
     });
   }
@@ -403,7 +386,6 @@
   function renderHeroCard(ss){
     const heroListEl = document.getElementById("ck-hero-card-list");
     if (!heroListEl) return;
-    // urut RTP tertinggi -> ambil 3 teratas
     const sorted = ss.slice().sort((a,b) => b.rtpNow - a.rtpNow);
     const top3 = sorted.slice(0,3);
     heroListEl.innerHTML = top3.map(g => `
@@ -430,7 +412,6 @@
         list = list.filter(g => g.providerKey === currentProvider);
     }
     list = list.slice().sort((a,b)=> b.rtpNow - a.rtpNow);
-
     tbody.innerHTML = list.map(g => `
       <tr>
         <td>${g.name}</td>
@@ -441,20 +422,13 @@
     `).join("");
   }
 
-  // Animasi bar hijau
-  // - setiap kartu punya .ck-rtp-bar-fill dengan data-target-width
-  // - kita paksa width=0% dulu TANPA transition
-  // - lalu kasih transition dan set width target -> akan nge-fill halus
+  // animate green bars
   function animateRtpBars(rootEl){
     const bars = rootEl.querySelectorAll('.ck-rtp-bar-fill');
     bars.forEach(bar => {
       const target = bar.getAttribute('data-target-width');
-
-      // start state
       bar.style.transition = 'none';
       bar.style.width = '0%';
-
-      // async apply animasi
       setTimeout(() => {
         bar.style.transition = 'width 1s ease';
         bar.style.width = target;
@@ -545,25 +519,21 @@
       </div>
     `;
 
-    // open pola modal
+    // buka modal
     wrap.querySelectorAll("[data-game-modal]").forEach(card => {
       card.addEventListener("click", () => {
         const id = "pola-" + card.getAttribute("data-game-modal");
         const modal = document.getElementById(id);
-        if(modal){
-          modal.classList.add("active");
-        }
+        if(modal) modal.classList.add("active");
       });
     });
 
-    // close pola modal
+    // tutup modal
     document.querySelectorAll("[data-close-pola]").forEach(btn=>{
       btn.addEventListener("click", ()=>{
         const targetId = btn.getAttribute("data-close-pola");
         const modal = document.getElementById(targetId);
-        if(modal){
-          modal.classList.remove("active");
-        }
+        if(modal) modal.classList.remove("active");
       });
     });
     document.querySelectorAll(".ck-pola-overlay").forEach(overlay=>{
@@ -574,7 +544,7 @@
       });
     });
 
-    // animate bar hijau sesudah DOM jadi
+    // animasi bar hijau
     animateRtpBars(wrap);
   }
 
@@ -586,15 +556,10 @@
     renderProviderDetail(snap);
   }
 
-  // ======== RENDER PERTAMA ========
+  // pertama kali render
   renderAll();
 
-  // ======== AUTO-REFRESH PELAN ========
-  // tadinya 10 detik → bikin flicker
-  // sekarang kita tetap refresh tapi santai, 15 menit.
+  // refresh pelan: setiap 15 menit
   setInterval(renderAll, 900000);
 
-  // CATATAN:
-  // kalau kamu mau TANPA refresh otomatis sama sekali,
-  // hapus saja baris setInterval di atas.
 })();
