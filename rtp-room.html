@@ -120,7 +120,7 @@
       color:#999;
     }
 
-    /* ===== DAILY BONUS CARD KHUSUS (yg kecil di grid atas paling kanan bawah di mobile) ===== */
+    /* ===== DAILY BONUS CARD KHUSUS ===== */
     .ck-daily-bonus h3{
       margin:0 0 8px;
       font-size:.9rem;
@@ -196,7 +196,7 @@
       font-weight:600;
     }
 
-    /* ===== PROVIDER DETAIL WRAP (CARD GRID GAME ↔ INI YANG THUMBNAIL-NYA RUSAK KEMARIN) ===== */
+    /* ===== PROVIDER DETAIL WRAP (CARD GRID GAME) ===== */
     #ck-provider-detail-wrap{
       background:#111;
       border:1px solid rgba(255,255,255,.07);
@@ -209,7 +209,6 @@
       line-height:1.4;
     }
 
-    /* judul provider misal "Pragmatic Play • Hot RTP & Pola" */
     .ck-provider-block-title{
       font-size:.9rem;
       font-weight:600;
@@ -229,7 +228,6 @@
       margin-bottom:12px;
     }
 
-    /* grid list game */
     .ck-provider-game-grid{
       display:grid;
       grid-template-columns:repeat(auto-fit,minmax(min(260px,100%),1fr));
@@ -247,23 +245,31 @@
       flex-direction: column;
     }
 
-    /* BAGIAN THUMBNAIL ATAS */
+    /* >>> FIX BARU UNTUK GAMBAR <<< */
     .ck-provider-game-thumb {
       position: relative;
       width: 100%;
-      aspect-ratio: 16 / 9;           /* fix rasio */
+      height: 140px; /* semua kartu sama tinggi */
       background: #000;
       overflow: hidden;
+      border-bottom: 1px solid rgba(255,255,255,.08);
+
+      display: flex;
+      align-items: center;
+      justify-content: center;
     }
+
     .ck-provider-game-thumb img {
-      position: absolute;
-      inset: 0;
-      width: 100%;
-      height: 100%;
-      object-fit: cover;              /* gambar tidak gepeng */
+      position: static;          /* jangan absolute lagi */
+      max-width: 100%;
+      max-height: 100%;
+      width: auto;
+      height: auto;
+      object-fit: contain;       /* proporsi asli, tidak crop */
       object-position: center;
       display: block;
     }
+
     .ck-provider-game-thumb .ck-win-badge {
       position: absolute;
       top: 4px;
@@ -334,6 +340,13 @@
       display:block;
       height:100%;
       background:linear-gradient(90deg,#00ff62 0%,#007a1f 100%);
+    }
+
+    /* responsive kecil: tinggi thumbnail sedikit turun biar gak terlalu besar di hp */
+    @media (max-width:480px){
+      .ck-provider-game-thumb {
+        height:110px;
+      }
     }
 
     /* ===== BACK BUTTON STRIP ===== */
@@ -431,7 +444,7 @@
       color:#fff;
     }
 
-    /* tombol2 provider tab (diset dari JS), contoh kelas .ck-provider-tab-btn */
+    /* tombol provider tab */
     #ck-provider-tabs .ck-provider-tab-btn{
       cursor:pointer;
       background:rgba(255,255,255,.05);
@@ -454,7 +467,7 @@
       font-weight:700;
     }
 
-    /* RESPONSIVE */
+    /* RESPONSIVE EXTRA */
     @media(max-width:480px){
       .ck-btn,
       .ck-btn-ghost{
@@ -474,7 +487,7 @@
 
   <!-- STRIP BACK KE LANDING UTAMA -->
   <div class="ck-back-strip">
-    <a href="https://ck-44-bangladesh.vercel.app/rtp-live.html" class="ck-back-btn">
+    <a href="https://ck-44-bangladesh.vercel.app/" class="ck-back-btn">
       <span>⬅</span>
       <span>Back to CK44 VIP Bangladesh</span>
     </a>
@@ -482,13 +495,13 @@
 
   <div class="ck-page-wrap">
 
-    <!-- GRID ATAS: 4 CARD INFO -->
+    <!-- GRID ATAS: 4 CARD INFO + daily bonus -->
     <div class="ck-hero-grid">
 
       <!-- CARD 1: VIP & BONUS INTRO -->
       <div class="ck-hero-col ck-section-card">
         <div style="margin-bottom:12px;">
-          <a href="https://ck-44-bangladesh.vercel.app/rtp-live.html" class="ck-btn-ghost" style="text-decoration:none;display:inline-flex;align-items:center;gap:6px;">
+          <a href="https://ck-44-bangladesh.vercel.app/" class="ck-btn-ghost" style="text-decoration:none;display:inline-flex;align-items:center;gap:6px;">
             <span style="font-size:.8rem;line-height:1;">⬅</span>
             <span>হোমে ফিরুন</span>
           </a>
@@ -637,7 +650,7 @@
       </div>
       <!-- /CARD 4 -->
 
-      <!-- CARD 5: DAILY BONUS REMINDER (kita taruh juga di grid, bisa hidden via CSS kalau mau nanti) -->
+      <!-- CARD 5: DAILY BONUS REMINDER -->
       <div class="ck-hero-col ck-daily-bonus ck-section-card">
         <div style="display:flex;justify-content:space-between;align-items:flex-start;gap:8px;">
           <h3 style="margin:0;">
@@ -708,7 +721,7 @@
 
     <!-- ===== SECTION: PROVIDER DETAIL CARDS LIST ===== -->
     <div id="ck-provider-detail-wrap">
-      <!-- main.js akan inject:
+      <!-- main.js inject contoh struktur:
         <div class="ck-provider-block">
           <div class="ck-provider-block-title">Pragmatic Play • Hot RTP &amp; Pola</div>
           <div class="ck-provider-block-desc">Klik game untuk lihat pola / step bermain. RTP bar hijau = performa live sekarang.</div>
@@ -716,19 +729,19 @@
           <div class="ck-provider-game-grid">
             <div class="ck-provider-game-card">
               <div class="ck-provider-game-thumb">
-                <img src="img/pragmatic/jurassic-giants.jpg" alt="Jurassic Giants" />
+                <img src="img/pragmatic/big-juan.jpg" alt="Big Juan" />
                 <div class="ck-win-badge">WIN%</div>
               </div>
               <div class="ck-provider-game-info">
-                <div class="ck-game-title">Jurassic Giants</div>
+                <div class="ck-game-title">Big Juan</div>
                 <div class="ck-game-provider">Pragmatic Play</div>
                 <div class="ck-rtp-bar-wrap">
-                  <div class="ck-rtp-num">97.43%</div>
-                  <div class="ck-rtp-bar"><span style="width:97.43%"></span></div>
+                  <div class="ck-rtp-num">97.20%</div>
+                  <div class="ck-rtp-bar"><span style="width:97.20%"></span></div>
                 </div>
               </div>
             </div>
-            ... dst ...
+            <!-- dst -->
           </div>
         </div>
       -->
@@ -770,7 +783,7 @@
   <!-- ==== JS ASSETS ==== -->
   <script src="./js/main.js"></script>
 
-  <!-- LIMIT TOP 10 ROW + TOGGLE "SEMUA" -->
+  <!-- LIMIT TOP 10 ROW + TOGGLE -->
   <script>
   (function() {
     const MAX_VISIBLE = 10;
@@ -796,18 +809,15 @@
       const btn = toggleWrap.querySelector('.ck-rtp-toggle-btn');
       if (!btn) return;
 
-      // default collapsed label
       btn.textContent = `সব গেম দেখুন (${rows.length})`;
       btn.dataset.expanded = "false";
 
-      // replace listener supaya nggak dobel
       const newBtn = btn.cloneNode(true);
       btn.parentNode.replaceChild(newBtn, btn);
 
       newBtn.addEventListener('click', () => {
         const expanded = newBtn.dataset.expanded === "true";
         if (expanded) {
-          // COLLAPSE kembali hanya 10
           rows.forEach((r, idx) => {
             r.style.display = (idx < MAX_VISIBLE) ? '' : 'none';
           });
@@ -819,7 +829,6 @@
             cardTop.scrollIntoView({ behavior:'smooth' });
           }
         } else {
-          // EXPAND semua
           rows.forEach(r => { r.style.display = ''; });
           newBtn.dataset.expanded = "true";
           newBtn.textContent = 'তালিকা বন্ধ করুন';
@@ -833,7 +842,6 @@
       const rows = Array.from(tbody.querySelectorAll('tr'));
       if (rows.length === 0) return;
 
-      // tampilkan hanya 10 awal
       rows.forEach((row, idx) => {
         row.style.display = (idx < MAX_VISIBLE) ? '' : 'none';
       });
@@ -847,7 +855,6 @@
 
       limitRowsNow();
 
-      // kalau main.js update tbody isi ulang, kita limit lagi otomatis
       const obs = new MutationObserver(() => {
         limitRowsNow();
       });
@@ -856,7 +863,6 @@
         subtree: false
       });
 
-      // expose manual refresher juga kalau tab provider diganti
       window.__ckForceLimitRows = limitRowsNow;
     }
 
@@ -866,7 +872,6 @@
       attachObserver();
     }
 
-    // kalau user klik provider tab, setelah update tabel kasih waktu sedikit lalu re-limit
     document.addEventListener('click', (e) => {
       const tabBtn = e.target.closest('#ck-provider-tabs .ck-provider-tab-btn');
       if (tabBtn) {
@@ -909,7 +914,7 @@
 
       const closeBtn = e.target.closest('[data-close-popup]');
       if(closeBtn){
-        // tutup box kecil daily bonus (jangan ganggu popup overlay)
+        // tutup card kecil daily bonus
         const which = closeBtn.getAttribute('data-close-popup');
         if(which === 'bonus-info'){
           const parentCard = closeBtn.closest('.ck-daily-bonus');
@@ -918,7 +923,7 @@
           }
         }
 
-        // tutup popup overlay (bonus-popup)
+        // tutup overlay popup
         const popupOverlay = closeBtn.closest('.ck-popup-overlay');
         if(popupOverlay){
           popupOverlay.style.display='none';
@@ -926,7 +931,7 @@
       }
     });
 
-    // klik luar card -> close popup
+    // klik luar card popup -> close
     document.addEventListener('click', function(e){
       const ov = e.target.closest('.ck-popup-overlay');
       if(ov && e.target === ov){
