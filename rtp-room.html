@@ -10,7 +10,7 @@
   <link rel="stylesheet" href="./css/messagebleft.css" />
 
   <style>
-    /* === POPUP WINNERS BANGLADESH STYLE (stabil) === */
+    /* === POPUP WINNERS BANGLADESH STYLE (stabil, anti freeze) === */
     .message-left-container {
       position: fixed;
       left: 16px;
@@ -297,7 +297,7 @@
     <!-- ================================ -->
 
     <div id="ck-provider-detail-wrap" class="ck-section-card" style="margin-top:24px;">
-      <!-- main.js akan fill kartu-kartu game Hot RTP & Pola, dsb -->
+      <!-- main.js akan fill kartu-kartu game Hot RTP & Pola -->
     </div>
 
     <!-- ================================ -->
@@ -347,10 +347,10 @@
   <script src="./property/pragmatic.js"></script>
   <script src="./property/slide.js"></script>
 
-  <!-- Engine UI RTP / Pola / Tabs (INI PUNYA KAMU) -->
+  <!-- Engine UI RTP / Pola / Tabs (punyamu) -->
   <script src="./js/main.js"></script>
 
-  <!-- LIMIT TOP 10 ROW + TOGGLE LIHAT SEMUA -->
+  <!-- LIMIT TOP 10 ROW + TOGGLE LIHAT SEMUA (MUTATION OBSERVER VERSION) -->
   <script>
   (function() {
     const MAX_VISIBLE = 10;
@@ -390,31 +390,31 @@
       const btn = toggleWrap.querySelector('.ck-rtp-toggle-btn');
       if (!btn) return;
 
-      // label awal
+      // set label awal sesuai jumlah rows
       btn.textContent = `Lihat semua game (${rows.length})`;
       btn.dataset.expanded = "false";
 
-      // replace click handler lama (clone trick)
+      // ganti click handler lama -> clone trick biar ga duplikat
       const newBtn = btn.cloneNode(true);
       btn.parentNode.replaceChild(newBtn, btn);
 
       newBtn.addEventListener('click', () => {
         const expanded = newBtn.dataset.expanded === "true";
+
         if (expanded) {
-          // collapse -> cuma tampil 10 teratas
+          // collapse lagi -> cuma 10 row
           rows.forEach((r, idx) => {
             r.style.display = (idx < MAX_VISIBLE) ? '' : 'none';
           });
           newBtn.dataset.expanded = "false";
           newBtn.textContent = `Lihat semua game (${rows.length})`;
 
-          // scroll balik atas tabel biar user ga nyasar bawah
           const cardTop = document.querySelector('.ck-section-card');
           if (cardTop) {
             cardTop.scrollIntoView({ behavior:'smooth' });
           }
         } else {
-          // expand -> tampil semua
+          // expand -> semua row tampil
           rows.forEach(r => { r.style.display = ''; });
           newBtn.dataset.expanded = "true";
           newBtn.textContent = 'Tutup daftar';
@@ -422,47 +422,63 @@
       });
     }
 
-    // fungsi utama batasi baris jadi 10
-    function limitRows() {
+    // apply limit 10 baris ke tbody saat ini
+    function limitRowsNow() {
       const tbody = document.getElementById('ck-rtp-tbody');
       if (!tbody) return;
 
       const rows = Array.from(tbody.querySelectorAll('tr'));
       if (rows.length === 0) return;
 
-      // default collapsed (10 baris)
+      // state default = collapsed (10 row pertama aja yg kelihatan)
       rows.forEach((row, idx) => {
         row.style.display = (idx < MAX_VISIBLE) ? '' : 'none';
       });
 
-      // siapin tombol toggle
       ensureToggle(rows);
     }
 
-    // scheduleLimit = panggil limitRows sedikit delay,
-    // supaya nunggu main.js selesai render
-    function scheduleLimit() {
-      setTimeout(limitRows, 100);
+    // pasang MutationObserver supaya setiap kali main.js render ulang tbody (misalnya ganti provider),
+    // kita otomatis apply limitRowsNow()
+    function attachObserver() {
+      const tbody = document.getElementById('ck-rtp-tbody');
+      if (!tbody) return;
+
+      // panggil sekali saat attach
+      limitRowsNow();
+
+      const obs = new MutationObserver(() => {
+        // tbody berubah -> rerun limit top 10
+        limitRowsNow();
+      });
+
+      obs.observe(tbody, {
+        childList: true,
+        subtree: false
+      });
+
+      // expose buat panggilan manual kalau dibutuhkan
+      window.__ckForceLimitRows = limitRowsNow;
     }
 
-    // 1) load pertama kali
     if (document.readyState === 'loading') {
-      document.addEventListener('DOMContentLoaded', scheduleLimit);
+      document.addEventListener('DOMContentLoaded', attachObserver);
     } else {
-      scheduleLimit();
+      attachObserver();
     }
 
-    // 2) setiap kali klik tab provider (All / Pragmatic Play / PG Soft / dll),
-    // main.js kemungkinan rerender tbody -> kita re-limit
+    // backup: setiap kali klik tab provider kita paksa cek lagi
     document.addEventListener('click', (e) => {
       const tabBtn = e.target.closest('#ck-provider-tabs button, #ck-provider-tabs .ck-tab-btn');
       if (tabBtn) {
-        scheduleLimit();
+        setTimeout(() => {
+          if (window.__ckForceLimitRows) {
+            window.__ckForceLimitRows();
+          }
+        }, 300);
       }
     });
 
-    // 3) kita expose supaya script refresh 15 menit bisa panggil lagi
-    window.__ckScheduleLimitRows = scheduleLimit;
   })();
   </script>
 
@@ -472,29 +488,32 @@
     // 15 menit = 900000 ms
     const FIFTEEN_MIN_MS = 900000;
 
-    // cara aman universal -> reload halaman penuh setiap 15 menit
-    // supaya data RTP terbaru masuk lagi, dan limitRows jalan lagi.
     function doRefresh(){
-      // Kalau suatu saat kamu punya fungsi ckReloadData() di main.js
-      // kita bisa ganti ini biar gak full reload.
-      // Contoh:
+      // Cara universal paling aman:
+      // reload halaman penuh supaya data RTP update
+      // dan limiter dijalankan ulang otomatis
+      location.reload();
+
+      // Catatan:
+      // Kalau nanti lo punya window.ckReloadData() di main.js
+      // (buat re-fetch data tanpa reload page penuh),
+      // kita bisa ganti isi fungsi ini jadi:
       //
       // if (window.ckReloadData) {
       //   window.ckReloadData().then(() => {
-      //     if (window.__ckScheduleLimitRows) window.__ckScheduleLimitRows();
+      //     if (window.__ckForceLimitRows) window.__ckForceLimitRows();
       //   });
       //   return;
       // }
       //
-      // fallback sekarang:
-      location.reload();
+      // Sekarang kita pakai reload() biar aman.
     }
 
     setInterval(doRefresh, FIFTEEN_MIN_MS);
   })();
   </script>
 
-  <!-- POPUP PEMENANG (versi stabil anti-freeze) -->
+  <!-- POPUP PEMENANG BANGLADESH (STABIL) -->
   <script>
   (function(){
     const WINNERS = [
@@ -506,7 +525,7 @@
     ];
 
     const POPUP_INTERVAL_MS = 8000;   // jeda antar popup muncul
-    const POPUP_LIFETIME_MS  = 5000;  // berapa lama popup nongol
+    const POPUP_LIFETIME_MS  = 5000;  // popup bertahan berapa lama
     const MAX_ACTIVE         = 1;     // cuma 1 popup aktif sekaligus
 
     let indexPointer = 0;
@@ -528,7 +547,7 @@
     }
 
     function showPopup(){
-      // hapus popup lama jika sudah ada (biar ga numpuk / nge-freeze)
+      // bersihin popup lama biar ga numpuk (anti freeze)
       const actives = wrap.querySelectorAll(".message-left-card");
       if (actives.length >= MAX_ACTIVE){
         actives.forEach(el=>{
@@ -539,14 +558,13 @@
         });
       }
 
-      // ambil data winner berikutnya
       const data = WINNERS[indexPointer % WINNERS.length];
       indexPointer++;
 
       const card = spawnCard(data);
       wrap.appendChild(card);
 
-      // auto-remove setelah lifetime
+      // auto-hilang setelah lifetime
       setTimeout(()=>{
         card.classList.add("hide");
         setTimeout(()=>{
