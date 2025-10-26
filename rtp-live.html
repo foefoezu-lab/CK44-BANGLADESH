@@ -5,8 +5,9 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>CK44 VIP Bangladesh • VIP 30 Event & Mystery Bonus Drop</title>
 
-  <!-- Tema gelap emas yang sama dengan RTP dashboard -->
+  <!-- THEME / STYLE GLOBAL -->
   <link rel="stylesheet" href="./css/style.css" />
+  <!-- POPUP HIJAU BANGLADESH -->
   <link rel="stylesheet" href="./css/messagebleft.css" />
 
   <style>
@@ -50,8 +51,9 @@
       font-size: .8rem;
       font-weight: 700;
       color: var(--ck-gold, #d4af37);
-      text-shadow: 0 0 8px rgba(212,175,55,.8),
-                   0 0 16px rgba(212,175,55,.4);
+      text-shadow:
+        0 0 8px rgba(212,175,55,.8),
+        0 0 16px rgba(212,175,55,.4);
     }
     .ck-brand-sub {
       color: #aaa;
@@ -156,8 +158,9 @@
     .ck-hero-desc .accent {
       color: var(--ck-gold,#d4af37);
       font-weight:600;
-      text-shadow:0 0 8px rgba(212,175,55,.7),
-                  0 0 16px rgba(212,175,55,.4);
+      text-shadow:
+        0 0 8px rgba(212,175,55,.7),
+        0 0 16px rgba(212,175,55,.4);
     }
 
     .ck-hero-actions {
@@ -248,7 +251,7 @@
       font-weight:600;
     }
 
-    /* kolom kanan hero: highlight daily bonus */
+    /* kolom kanan hero: daily bonus / urgency */
     .ck-hero-side {
       background: radial-gradient(circle at 0% 0%, rgba(255,215,0,.08) 0%, rgba(0,0,0,0) 60%), #0f0f0f;
       border:1px solid rgba(255,215,0,.3);
@@ -320,7 +323,6 @@
       font-weight:600;
     }
 
-    /* responsive tweaks */
     @media(max-width:480px){
       .ck-big-btn{
         width:100%;
@@ -354,7 +356,7 @@
         <a class="ck-nav-btn" href="#events">Events</a>
         <a class="ck-nav-btn" href="#benefits">Benefits</a>
 
-        <!-- Tombol langsung ke halaman RTP -->
+        <!-- Direct ke halaman RTP -->
         <a class="ck-nav-rtl" href="rtp-room.html">🔥 RTP Live</a>
       </nav>
 
@@ -365,7 +367,7 @@
   <section class="ck-hero">
     <div class="ck-hero-grid">
 
-      <!-- KIRI: headline / join / feature list -->
+      <!-- KIRI: hero utama -->
       <div class="ck-hero-main" id="events">
         <div class="ck-hero-headline">
           <span class="emoji">🏆</span>
@@ -446,7 +448,7 @@
         </div>
       </div>
 
-      <!-- KANAN: daily bonus notice / urgency -->
+      <!-- KANAN: daily bonus notice -->
       <aside class="ck-hero-side">
         <h2>
           <span>🎁 DAILY BONUS NOTICE</span>
@@ -510,11 +512,8 @@
   <!-- POPUP PEMENANG BANGLADESH (trust element kiri bawah) -->
   <div class="message-left-container"></div>
 
-  <!-- optional libs -->
-  <script src="./js/jquery.min.js"></script>
-  <script src="./js/popper.min.js"></script>
-
-  <!-- popup winner generator -->
+  <!-- popup pemenang hijau ringan -->
   <script src="./js/messagebleft.js"></script>
+
 </body>
 </html>
