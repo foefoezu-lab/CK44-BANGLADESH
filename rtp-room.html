@@ -1,4 +1,3 @@
-<!-- rtp-room.html -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -11,7 +10,7 @@
   <link rel="stylesheet" href="./css/messagebleft.css" />
 
   <style>
-    /* === OVERRIDE POPUP STYLE (sama dengan rtp-live.html) === */
+    /* === OVERRIDE POPUP STYLE (sama seperti rtp-live.html) === */
     .message-left-container {
       position: fixed;
       left: 16px;
@@ -345,14 +344,100 @@
   <script src="./js/jquery.min.js"></script>
   <script src="./js/popper.min.js"></script>
 
-  <!-- property (dari kamu sebelumnya) -->
+  <!-- property data provider -->
   <script src="./property/pragmatic.js"></script>
   <script src="./property/slide.js"></script>
 
-  <!-- Engine UI RTP / Pola / Tabs (modern version) -->
+  <!-- Engine UI RTP / Pola / Tabs -->
   <script src="./js/main.js"></script>
 
-  <!-- POPUP PEMENANG (versi stabil anti-freeze, sama seperti rtp-live.html) -->
+  <!-- PATCH: batasi tabel jadi Top 10 + tombol "Lihat semua game" -->
+  <script>
+  (function() {
+    // berapa banyak row yang keliatan awal
+    const MAX_VISIBLE = 10;
+
+    function applyLimit() {
+      const tbody = document.getElementById('ck-rtp-tbody');
+      if (!tbody) return;
+
+      const rows = Array.from(tbody.querySelectorAll('tr'));
+      if (rows.length <= MAX_VISIBLE) return; // kalau data sedikit, ga usah apa2
+
+      // Sembunyikan semua row setelah batas
+      rows.forEach((row, idx) => {
+        row.style.display = (idx < MAX_VISIBLE) ? '' : 'none';
+      });
+
+      // kalau toggle area belum ada → bikin
+      let toggleWrap = document.querySelector('.ck-rtp-toggle-wrap');
+      if (!toggleWrap) {
+        toggleWrap = document.createElement('div');
+        toggleWrap.className = 'ck-rtp-toggle-wrap';
+        toggleWrap.style.textAlign = 'center';
+        toggleWrap.style.padding = '12px 0';
+        toggleWrap.style.fontSize = '.75rem';
+        toggleWrap.style.color = '#ccc';
+
+        const btn = document.createElement('button');
+        btn.textContent = `Lihat semua game (${rows.length})`;
+        btn.style.background = 'rgba(255,255,255,.05)';
+        btn.style.border = '1px solid rgba(255,255,255,.2)';
+        btn.style.borderRadius = '8px';
+        btn.style.padding = '8px 12px';
+        btn.style.cursor = 'pointer';
+        btn.style.color = '#fff';
+        btn.style.fontSize = '.75rem';
+        btn.style.lineHeight = '1.2';
+        btn.style.fontWeight = '600';
+
+        let expanded = false;
+
+        btn.addEventListener('click', () => {
+          expanded = !expanded;
+          if (expanded) {
+            // tampilkan semua row
+            rows.forEach(r => { r.style.display = ''; });
+            btn.textContent = 'Tutup daftar';
+          } else {
+            // balik ke top MAX_VISIBLE
+            rows.forEach((r, idx) => {
+              r.style.display = (idx < MAX_VISIBLE) ? '' : 'none';
+            });
+            btn.textContent = `Lihat semua game (${rows.length})`;
+
+            // scroll balik supaya user gak “nyasar” di bawah
+            const cardTop = document.querySelector('.ck-section-card');
+            if (cardTop) {
+              cardTop.scrollIntoView({ behavior: 'smooth' });
+            }
+          }
+        });
+
+        toggleWrap.appendChild(btn);
+
+        // sisipin toggleWrap setelah table wrapper
+        const tableWrapper = document.querySelector('.ck-rtp-table-wrap');
+        if (tableWrapper && tableWrapper.parentNode) {
+          tableWrapper.parentNode.appendChild(toggleWrap);
+        }
+      }
+    }
+
+    // Kita jalankan setelah main.js sempat render data
+    function initLimiter() {
+      setTimeout(applyLimit, 200);
+    }
+
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', initLimiter);
+    } else {
+      initLimiter();
+    }
+  })();
+  </script>
+
+  <!-- POPUP PEMENANG (versi stabil anti-freeze) -->
   <script>
   (function(){
     const WINNERS = [
@@ -386,6 +471,7 @@
     }
 
     function showPopup(){
+      // Bersihkan popup lama kalau MAX_ACTIVE terpenuhi
       const actives = wrap.querySelectorAll(".message-left-card");
       if (actives.length >= MAX_ACTIVE){
         actives.forEach(el=>{
@@ -396,12 +482,14 @@
         });
       }
 
+      // data winner berikut
       const data = WINNERS[indexPointer % WINNERS.length];
       indexPointer++;
 
       const card = spawnCard(data);
       wrap.appendChild(card);
 
+      // auto remove setelah lifetime
       setTimeout(()=>{
         card.classList.add("hide");
         setTimeout(()=>{
