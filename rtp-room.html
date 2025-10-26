@@ -13,10 +13,42 @@
   <style>
     /* ==== GLOBAL ==== */
     body {
+      /* base dark */
       background-color:#0a0a0a;
       color:#fff;
       font-family:system-ui,-apple-system,BlinkMacSystemFont,'Inter','Segoe UI',Roboto,Helvetica,Arial,sans-serif;
       margin:0;
+
+      /* --- layered background glow --- */
+      background-image:
+        radial-gradient(
+          circle at 50% 0%,
+          rgba(255,215,80,0.12) 0%,
+          rgba(0,0,0,0) 60%
+        ),
+        radial-gradient(
+          circle at 50% 40%,
+          rgba(0,255,120,0.07) 0%,
+          rgba(0,0,0,0) 70%
+        ),
+        radial-gradient(
+          circle at 80% 20%,
+          rgba(255,255,255,0.04) 0%,
+          rgba(0,0,0,0) 70%
+        ),
+        linear-gradient(
+          to bottom,
+          #0a0a0a 0%,
+          #000000 100%
+        );
+
+      background-repeat:no-repeat;
+      background-size:
+        800px 600px,
+        900px 900px,
+        700px 700px,
+        100% 100%;
+      background-attachment:fixed;
     }
 
     .ck-page-wrap{
@@ -734,7 +766,7 @@
         <!-- VIP CARD -->
         <div class="ck-section-card">
           <div style="margin-bottom:12px;">
-            <a href="https://ck-44-bangladesh.vercel.app/rtp-live.html" class="ck-btn-ghost" style="text-decoration:none;display:inline-flex;align-items:center;gap:6px;">
+            <a href="https://ck-44-bangladesh.vercel.app/" class="ck-btn-ghost" style="text-decoration:none;display:inline-flex;align-items:center;gap:6px;">
               <span style="font-size:.8rem;line-height:1;">⬅</span>
               <span>হোমে ফিরুন</span>
             </a>
@@ -1097,7 +1129,7 @@
   })();
   </script>
 
-  <!-- AUTO REFRESH PER 15 MENিট -->
+  <!-- AUTO REFRESH PER 15 MENIT -->
   <script>
   (function(){
     const FIFTEEN_MIN_MS = 900000; // 15 * 60 * 1000
