@@ -7,9 +7,8 @@
 
   <meta name="description" content="CK44 VIP Bangladesh RTP লাইভ – রিয়েলটাইম RTP স্যাম্পল, গেম প্যাটার্ন, VIP 30 ইভেন্ট, মিস্ট্রি বোনাস ড্রপ প্রতিদিন। বাংলাদেশ প্লেয়ারের জন্য দ্রুত উইথড্রো & 24/7 সাপোর্ট।" />
 
-  <!-- stylesheet luar kamu -->
+  <!-- stylesheet luar kamu (biar komponen lain tetap jalan) -->
   <link rel="stylesheet" href="./css/messagebleft.css" />
-  <!-- style.css lama kamu boleh tetap ada kalau dipakai komponen lain; tapi kita override di bawah -->
   <link rel="stylesheet" href="./css/style.css" />
 
   <style>
@@ -27,7 +26,7 @@
       padding:16px;
     }
 
-    /* grid kartu atas */
+    /* grid kartu info atas */
     .ck-hero-grid{
       display:grid;
       grid-template-columns:repeat(auto-fit,minmax(min(320px,100%),1fr));
@@ -121,7 +120,7 @@
       color:#999;
     }
 
-    /* ===== DAILY BONUS CARD KHUSUS ===== */
+    /* ===== DAILY BONUS MINI CARD ===== */
     .ck-daily-bonus h3{
       margin:0 0 8px;
       font-size:.9rem;
@@ -200,15 +199,7 @@
       font-weight:600;
     }
 
-    /* ===== PROVIDER DETAIL WRAP =====
-       JS akan isi #ck-provider-detail-wrap dengan:
-       .ck-provider-detail-head,
-       .ck-game-grid,
-       .ck-game-card,
-       .ck-game-card-thumb,
-       .ck-game-card-body
-       + modal .ck-pola-overlay  (lihat file JS). :contentReference[oaicite:1]{index=1}
-    */
+    /* ===== PROVIDER DETAIL WRAP ===== */
     #ck-provider-detail-wrap{
       background:#111;
       border:1px solid rgba(255,255,255,.07);
@@ -219,7 +210,7 @@
       color:#fff;
       font-size:.8rem;
       line-height:1.4;
-      display:none; /* default hidden kalau 'all' */
+      display:none; /* hidden when provider=all */
     }
 
     .ck-provider-detail-head{
@@ -239,17 +230,17 @@
       color:#ccc;
     }
 
-    /* grid kartu game dari JS */
+    /* GRID KARTU GAME (isi dari JS) */
     .ck-game-grid{
       display:grid;
       grid-template-columns:repeat(auto-fit,minmax(min(260px,100%),1fr));
       gap:16px;
     }
 
-    /* ==== KARTU SATU GAME (cocokkan dgn .ck-game-card di JS) ==== */
+    /* ==== KARTU GAME ==== */
     .ck-game-card {
       background:#1a1a1a;
-      border:1px solid rgba(255,255,255,.08);
+      border:1px solid rgba(255,255,255,0.08);
       border-radius:10px;
       box-shadow:0 20px 40px rgba(0,0,0,.9);
       overflow:hidden;
@@ -258,30 +249,34 @@
       cursor:pointer;
     }
 
-    /* THUMBNAIL FIX (contain, bukan crop) */
+    /* >>> THUMBNAIL (DIPERBAIKI) <<< */
     .ck-game-card-thumb {
       position:relative;
       width:100%;
-      height:140px;         /* semua kartu sama tinggi */
-      background:#000;
+      height:140px; /* tinggi konsisten buat grid rapi */
+      /* ganti background hitam flat -> radial glow biar ga keliatan kosong */
+      background:radial-gradient(circle at 50% 35%, #2a2a2a 0%, #000 70%);
       border-bottom:1px solid rgba(255,255,255,.08);
 
       display:flex;
       align-items:center;
       justify-content:center;
+      text-align:center; /* buat kasus gambar broken supaya alt text tetep tengah */
       overflow:hidden;
     }
     .ck-game-card-thumb img {
+      display:block;
+      margin:auto;
       max-width:100%;
       max-height:100%;
       width:auto;
       height:auto;
-      object-fit:contain;   /* jaga proporsi, jangan gepeng */
+      object-fit:contain;   /* jangan gepeng */
       object-position:center;
-      display:block;
+      image-rendering:auto;
     }
 
-    /* body kartu game */
+    /* BODY GAME CARD */
     .ck-game-card-body {
       background:linear-gradient(#1a1a1a 0%, #111 100%);
       border-top:1px solid rgba(255,255,255,.06);
@@ -305,50 +300,61 @@
       margin-bottom:8px;
     }
 
-    /* RTP green bar versi JS:
+    /* ==== RTP BAR (DIPERBAIKI) ====
+       Struktur markup dari JS kamu:
        <div class="ck-rtp-bar-wrap">
-         <div class="ck-rtp-bar-fill" data-target-width="94.12%" style="width:0%;">94.12%</div>
+         <div class="ck-rtp-bar-fill" data-target-width="97.20%" style="width:0%;">97.20%</div>
        </div>
+
+       Sekarang:
+       - .ck-rtp-bar-wrap = frame / track
+       - .ck-rtp-bar-fill = isi hijau yg kita animasikan width nya
+       - plus efek glow pulse looping supaya keliatan "hidup"
     */
     .ck-rtp-bar-wrap{
+      position:relative;
       width:100%;
-      height:28px;
+      height:32px;
       background:#003b14;
-      border-radius:4px;
+      border-radius:6px;
       border:1px solid rgba(0,255,98,.4);
-      box-shadow:0 0 8px rgba(0,255,98,.4);
       overflow:hidden;
-      display:flex;
-      align-items:center;
-      /* gap kecil supaya text di tengah tetap kebaca */
-      font-size:.7rem;
-      font-weight:600;
-      line-height:1.2;
-      color:#00ff62;
+      box-shadow:0 0 10px rgba(0,255,98,.4);
     }
     .ck-rtp-bar-fill{
+      position:absolute;
+      top:0;
+      left:0;
+      bottom:0;
+      /* width di-set via JS animateRtpBars() */
       background:linear-gradient(90deg,#00ff62 0%,#007a1f 100%);
-      height:100%;
+      border-right:1px solid rgba(0,0,0,.4);
+      box-shadow:0 0 10px rgba(0,255,98,.5);
       display:flex;
       align-items:center;
       justify-content:center;
-      white-space:nowrap;
       color:#000;
       font-weight:700;
+      font-size:.8rem;
+      line-height:1.2;
       text-shadow:0 0 4px rgba(0,0,0,.6);
-      box-shadow:0 0 8px rgba(0,255,98,.4);
-      border-right:1px solid rgba(0,0,0,.4);
-      /* width akan dianimasikan via JS animateRtpBars() */
+    }
+    /* efek glow berdenyut biar bar keliatan "aktif" terus */
+    .ck-rtp-bar-fill::after{
+      content:'';
+      position:absolute;
+      inset:0;
+      background:radial-gradient(circle at 30% 30%,rgba(255,255,255,.4) 0%,rgba(255,255,255,0) 60%);
+      mix-blend-mode:screen;
+      pointer-events:none;
+      animation:ck-glow 2s ease-in-out infinite;
+    }
+    @keyframes ck-glow {
+      0%,100% {opacity:.4;}
+      50%     {opacity:.8;}
     }
 
-    /* responsive kecil: tinggi thumbnail sedikit turun biar gak terlalu besar di hp */
-    @media (max-width:480px){
-      .ck-game-card-thumb {
-        height:110px;
-      }
-    }
-
-    /* ===== HERO "TOP 3" LIST (ck-hero-card-list yg di atas tabel) ===== */
+    /* ===== HERO "TOP 3" LIST DI ATAS TABEL ===== */
     #ck-hero-card-list{
       display:grid;
       grid-template-columns:repeat(auto-fit,minmax(min(220px,100%),1fr));
@@ -367,7 +373,7 @@
       flex-shrink:0;
       width:90px;
       height:90px;
-      background:#000;
+      background:radial-gradient(circle at 50% 35%, #2a2a2a 0%, #000 70%);
       border-right:1px solid rgba(255,255,255,.08);
       display:flex;
       align-items:center;
@@ -382,6 +388,7 @@
       object-fit:contain;
       object-position:center;
       display:block;
+      margin:auto;
     }
     .ck-game-info{
       padding:10px 12px;
@@ -418,8 +425,9 @@
       line-height:1.2;
     }
 
-    /* ===== PROVIDER TAB BUTTONS =====
-       JS bikin <div class="ck-provider-tab-btn ck-active" data-prov="...">... </div>  :contentReference[oaicite:2]{index=2}
+    /* ===== PROVIDER TABS =====
+       JS bikin tombol:
+       <div class="ck-provider-tab-btn ck-active" data-prov="pragmatic">Pragmatic Play</div>
     */
     #ck-provider-tabs{
       display:flex;
@@ -480,9 +488,7 @@
       line-height:1;
     }
 
-    /* ===== BONUS POPUP OVERLAY =====
-       JS menambah/men-remove class "active" pada .ck-popup-overlay  :contentReference[oaicite:3]{index=3}
-    */
+    /* ===== BONUS POPUP (data-open-popup / data-close-popup) ===== */
     .ck-popup-overlay{
       position:fixed;
       inset:0;
@@ -536,9 +542,7 @@
       color:#fff;
     }
 
-    /* ===== POLA MODAL (ck-pola-overlay) =====
-       JS bikin overlay ini per game dan toggle class "active"  :contentReference[oaicite:4]{index=4}
-    */
+    /* ===== MODAL POLA GAME ===== */
     .ck-pola-overlay{
       position:fixed;
       inset:0;
@@ -679,7 +683,7 @@
 
   <!-- STRIP BACK KE LANDING UTAMA -->
   <div class="ck-back-strip">
-    <a href="https://ck-44-bangladesh.vercel.app/" class="ck-back-btn">
+    <a href="https://ck-44-bangladesh.vercel.app/rtp-live.html" class="ck-back-btn">
       <span>⬅</span>
       <span>Back to CK44 VIP Bangladesh</span>
     </a>
@@ -805,7 +809,7 @@
             <div style="font-weight:600;color:#fff;margin-bottom:4px;font-size:.75rem;line-height:1.4;">
               🔥 লাইভ RTP স্যাম্পল
             </div>
-            <div id="ck-hero-card-list"><!-- main.js isi top 3 RTP --></div>
+            <div id="ck-hero-card-list"><!-- diisi top 3 RTP dari main.js --></div>
           </div>
 
           <div style="margin-top:12px;font-size:.7rem;color:#999;line-height:1.4;">
@@ -887,7 +891,7 @@
         রিয়েলটাইম RTP স্যাম্পল &amp; হট গেম প্যাটার্ন। প্রোভাইডার ক্লিক করে ফিল্টার করো.
       </div>
 
-      <!-- Tabs provider -> JS inject -->
+      <!-- tombol filter provider dari JS -->
       <div id="ck-provider-tabs"></div>
 
       <div class="ck-line"></div>
@@ -897,13 +901,13 @@
           <thead>
             <tr>
               <th>গেম</th>
-              <th>прোভাইডার</th>
+              <th>প্রোভাইডার</th>
               <th>RTP লাইভ</th>
               <th>স্ট্যাটাস</th>
             </tr>
           </thead>
           <tbody id="ck-rtp-tbody">
-            <!-- JS inject rows -->
+            <!-- rows by JS -->
           </tbody>
         </table>
       </div>
@@ -911,40 +915,20 @@
     <!-- /RTP TABLE SECTION -->
 
 
-    <!-- ===== SECTION: PROVIDER DETAIL CARDS LIST ===== -->
+    <!-- ===== SECTION: PROVIDER DETAIL GAME CARDS ===== -->
     <div id="ck-provider-detail-wrap">
-      <!-- JS akan isi:
-        <div class="ck-provider-detail-head">
-          <div class="ck-provider-detail-title">Pragmatic Play • Hot RTP & Pola</div>
-          <div class="ck-provider-detail-sub">Klik game untuk lihat pola / step bermain. RTP bar hijau = performa live sekarang.</div>
-        </div>
-
-        <div class="ck-game-grid">
-          <div class="ck-game-card" data-game-modal="pragmatic-0">
-            <div class="ck-game-card-thumb">
-              <img src=".../1.png" alt="Big Juan" />
-            </div>
-            <div class="ck-game-card-body">
-              <div class="ck-game-card-name">Big Juan</div>
-              <div class="ck-game-card-provider">Pragmatic Play</div>
-              <div class="ck-rtp-bar-wrap">
-                <div class="ck-rtp-bar-fill" data-target-width="97.20%" style="width:0%;">97.20%</div>
-              </div>
-            </div>
-          </div>
-
-          <div class="ck-pola-overlay active" id="pola-pragmatic-0">
-            <!-- modal pola card -->
-          </div>
-        </div>
+      <!-- diisi full oleh main.js:
+        - .ck-provider-detail-head
+        - .ck-game-grid
+        - .ck-game-card (tiap game)
+        - .ck-pola-overlay (tiap game modal)
       -->
     </div>
-    <!-- /PROVIDER DETAIL -->
 
   </div><!-- /.ck-page-wrap -->
 
 
-  <!-- BONUS POPUP (klik "বোনাস দেখুন") -->
+  <!-- BONUS POPUP -->
   <div class="ck-popup-overlay" id="bonus-popup">
     <div class="ck-popup-card">
       <div class="ck-popup-head">
@@ -975,10 +959,9 @@
   <div class="message-left-container"></div>
 
   <!-- ==== JS ASSETS ==== -->
-  <!-- Ganti nama file ini sesuai nama file JS kamu (isinya sama seperti yg kamu kirim /turn3file0) -->
   <script src="./js/main.js"></script>
 
-  <!-- LIMIT TOP 10 ROW + TOGGLE -->
+  <!-- LIMIT TOP 10 ROW + TOGGLE DI TABEL -->
   <script>
   (function() {
     const MAX_VISIBLE = 10;
@@ -1067,6 +1050,7 @@
       attachObserver();
     }
 
+    // kalau ganti tab provider, kasih delay lalu limit ulang
     document.addEventListener('click', (e) => {
       const tabBtn = e.target.closest('#ck-provider-tabs .ck-provider-tab-btn');
       if (tabBtn) {
@@ -1091,8 +1075,47 @@
   })();
   </script>
 
-  <!-- POPUP WINNER (nama pemenang di kiri bawah) -->
+  <!-- WINNER FEED KIRI BAWAH -->
   <script src="./js/messagebleft.js"></script>
+
+  <!-- POPUP BONUS OPEN/CLOSE -->
+  <script>
+    document.addEventListener('click', function(e){
+      const openBtn = e.target.closest('[data-open-popup]');
+      if(openBtn){
+        const id = openBtn.getAttribute('data-open-popup');
+        const target = document.getElementById(id);
+        if(target){
+          target.classList.add('active');
+        }
+      }
+
+      const closeBtn = e.target.closest('[data-close-popup]');
+      if(closeBtn){
+        const which = closeBtn.getAttribute('data-close-popup');
+
+        if(which === 'bonus-info'){
+          const parentCard = closeBtn.closest('.ck-daily-bonus');
+          if(parentCard){
+            parentCard.style.display='none';
+          }
+        }
+
+        const popupOverlay = closeBtn.closest('.ck-popup-overlay');
+        if(popupOverlay){
+          popupOverlay.classList.remove('active');
+        }
+      }
+    });
+
+    // klik luar card popup -> close
+    document.addEventListener('click', function(e){
+      const ov = e.target.closest('.ck-popup-overlay');
+      if(ov && e.target === ov){
+        ov.classList.remove('active');
+      }
+    });
+  </script>
 
 </body>
 </html>
