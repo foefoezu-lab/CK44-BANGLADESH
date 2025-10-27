@@ -1,11 +1,16 @@
-// CK44 VIP Bangladesh RTP engine
+// CK44 VIP Bangladesh RTP engine (ভার্সি বাংলা)
 // - Random RTP 30-98%
 // - Animated green bar
-// - Provider tabs, pola modal
-// - Gentle refresh every 15 min
+// - Provider tabs, pola modal (ট্যাকটিক)
+// - Soft refresh every 15 min
+
 (function(){
 
-  // PROVIDER MAPS (Pragmatic example full list you gave)
+  // =========================
+  // PROVIDER GAME NAME MAPS
+  // =========================
+
+  // Pragmatic list dari kamu (tidak di-translate judul gamenya biar user tetap kenal)
   const PRAGMATIC_NAME_MAP = {
     1:  "Christmas big bass bonanza",
     2:  "Gates of Olympus",
@@ -222,7 +227,7 @@
     213:"Might Of Ra"
   };
 
-  // stub maps for other providers (edit / extend as needed)
+  // contoh provider lain (placeholder)
   const PGSOFT_NAME_MAP = {
     1:"Mahjong Ways",
     2:"Mahjong Ways 2",
@@ -251,23 +256,56 @@
     3:"Game 3"
   };
 
-  // build games array
-  // NOTE: ganti ".png" jadi ".jpg" kalau aset kamu jpg
-  function generateGamesFromMap(nameMap, providerLabel, providerKey, imgFolder){
-    return Object.entries(nameMap).map(([num, gameName]) => ({
-      name: gameName,
-      provider: providerLabel,
-      providerKey: providerKey,
-      img: `./img/${imgFolder}/${num}.png`,
-      stake: "1K - 10K",
-      polaSteps: [
-        "50X Spin Normal Manual",
-        "80X Spin Cepat AUTO",
-        "30X Stop-Spin Manual (Ceklis OFF)",
-        "20X Spin Turbo Manual"
+  // =====================================================
+  // VARIASI POLA (tips main) DALAM BAHASA BANGLA
+  // kita rotasi berdasarkan index game (idx % 3)
+  // =====================================================
+  const POLA_VARIANTS = [
+    {
+      steps: [
+        "৫০x ম্যানুয়াল স্পিন নরমাল বেট",
+        "৮০x অটো স্পিন স্পিড ফাস্ট",
+        "৩০x ম্যানুয়াল স্টপ-স্পিন (কুইক স্টপ OFF)",
+        "২০x টার্বো স্পিন ম্যানুয়াল"
       ],
-      polaNote: "Aktifkan double chance kalau ada."
-    }));
+      note: "যদি 'ডাবল চান্স' / বোনাস বেট থাকে সেটা অন করো।"
+    },
+    {
+      steps: [
+        "২০x টার্বো স্পিন বেট সবথেকে ছোট (ওয়ার্ম আপ)",
+        "৪০x অটো স্পিন দ্রুত",
+        "৩০x ম্যানুয়াল স্পিন + কুইক স্টপ ON",
+        "১০x বেট এক ধাপ বাড়াও, তারপর ১০x টার্বো স্পিন"
+      ],
+      note: "ফ্রি স্পিন / স্ক্যাটার এলে জোর করে অল-ইন কোরো না — থামো, রিসেট করো।"
+    },
+    {
+      steps: [
+        "৩০x ম্যানুয়াল স্পিন (প্রতি স্পিন ১-২ সেক ধরে রাখো)",
+        "৩০x অটো স্পিন দ্রুত",
+        "১৫x টার্বো স্পিন",
+        "১০x ম্যানুয়াল স্পিন আবার ধীরে (কুলডাউন)"
+      ],
+      note: "বোনাস বের হলে সরাসরি বড় বেট কোরো না; আবার ধাপ ১ থেকে রিপিট করো।"
+    }
+  ];
+
+  // =====================================================
+  // GENERATOR GAME DATA
+  // =====================================================
+  function generateGamesFromMap(nameMap, providerLabel, providerKey, imgFolder){
+    return Object.entries(nameMap).map(([num, gameName], idx) => {
+      const variant = POLA_VARIANTS[idx % POLA_VARIANTS.length];
+      return {
+        name: gameName,
+        provider: providerLabel,
+        providerKey: providerKey,
+        img: `./img/${imgFolder}/${num}.png`, // ganti .png kalau aset lain
+        stake: "৳1K - ৳10K",
+        polaSteps: variant.steps,
+        polaNote: variant.note
+      };
+    });
   }
 
   const PRAGMATIC_GAMES = generateGamesFromMap(
@@ -291,6 +329,7 @@
 
   const EXTRA_GAMES = [];
 
+  // gabung semua
   const CK_GAMES = []
     .concat(PRAGMATIC_GAMES)
     .concat(PGSOFT_GAMES)
@@ -300,7 +339,9 @@
     .concat(TTG_GAMES)
     .concat(EXTRA_GAMES);
 
-  // popup 'bonus' overlay logic
+  // ============================
+  // BONUS POPUP (sudah ada di HTML)
+  // ============================
   const openButtons = document.querySelectorAll("[data-open-popup]");
   const closeButtons = document.querySelectorAll("[data-close-popup]");
   const popups = {};
@@ -327,7 +368,9 @@
     });
   });
 
-  // RTP random 30-98%
+  // ============================
+  // RTP GEN + SNAPSHOT
+  // ============================
   function getRandomRTP() {
     const val = 30 + Math.random()*68; // 30..98
     return parseFloat(val.toFixed(2));
@@ -339,16 +382,19 @@
     });
   }
 
-  // badge HOT / WARM
+  // badge status → Bangla
   function badge(rtp){
     if (rtp >= 80) {
-      return '<span class="ck-hot">HOT</span>';
+      return '<span class="ck-hot">হট</span>';
     }
-    return '<span class="ck-hot" style="opacity:.5">WARM</span>';
+    return '<span class="ck-hot" style="opacity:.5">স্টেবল</span>';
   }
 
-  // provider tabs state
+  // ============================
+  // PROVIDER TABS
+  // ============================
   let currentProvider = "all";
+
   function getProviders(){
     const map = {};
     CK_GAMES.forEach(g => {
@@ -363,7 +409,7 @@
     const providers = getProviders();
     let html = `
       <div class="ck-provider-tab-btn ${currentProvider==='all'?'ck-active':''}" data-prov="all">
-        All
+        সব
       </div>
     `;
     Object.keys(providers).forEach(key => {
@@ -383,11 +429,15 @@
     });
   }
 
+  // ============================
+  // HERO TOP 3 HOT GAME (RTP tertinggi)
+  // ============================
   function renderHeroCard(ss){
     const heroListEl = document.getElementById("ck-hero-card-list");
     if (!heroListEl) return;
     const sorted = ss.slice().sort((a,b) => b.rtpNow - a.rtpNow);
     const top3 = sorted.slice(0,3);
+
     heroListEl.innerHTML = top3.map(g => `
       <div class="ck-card-row">
         <div class="ck-game-thumb">
@@ -404,6 +454,9 @@
     `).join("");
   }
 
+  // ============================
+  // RTP TABLE (tabel bawah)
+  // ============================
   function renderRtpTable(ss){
     const tbody = document.getElementById("ck-rtp-tbody");
     if (!tbody) return;
@@ -422,7 +475,9 @@
     `).join("");
   }
 
-  // animate green bars
+  // ============================
+  // BAR ANIMASI HIJAU
+  // ============================
   function animateRtpBars(rootEl){
     const bars = rootEl.querySelectorAll('.ck-rtp-bar-fill');
     bars.forEach(bar => {
@@ -436,10 +491,14 @@
     });
   }
 
+  // ============================
+  // PROVIDER DETAIL GRID + MODAL POLA
+  // ============================
   function renderProviderDetail(ss){
     const wrap = document.getElementById("ck-provider-detail-wrap");
     if (!wrap) return;
 
+    // kalau tab sekarang "সব" → jangan tampilkan grid detail
     if (currentProvider === "all"){
       wrap.style.display = "none";
       wrap.innerHTML = "";
@@ -452,6 +511,7 @@
     const cardsHTML = list.map((g, idx) => {
       const pctText = g.rtpNow.toFixed(2) + "%";
       const widthPct = Math.min(g.rtpNow,100) + "%";
+
       return `
         <div class="ck-game-card" data-game-modal="${currentProvider}-${idx}">
           <div class="ck-game-card-thumb">
@@ -472,32 +532,46 @@
 
         <div class="ck-pola-overlay" id="pola-${currentProvider}-${idx}">
           <div class="ck-pola-card">
+
             <div class="ck-pola-head">
               <div class="ck-pola-close" data-close-pola="pola-${currentProvider}-${idx}">X</div>
-              TIPS GACOR SLOT
+              স্লট ট্যাকটিক / জেতার স্টেপ
             </div>
+
             <div class="ck-pola-body">
               <div class="ck-pola-provider">
                 <div><strong>${g.name}</strong></div>
                 <div>${g.provider}</div>
-                <div>Stake Bet<br><strong>${g.stake}</strong></div>
+                <div>মিন বেট<br><strong>${g.stake}</strong></div>
               </div>
             </div>
+
             <div class="ck-pola-steps">
-              ${g.polaSteps.map((step,i)=>`<div><strong>Step ${i+1}:</strong> ${step}</div>`).join("")}
+              ${g.polaSteps.map((step,i)=>`
+                <div><strong>ধাপ ${i+1}:</strong> ${step}</div>
+              `).join("")}
             </div>
+
             <div class="ck-pola-warning">
-              LAKUKAN TIPS DARI AWAL & ULANGI<br/>
-              Nyalakan bet double chance jika ada
+              শুরু থেকে ধাপগুলো ফলো করো। কাজ করলে রিপিট করো।<br/>
+              যদি 'ডাবল চান্স' / বোনাস বেট থাকে → অন করো।
             </div>
+
             <div class="ck-pola-note">
-              Note:<br/>
+              নোট:<br/>
               ${g.polaNote}
             </div>
+
             <div class="ck-pola-actions">
-              <a class="ck-pola-btn ck-pola-btn-left" href="https://www.wwwck-444.com/register" target="_blank" rel="nofollow noopener">DAFTAR</a>
-              <a class="ck-pola-btn ck-pola-btn-right" href="https://www.wwwck-444.com/" target="_blank" rel="nofollow noopener">MAIN</a>
+              <a class="ck-pola-btn ck-pola-btn-left"
+                 href="https://www.wwwck-444.com/register"
+                 target="_blank" rel="nofollow noopener">রেজিস্টার</a>
+
+              <a class="ck-pola-btn ck-pola-btn-right"
+                 href="https://www.wwwck-444.com/"
+                 target="_blank" rel="nofollow noopener">মেইন এখনই</a>
             </div>
+
           </div>
         </div>
       `;
@@ -507,10 +581,10 @@
     wrap.innerHTML = `
       <div class="ck-provider-detail-head">
         <div class="ck-provider-detail-title">
-          ${list[0]?.provider || ""} • Hot RTP & Pola
+          ${list[0]?.provider || ""} • হট RTP & প্যাটার্ন
         </div>
         <div class="ck-provider-detail-sub">
-          Klik game untuk lihat pola / step bermain. RTP bar hijau = performa live sekarang.
+          গেমে ট্যাপ করো → জেতার স্টেপ / ট্যাকটিক দেখো। সবুজ বার = এখনকার লাইভ পারফরম্যান্স।
         </div>
       </div>
 
@@ -519,7 +593,7 @@
       </div>
     `;
 
-    // buka modal
+    // buka modal pola saat kartu di-klik
     wrap.querySelectorAll("[data-game-modal]").forEach(card => {
       card.addEventListener("click", () => {
         const id = "pola-" + card.getAttribute("data-game-modal");
@@ -528,7 +602,7 @@
       });
     });
 
-    // tutup modal
+    // tombol X
     document.querySelectorAll("[data-close-pola]").forEach(btn=>{
       btn.addEventListener("click", ()=>{
         const targetId = btn.getAttribute("data-close-pola");
@@ -536,6 +610,8 @@
         if(modal) modal.classList.remove("active");
       });
     });
+
+    // klik luar overlay buat close
     document.querySelectorAll(".ck-pola-overlay").forEach(overlay=>{
       overlay.addEventListener("click", e=>{
         if(e.target===overlay){
@@ -544,10 +620,13 @@
       });
     });
 
-    // animasi bar hijau
+    // animasi progress bar hijau
     animateRtpBars(wrap);
   }
 
+  // ============================
+  // RENDER SEMUA BAGIAN
+  // ============================
   function renderAll(){
     const snap = getSnapshot();
     renderProviderTabs();
@@ -556,10 +635,10 @@
     renderProviderDetail(snap);
   }
 
-  // pertama kali render
+  // first render
   renderAll();
 
-  // refresh pelan: setiap 15 menit
+  // auto refresh konten (rtp baru) tiap 15 menit
   setInterval(renderAll, 900000);
 
 })();
