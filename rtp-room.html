@@ -1828,7 +1828,7 @@
     });
   </script>
 
-<!-- CK44 OVERRIDES (pulse LIVE, HOT badge gradient, striped RTP bar) -->
+<!-- CK44 OVERRIDES (LIVE pulse, HOT badge gradient, striped RTP bar w/ autoscan) -->
 <style>
 /* LIVE badge pulsing hijau */
 .ck-live-wrap{
@@ -1859,7 +1859,7 @@
   border-radius: 6px !important;
 }
 
-/* ===== CK44 • RTP BAR STRIPED ===== */
+/* ===== CK44 • RTP BAR STRIPED (matte, ringan) ===== */
 .ck-rtp-bar-wrap {
   height: 24px;
   background: #1a1a1a;
@@ -1887,7 +1887,6 @@
   border-radius: 4px;
   position: relative;
 
-  /* layer garis miring + blok solid */
   background-image:
     repeating-linear-gradient(
       45deg,
@@ -1920,7 +1919,7 @@
   box-shadow: inset 0 0 2px rgba(0,0,0,.4);
 }
 
-/* animasi garis miring pelan, ringan */
+/* animasi garis miring pelan */
 @keyframes ckStripeMove {
   0%   { background-position:    0px 0, 0 0; }
   100% { background-position: -24px 0, 0 0; }
@@ -1928,62 +1927,103 @@
 </style>
 
 
-<!-- CK44 RTP COLOR SCRIPT -->
+<!-- CK44 RTP COLOR AUTOSCAN SCRIPT -->
 <script>
 (function(){
-  // matte colors
   const COLOR_GOOD  = "#1f8f3a"; // hijau tebal (bagus)
   const COLOR_MID   = "#8a6d00"; // kuning emas gelap (sedang)
   const COLOR_BAD   = "#7a0c0c"; // merah bata gelap (buruk)
 
-  function styleBar(wrapEl, fillEl) {
-    if (!wrapEl || !fillEl) return;
+  function paintBar(elBox){
+    if(!elBox) return;
 
-    const raw = (fillEl.innerText || fillEl.textContent || "").trim();
+    const raw = (elBox.innerText || elBox.textContent || "").trim();
     const m = raw.match(/(\d+(?:\.\d+)?)\s*%/);
-    if (!m) return;
+    if(!m) return;
     const val = parseFloat(m[1]);
-    if (isNaN(val)) return;
+    if(isNaN(val)) return;
 
+    // pilih warna dasar
     let baseColor;
-    if (val < 60) {
+    if(val < 60){
       baseColor = COLOR_BAD;
-    } else if (val < 80) {
+    } else if(val < 80){
       baseColor = COLOR_MID;
     } else {
       baseColor = COLOR_GOOD;
     }
 
-    // set variable warna untuk background solid
-    fillEl.style.setProperty("--ck-base", baseColor);
+    // parent = container bar
+    const parent = elBox.parentElement;
+    if(parent){
+      parent.style.background = "#1a1a1a";
+      parent.style.border = "1px solid rgba(255,255,255,.07)";
+      parent.style.borderRadius = "4px";
+      parent.style.boxShadow = "none";
+      parent.style.overflow = "hidden";
+      parent.style.height = "24px";
+    }
 
-    // wrapper matte
-    wrapEl.style.background = "#1a1a1a";
-    wrapEl.style.border = "1px solid rgba(255,255,255,.07)";
-    wrapEl.style.boxShadow = "none";
+    // apply tampilan bar matte striped
+    elBox.style.setProperty("--ck-base", baseColor, "important");
+    elBox.style.height = "100%";
+    elBox.style.minWidth = "42px";
+    elBox.style.display = "flex";
+    elBox.style.alignItems = "center";
+    elBox.style.justifyContent = "center";
+    elBox.style.color = "#fff";
+    elBox.style.fontSize = "13px";
+    elBox.style.fontWeight = "700";
+    elBox.style.lineHeight = "1.2";
+    elBox.style.position = "relative";
+    elBox.style.borderRadius = "4px";
+    elBox.style.textShadow = "0 0 4px rgba(0,0,0,.8)";
+    elBox.style.backgroundImage =
+      'repeating-linear-gradient(45deg,rgba(255,255,255,.12) 0px,rgba(255,255,255,.12) 8px,rgba(255,255,255,0) 8px,rgba(255,255,255,0) 16px),'
+      + 'linear-gradient(' + baseColor + ',' + baseColor + ')';
+    elBox.style.backgroundSize = "24px 24px, auto";
+    elBox.style.backgroundPosition = "0 0, 0 0";
+    elBox.style.animation = "ckStripeMove 1.2s linear infinite";
+    elBox.style.boxShadow = "none";
 
-    // isi bar matte
-    fillEl.style.boxShadow = "none";
+    // ujung putih kecil
+    if(!elBox.querySelector(".ck-edge")){
+      const edge = document.createElement("div");
+      edge.className = "ck-edge";
+      edge.style.position = "absolute";
+      edge.style.top = "0";
+      edge.style.right = "0";
+      edge.style.bottom = "0";
+      edge.style.width = "6px";
+      edge.style.background = "rgba(255,255,255,.85)";
+      edge.style.borderTopRightRadius = "4px";
+      edge.style.borderBottomRightRadius = "4px";
+      edge.style.boxShadow = "inset 0 0 2px rgba(0,0,0,.4)";
+      elBox.appendChild(edge);
+    }
   }
 
-  function paintAll() {
-    document.querySelectorAll(".ck-rtp-bar-wrap").forEach(function(wrap){
-      const fill = wrap.querySelector(".ck-rtp-bar-fill");
-      styleBar(wrap, fill);
-    });
+  function scanAll(){
+    // cari elemen kecil yg isinya angka% pendek, contoh "38.79%"
+    const nodes = Array.from(document.querySelectorAll("div,span"))
+      .filter(n => {
+        const t = (n.innerText || n.textContent || "").trim();
+        // hanya yg keliatan seperti "42.25%" bukan teks panjang
+        return /\d/.test(t) && /%/.test(t) && t.length <= 8;
+      });
+
+    nodes.forEach(paintBar);
   }
 
-  // first run
-  if (document.readyState === "loading") {
-    document.addEventListener("DOMContentLoaded", paintAll);
-  } else {
-    paintAll();
+  // initial run
+  if(document.readyState === "loading"){
+    document.addEventListener("DOMContentLoaded", scanAll);
+  }else{
+    scanAll();
   }
 
-  // observe perubahan DOM (provider switch, auto-refresh, dll)
-  const obs = new MutationObserver(function(){
-    paintAll();
-  });
+  // observe DOM refresh / tab switch
+  const obs = new MutationObserver(() => { scanAll(); });
   obs.observe(document.body, {
     childList: true,
     subtree: true,
