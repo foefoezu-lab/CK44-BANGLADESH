@@ -1835,5 +1835,76 @@
       }
     });
   </script>
+
+  <!-- Dynamic RTP colorizer -->
+  <script>
+  (function(){
+    function paintOne(barWrap, barFill){
+      if(!barWrap || !barFill) return;
+      var txt = (barFill.innerText || barFill.textContent || "").trim();
+      var m = txt.match(/(\d+(?:\.\d+)?)\s*%/);
+      if(!m) return;
+      var val = parseFloat(m[1]);
+      if(isNaN(val)) return;
+
+      // default style objects (matte, bukan neon)
+      var wrapBg, wrapBorder, fillBg, textColor;
+
+      if(val < 60){
+        // buruk -> merah
+        wrapBg    = "#3b0000";
+        wrapBorder= "1px solid rgba(255,59,48,.5)";
+        fillBg    = "#4b0000";
+        textColor = "#fff";
+      } else if(val < 80){
+        // sedang -> kuning
+        wrapBg    = "#4a3b00";
+        wrapBorder= "1px solid rgba(255,214,10,.5)";
+        fillBg    = "#6b5200";
+        textColor = "#fff";
+      } else {
+        // bagus -> hijau
+        wrapBg    = "#003b10";
+        wrapBorder= "1px solid rgba(0,255,98,.4)";
+        fillBg    = "#00581c";
+        textColor = "#fff";
+      }
+
+      // apply wrap
+      barWrap.style.setProperty("background", wrapBg, "important");
+      barWrap.style.setProperty("border", wrapBorder, "important");
+      barWrap.style.setProperty("box-shadow", "0 0 6px rgba(0,0,0,.6)", "important");
+
+      // apply fill
+      barFill.style.setProperty("background", fillBg, "important");
+      barFill.style.setProperty("background-image", "none", "important");
+      barFill.style.setProperty("color", textColor, "important");
+      barFill.style.setProperty("text-shadow", "0 0 4px rgba(0,0,0,.8)", "important");
+      barFill.style.setProperty("box-shadow", "0 0 4px rgba(0,0,0,.8)", "important");
+    }
+
+    function colorizeAll(){
+      var nodes = document.querySelectorAll(".ck-rtp-bar-wrap");
+      nodes.forEach(function(wrap){
+        var fill = wrap.querySelector(".ck-rtp-bar-fill");
+        paintOne(wrap, fill);
+      });
+    }
+
+    // run once after DOM ready
+    if(document.readyState === "loading"){
+      document.addEventListener("DOMContentLoaded", colorizeAll);
+    }else{
+      colorizeAll();
+    }
+
+    // observe DOM changes (tab pindah, refresh data, dsb)
+    var obs = new MutationObserver(function(){
+      colorizeAll();
+    });
+    obs.observe(document.body, {childList:true,subtree:true,characterData:true});
+  })();
+  </script>
+
 </body>
 </html>
