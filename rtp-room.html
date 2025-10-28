@@ -7,879 +7,1168 @@
 
   <meta name="description" content="CK44 VIP Bangladesh RTP লাইভ – রিয়েলটাইম RTP স্যাম্পল, গেম প্যাটার্ন, VIP 30 ইভেন্ট, মিস্ট্রি বোনাস ড্রপ প্রতিদিন। বাংলাদেশ প্লেয়ারের জন্য দ্রুত উইথড্রো & 24/7 সাপোর্ট।" />
 
-  <!-- kalau kamu masih punya file css lama, tetap boleh load -->
   <link rel="stylesheet" href="./css/messagebleft.css" />
   <link rel="stylesheet" href="./css/style.css" />
 
   <style>
-    /****************************************
-    ============ BASE LAYOUT CSS ============
-    *****************************************/
-    * {
-      box-sizing: border-box;
-      -webkit-font-smoothing: antialiased;
-    }
+    /*****************
+     GLOBAL BACKGROUND
+    ******************/
     body {
+      background-color:#0a0a0a;
+      color:#fff;
+      font-family:system-ui,-apple-system,BlinkMacSystemFont,'Inter','Segoe UI',Roboto,Helvetica,Arial,sans-serif;
       margin:0;
-      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Inter", Roboto, "Helvetica Neue", Arial, sans-serif;
-      color:#fff;
-      background:#000;
-    }
 
-    .ck-page-bg {
-      background:
-        radial-gradient(circle at 20% 15%, rgba(0,255,163,0.18) 0%, rgba(0,0,0,0) 60%),
-        radial-gradient(circle at 80% 30%, rgba(255,0,115,0.18) 0%, rgba(0,0,0,0) 60%),
-        radial-gradient(circle at 50% 80%, rgba(0,128,255,0.12) 0%, rgba(0,0,0,0) 70%),
-        #000000;
-      background-color:#000;
+      background-image:
+        radial-gradient(circle at 50% 0%,rgba(255,215,80,0.10) 0%,rgba(0,0,0,0) 60%),
+        radial-gradient(circle at 50% 40%,rgba(0,255,120,0.05) 0%,rgba(0,0,0,0) 70%),
+        linear-gradient(to bottom,#0a0a0a 0%,#000000 100%);
       background-repeat:no-repeat;
-      background-size:900px 600px,800px 700px,900px 900px;
+      background-size:700px 520px,800px 800px,100% 100%;
       background-attachment:fixed;
-      color:#fff;
-      min-height:100vh;
     }
 
-    .ck-back-strip {
-      background:rgba(0,0,0,.6);
-      border-bottom:1px solid rgba(255,255,255,.07);
-      padding:8px 12px;
-      display:flex;
-      justify-content:flex-start;
-    }
-    .ck-back-btn {
-      display:inline-flex;
-      align-items:center;
-      gap:6px;
-      font-size:.8rem;
-      font-weight:600;
-      color:#fff;
-      background:rgba(255,255,255,.07);
-      border:1px solid rgba(255,255,255,.2);
-      border-radius:6px;
-      padding:6px 10px;
-      text-decoration:none;
-      text-shadow:0 0 4px rgba(0,0,0,.9);
-      box-shadow:0 0 10px rgba(255,255,255,.15),0 16px 32px rgba(0,0,0,.8);
-    }
-
-    .ck-page-wrap {
+    .ck-page-wrap{
       max-width:1280px;
-      margin:16px auto 80px;
-      padding:0 12px 60px;
+      margin:0 auto;
+      padding:16px;
     }
 
-    .ck-hero-layout {
-      display:grid;
-      grid-template-columns:repeat(auto-fit,minmax(min(380px,100%),1fr));
-      gap:16px;
-    }
-
-    .ck-col {
-      min-width:0;
-      display:flex;
-      flex-direction:column;
-      gap:16px;
-    }
-
-    /****************************************
-    ============ GENERIC CARD ==============
-    *****************************************/
-    .ck-section-card {
-      background:rgba(20,20,28,0.6);
-      backdrop-filter:blur(6px);
-      -webkit-backdrop-filter:blur(6px);
-      border:1px solid rgba(255,255,255,0.08);
+    /*****************
+     GENERIC CARD
+    ******************/
+    .ck-section-card{
+      background:#1a1a1a;
+      border:1px solid rgba(255,255,255,.07);
       border-radius:16px;
-      box-shadow:
-        0 20px 40px rgba(0,0,0,.9),
-        0 0 40px rgba(0,255,170,.18),
-        0 0 80px rgba(255,0,128,.12) inset;
-      position:relative;
+      box-shadow:0 16px 32px rgba(0,0,0,.8);
+      padding:16px;
       color:#fff;
-      line-height:1.45;
-      padding:16px 20px;
+      font-size:.8rem;
+      line-height:1.4;
     }
 
-    .ck-section-card h2,
-    .ck-section-card h3,
-    .ck-card-headline {
-      font-size:.9rem;
+    .ck-section-title-emoji{line-height:1;}
+    .ck-line{border-top:1px solid rgba(255,255,255,.12);margin:12px 0;}
+
+    .ck-accent{
+      color:#ffd24a;
       font-weight:600;
+      text-shadow:0 0 8px rgba(212,175,55,.7);
+    }
+
+    .ck-btn{
+      display:inline-block;
+      background:linear-gradient(135deg,#ffd24a,#e3b95c);
+      color:#000;
+      border-radius:10px;
+      font-size:.75rem;
+      line-height:1.2;
+      font-weight:700;
+      padding:8px 12px;
+      text-decoration:none;
+      box-shadow:0 0 0 2px rgba(245,217,124,.28),0 14px 42px rgba(245,217,124,.12);
+    }
+    .ck-btn-ghost{
+      display:inline-block;
+      background:rgba(255,255,255,.05);
+      border:1px solid rgba(255,255,255,.2);
+      color:#fff;
+      border-radius:10px;
+      font-size:.75rem;
+      line-height:1.2;
+      font-weight:700;
+      padding:8px 12px;
+      text-decoration:none;
+      cursor:pointer;
+    }
+
+    .ck-hero-text-block{font-size:.8rem;line-height:1.4;color:#fff;}
+
+    .ck-list{
+      padding-left:16px;
+      margin:0 0 12px;
+      font-size:.8rem;
+      line-height:1.4;
+      color:#fff;
+      list-style:none;
+    }
+    .ck-list li{
+      margin-bottom:4px;
+      display:flex;
+      gap:6px;
+    }
+
+    .ck-section-desc{
+      font-size:.8rem;
+      line-height:1.4;
+      color:#ccc;
+      margin-bottom:12px;
+    }
+    .ck-muted{color:#999;}
+
+    /*****************
+     DAILY BONUS MINI
+    ******************/
+    .ck-daily-bonus h3{
       margin:0 0 8px;
-      color:#00ffbf;
-      text-shadow:
-        0 0 8px rgba(0,255,191,.6),
-        0 0 18px rgba(0,255,191,.4),
-        0 0 32px rgba(0,255,191,.2);
+      font-size:.9rem;
+      line-height:1.3;
+      font-weight:600;
+      color:#ffd24a;
+      text-shadow:0 0 8px rgba(212,175,55,.7);
       display:flex;
       flex-wrap:wrap;
       gap:.5rem;
       align-items:flex-start;
-      line-height:1.3;
+    }
+    .ck-daily-close{
+      font-size:.7rem;
+      font-weight:600;
+      color:#999;
+      cursor:pointer;
+      background:rgba(255,255,255,.05);
+      border:1px solid rgba(255,255,255,.2);
+      border-radius:6px;
+      padding:4px 8px;
+      line-height:1.2;
     }
 
-    .ck-desc,
-    .ck-section-desc {
-      font-size:.8rem;
-      color:#d8d8d8;
-      text-shadow:0 0 8px rgba(0,0,0,.8);
-      margin-bottom:8px;
-      line-height:1.45;
+    /*****************
+     HERO 3-COLUMN TOP
+    ******************/
+    .ck-hero-layout{
+      display:grid;
+      grid-template-columns:1fr 1.2fr 1fr;
+      gap:16px;
+      align-items:start;
+    }
+    .ck-col{
+      display:flex;
+      flex-direction:column;
+      gap:16px;
+      min-width:0;
     }
 
-    .ck-action-row {
+    /*****************
+     LIVE RTP CARD (middle)
+    ******************/
+    .ck-rtp-main-card{
+      background:#181818;
+      border:1px solid rgba(255,255,255,.12);
+      border-radius:16px;
+      box-shadow:0 20px 40px rgba(0,0,0,.8),0 0 16px rgba(0,255,98,.08);
+      padding:16px;
+    }
+
+    .ck-rtp-main-header-top{
       display:flex;
       flex-wrap:wrap;
-      gap:10px;
-      margin-top:12px;
-    }
-
-    .ck-btn {
-      background:radial-gradient(circle at 0% 0%, #00ff88 0%, #006634 70%);
-      color:#000;
-      font-weight:700;
-      font-size:.8rem;
-      line-height:1.2;
-      padding:10px 14px;
-      border-radius:10px;
-      border:1px solid rgba(0,255,136,.5);
-      box-shadow:
-        0 0 10px rgba(0,255,136,.7),
-        0 0 40px rgba(0,255,136,.3),
-        0 16px 32px rgba(0,0,0,.8);
-      text-shadow:0 0 4px rgba(0,0,0,.8);
-      text-decoration:none;
-      text-align:center;
-      flex:0 0 auto;
-    }
-    .ck-btn:active { transform:scale(.97); }
-
-    .ck-btn-ghost {
-      background:rgba(255,255,255,.07);
-      border:1px solid rgba(255,255,255,.3);
-      box-shadow:
-        0 0 10px rgba(255,255,255,.15),
-        0 16px 32px rgba(0,0,0,.8);
-      color:#fff;
-      font-weight:700;
-      font-size:.8rem;
-      line-height:1.2;
-      padding:10px 14px;
-      border-radius:10px;
-      text-shadow:0 0 4px rgba(0,0,0,.8);
-      text-decoration:none;
-      text-align:center;
-      flex:0 0 auto;
-    }
-    .ck-btn-ghost:active { transform:scale(.97); }
-
-    /* garis tipis */
-    .ck-line {
-      border-top:1px solid rgba(255,255,255,.12);
-      margin:12px 0;
-    }
-
-    /****************************************
-    ============ HERO MIDDLE CARD ===========
-    (Live RTP Hot Now top3)
-    *****************************************/
-    #ck-hero-card-list {
-      max-width:100%;
-      display:grid;
-      grid-template-columns:repeat(auto-fit,minmax(240px,1fr));
-      gap:16px;
-    }
-    .ck-card-row {
-      position:relative;
-      background:
-        radial-gradient(circle at 0% 0%, rgba(255,0,128,.18) 0%, rgba(0,0,0,0) 70%),
-        radial-gradient(circle at 100% 100%, rgba(0,255,136,.18) 0%, rgba(0,0,0,0) 70%),
-        rgba(20,20,28,.6);
-      border:1px solid rgba(255,255,255,.1);
-      border-radius:14px;
-      box-shadow:
-        0 24px 48px rgba(0,0,0,.9),
-        0 0 60px rgba(255,0,128,.25),
-        0 0 60px rgba(0,255,136,.25);
-      padding:12px 14px;
-      display:flex;
-      gap:12px;
+      justify-content:space-between;
       align-items:flex-start;
-    }
-    .ck-card-row::after {
-      content:"HOT NOW";
-      position:absolute;
-      top:8px;
-      right:10px;
-      font-size:.6rem;
-      font-weight:700;
-      color:#fff;
-      background:linear-gradient(90deg,#ff007a 0%,#ffae00 100%);
-      padding:3px 6px;
-      border-radius:6px;
-      box-shadow:0 0 10px rgba(255,0,128,.6);
-      text-shadow:0 0 4px rgba(0,0,0,.8);
-      line-height:1.2;
+      gap:8px;
+      margin-bottom:8px;
     }
 
-    .ck-game-thumb {
-      flex:0 0 64px;
+    .ck-rtp-main-title{
+      display:flex;
+      flex-wrap:wrap;
+      align-items:flex-start;
+      gap:.5rem;
+      font-size:1rem;
+      line-height:1.3;
+      font-weight:600;
+      color:#ffd24a;
+      text-shadow:0 0 8px rgba(212,175,55,.7);
+    }
+    .ck-rtp-main-title .emoji{line-height:1;font-size:1rem;}
+
+    .ck-live-wrap{
+      display:flex;
+      align-items:center;
+      gap:6px;
+      font-size:.7rem;
+      line-height:1.2;
+      font-weight:600;
+      color:#00ff62;
+      text-shadow:0 0 6px rgba(0,255,98,.6);
+    }
+    .ck-live-dot{
+      width:8px;
+      height:8px;
+      border-radius:50%;
+      background:#00ff62;
+      box-shadow:0 0 8px rgba(0,255,98,.8);
+      animation:ck-pulse 1.5s infinite;
+    }
+    @keyframes ck-pulse{
+      0%,100%{opacity:1;box-shadow:0 0 6px rgba(0,255,98,.8);}
+      50%{opacity:.4;box-shadow:0 0 2px rgba(0,255,98,.2);}
+    }
+
+    .ck-rtp-main-desc{
+      font-size:.8rem;
+      line-height:1.4;
+      color:#ccc;
+      margin-bottom:12px;
+    }
+
+    .ck-rtp-hot-list{
+      display:grid;
+      gap:12px;
+    }
+
+    .ck-card-row{
+      display:flex;
+      align-items:flex-start;
+      background:linear-gradient(#1f1f1f 0%, #2a2a2a 100%);
+      border:1px solid rgba(255,255,255,.12);
+      border-radius:8px;
+      box-shadow:0 12px 24px rgba(0,0,0,.8);
+      padding:10px 12px;
+    }
+
+    .ck-game-thumb{
+      flex-shrink:0;
       width:64px;
       height:64px;
-      border-radius:10px;
       background:#000;
+      border-radius:6px;
       border:1px solid rgba(255,255,255,.15);
-      box-shadow:0 0 20px rgba(0,0,0,.9),0 0 30px rgba(0,255,136,.25);
       display:flex;
       align-items:center;
       justify-content:center;
       overflow:hidden;
+      margin-right:12px;
     }
-    .ck-game-thumb img {
-      width:100%;
+    .ck-game-thumb img{
+      max-width:100%;
+      max-height:100%;
+      width:auto;
       height:auto;
       object-fit:contain;
-      filter:drop-shadow(0 0 8px rgba(0,0,0,.9));
+      object-position:center;
+      display:block;
+      margin:auto;
     }
 
-    .ck-game-info{flex:1;min-width:0;}
+    .ck-game-info{
+      flex:1 1 auto;
+      font-size:.75rem;
+      line-height:1.4;
+      color:#ccc;
+    }
     .ck-game-name{
-      font-size:.8rem;
-      font-weight:600;
       color:#fff;
-      text-shadow:0 0 6px rgba(0,0,0,.9),0 0 20px rgba(0,255,170,.4);
+      font-weight:600;
+      font-size:.8rem;
       line-height:1.3;
-      margin-bottom:4px;
+      margin-bottom:2px;
     }
     .ck-game-rtp{
-      font-size:.7rem;
-      line-height:1.3;
-      color:#9afff0;
-      text-shadow:0 0 6px rgba(0,255,200,.4);
       display:flex;
       flex-wrap:wrap;
       align-items:center;
       gap:6px;
-      margin-bottom:4px;
-    }
-    .ck-rtp-val{
-      min-width:50px;
-      text-align:center;
-      font-size:.75rem;
-      line-height:1.2;
-      border-radius:4px;
-      font-weight:700;
-      text-shadow:0 0 4px rgba(0,0,0,.8);
-      background:#003b14;
-      border:1px solid rgba(0,255,98,.4);
       color:#00ff62;
-    }
-    .ck-game-provider{
-      font-size:.65rem;
-      color:#d0d0d0;
-      text-shadow:0 0 6px rgba(0,0,0,.9);
-    }
-
-    /****************************************
-    ============ PROVIDER TABS + TABLE ======
-    *****************************************/
-    #ck-rtp-table-section {
-      margin-top:24px;
-    }
-
-    #ck-provider-tabs {
-      display:flex;
-      flex-wrap:wrap;
-      gap:8px;
-      margin-bottom:12px;
-      justify-content:flex-start;
-    }
-    .ck-provider-tab-btn {
-      background:rgba(0,0,0,.4);
-      border:1px solid rgba(255,255,255,.3);
-      box-shadow:
-        0 0 10px rgba(255,255,255,.15),
-        0 16px 32px rgba(0,0,0,.8);
       font-weight:600;
-      color:#fff;
       font-size:.7rem;
       line-height:1.2;
-      padding:8px 10px;
-      border-radius:8px;
-      text-shadow:0 0 4px rgba(0,0,0,.8);
-      cursor:pointer;
-      user-select:none;
+      margin-bottom:4px;
+      text-shadow:0 0 6px rgba(0,255,98,.6);
     }
-    .ck-provider-tab-btn.ck-active {
-      background:radial-gradient(circle at 0% 0%, #00ff88 0%, #006634 70%);
-      color:#000;
-      border:1px solid rgba(0,255,136,.6);
-      box-shadow:
-        0 0 12px rgba(0,255,136,.7),
-        0 0 42px rgba(0,255,136,.3),
-        0 20px 40px rgba(0,0,0,.9);
-      text-shadow:0 0 4px rgba(0,0,0,.8);
+    .ck-rtp-val{
+      background:#003b14;
+      border:1px solid rgba(0,255,98,.4);
+      border-radius:4px;
+      padding:2px 4px;
+      color:#00ff62;
+      font-weight:700;
+      text-shadow:0 0 4px rgba(0,255,98,.4);
+      font-size:.7rem;
+      line-height:1.2;
+    }
+    .ck-game-provider{
+      color:#999;
+      font-size:.7rem;
+      line-height:1.2;
     }
 
-    .ck-rtp-table-wrap {
-      overflow-x:auto;
-      border:1px solid rgba(255,255,255,.08);
-      border-radius:8px;
-      background:rgba(0,0,0,.4);
+    .ck-rtp-main-footnote{
+      font-size:.7rem;
+      line-height:1.4;
+      color:#999;
+      margin-top:12px;
     }
-    .ck-rtp-table {
+
+    /*****************
+     RTP TABLE
+    ******************/
+    .ck-rtp-table-wrap{width:100%;overflow-x:auto;}
+    .ck-rtp-table{
       width:100%;
       border-collapse:collapse;
       min-width:600px;
-      color:#fff;
       font-size:.75rem;
       line-height:1.4;
+      color:#fff;
+      background:#1a1a1a;
+      border:1px solid rgba(255,255,255,.07);
+      border-radius:12px;
+      box-shadow:0 20px 40px rgba(0,0,0,.8);
     }
-    .ck-rtp-table thead tr {
-      background:rgba(255,255,255,.07);
+    .ck-rtp-table thead th{
       text-align:left;
+      background:#2a2a2a;
+      color:#fff;
+      font-weight:600;
+      padding:10px 12px;
+      border-bottom:1px solid rgba(255,255,255,.12);
+      font-size:.7rem;
+    }
+    .ck-rtp-table tbody td{
+      padding:10px 12px;
+      border-bottom:1px solid rgba(255,255,255,.07);
+      color:#ccc;
+      font-size:.7rem;
+    }
+
+    .ck-rtp-toggle-wrap{text-align:center;padding:12px 0;font-size:.75rem;color:#ccc;}
+    .ck-rtp-toggle-btn{
+      background:rgba(255,255,255,.05);
+      border:1px solid rgba(255,255,255,.2);
+      border-radius:8px;
+      padding:8px 12px;
+      cursor:pointer;
+      color:#fff;
+      font-size:.75rem;
+      line-height:1.2;
       font-weight:600;
     }
-    .ck-rtp-table thead th {
-      padding:10px;
-      border-bottom:1px solid rgba(255,255,255,.12);
-      white-space:nowrap;
-      color:#fff;
-    }
-    .ck-rtp-table tbody tr {
-      border-bottom:1px solid rgba(255,255,255,.07);
-    }
-    .ck-rtp-table tbody td {
-      padding:10px;
-      color:#fff;
-      text-shadow:0 0 4px rgba(0,0,0,.8);
-      vertical-align:top;
-    }
 
-    /****************************************
-    ============ PROVIDER DETAIL GRID ======
-    *****************************************/
-    #ck-provider-detail-wrap {
-      display:none;
-      margin-top:24px;
-      background:rgba(20,20,28,.6);
-      backdrop-filter:blur(6px);
-      -webkit-backdrop-filter:blur(6px);
-      box-shadow:
-        0 20px 40px rgba(0,0,0,.9),
-        0 0 60px rgba(0,255,170,.2),
-        0 0 80px rgba(255,0,128,.15) inset;
-      border:1px solid rgba(255,255,255,.08);
+    /*****************
+     PROVIDER DETAIL GRID (DAFTAR GAME)
+    ******************/
+    #ck-provider-detail-wrap{
+      background:#1a1a1a;
+      border:1px solid rgba(255,255,255,.07);
       border-radius:16px;
-      padding:16px 20px;
+      box-shadow:0 16px 32px rgba(0,0,0,.8);
+      padding:16px;
+      margin-top:24px;
+      color:#fff;
+      font-size:.8rem;
+      line-height:1.4;
+      display:none; /* visible setelah pilih provider */
     }
 
-    .ck-provider-detail-head {
-      margin-bottom:16px;
-    }
-    .ck-provider-detail-title {
+    .ck-provider-detail-head{margin-bottom:12px;text-align:left;}
+    .ck-provider-detail-title{
       font-size:.9rem;
       font-weight:600;
-      color:#00ffbf;
-      text-shadow:
-        0 0 8px rgba(0,255,191,.6),
-        0 0 18px rgba(0,255,191,.4);
-      margin-bottom:6px;
       line-height:1.3;
+      color:#ffd24a;
+      text-shadow:0 0 8px rgba(212,175,55,.7);
+      margin-bottom:4px;
     }
-    .ck-provider-detail-sub {
-      font-size:.75rem;
+    .ck-provider-detail-sub{
+      font-size:.7rem;
       line-height:1.4;
-      color:#d8d8d8;
-      text-shadow:0 0 8px rgba(0,0,0,.8);
+      color:#ccc;
     }
 
-    .ck-game-grid {
+    /* GRID game-card */
+    .ck-game-grid{
       display:grid;
-      grid-template-columns:repeat(auto-fill,minmax(min(200px,45%),1fr));
-      gap:16px;
-      max-width:1280px;
-      margin:16px auto 32px;
+      grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+      gap:12px;
     }
 
+    /* kartu game versi baru */
     .ck-game-card {
-      background:rgba(15,15,22,.75);
-      border-radius:14px;
-      border:1px solid rgba(255,255,255,.07);
-      box-shadow:
-        0 20px 40px rgba(0,0,0,.9),
-        0 0 40px rgba(0,255,170,.18),
-        0 0 60px rgba(255,0,128,.12);
-      transition:box-shadow .15s ease, transform .15s ease;
-      cursor:pointer;
+      background:#1a1a1a;
+      border:1px solid rgba(255,255,255,.05);
+      border-radius:8px;
+      box-shadow:0 8px 16px rgba(0,0,0,.6);
+      overflow:hidden;
       display:flex;
       flex-direction:column;
-      gap:10px;
-      min-height:190px;
-      padding:12px;
-    }
-    .ck-game-card:hover {
-      transform:translateY(-2px) scale(1.02);
-      box-shadow:
-        0 24px 50px rgba(0,0,0,.95),
-        0 0 50px rgba(0,255,170,.3),
-        0 0 80px rgba(255,0,128,.25);
-    }
-
-    .ck-game-card-thumb {
-      background:#000;
-      border-radius:10px;
-      border:1px solid rgba(255,255,255,.15);
-      min-height:80px;
-      display:flex;
-      align-items:center;
-      justify-content:center;
-      overflow:hidden;
-      box-shadow:0 0 20px rgba(0,0,0,.9),
-                 0 0 30px rgba(0,255,136,.25);
-    }
-    .ck-game-card-thumb img {
+      cursor:pointer;
+      max-width:240px;
       width:100%;
-      max-width:120px;
-      height:auto;
-      object-fit:contain;
-      display:block;
-      filter:drop-shadow(0 0 8px rgba(0,0,0,.9));
-    }
-
-    .ck-game-card-body{
+      margin:0 auto;
       text-align:center;
     }
-    .ck-game-card-name{
+
+    /* thumbnail jadi kotak hitam kecil tengah */
+    .ck-game-card-thumb {
+      width:auto;
+      max-width:140px;
+      max-height:140px;
+      margin:16px auto 12px;
+      padding:8px;
+      background:#000;
+      border:1px solid rgba(255,255,255,.15);
+      border-radius:8px;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      overflow:hidden;
+    }
+    .ck-game-card-thumb img {
+      display:block;
+      margin:auto;
+      max-width:100%;
+      max-height:100%;
+      width:auto;
+      height:auto;
+      object-fit:contain;
+      object-position:center;
+      image-rendering:auto;
+    }
+
+    .ck-game-card-body {
+      background:linear-gradient(#1a1a1a 0%, #111 100%);
+      border-top:1px solid rgba(255,255,255,.06);
+      padding:10px 12px;
+      font-size:.75rem;
+      line-height:1.4;
+      color:#ccc;
+      text-align:center;
+    }
+
+    .ck-game-card-name {
+      color:#fff;
       font-size:.8rem;
       font-weight:600;
-      color:#fff;
       line-height:1.3;
-      text-shadow:0 0 6px rgba(0,0,0,.9),
-                   0 0 20px rgba(0,255,170,.4);
+      margin-bottom:2px;
+      text-align:center;
     }
-    .ck-game-card-provider{
+    .ck-game-card-provider {
+      color:#9a9a9a;
       font-size:.7rem;
-      font-weight:500;
-      color:#9afff0;
-      text-shadow:0 0 8px rgba(0,255,200,.4);
+      line-height:1.2;
       margin-bottom:6px;
+      text-align:center;
     }
 
+    /* bar RTP hijau slim */
     .ck-rtp-bar-wrap{
       position:relative;
+      width:100%;
       height:24px;
+      background:#003b14;
       border-radius:4px;
+      border:1px solid rgba(0,255,98,.4);
       overflow:hidden;
-      border:1px solid rgba(255,255,255,.07);
-      background:rgba(0,0,0,.4);
-      box-shadow:0 0 10px rgba(0,255,98,.5);
+      box-shadow:0 0 6px rgba(0,255,98,.3);
     }
     .ck-rtp-bar-fill{
-      font-size:.7rem;
-      font-weight:700;
-      text-shadow:0 0 4px rgba(0,0,0,.8);
+      position:absolute;
+      top:0;
+      left:0;
+      bottom:0;
+      background:linear-gradient(90deg,#00ff62 0%,#007a1f 100%);
+      border-right:1px solid rgba(0,0,0,.4);
+      box-shadow:0 0 6px rgba(0,255,98,.4);
       display:flex;
       align-items:center;
       justify-content:center;
-      height:24px;
-      position:relative;
-      border-radius:4px;
       color:#000;
+      font-weight:700;
+      font-size:.75rem;
       line-height:1.2;
+      text-shadow:0 0 4px rgba(0,0,0,.6);
     }
-
-    /****************************************
-    ============ POLA MODAL ================
-    *****************************************/
-    .ck-pola-overlay {
-      position:fixed;
+    .ck-rtp-bar-fill::after{
+      content:'';
+      position:absolute;
       inset:0;
-      display:none;
-      align-items:center;
-      justify-content:center;
-      background:rgba(0,0,0,.6);
-      z-index:9999;
-      padding:16px;
+      background:radial-gradient(circle at 30% 30%,rgba(255,255,255,.4) 0%,rgba(255,255,255,0) 60%);
+      mix-blend-mode:screen;
+      pointer-events:none;
+      animation:ck-glow 2s ease-in-out infinite;
     }
-    .ck-pola-overlay.active {
-      display:flex;
-    }
+    @keyframes ck-glow {0%,100% {opacity:.4;}50%{opacity:.8;}}
 
-    .ck-pola-card {
-      max-width:420px;
-      width:100%;
-      background:rgba(15,15,22,.9);
-      border:1px solid rgba(255,255,255,.12);
-      box-shadow:
-        0 40px 80px rgba(0,0,0,.95),
-        0 0 60px rgba(0,255,170,.25),
-        0 0 80px rgba(255,0,128,.2);
-      border-radius:16px;
-      color:#fff;
-      padding:16px;
-      text-shadow:0 0 4px rgba(0,0,0,.8);
-    }
-    .ck-pola-head {
-      font-weight:600;
-      font-size:.9rem;
-      line-height:1.3;
-      color:#00ffbf;
-      text-shadow:
-        0 0 8px rgba(0,255,191,.6),
-        0 0 18px rgba(0,255,191,.4);
+    /*****************
+     PROVIDER TABS
+    ******************/
+    #ck-provider-tabs{
       display:flex;
       flex-wrap:wrap;
       gap:8px;
-      align-items:flex-start;
-      margin-bottom:12px;
-      position:relative;
-      padding-right:28px;
-    }
-
-    .ck-pola-close {
-      position:absolute;
-      top:0;
-      right:0;
-      background:rgba(255,255,255,.07);
-      border:1px solid rgba(255,255,255,.3);
-      box-shadow:0 0 10px rgba(255,255,255,.15),
-                 0 16px 32px rgba(0,0,0,.8);
+      margin:12px 0;
+      font-size:.7rem;
+      line-height:1.2;
       color:#fff;
-      font-weight:600;
-      font-size:.8rem;
-      line-height:1;
-      border-radius:6px;
-      padding:4px 6px;
+    }
+    #ck-provider-tabs .ck-provider-tab-btn{
       cursor:pointer;
-      text-shadow:0 0 4px rgba(0,0,0,.8);
-    }
-
-    .ck-pola-body {
-      margin-bottom:12px;
-    }
-    .ck-pola-provider {
-      background:rgba(20,20,28,.6);
-      border:1px solid rgba(255,255,255,.08);
-      box-shadow:
-        0 20px 40px rgba(0,0,0,.9),
-        0 0 40px rgba(0,255,170,.18),
-        0 0 60px rgba(255,0,128,.12);
-      border-radius:10px;
-      padding:10px;
-      font-size:.75rem;
-      line-height:1.4;
+      background:rgba(255,255,255,.05);
+      border:1px solid rgba(255,255,255,.2);
       color:#fff;
-    }
-    .ck-pola-provider strong {
+      border-radius:8px;
+      padding:8px 12px;
       font-weight:600;
-      color:#fff;
-      text-shadow:0 0 6px rgba(0,0,0,.9),
-                   0 0 20px rgba(0,255,170,.4);
+      font-size:.7rem;
+      line-height:1.2;
+      text-decoration:none;
+    }
+    #ck-provider-tabs .ck-provider-tab-btn.ck-active{
+      background:linear-gradient(135deg,#ffd24a,#e3b95c);
+      color:#000;
+      box-shadow:0 0 0 2px rgba(245,217,124,.28),0 14px 42px rgba(245,217,124,.12);
+      border:0;
+      font-weight:700;
     }
 
-    .ck-pola-steps {
-      margin-bottom:12px;
+    /*****************
+     TOP "BACK" STRIP
+    ******************/
+    .ck-back-strip{
+      max-width:1280px;
+      margin:0 auto 16px;
+      padding:16px;
+      font-size:.7rem;
+      line-height:1.2;
+    }
+    .ck-back-btn{
+      display:inline-flex;
+      align-items:center;
+      gap:6px;
+      background:rgba(255,255,255,.05);
+      border:1px solid rgba(255,255,255,.2);
+      color:#fff;
+      font-weight:600;
+      text-decoration:none;
+      padding:8px 12px;
+      border-radius:8px;
+      font-family:inherit;
+      font-size:.75rem;
+      line-height:1.2;
+    }
+    .ck-back-btn span:first-child{font-size:.8rem;line-height:1;}
+
+    /*****************
+     POPUP BONUS
+    ******************/
+    .ck-popup-overlay{
+      position:fixed;
+      inset:0;
+      background:rgba(0,0,0,.6);
+      display:none;
+      align-items:center;
+      justify-content:center;
+      padding:16px;
+      z-index:9999;
+    }
+    .ck-popup-overlay.active{display:flex;}
+    .ck-popup-card{
+      background:#111;
+      border:1px solid rgba(255,255,255,.15);
+      border-radius:16px;
+      box-shadow:0 32px 64px rgba(0,0,0,.9);
+      max-width:360px;
+      width:100%;
+      color:#fff;
+      font-size:.8rem;
+      line-height:1.4;
+      padding:16px;
+    }
+    .ck-popup-head{
+      display:flex;
+      align-items:flex-start;
+      justify-content:space-between;
+      gap:8px;
+      font-size:.8rem;
+      font-weight:600;
+      color:#ffd24a;
+      text-shadow:0 0 8px rgba(212,175,55,.7);
+      margin-bottom:8px;
+    }
+    .ck-popup-close{
+      cursor:pointer;
+      font-size:.7rem;
+      font-weight:600;
+      line-height:1.2;
+      background:rgba(255,255,255,.05);
+      border:1px solid rgba(255,255,255,.2);
+      border-radius:6px;
+      padding:4px 8px;
+      color:#999;
+    }
+    .ck-popup-body{
+      font-size:.8rem;
+      line-height:1.4;
+      color:#fff;
+    }
+
+    /*****************
+     MODAL POLA / TACTIC
+    ******************/
+    .ck-pola-overlay{
+      position:fixed;
+      inset:0;
+      background:rgba(0,0,0,.7);
+      display:none;
+      align-items:center;
+      justify-content:center;
+      padding:16px;
+      z-index:10000;
+    }
+    .ck-pola-overlay.active{display:flex;}
+    .ck-pola-card{
+      background:#111;
+      border:1px solid rgba(255,255,255,.15);
+      border-radius:16px;
+      box-shadow:0 32px 64px rgba(0,0,0,.9);
+      width:100%;
+      max-width:360px;
+      color:#fff;
+      font-size:.8rem;
+      line-height:1.4;
+      padding:16px;
+    }
+    .ck-pola-head{
+      font-size:.8rem;
+      font-weight:600;
+      color:#ffd24a;
+      text-shadow:0 0 8px rgba(212,175,55,.7);
+      display:flex;
+      align-items:flex-start;
+      justify-content:space-between;
+      gap:8px;
+      margin-bottom:8px;
+    }
+    .ck-pola-close{
+      background:rgba(255,255,255,.05);
+      border:1px solid rgba(255,255,255,.2);
+      border-radius:6px;
+      padding:4px 8px;
+      font-size:.7rem;
+      line-height:1.2;
+      font-weight:600;
+      color:#999;
+      cursor:pointer;
+    }
+    .ck-pola-body{
+      font-size:.75rem;
+      color:#fff;
+      line-height:1.4;
+      margin-bottom:8px;
+    }
+    .ck-pola-provider{
+      background:#1a1a1a;
+      border:1px solid rgba(255,255,255,.07);
+      border-radius:8px;
+      box-shadow:0 16px 32px rgba(0,0,0,.8);
+      padding:12px;
       font-size:.75rem;
       line-height:1.4;
-      color:#dcdcdc;
+      color:#ccc;
     }
-    .ck-pola-steps div {
-      background:rgba(20,20,28,.6);
-      border:1px solid rgba(255,255,255,.08);
-      box-shadow:
-        0 20px 40px rgba(0,0,0,.9),
-        0 0 40px rgba(0,255,170,.18),
-        0 0 60px rgba(255,0,128,.12);
+    .ck-pola-steps{
+      font-size:.75rem;
+      line-height:1.4;
+      color:#fff;
+      margin-top:12px;
+    }
+    .ck-pola-steps div{
+      background:#151515;
+      border:1px solid rgba(255,255,255,.07);
       border-radius:6px;
-      padding:8px;
+      box-shadow:0 16px 32px rgba(0,0,0,.8);
+      padding:8px 10px;
+      font-size:.75rem;
+      line-height:1.4;
+      color:#ccc;
       margin-bottom:6px;
     }
-
-    .ck-pola-warning {
+    .ck-pola-warning{
       color:#ffd24a;
-      text-shadow:0 0 8px rgba(212,175,55,.7),
-                   0 0 20px rgba(212,175,55,.4);
-      font-size:.75rem;
-      line-height:1.4;
-      margin-bottom:10px;
-    }
-
-    .ck-pola-note {
-      background:rgba(20,20,28,.6);
-      border:1px solid rgba(255,255,255,.08);
-      box-shadow:
-        0 20px 40px rgba(0,0,0,.9),
-        0 0 40px rgba(0,255,170,.18),
-        0 0 60px rgba(255,0,128,.12);
-      border-radius:10px;
-      padding:8px;
-      color:#dcdcdc;
       font-size:.7rem;
       line-height:1.4;
-      margin-bottom:14px;
+      font-weight:600;
+      margin-top:12px;
     }
-
-    .ck-pola-actions {
+    .ck-pola-note{
+      background:#1a1a1a;
+      border:1px solid rgba(255,255,255,.07);
+      border-radius:6px;
+      box-shadow:0 16px 32px rgba(0,0,0,.8);
+      padding:10px;
+      font-size:.7rem;
+      line-height:1.4;
+      color:#ccc;
+      margin-top:12px;
+    }
+    .ck-pola-actions{
       display:flex;
-      gap:10px;
+      gap:8px;
       flex-wrap:wrap;
-      justify-content:space-between;
+      margin-top:16px;
+      justify-content:center;
     }
-    .ck-pola-btn {
-      background:radial-gradient(circle at 0% 0%, #00ff88 0%, #006634 70%);
-      border:1px solid rgba(0,255,136,.6);
-      box-shadow:
-        0 0 12px rgba(0,255,136,.7),
-        0 0 42px rgba(0,255,136,.3),
-        0 20px 40px rgba(0,0,0,.9);
-      color:#000;
-      text-shadow:0 0 4px rgba(0,0,0,.8);
-      font-weight:700;
-      text-decoration:none;
-      border-radius:10px;
-      font-size:.8rem;
-      line-height:1.2;
-      padding:10px 12px;
+    .ck-pola-btn{
       flex:1 1 auto;
       text-align:center;
+      font-size:.75rem;
+      line-height:1.2;
+      font-weight:700;
+      text-decoration:none;
+      border-radius:8px;
+      padding:10px 12px;
+      color:#000;
+      background:linear-gradient(135deg,#ffd24a,#e3b95c);
+      box-shadow:0 0 0 2px rgba(245,217,124,.28),0 14px 42px rgba(245,217,124,.12);
     }
-    .ck-pola-btn:active { transform:scale(.97); }
 
-    /****************************************
-    ============ RESPONSIVE LIGHT MODE =====
-    (supaya HP nggak lag)
-    *****************************************/
-   @media (max-width: 768px) {
+    /*****************
+     RESPONSIVE
+    ******************/
+    /* Tablet & down */
+    @media(max-width:1024px){
+      .ck-hero-layout{
+        grid-template-columns:1fr;
+      }
+      .ck-col{
+        gap:12px;
+      }
 
-  /* --- Semua kartu utama / panel / section box --- */
-  .ck-section-card,
-  .ck-card-row,
-  .ck-game-card,
-  #ck-provider-detail-wrap,
-  .message-left-container,
-  .ck-pola-overlay .ck-pola-card {
-    /* Tidak ada efek kaca blur */
-    backdrop-filter: none !important;
-    -webkit-backdrop-filter: none !important;
+      /* list live rtp row -> stack vertical on mobile */
+      .ck-card-row{
+        flex-wrap:nowrap;
+      }
+    }
 
-    /* Background solid gelap biar kontras teksturnya jelas */
-    background: #0f0f13 !important;
+    /* Mobile layout tweaks */
+    @media(max-width:768px){
+      /* Make each provider card full width, still centered look */
+      .ck-game-grid{
+        grid-template-columns:1fr 1fr;
+        gap:12px;
+      }
+      .ck-game-card{
+        max-width:100% !important;
+        width:100% !important;
+      }
 
-    /* Hilangkan neon glow besar */
-    box-shadow: none !important;
+      /* Thumbnail sedikit lebih kecil di hp */
+      .ck-game-card-thumb{
+        max-width:96px !important;
+        max-height:96px !important;
+        margin:12px auto 8px !important;
+        padding:6px !important;
+      }
 
-    /* Border tipis aja biar kotaknya tetap keliatan */
-    border: 1px solid rgba(255,255,255,0.07) !important;
+      .ck-game-card-body{
+        padding:10px 8px;
+      }
 
-    /* Sudut tetap radius kalau kamu pakai */
-    border-radius: 8px !important;
-  }
+      .ck-game-card-name{
+        font-size:.78rem;
+      }
+      .ck-game-card-provider{
+        font-size:.7rem;
+      }
+      .ck-rtp-bar-wrap{
+        height:22px;
+      }
+      .ck-rtp-bar-fill{
+        font-size:.7rem;
+      }
 
-  /* --- Headline / title di dalam card --- */
-  .ck-section-card h3,
-  .ck-card-headline,
-  .ck-provider-detail-title {
-    color: #ffffff !important;
-    font-weight: 600 !important;
+      /* live list card: supaya gak terlalu tinggi di hp */
+      .ck-card-row{
+        padding:10px;
+      }
+      .ck-game-thumb{
+        width:56px;
+        height:56px;
+        margin-right:10px;
+      }
+      .ck-game-info{
+        font-size:.72rem;
+      }
+      .ck-game-name{
+        font-size:.78rem;
+      }
+      .ck-game-rtp{
+        font-size:.7rem;
+      }
+    }
 
-    /* Buang text-glow */
-    text-shadow: none !important;
-  }
+    /* Small phones */
+    @media(max-width:480px){
+      .ck-btn,
+      .ck-btn-ghost{
+        width:100%;
+        min-width:0;
+        justify-content:center;
+        text-align:center;
+      }
 
-  /* --- Deskripsi kecil / subtext / provider label --- */
-  .ck-desc,
-  .ck-section-desc,
-  .ck-provider-detail-sub,
-  .ck-game-card-provider,
-  .ck-game-provider,
-  .ck-pola-body,
-  .ck-pola-provider,
-  .ck-pola-steps div,
-  .ck-pola-warning,
-  .ck-pola-note,
-  .message-left-container,
-  .message-left-container * {
-    color: #dcdcdc !important;
-    text-shadow: none !important;
-    font-weight: 400 !important;
-    line-height: 1.4;
-  }
+      .ck-game-grid{
+        grid-template-columns:1fr 1fr;
+      }
 
-  /* --- Nama game / judul item RTP --- */
-  .ck-game-name,
-  .ck-game-card-name,
-  #ck-rtp-tbody td:first-child {
-    color: #fff !important;
-    font-weight: 600 !important;
-    text-shadow: none !important; /* tajam */
-  }
+      /* Make hero card sections breathe a bit less */
+      .ck-section-card{
+        padding:14px;
+        border-radius:14px;
+      }
+    }
 
-  /* --- Provider di tabel --- */
-  #ck-rtp-tbody td:nth-child(2) {
-    color: #9e9e9e !important;
-    font-size: .7rem !important;
-    font-weight: 400 !important;
-    text-shadow: none !important;
-  }
+    /***********************************************
+     PATCH OVERRIDES (important!) UNTUK HTML LAMA
+     Biar desktop & mobile SERAGAM
+    ***********************************************/
+    .ck-game-card,
+    .ck-game-card-body,
+    .ck-game-card-name,
+    .ck-game-card-provider{
+      text-align:center!important;
+    }
 
-  /* --- Angka RTP di tabel & label status --- */
-  #ck-rtp-tbody td:nth-child(3),
-  #ck-rtp-tbody td:nth-child(4) {
-    font-weight: 600 !important;
-    text-shadow: none !important;
-  }
+    .ck-game-card-thumb{
+      width:auto!important;
+      max-width:140px!important;
+      max-height:140px!important;
+      margin:16px auto 12px!important;
+      padding:8px!important;
+      background:#000!important;
+      border:1px solid rgba(255,255,255,.15)!important;
+      border-radius:8px!important;
+      display:flex!important;
+      align-items:center!important;
+      justify-content:center!important;
+      overflow:hidden!important;
+    }
+    .ck-game-card-thumb img{
+      width:auto!important;
+      height:auto!important;
+      max-width:100%!important;
+      max-height:100%!important;
+      object-fit:contain!important;
+      object-position:center!important;
+      display:block!important;
+      margin:auto!important;
+    }
+  
 
-  /* Warna high RTP, medium, low:
-     -> ini diset oleh JS via inline style color, tapi kita pastikan tidak ada glow */
-  .ck-rtp-val {
-    /* badge RTP di hero */
-    background: transparent !important;
-    border: 1px solid currentColor !important;
-    border-radius: 4px !important;
-    padding: 2px 6px !important;
-    font-size: .75rem !important;
-    font-weight: 600 !important;
-    text-shadow: none !important;
-    box-shadow: none !important;
-  }
+/*************************************
+ EXTRA OVERRIDES (TANPA HAPUS KODE ASLI)
+**************************************/
 
-  /* --- Bar RTP di grid detail provider --- */
-  .ck-rtp-bar-wrap {
-    /* hilangkan glow neon */
-    box-shadow: none !important;
-    border-radius: 4px !important;
-    border: 1px solid rgba(255,255,255,.07) !important;
-    background: #1a1a20 !important; /* netral gelap */
-  }
-
-  .ck-rtp-bar-fill {
-    /* biar tetap warna indikator (hijau/kuning/merah) tapi flat tanpa glow */
-    box-shadow: none !important;
-    text-shadow: none !important;
-    font-weight: 600 !important;
-    border-radius: 3px !important;
-
-    /* override gradient jadi lebih flat */
-    background-image: none !important;
-  }
-
-  /* override per status pakai attribute style yang udah diset JS:
-     - hijau tetap hijau tapi flat
-     - kuning flat
-     - merah flat
-     kita pakai !important di bawah untuk mematikan gradient neon */
-  .ck-rtp-bar-fill[style*="#00ff62"] {
-    background: #00c84a !important; /* hijau solid */
-    color: #000 !important;
-  }
-  .ck-rtp-bar-fill[style*="#ffd24a"] {
-    background: #d7b135 !important; /* kuning solid */
-    color: #000 !important;
-  }
-  .ck-rtp-bar-fill[style*="#ff3b3b"] {
-    background: #c32424 !important; /* merah solid */
-    color: #fff !important;
-  }
-
-  /* --- Thumbnail game: kecilkan dikit biar gak pecah / pixel stretch */
-  .ck-game-thumb img,
-  .ck-game-card-thumb img {
-    width: 52px !important;
-    height: 52px !important;
-    object-fit: contain !important;
-    border-radius: 6px !important;
-    background: #1f1f25 !important;
-    border: 1px solid rgba(255,255,255,0.06) !important;
-    box-shadow: none !important;
-  }
-
-  .ck-game-thumb,
-  .ck-game-card-thumb {
-    background: transparent !important;
-    box-shadow: none !important;
-    border-radius: 6px !important;
-    padding: 6px !important;
-  }
-
-  /* --- tombol hijau (call to action) ---
-     JANGAN neon, tapi tetap hijau brand kamu */
-  .ck-btn,
-  .ck-pola-btn,
-  .ck-btn-ghost,
-  .ck-claim-btn,
-  .ck-register-btn {
-    background: linear-gradient(#00c84a,#00a53d) !important; /* hijau gelap solid */
-    color: #000 !important;
-    font-weight: 600 !important;
-    border: 1px solid #008d33 !important;
-    border-radius: 6px !important;
-
-    box-shadow: none !important;
-    text-shadow: none !important;
-  }
-
-  /* tombol varian "ghost" / abu tanpa hijau */
-  .ck-btn-ghost-secondary,
-  .ck-pola-btn-right {
-    background: #2a2a33 !important;
-    color: #fff !important;
-    border: 1px solid rgba(255,255,255,.1) !important;
-  }
-
-  /* close button / X modal */
-  .ck-pola-head .ck-pola-close {
-    background: #2a2a33 !important;
-    color:#fff !important;
-    border:1px solid rgba(255,255,255,.15) !important;
-    box-shadow:none !important;
-    text-shadow:none !important;
-  }
-
-  /* provider tabs bar */
-  .ck-provider-tab-btn {
-    background: #1c1c22 !important;
-    border: 1px solid rgba(255,255,255,.08) !important;
-    box-shadow: none !important;
-    text-shadow: none !important;
-    color: #dcdcdc !important;
-    font-weight:500 !important;
-  }
-
-  .ck-provider-tab-btn.ck-active {
-    background: #00c84a !important; /* hijau aktif */
-    border: 1px solid #008d33 !important;
-    color:#000 !important;
-    font-weight:600 !important;
-    box-shadow:none !important;
-    text-shadow:none !important;
-  }
-
-  /* header kecil seperti "LIVE এখন আপডেট" */
-  .ck-card-headline .ck-live-badge,
-  .ck-head-live-badge {
-    background:#2a2a33 !important;
-    color:#00c84a !important;
-    border:1px solid rgba(0,200,74,.4) !important;
-    border-radius:4px !important;
-    box-shadow:none !important;
-    text-shadow:none !important;
-  }
-
-  /* bersihin popup bawah kiri / message bubble */
-  .message-left-close,
-  .message-left-title,
-  .message-left-text {
-    text-shadow:none !important;
-  }
+/* 1. Page aura background */
+.ck-page-bg {
+  background:
+    radial-gradient(circle at 20% 15%, rgba(0,255,163,0.18) 0%, rgba(0,0,0,0) 60%),
+    radial-gradient(circle at 80% 30%, rgba(255,0,115,0.18) 0%, rgba(0,0,0,0) 60%),
+    radial-gradient(circle at 50% 80%, rgba(0,128,255,0.12) 0%, rgba(0,0,0,0) 70%),
+    #000000;
+  background-color:#000;
+  background-repeat:no-repeat;
+  background-size:900px 600px,800px 700px,900px 900px;
+  background-attachment:fixed;
+  color:#fff;
 }
-  </style>
-</head>
 
+/* 2. VIP-style glass card look untuk semua .ck-section-card */
+.ck-section-card {
+  background:rgba(20,20,28,0.6);
+  backdrop-filter:blur(6px);
+  -webkit-backdrop-filter:blur(6px);
+  border:1px solid rgba(255,255,255,0.08);
+  border-radius:16px;
+  box-shadow:
+    0 20px 40px rgba(0,0,0,.9),
+    0 0 40px rgba(0,255,170,.18),
+    0 0 80px rgba(255,0,128,.12) inset;
+  position:relative;
+}
+
+/* Headline jadi lebih "casino neon" */
+.ck-section-card h2,
+.ck-section-card h3 {
+  color:#00ffbf !important;
+  text-shadow:
+    0 0 8px rgba(0,255,191,.6),
+    0 0 18px rgba(0,255,191,.4),
+    0 0 32px rgba(0,255,191,.2) !important;
+}
+
+/* Tombol utama hijau neon sebagai CTA */
+.ck-btn {
+  background:radial-gradient(circle at 0% 0%, #00ff88 0%, #006634 70%);
+  color:#000;
+  border:1px solid rgba(0,255,136,.5);
+  box-shadow:
+    0 0 10px rgba(0,255,136,.7),
+    0 0 40px rgba(0,255,136,.3),
+    0 16px 32px rgba(0,0,0,.8);
+  text-shadow:0 0 4px rgba(0,0,0,.8);
+  font-weight:700;
+}
+.ck-btn:active { transform:scale(.97); }
+
+/* Secondary ghost button kontras */
+.ck-btn-ghost {
+  background:rgba(255,255,255,.07);
+  border:1px solid rgba(255,255,255,.3);
+  box-shadow:
+    0 0 10px rgba(255,255,255,.15),
+    0 16px 32px rgba(0,0,0,.8);
+  color:#fff;
+  font-weight:700;
+  text-shadow:0 0 4px rgba(0,0,0,.8);
+}
+.ck-btn-ghost:active { transform:scale(.97); }
+
+/* 3. HERO HOT LIST (3 game paling panas) */
+.ck-rtp-hot-list {
+  gap:16px !important;
+}
+.ck-card-row {
+  position:relative;
+  background: radial-gradient(circle at 0% 0%, rgba(255,0,128,.18) 0%, rgba(0,0,0,0) 70%),
+              radial-gradient(circle at 100% 100%, rgba(0,255,136,.18) 0%, rgba(0,0,0,0) 70%),
+              rgba(20,20,28,.6);
+  border:1px solid rgba(255,255,255,.1);
+  border-radius:14px;
+  box-shadow:
+    0 24px 48px rgba(0,0,0,.9),
+    0 0 60px rgba(255,0,128,.25),
+    0 0 60px rgba(0,255,136,.25);
+  padding:12px 14px !important;
+}
+.ck-card-row::after {
+  content:"HOT NOW";
+  position:absolute;
+  top:8px;
+  right:10px;
+  font-size:.6rem;
+  font-weight:700;
+  color:#fff;
+  background:linear-gradient(90deg,#ff007a 0%,#ffae00 100%);
+  padding:3px 6px;
+  border-radius:6px;
+  box-shadow:0 0 10px rgba(255,0,128,.6);
+  text-shadow:0 0 4px rgba(0,0,0,.8);
+  line-height:1.2;
+}
+
+/* thumb hero list */
+.ck-game-thumb {
+  box-shadow:
+    0 0 20px rgba(0,0,0,.9),
+    0 0 30px rgba(0,255,136,.25);
+  border-radius:10px !important;
+  border:1px solid rgba(255,255,255,.15) !important;
+  background:#000 !important;
+}
+.ck-game-thumb img {
+  filter:drop-shadow(0 0 8px rgba(0,0,0,.9));
+}
+
+/* judul game hero */
+.ck-game-name {
+  color:#fff !important;
+  text-shadow:
+    0 0 6px rgba(0,0,0,.9),
+    0 0 20px rgba(0,255,170,.4);
+  font-weight:600 !important;
+}
+
+/* nilai RTP hero */
+.ck-rtp-val {
+  min-width:50px;
+  text-align:center;
+  font-size:.75rem!important;
+  line-height:1.2!important;
+  border-radius:4px!important;
+  font-weight:700!important;
+  text-shadow:0 0 4px rgba(0,0,0,.8)!important;
+}
+
+/* 4. Tabs provider jadi tombol */
+#ck-provider-tabs {
+  justify-content:flex-start;
+}
+#ck-provider-tabs .ck-provider-tab-btn {
+  background:rgba(0,0,0,.4);
+  border:1px solid rgba(255,255,255,.3);
+  box-shadow:
+    0 0 10px rgba(255,255,255,.15),
+    0 16px 32px rgba(0,0,0,.8);
+  font-weight:600;
+  color:#fff;
+  text-shadow:0 0 4px rgba(0,0,0,.8);
+}
+#ck-provider-tabs .ck-provider-tab-btn.ck-active {
+  background:radial-gradient(circle at 0% 0%, #00ff88 0%, #006634 70%);
+  color:#000;
+  border:1px solid rgba(0,255,136,.6);
+  box-shadow:
+    0 0 12px rgba(0,255,136,.7),
+    0 0 42px rgba(0,255,136,.3),
+    0 20px 40px rgba(0,0,0,.9);
+  text-shadow:0 0 4px rgba(0,0,0,.8);
+}
+
+/* 5. Provider detail wrap aura */
+#ck-provider-detail-wrap {
+  background:rgba(20,20,28,.6) !important;
+  box-shadow:
+    0 20px 40px rgba(0,0,0,.9) !important,
+    0 0 60px rgba(0,255,170,.2) !important,
+    0 0 80px rgba(255,0,128,.15) inset !important;
+  border:1px solid rgba(255,255,255,.08) !important;
+}
+.ck-provider-detail-title {
+  color:#00ffbf !important;
+  text-shadow:
+    0 0 8px rgba(0,255,191,.6),
+    0 0 18px rgba(0,255,191,.4) !important;
+}
+
+/* 6. Game card glow */
+.ck-game-card {
+  background:rgba(15,15,22,.75) !important;
+  border-radius:14px !important;
+  border:1px solid rgba(255,255,255,.07) !important;
+  box-shadow:
+    0 20px 40px rgba(0,0,0,.9),
+    0 0 40px rgba(0,255,170,.18),
+    0 0 60px rgba(255,0,128,.12) !important;
+  transition:box-shadow .15s ease, transform .15s ease;
+}
+.ck-game-card:hover {
+  transform:translateY(-2px) scale(1.02);
+  box-shadow:
+    0 24px 50px rgba(0,0,0,.95),
+    0 0 50px rgba(0,255,170,.3),
+    0 0 80px rgba(255,0,128,.25);
+}
+
+/* thumbnail game */
+.ck-game-card-thumb {
+  background:#000 !important;
+  border:1px solid rgba(255,255,255,.15) !important;
+  box-shadow:
+    0 0 20px rgba(0,0,0,.9),
+    0 0 30px rgba(0,255,136,.25) !important;
+  border-radius:10px !important;
+}
+.ck-game-card-thumb img {
+  filter:drop-shadow(0 0 8px rgba(0,0,0,.9));
+}
+
+/* judul & provider */
+.ck-game-card-name {
+  text-shadow:
+    0 0 6px rgba(0,0,0,.9),
+    0 0 20px rgba(0,255,170,.4) !important;
+  font-weight:600 !important;
+  color:#fff !important;
+}
+.ck-game-card-provider {
+  color:#9afff0 !important;
+  text-shadow:0 0 8px rgba(0,255,200,.4) !important;
+  font-weight:500 !important;
+}
+
+/* 7. RTP bar */
+.ck-rtp-bar-wrap {
+  box-shadow:0 0 10px rgba(0,255,98,.5) !important;
+}
+.ck-rtp-bar-fill {
+  font-size:.7rem !important;
+  font-weight:700 !important;
+  text-shadow:0 0 4px rgba(0,0,0,.8) !important;
+}
+
+/* 8. Modal pola / tactic */
+.ck-pola-card {
+  background:rgba(15,15,22,.9) !important;
+  border:1px solid rgba(255,255,255,.12) !important;
+  box-shadow:
+    0 40px 80px rgba(0,0,0,.95),
+    0 0 60px rgba(0,255,170,.25),
+    0 0 80px rgba(255,0,128,.2) !important;
+  border-radius:16px !important;
+}
+.ck-pola-head {
+  color:#00ffbf !important;
+  text-shadow:
+    0 0 8px rgba(0,255,191,.6),
+    0 0 18px rgba(0,255,191,.4) !important;
+}
+.ck-pola-close {
+  background:rgba(255,255,255,.07) !important;
+  border:1px solid rgba(255,255,255,.3) !important;
+  box-shadow:
+    0 0 10px rgba(255,255,255,.15),
+    0 16px 32px rgba(0,0,0,.8) !important;
+  color:#fff !important;
+  font-weight:600 !important;
+}
+.ck-pola-provider {
+  background:rgba(20,20,28,.6) !important;
+  border:1px solid rgba(255,255,255,.08) !important;
+  box-shadow:
+    0 20px 40px rgba(0,0,0,.9),
+    0 0 40px rgba(0,255,170,.18),
+    0 0 60px rgba(255,0,128,.12) !important;
+  border-radius:10px !important;
+  color:#fff !important;
+}
+.ck-pola-steps div {
+  background:rgba(20,20,28,.6) !important;
+  border:1px solid rgba(255,255,255,.08) !important;
+  box-shadow:
+    0 20px 40px rgba(0,0,0,.9),
+    0 0 40px rgba(0,255,170,.18),
+    0 0 60px rgba(255,0,128,.12) !important;
+  color:#dcdcdc !important;
+}
+.ck-pola-warning {
+  color:#ffd24a !important;
+  text-shadow:
+    0 0 8px rgba(212,175,55,.7),
+    0 0 20px rgba(212,175,55,.4) !important;
+}
+.ck-pola-note {
+  background:rgba(20,20,28,.6) !important;
+  border:1px solid rgba(255,255,255,.08) !important;
+  box-shadow:
+    0 20px 40px rgba(0,0,0,.9),
+    0 0 40px rgba(0,255,170,.18),
+    0 0 60px rgba(255,0,128,.12) !important;
+  border-radius:10px !important;
+  color:#dcdcdc !important;
+}
+.ck-pola-btn {
+  background:radial-gradient(circle at 0% 0%, #00ff88 0%, #006634 70%) !important;
+  border:1px solid rgba(0,255,136,.6) !important;
+  box-shadow:
+    0 0 12px rgba(0,255,136,.7),
+    0 0 42px rgba(0,255,136,.3),
+    0 20px 40px rgba(0,0,0,.9) !important;
+  color:#000 !important;
+  text-shadow:0 0 4px rgba(0,0,0,.8) !important;
+  font-weight:700 !important;
+}
+.ck-pola-btn:active { transform:scale(.97); }
+
+</style>
+</head>
 <body class="ck-page-bg">
 
-  <!-- TOP BACK -->
+  <!-- BACK LINK TOP -->
   <div class="ck-back-strip">
     <a href="https://ck-44-bangladesh.vercel.app/" class="ck-back-btn">
       <span>⬅</span>
@@ -888,96 +1177,199 @@
   </div>
 
   <div class="ck-page-wrap">
-
-    <!-- HERO ROW: kiri promo VIP, tengah HOT RTP, kanan provider info -->
+    <!-- HERO -->
     <div class="ck-hero-layout">
-
-      <!-- LEFT COL: VIP Promo / Bonus etc -->
+      <!-- LEFT -->
       <div class="ck-col">
         <div class="ck-section-card">
-          <h3>
-            <span>💎 VIP 30 ইভেন্ট & মিস্ট্রি বোনাস ড্রপ</span>
-          </h3>
-          <div class="ck-desc">
-            CK44 VIP Bangladesh<br/>
-            Trusted • Mystery Bonus • VIP 30 • Bangladesh<br/>
-            দ্রুত উইথড্রো, ২৪/৭ সাপোর্ট, দ্রুত &amp; ক্লেইমড বোনাস।<br/>
-            প্রতিদিনের বোনাস ড্রপ মিস করো না – আগে রেজিস্টার করো।
+          <div style="margin-bottom:12px;">
+            <a href="https://ck-44-bangladesh.vercel.app/rtp-live.html" class="ck-btn-ghost" style="text-decoration:none;display:inline-flex;align-items:center;gap:6px;">
+              <span style="font-size:.8rem;line-height:1;">⬅</span>
+              <span>হোমে ফিরুন</span>
+            </a>
           </div>
 
-          <div class="ck-desc">
-            ✅ বাংলাদেশ স্পেশাল<br/>
-            ✅ গ্লোবাল টুর্নামেন্ট<br/>
-            ✅ CK44 VIP Standard.
+          <h2 style="margin:0 0 8px;font-size:.9rem;line-height:1.3;font-weight:600;color:#ffd24a;text-shadow:0 0 8px rgba(212,175,55,.7);display:flex;flex-wrap:wrap;gap:.5rem;align-items:flex-start;">
+            <span class="ck-section-title-emoji">🏆</span>
+            <span>VIP 30 ইভেন্ট &amp; মিস্ট্রি বোনাস ড্রপ</span>
+          </h2>
+
+          <div class="ck-hero-text-block">
+            <p style="margin:0 0 8px;">
+              <b>CK44 VIP Bangladesh</b><br/>
+              Trusted • Mystery Bonus • VIP 30 • Bangladesh
+            </p>
+
+            <p style="margin:0 0 8px;">
+              <span class="ck-accent">দ্রুত উইথড্রো</span>, ২৪/৭ সাপোর্ট, সেফ &amp; প্রাইভেট হ্যান্ডলিং।<br/>
+              প্রতিদিনের বোনাস অবশ্যই <b>রিসেটের আগে</b> ক্লেইম করুন!
+            </p>
+
+            <p style="margin:0 0 12px;">
+              Bangladesh • Global • CK44 VIP Standard.
+            </p>
+
+            <div class="ck-line"></div>
+
+            <ul class="ck-list">
+              <li><span class="ck-list-emoji">🎁</span> <span>ডেইলি মিস্ট্রি বোনাস</span></li>
+              <li><span class="ck-list-emoji">⚡</span> <span>VIP 30 বুস্ট (অ্যাকটিভ প্লেয়ারের জন্য)</span></li>
+              <li><span class="ck-list-emoji">🚀</span> <span>ফাস্ট WD &amp; সেফ চ্যানেল</span></li>
+              <li><span class="ck-list-emoji">💬</span> <span>২৪/৭ লাইভ সাপোর্ট</span></li>
+            </ul>
+
+            <div style="margin-top:12px;display:flex;flex-wrap:wrap;gap:8px;">
+              <a class="ck-btn"
+                 href="https://www.wwwck-444.com/register"
+                 target="_blank" rel="nofollow noopener">
+                এখনই রেজিস্টার করুন
+              </a>
+
+              <a class="ck-btn-ghost"
+                 data-open-popup="bonus-popup">
+                বোনাস দেখুন
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <div class="ck-section-card ck-daily-bonus">
+          <div style="display:flex;justify-content:space-between;align-items:flex-start;gap:8px;">
+            <h3 style="margin:0;font-size:.9rem;line-height:1.3;font-weight:600;color:#ffd24a;text-shadow:0 0 8px rgba(212,175,55,.7);display:flex;flex-wrap:wrap;gap:.5rem;align-items:flex-start;">
+              <span class="ck-section-title-emoji">🎁</span>
+              <span>ডেইলি বোনাস নোটিস</span>
+            </h3>
+            <div class="ck-daily-close" data-close-popup="bonus-info">X</div>
           </div>
 
-          <div class="ck-desc">
-            🔥 ডেইলি মিস্ট্রি বোনাস<br/>
-            VIP 30 শুধু এক্সক্লুসিভ প্লেয়ারদের জন্য।
-          </div>
+          <div style="font-size:.75rem;line-height:1.4;color:#fff;margin-top:8px;">
+            "মিস্ট্রি বোনাস ড্রপ" &amp; "VIP 30 রিওয়ার্ড"
+            <b>প্রতিদিন লিমিটেড</b>।<br/>
+            অবশ্যই সেইদিনেই ক্লেইম করে ব্যবহার করুন।
+            একদিন পেরিয়ে গেলে আর ইউজ না করলে —
+            বোনাস <b>এক্সপায়ার</b> হবে।
 
-          <div class="ck-action-row">
+            <div class="ck-line" style="margin:10px 0;"></div>
+
+            এখনই নাও। এখনই ইউজ করো। কাল পর্যন্ত অপেক্ষা কোরো না।
+            <br/><br/>
             <a class="ck-btn"
                href="https://www.wwwck-444.com/register"
-               target="_blank" rel="nofollow noopener">
-              এখনই রেজিস্টার করো
-            </a>
-            <a class="ck-btn-ghost"
-               href="https://www.wwwck-444.com/"
-               target="_blank" rel="nofollow noopener">
-              বোনাস ক্লেইম
+               target="_blank"
+               rel="nofollow noopener">
+              এখনই ক্লেইম করো
             </a>
           </div>
         </div>
       </div>
 
-      <!-- CENTER COL: LIVE RTP HOT NOW -->
+      <!-- CENTER LIVE RTP -->
       <div class="ck-col">
-        <div class="ck-section-card">
-          <h3>
-            <span>📊 আজকের RTP / হট প্যাটার্ন</span>
-          </h3>
-          <div class="ck-desc">
-            রিয়েলটাইম RTP স্যাম্পল &amp; হট গেম প্যাটার্ন। এগুলো এখন সবচেয়ে গরম।
-            ক্লিক করলে দেখবে গেমের RTP কত %.
+        <div class="ck-rtp-main-card">
+          <div class="ck-rtp-main-header-top">
+            <div class="ck-rtp-main-title">
+              <span class="emoji">📊</span>
+              <span>আজকের RTP / হট প্যাটার্ন</span>
+            </div>
+            <div class="ck-live-wrap">
+              <span class="ck-live-dot"></span>
+              <span>LIVE এখন আপডেট</span>
+            </div>
           </div>
 
-          <div id="ck-hero-card-list" class="ck-rtp-hot-list">
-            <!-- diisi main.js (top 3 game RTP tertinggi) -->
+          <div class="ck-rtp-main-desc">
+            রিয়েলটাইম RTP স্যাম্পল &amp; হট গেম প্যাটার্ন।
+            এখানে তুমি দেখবে আজকে কোন গেম । 
           </div>
 
-          <div class="ck-desc" style="margin-top:12px;font-size:.7rem;">
-            *নিচের প্রোভাইডার ক্লিক করো → গেম লিস্ট &amp; প্যাটার্ন (স্লট টিপ / TACTIC).
+          <div class="ck-rtp-hot-list" id="ck-hero-card-list"></div>
+
+          <div class="ck-rtp-main-footnote">
+            *নিচের প্রোভাইডার ক্লিক করো → পুরো টেবিল &amp; বিস্তারিত প্যাটার্ন দেখবে।
           </div>
         </div>
       </div>
 
-      <!-- RIGHT COL: Provider / promo note -->
+      <!-- RIGHT PROMO / PROVIDERS -->
       <div class="ck-col">
         <div class="ck-section-card">
-          <h3>
-            <span>🔥 প্রোভাইডার</span>
-          </h3>
-          <div class="ck-desc">
-            PG Soft • JILI • Pragmatic • Joker • Microgaming • Top Trend Gaming
+          <h2 style="margin:0 0 8px;font-size:.9rem;line-height:1.3;font-weight:600;color:#ffd24a;text-shadow:0 0 8px rgba(212,175,55,.7);display:flex;flex-wrap:wrap;gap:.5rem;align-items:flex-start;">
+            <span class="ck-section-title-emoji">🔥</span>
+            <span>চলমান প্রোমো (Active Promo)</span>
+          </h2>
+
+          <div class="ck-hero-text-block">
+            <p style="margin:0 0 8px;"><b>CK44 VIP Bangladesh স্পেশাল ইভেন্ট</b></p>
+
+            <p style="margin:0 0 12px;">
+              <b>VIP 30 / VIP 30 EVENT</b><br/>
+              যত বেশি তুমি খেলো, তত উঁচু VIP র্যাঙ্ক।
+              VIP লেভেল আপ মানে এক্সক্লুসিভ মাল্টিপ্লায়ার রিওয়ার্ড &amp; প্রায়োরিটি WD।
+            </p>
+
+            <div class="ck-line"></div>
+
+            <p style="margin:0 0 12px;">
+              <b>MYSTERY BONUS DROP</b><br/>
+              র‍্যান্ডম বোনাস শুধু অ্যাকটিভ ডেইলি প্লেয়ারের জন্য।
+              অবশ্যই সেইদিনেই ক্লেইম করে ইউজ করতে হবে —
+              <span class="ck-accent">মিস কোরো না।</span>
+            </p>
+
+            <div class="ck-line"></div>
+
+            <p style="margin:0 0 12px;">
+              <b>ফাস্ট WD</b><br/>
+              দ্রুত পেআউট, কোন ড্রামা নেই। বাংলাদেশ + গ্লোবাল চ্যানেল সাপোর্ট।
+              লাইভ হেল্প ২৪/৭।
+            </p>
+
+            <div style="margin-top:12px">
+              <a class="ck-btn-ghost"
+                 href="https://www.wwwck-444.com/"
+                 target="_blank" rel="nofollow noopener">
+                ২৪/৭ কন্টাক্ট
+              </a>
+            </div>
           </div>
-          <div class="ck-desc" style="font-size:.7rem;">
-            সব প্রোভাইডার একসাথে। লাইভ RTP চেক করো, গেম প্যাটার্ন দেখো,
-            আর তারপরে দেখো "SLOT TIP / TACTIC" (লেভেল বেট / স্পিন সিকোয়েন্স).
+        </div>
+
+        <div class="ck-section-card">
+          <h2 style="margin:0 0 8px;font-size:.9rem;line-height:1.3;font-weight:600;color:#ffd24a;text-shadow:0 0 8px rgba(212,175,55,.7);display:flex;flex-wrap:wrap;gap:.5rem;align-items:flex-start;">
+            <span class="ck-section-title-emoji">🎮</span>
+            <span>প্রোভাইডারস</span>
+          </h2>
+
+          <div class="ck-hero-text-block">
+            <p style="margin:0 0 8px;">
+              PG Soft • JILI • Pragmatic • Joker • Microgaming • Top Trend Gaming
+            </p>
+
+            <p style="font-size:.75rem;color:#999;line-height:1.4;margin:0 0 12px;">
+              সব ফেভারিট প্রোভাইডার এক ড্যাশবোর্ডে।
+              লাইভ RTP দেখো, স্পিন প্যাটার্ন দেখো, আর কোন গেম এখন হিট সেটা ধরো।
+            </p>
+
+            <div class="ck-line"></div>
+
+            <p class="ck-muted" style="font-size:.7rem;line-height:1.4;margin:0;">
+              নিচের ট্যাব থেকে প্রোভাইডার সিলেক্ট করো → তারপর গেমে ক্লিক করো →
+              তুমি পাবে <b>“SLOT TIP / TACTIC”</b> (স্পিন স্টেপ / প্যাটার্ন সাজেশন)।
+            </p>
           </div>
         </div>
       </div>
+    </div>
 
-    </div><!-- /.ck-hero-layout -->
-
-    <!-- PROVIDER & RTP TABLE (GLOBAL MODE) -->
-    <!-- penting: wrapper pakai id="ck-rtp-table-section" -->
-    <div id="ck-rtp-table-section" class="ck-section-card" style="margin-top:24px;">
-      <h3>
-        <span>⚡ প্রোভাইডার &amp; RTP লাইভ</span>
+    <!-- PROVIDER & RTP TABLE -->
+    <div class="ck-section-card" style="margin-top:24px;">
+      <h3 style="margin:0 0 8px;font-size:.9rem;line-height:1.3;font-weight:600;color:#ffd24a;text-shadow:0 0 8px rgba(212,175,55,.7);display:flex;flex-wrap:wrap;gap:.5rem;align-items:flex-start;">
+        <span class="ck-section-title-emoji">⚡</span>
+        <span>প্রোভাইডার &amp; RTP লাইভ</span>
       </h3>
-      <div class="ck-section-desc">
-        রিয়েলটাইম RTP স্যাম্পল &amp; হট গেম প্যাটার্ন। প্রোভাইডার ক্লিক করে ফিল্টার করো।
+
+      <div class="ck-section-desc" style="margin-bottom:8px;">
+        রিয়েলটাইম RTP স্যাম্পল &amp; হট গেম প্যাটার্ন। প্রোভাইডার ক্লিক করে ফিল্টার করো.
       </div>
 
       <div id="ck-provider-tabs"></div>
@@ -999,99 +1391,199 @@
       </div>
     </div>
 
-    <!-- PROVIDER DETAIL GRID (PROVIDER MODE) -->
+    <!-- PROVIDER DETAIL GRID -->
     <div id="ck-provider-detail-wrap">
-      <!-- main.js akan inject:
+      <!-- akan diinject main.js:
            .ck-provider-detail-head
-           .ck-game-grid (isi list game card)
-           dan overlay pola (modal ck-pola-overlay) -->
+           .ck-game-grid (isi .ck-game-card)
+           modal pola -->
     </div>
+  </div>
 
-  </div><!-- /.ck-page-wrap -->
-
-  <!-- LEFT WINNER FEED / floating notif -->
-  <div class="message-left-container"></div>
-
-  <!-- BONUS POPUP (opsional - disiapin buat initBonusPopup di main.js) -->
-  <div class="ck-popup-overlay" id="bonus-popup" style="display:none;">
-    <div class="ck-pola-card" style="max-width:360px;">
-      <div class="ck-pola-head">
-        <div class="ck-pola-close" data-close-popup="bonus-popup">X</div>
-        দৈনিক বোনাস
+  <!-- POPUP BONUS -->
+  <div class="ck-popup-overlay" id="bonus-popup">
+    <div class="ck-popup-card">
+      <div class="ck-popup-head">
+        <div>🎁 ডেইলি বোনাস</div>
+        <div class="ck-popup-close" data-close-popup>X</div>
       </div>
-      <div class="ck-pola-body">
-        <div class="ck-pola-provider">
-          <div><strong>VIP 30 বোনাস</strong></div>
-          <div>২৪/৭ ক্লেইম • দ্রুত WD • বাংলাদেশ স্পেশাল</div>
+      <div class="ck-popup-body">
+        <p style="margin:0 0 8px;"><b>মিস্ট্রি বোনাস ড্রপ</b> আজকে লাইভ!</p>
+        <p style="margin:0 0 12px;">
+          একই দিনে ক্লেইম &amp; ইউজ করতে হবে।
+          বোনাস কালকে ক্যারি ওভার হবে না।
+          VIP অ্যাকটিভ মানে মাল্টিপ্লায়ার আরও বড়।
+        </p>
+
+        <div style="text-align:center;">
+          <a class="ck-btn"
+             href="https://www.wwwck-444.com/register"
+             target="_blank"
+             rel="nofollow noopener">
+            এখনই ক্লেইম করো
+          </a>
         </div>
-      </div>
-      <div class="ck-pola-steps">
-        <div><strong>Step 1:</strong> রেজিস্টার করো</div>
-        <div><strong>Step 2:</strong> ডিপোজিট ছোট</div>
-        <div><strong>Step 3:</strong> লাইভ চ্যাটে বোনাস জিজ্ঞেস করো</div>
-      </div>
-      <div class="ck-pola-actions">
-        <a class="ck-pola-btn"
-           href="https://www.wwwck-444.com/register"
-           target="_blank" rel="nofollow noopener">
-           এখনই রেজিস্টার
-        </a>
-        <a class="ck-pola-btn"
-           href="https://www.wwwck-444.com/"
-           target="_blank" rel="nofollow noopener">
-           মেইন
-        </a>
       </div>
     </div>
   </div>
 
-  <!-- ================= SCRIPTS ================= -->
+  <!-- WINNER FEED / NOTIF LEFT -->
+  <div class="message-left-container"></div>
 
-  <!-- logic RTP / provider / pola / warna -->
+  <!-- SCRIPTS -->
   <script src="./js/main.js"></script>
 
-  <!-- optional extra scripts:
-       kalau kamu punya messagebleft.js untuk anim winner left -->
-  <script src="./js/messagebleft.js"></script>
-
-  <!-- popup open/close generic -->
+  <!-- limit baris table -> tombol "lihat semua" -->
   <script>
-    (function(){
-      const openers = document.querySelectorAll("[data-open-popup]");
-      const closers = document.querySelectorAll("[data-close-popup]");
+  (function() {
+    const MAX_VISIBLE = 10;
 
-      function closePopupById(id){
-        const el = document.getElementById(id);
-        if(el) el.style.display = "none";
+    function ensureToggle(rows) {
+      let toggleWrap = document.querySelector('.ck-rtp-toggle-wrap');
+      if (!toggleWrap) {
+        toggleWrap = document.createElement('div');
+        toggleWrap.className = 'ck-rtp-toggle-wrap';
+
+        const btn = document.createElement('button');
+        btn.className = 'ck-rtp-toggle-btn';
+        btn.dataset.expanded = "false";
+
+        toggleWrap.appendChild(btn);
+
+        const tableWrapper = document.querySelector('.ck-rtp-table-wrap');
+        if (tableWrapper && tableWrapper.parentNode) {
+          tableWrapper.parentNode.appendChild(toggleWrap);
+        }
       }
-      function openPopupById(id){
-        const el = document.getElementById(id);
-        if(el) el.style.display = "flex";
-      }
 
-      openers.forEach(btn=>{
-        btn.addEventListener("click",()=>{
-          const t = btn.getAttribute("data-open-popup");
-          if(t) openPopupById(t);
-        });
-      });
-      closers.forEach(btn=>{
-        btn.addEventListener("click",()=>{
-          const t = btn.getAttribute("data-close-popup");
-          if(t) closePopupById(t);
-        });
-      });
+      const btn = toggleWrap.querySelector('.ck-rtp-toggle-btn');
+      if (!btn) return;
 
-      // overlay click close
-      document.querySelectorAll(".ck-popup-overlay").forEach(ov=>{
-        ov.addEventListener("click",(e)=>{
-          if(e.target===ov){
-            ov.style.display="none";
+      btn.textContent = `সব গেম দেখুন (${rows.length})`;
+      btn.dataset.expanded = "false";
+
+      const newBtn = btn.cloneNode(true);
+      btn.parentNode.replaceChild(newBtn, btn);
+
+      newBtn.addEventListener('click', () => {
+        const expanded = newBtn.dataset.expanded === "true";
+        if (expanded) {
+          rows.forEach((r, idx) => {
+            r.style.display = (idx < MAX_VISIBLE) ? '' : 'none';
+          });
+          newBtn.dataset.expanded = "false";
+          newBtn.textContent = `সব গেম দেখুন (${rows.length})`;
+
+          const cardTop = document.querySelector('.ck-section-card');
+          if (cardTop) {
+            cardTop.scrollIntoView({ behavior:'smooth' });
           }
-        });
+        } else {
+          rows.forEach(r => { r.style.display = ''; });
+          newBtn.dataset.expanded = "true";
+          newBtn.textContent = 'তালিকা বন্ধ করুন';
+        }
       });
-    })();
+    }
+
+    function limitRowsNow() {
+      const tbody = document.getElementById('ck-rtp-tbody');
+      if (!tbody) return;
+      const rows = Array.from(tbody.querySelectorAll('tr'));
+      if (rows.length === 0) return;
+
+      rows.forEach((row, idx) => {
+        row.style.display = (idx < MAX_VISIBLE) ? '' : 'none';
+      });
+
+      ensureToggle(rows);
+    }
+
+    function attachObserver() {
+      const tbody = document.getElementById('ck-rtp-tbody');
+      if (!tbody) return;
+
+      limitRowsNow();
+
+      const obs = new MutationObserver(() => {
+        limitRowsNow();
+      });
+      obs.observe(tbody, {
+        childList: true,
+        subtree: false
+      });
+
+      window.__ckForceLimitRows = limitRowsNow;
+    }
+
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', attachObserver);
+    } else {
+      attachObserver();
+    }
+
+    document.addEventListener('click', (e) => {
+      const tabBtn = e.target.closest('#ck-provider-tabs .ck-provider-tab-btn');
+      if (tabBtn) {
+        setTimeout(() => {
+          if (window.__ckForceLimitRows) {
+            window.__ckForceLimitRows();
+          }
+        }, 300);
+      }
+    });
+  })();
   </script>
 
+  <!-- Auto refresh RTP tiap 15 menit -->
+  <script>
+  (function(){
+    const FIFTEEN_MIN_MS = 900000;
+    function doRefresh(){ location.reload(); }
+    setInterval(doRefresh, FIFTEEN_MIN_MS);
+  })();
+  </script>
+
+  <!-- left winner feed script -->
+  <script src="./js/messagebleft.js"></script>
+
+  <!-- popup open/close -->
+  <script>
+    document.addEventListener('click', function(e){
+      const openBtn = e.target.closest('[data-open-popup]');
+      if(openBtn){
+        const id = openBtn.getAttribute('data-open-popup');
+        const target = document.getElementById(id);
+        if(target){
+          target.classList.add('active');
+        }
+      }
+
+      const closeBtn = e.target.closest('[data-close-popup]');
+      if(closeBtn){
+        const which = closeBtn.getAttribute('data-close-popup');
+
+        if(which === 'bonus-info'){
+          const parentCard = closeBtn.closest('.ck-daily-bonus');
+          if(parentCard){
+            parentCard.style.display='none';
+          }
+        }
+
+        const popupOverlay = closeBtn.closest('.ck-popup-overlay');
+        if(popupOverlay){
+          popupOverlay.classList.remove('active');
+        }
+      }
+    });
+
+    /* close modal by clicking background */
+    document.addEventListener('click', function(e){
+      const ov = e.target.closest('.ck-popup-overlay');
+      if(ov && e.target === ov){
+        ov.classList.remove('active');
+      }
+    });
+  </script>
 </body>
 </html>
