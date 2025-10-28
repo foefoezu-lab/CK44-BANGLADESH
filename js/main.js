@@ -1,116 +1,121 @@
-// CK44 VIP Bangladesh RTP engine (ভার্সি বাংলা)
-// - Random RTP 30-98%
-// - Animated green bar
-// - Provider tabs, pola modal (ট্যাকটিক)
-// - Soft refresh every 15 min
+// CK44 VIP Bangladesh RTP engine (Bangla, optimized, mobile-friendly)
+// Fitur besar:
+// - Daftar game Pragmatic lengkap (1..213) → disimpan di memori, tidak hilang
+// - Render dibatasi (12 card di HP, 30 di desktop) agar tidak lag
+// - Warna RTP dinamis: hijau >=60, kuning <60, merah <30
+// - Border kartu ikut warna RTP (hijau/kuning/merah)
+// - Badge হট / স্টেবল / রিস্ক
+// - Pola / tips Bangla
+// - Refresh RTP random setiap 15 menit
 
 (function(){
 
-  // =========================
-  // PROVIDER GAME NAME MAPS
-  // =========================
+  /*****************************************
+   * 1. DATA GAME PER PROVIDER (FULL LIST)
+   *****************************************/
 
-  // Pragmatic list dari kamu (tidak di-translate judul gamenya biar user tetap kenal)
+  // Pragmatic Play full list 1..213
+  // (Tetap lengkap, jadi kamu tidak kehilangan mapping ID -> nama)
   const PRAGMATIC_NAME_MAP = {
-    1:  "Christmas big bass bonanza",
-    2:  "Gates of Olympus",
-    3:  "Sweet Bonanza",
-    4:  "Aztec Gems",
-    5:  "Sweet Bonanza Xmas",
-    6:  "Starlight Princess",
-    7:  "Bonanza Gold",
-    8:  "Wild West Gold",
-    9:  "Joker's Jewels",
-    10: "Pyramid Bonanza",
-    11: "Great Rhino Megaways",
-    12: "Fire Strike",
-    13: "Candy Village",
-    14: "Aztec Gems Deluxe",
-    15: "5 Lions Megaways",
-    16: "John Hunter and the Tomb of the Scarab Queen",
-    17: "Christmas Carol Megaways",
-    18: "The Tweety House",
-    19: "Aztec Bonanza",
-    20: "Fire 88",
-    21: "Chicken Drop",
-    22: "Rise of Samurai Megaways",
-    23: "Dog House Megaways",
-    24: "Fruit Party",
-    25: "Madame Destiny Megaways",
-    26: "Buffalo King Megaways",
-    27: "Gems Bonanza",
-    28: "Fruit Party 2",
-    29: "Temujin Treasures",
-    30: "Lucky Lightning",
-    31: "The Hand of Midas",
-    32: "Power of Thor Megaways",
-    33: "Hot Fiesta",
-    34: "Empty the Bank",
-    35: "Juicy Fruits",
-    36: "Release the Kraken",
-    37: "7 Wild Booster",
-    38: "Star Bounty",
-    39: "Drago Jewels Of Fortune",
-    40: "John Hunter Book of Tut",
-    41: "Mysterious Egypt",
-    42: "Pirate Gold Deluxe",
-    43: "Curse of the Werewolf Megaways",
-    44: "Voodoo Magic",
-    45: "Asgard Jackpot",
-    46: "Madame Destiny Jackpot",
-    47: "Sweet Bonanza Jackpot",
-    48: "Dog House Jackpot",
-    49: "888 Dragons jackpot",
-    50: "Aztec Gems Jackpot",
-    51: "Journey To The West Jackpot",
-    52: "Monkey Madness Jackpot",
-    53: "Monkeys",
-    54: "HoT Safari ",
-    55: "Big Juan",
-    56: "John Hunter QUEST for Bermuda Riches",
-    57: "Star Ditates Code",
-    58: "Mystic Chief",
-    59: "Day of Dead",
-    60: "Piggy Bank Bills",
-    61: "Cash Bonanza",
-    62: "Bigger Bass Bonanza",
-    63: "Treasure Wild",
-    64: "Yum Yum Powerways",
-    65: "Raging Bull",
-    66: "Rize Of Giza Power Nudge",
-    67: "Chilli Heat Megaways",
-    68: "Lucky Grace and Charm Mega Hold&Spin",
-    69: "Aztec King Megaways",
-    70: "Phionex Forge",
-    71: "Heart of Rio",
-    72: "Dragon Hot Hold and Spin",
-    73: "Cash Elevator",
-    74: "Hokkaido Wolf",
-    75: "The Magic Cauldron",
-    76: "The Amazing Money Machine",
-    77: "Aztec King",
-    78: "Panda's Fortune 2",
-    79: "Floating Dragon Hold and Spin",
-    80: "Hot to Burn Hold and Spin",
-    81: "5 Lions",
-    82: "Chili Heat",
-    83: "888 Dragons",
-    84: "5 Lions Gold",
-    85: "Mustang Gold",
-    86: "Big Bass Bonanza",
-    87: "John Hunter Mayan God5",
-    88: "Spartan King",
-    89: "Cowboys Gold",
-    90: "Emerald King",
-    91: "Dragon Tiger",
-    92: "Book & Kingdoms",
-    93: "Return of Dead",
-    94: "5 Lions Dance",
-    95: "Ultra Hold and Spin",
-    96: "Rise Of Samurai",
-    97: "Wild Walker",
-    98: "Great Rhino Deluxe",
-    99: "Wild Wild Riches Lucky Of The Irish",
+    1:"Christmas big bass bonanza",
+    2:"Gates of Olympus",
+    3:"Sweet Bonanza",
+    4:"Aztec Gems",
+    5:"Sweet Bonanza Xmas",
+    6:"Starlight Princess",
+    7:"Bonanza Gold",
+    8:"Wild West Gold",
+    9:"Joker's Jewels",
+    10:"Pyramid Bonanza",
+    11:"Great Rhino Megaways",
+    12:"Fire Strike",
+    13:"Candy Village",
+    14:"Aztec Gems Deluxe",
+    15:"5 Lions Megaways",
+    16:"John Hunter and the Tomb of the Scarab Queen",
+    17:"Christmas Carol Megaways",
+    18:"The Tweety House",
+    19:"Aztec Bonanza",
+    20:"Fire 88",
+    21:"Chicken Drop",
+    22:"Rise of Samurai Megaways",
+    23:"Dog House Megaways",
+    24:"Fruit Party",
+    25:"Madame Destiny Megaways",
+    26:"Buffalo King Megaways",
+    27:"Gems Bonanza",
+    28:"Fruit Party 2",
+    29:"Temujin Treasures",
+    30:"Lucky Lightning",
+    31:"The Hand of Midas",
+    32:"Power of Thor Megaways",
+    33:"Hot Fiesta",
+    34:"Empty the Bank",
+    35:"Juicy Fruits",
+    36:"Release the Kraken",
+    37:"7 Wild Booster",
+    38:"Star Bounty",
+    39:"Drago Jewels Of Fortune",
+    40:"John Hunter Book of Tut",
+    41:"Mysterious Egypt",
+    42:"Pirate Gold Deluxe",
+    43:"Curse of the Werewolf Megaways",
+    44:"Voodoo Magic",
+    45:"Asgard Jackpot",
+    46:"Madame Destiny Jackpot",
+    47:"Sweet Bonanza Jackpot",
+    48:"Dog House Jackpot",
+    49:"888 Dragons jackpot",
+    50:"Aztec Gems Jackpot",
+    51:"Journey To The West Jackpot",
+    52:"Monkey Madness Jackpot",
+    53:"Monkeys",
+    54:"HoT Safari ",
+    55:"Big Juan",
+    56:"John Hunter QUEST for Bermuda Riches",
+    57:"Star Ditates Code",
+    58:"Mystic Chief",
+    59:"Day of Dead",
+    60:"Piggy Bank Bills",
+    61:"Cash Bonanza",
+    62:"Bigger Bass Bonanza",
+    63:"Treasure Wild",
+    64:"Yum Yum Powerways",
+    65:"Raging Bull",
+    66:"Rize Of Giza Power Nudge",
+    67:"Chilli Heat Megaways",
+    68:"Lucky Grace and Charm Mega Hold&Spin",
+    69:"Aztec King Megaways",
+    70:"Phionex Forge",
+    71:"Heart of Rio",
+    72:"Dragon Hot Hold and Spin",
+    73:"Cash Elevator",
+    74:"Hokkaido Wolf",
+    75:"The Magic Cauldron",
+    76:"The Amazing Money Machine",
+    77:"Aztec King",
+    78:"Panda's Fortune 2",
+    79:"Floating Dragon Hold and Spin",
+    80:"Hot to Burn Hold and Spin",
+    81:"5 Lions",
+    82:"Chili Heat",
+    83:"888 Dragons",
+    84:"5 Lions Gold",
+    85:"Mustang Gold",
+    86:"Big Bass Bonanza",
+    87:"John Hunter Mayan God5",
+    88:"Spartan King",
+    89:"Cowboys Gold",
+    90:"Emerald King",
+    91:"Dragon Tiger",
+    92:"Book & Kingdoms",
+    93:"Return of Dead",
+    94:"5 Lions Dance",
+    95:"Ultra Hold and Spin",
+    96:"Rise Of Samurai",
+    97:"Wild Walker",
+    98:"Great Rhino Deluxe",
+    99:"Wild Wild Riches Lucky Of The Irish",
     100:"Jungle Gorilla",
     101:"Tiger Warrior",
     102:"Street Racer",
@@ -227,7 +232,7 @@
     213:"Might Of Ra"
   };
 
-  // contoh provider lain (placeholder)
+  // Provider lain dummy pendek → aman kalau img belum lengkap
   const PGSOFT_NAME_MAP = {
     1:"Mahjong Ways",
     2:"Mahjong Ways 2",
@@ -512,7 +517,7 @@
     199:"888 Golden Dragon"
   };
   const JOKER_NAME_MAP = {
-     1:  "Power Stars ",
+    1:  "Power Stars ",
     2:  "Lucky Drum",
     3:  "Golden Dragon",
     4:  "Hercules",
@@ -956,7 +961,7 @@
     275:"Boat Of Fortune"
   };
   const TOPTREND_NAME_MAP = {
-     1:  "Mystic Bear",
+    1:  "Mystic Bear",
     2:  "Viking Honour",
     3:  "Wild wilL Tiger",
     4:  "Aloha Spirit",
@@ -1056,13 +1061,11 @@
     98: "Stacks Cheesk",
     99: "Super Kids",
     100:"Legend Of Link"
-    
   };
 
-  // =====================================================
-  // VARIASI POLA (tips main) DALAM BAHASA BANGLA
-  // kita rotasi berdasarkan index game (idx % 3)
-  // =====================================================
+  /*****************************************
+   * 2. POLA / TAKTIK BANGLA
+   *****************************************/
   const POLA_VARIANTS = [
     {
       steps: [
@@ -1075,132 +1078,192 @@
     },
     {
       steps: [
-        "২০x টার্বো স্পিন বেট সবথেকে ছোট (ওয়ার্ম আপ)",
-        "৪০x অটো স্পিন দ্রুত",
+        "২০x টার্বো স্পিন বেট paling kecil (ওয়ার্ম আপ)",
+        "৪০x অটো স্পিন cepat",
         "৩০x ম্যানুয়াল স্পিন + কুইক স্টপ ON",
-        "১০x বেট এক ধাপ বাড়াও, তারপর ১০x টার্বো স্পিন"
+        "১০x বেট satu level lebih besar, lalu ১০x টার্বো স্পিন"
       ],
-      note: "ফ্রি স্পিন / স্ক্যাটার এলে জোর করে অল-ইন কোরো না — থামো, রিসেট করো।"
+      note: "ফ্রি স্পিন / স্ক্যাটার keluar jangan langsung all-in – stop dulu, reset pola."
     },
     {
       steps: [
-        "৩০x ম্যানুয়াল স্পিন (প্রতি স্পিন ১-২ সেক ধরে রাখো)",
+        "৩০x ম্যানুয়াল স্পিন (tahan ১-২ detik tiap spin)",
         "৩০x অটো স্পিন দ্রুত",
         "১৫x টার্বো স্পিন",
-        "১০x ম্যানুয়াল স্পিন আবার ধীরে (কুলডাউন)"
+        "১০x ম্যানুয়াল স্পিন pelan lagi (cooldown)"
       ],
-      note: "বোনাস বের হলে সরাসরি বড় বেট কোরো না; আবার ধাপ ১ থেকে রিপিট করো।"
+      note: "বোনাস muncul? jangan langsung naikin bet besar. Balik ulang dari langkah awal."
     }
   ];
 
-  // =====================================================
-  // GENERATOR GAME DATA
-  // =====================================================
-  function generateGamesFromMap(nameMap, providerLabel, providerKey, imgFolder){
-    return Object.entries(nameMap).map(([num, gameName], idx) => {
-      const variant = POLA_VARIANTS[idx % POLA_VARIANTS.length];
-      return {
-        name: gameName,
-        provider: providerLabel,
-        providerKey: providerKey,
-        img: `./img/${imgFolder}/${num}.png`, // ganti .png kalau aset lain
-        stake: "৳1K - ৳10K",
-        polaSteps: variant.steps,
-        polaNote: variant.note
-      };
-    });
+  /*****************************************
+   * 3. Build subset utk render ringan
+   *****************************************/
+  function buildSubset(nameMap, limit){
+    return Object.entries(nameMap)
+      .slice(0, limit)
+      .map(([num, gameName], idx) => {
+        const variant = POLA_VARIANTS[idx % POLA_VARIANTS.length];
+        return {
+          id: num,
+          name: gameName,
+          stake: "৳1K - ৳10K",
+          polaSteps: variant.steps,
+          polaNote: variant.note
+        };
+      });
   }
 
-  const PRAGMATIC_GAMES = generateGamesFromMap(
-    PRAGMATIC_NAME_MAP,"Pragmatic Play","pragmatic","pragmatic"
-  );
-  const PGSOFT_GAMES = generateGamesFromMap(
-    PGSOFT_NAME_MAP,"PG Soft","pgsoft","pgsoft"
-  );
-  const JILI_GAMES = generateGamesFromMap(
-    JILI_NAME_MAP,"JILI","jili","jili"
-  );
-  const JOKER_GAMES = generateGamesFromMap(
-    JOKER_NAME_MAP,"Joker","joker","joker"
-  );
-  const MICRO_GAMES = generateGamesFromMap(
-    MICROGAMING_NAME_MAP,"Microgaming","microgaming","microgaming"
-  );
-  const TTG_GAMES = generateGamesFromMap(
-    TOPTREND_NAME_MAP,"Top Trend Gaming","toptrend","toptrend"
-  );
+  // NOTE:
+  // Kita simpan list ASLI lengkap (PRAGMATIC_NAME_MAP dkk),
+  // tapi kita HANYA ambil subset kecil buat ditampilkan
+  // supaya HP tidak lag.
+  const PRAG_SUB   = buildSubset(PRAGMATIC_NAME_MAP, 24);   // Pragmatic: 24 teratas
+  const PGSOFT_SUB = buildSubset(PGSOFT_NAME_MAP, 5);
+  const JILI_SUB   = buildSubset(JILI_NAME_MAP, 3);
+  const JOKER_SUB  = buildSubset(JOKER_NAME_MAP, 3);
+  const MICRO_SUB  = buildSubset(MICROGAMING_NAME_MAP, 20); // Microgaming: 20
+  const TTG_SUB    = buildSubset(TOPTREND_NAME_MAP, 3);
 
-  const EXTRA_GAMES = [];
+  function attachProvider(arr, providerLabel, providerKey, imgFolder){
+    return arr.map(g => ({
+      ...g,
+      provider: providerLabel,
+      providerKey,
+      imgFolder
+    }));
+  }
 
-  // gabung semua
-  const CK_GAMES = []
-    .concat(PRAGMATIC_GAMES)
-    .concat(PGSOFT_GAMES)
-    .concat(JILI_GAMES)
-    .concat(JOKER_GAMES)
-    .concat(MICRO_GAMES)
-    .concat(TTG_GAMES)
-    .concat(EXTRA_GAMES);
+  const ALL_GAMES = []
+    .concat( attachProvider(PRAG_SUB,"Pragmatic Play","pragmatic","pragmatic") )
+    .concat( attachProvider(PGSOFT_SUB,"PG Soft","pgsoft","pgsoft") )
+    .concat( attachProvider(JILI_SUB,"JILI","jili","jili") )
+    .concat( attachProvider(JOKER_SUB,"Joker","joker","joker") )
+    .concat( attachProvider(MICRO_SUB,"Microgaming","microgaming","microgaming") )
+    .concat( attachProvider(TTG_SUB,"Top Trend Gaming","toptrend","toptrend") );
 
-  // ============================
-  // BONUS POPUP (sudah ada di HTML)
-  // ============================
-  const openButtons = document.querySelectorAll("[data-open-popup]");
-  const closeButtons = document.querySelectorAll("[data-close-popup]");
-  const popups = {};
-  document.querySelectorAll(".ck-popup-overlay").forEach(p => {
-    popups[p.id] = p;
-  });
-  openButtons.forEach(btn => {
-    btn.addEventListener("click", () => {
-      const target = btn.getAttribute("data-open-popup");
-      if (popups[target]) {
-        popups[target].classList.add("active");
-      }
+  /*****************************************
+   * 4. POPUP BONUS (tetap dari HTML)
+   *****************************************/
+  (function initBonusPopup(){
+    const openButtons = document.querySelectorAll("[data-open-popup]");
+    const closeButtons = document.querySelectorAll("[data-close-popup]");
+    const popups = {};
+    document.querySelectorAll(".ck-popup-overlay").forEach(p => {
+      popups[p.id] = p;
     });
-  });
-  closeButtons.forEach(btn => {
-    btn.addEventListener("click", () => {
-      const overlay = btn.closest(".ck-popup-overlay");
-      if (overlay) overlay.classList.remove("active");
-    });
-  });
-  Object.values(popups).forEach(overlay => {
-    overlay.addEventListener("click", e => {
-      if (e.target === overlay) overlay.classList.remove("active");
-    });
-  });
 
-  // ============================
-  // RTP GEN + SNAPSHOT
-  // ============================
+    openButtons.forEach(btn => {
+      btn.addEventListener("click", () => {
+        const target = btn.getAttribute("data-open-popup");
+        if (popups[target]) popups[target].classList.add("active");
+      });
+    });
+
+    closeButtons.forEach(btn => {
+      btn.addEventListener("click", () => {
+        const overlay = btn.closest(".ck-popup-overlay");
+        if (overlay) overlay.classList.remove("active");
+      });
+    });
+
+    Object.values(popups).forEach(overlay => {
+      overlay.addEventListener("click", e => {
+        if (e.target === overlay) overlay.classList.remove("active");
+      });
+    });
+  })();
+
+  /*****************************************
+   * 5. RTP SNAPSHOT & VISUAL LOGIC
+   *****************************************/
+
+  // Random RTP 30..98%, supaya ada low juga (kuning/merah bisa muncul)
   function getRandomRTP() {
-    const val = 30 + Math.random()*68; // 30..98
+    const val = 30 + Math.random()*68;
     return parseFloat(val.toFixed(2));
   }
+
+  // bikin snapshot tiap render
   function getSnapshot(){
-    return CK_GAMES.map(g => {
-      const rtpNow = getRandomRTP();
-      return Object.assign({}, g, { rtpNow });
-    });
+    return ALL_GAMES.map(g => ({
+      ...g,
+      rtpNow: getRandomRTP()
+    }));
   }
 
-  // badge status → Bangla
-  function badge(rtp){
-    if (rtp >= 80) {
-      return '<span class="ck-hot">হট</span>';
+  // badge status teks Bangla
+  function getStatusBadge(rtp){
+    if (rtp >= 80){
+      return `<span style="
+        font-size:.7rem;
+        font-weight:600;
+        color:#00ff62;
+        text-shadow:0 0 6px rgba(0,255,98,.6);
+      ">হট</span>`;
     }
-    return '<span class="ck-hot" style="opacity:.5">স্টেবল</span>';
+    if (rtp < 30){
+      return `<span style="
+        font-size:.7rem;
+        font-weight:600;
+        color:#ff2e2e;
+        text-shadow:0 0 6px rgba(255,0,0,.6);
+      ">রিস্ক</span>`;
+    }
+    return `<span style="
+      font-size:.7rem;
+      font-weight:600;
+      color:#ffd400;
+      text-shadow:0 0 6px rgba(255,215,0,.6);
+    ">স্টেবল</span>`;
   }
 
-  // ============================
-  // PROVIDER TABS
-  // ============================
+  // VISUAL warna RTP:
+  // <30   => merah
+  // <60   => kuning
+  // >=60  => hijau
+  function getRtpVisual(rtp){
+    if (rtp < 30){
+      return {
+        wrapBg:     "#3b0000",
+        wrapBorder: "rgba(255,0,0,.4)",
+        fillBg:     "linear-gradient(90deg,#ff2e2e 0%,#7a0000 100%)",
+        fillShadow: "0 0 6px rgba(255,0,0,.4)",
+        textColor:  "#fff",
+        textShadow: "0 0 4px rgba(0,0,0,.8)",
+        cellColor:  "#ff2e2e"
+      };
+    } else if (rtp < 60){
+      return {
+        wrapBg:     "#3b2f00",
+        wrapBorder: "rgba(255,215,0,.4)",
+        fillBg:     "linear-gradient(90deg,#ffd400 0%,#7a5f00 100%)",
+        fillShadow: "0 0 6px rgba(255,215,0,.4)",
+        textColor:  "#000",
+        textShadow: "0 0 4px rgba(0,0,0,.4)",
+        cellColor:  "#ffd400"
+      };
+    } else {
+      return {
+        wrapBg:     "#003b14",
+        wrapBorder: "rgba(0,255,98,.4)",
+        fillBg:     "linear-gradient(90deg,#00ff62 0%,#007a1f 100%)",
+        fillShadow: "0 0 6px rgba(0,255,98,.4)",
+        textColor:  "#000",
+        textShadow: "0 0 4px rgba(0,0,0,.6)",
+        cellColor:  "#00ff62"
+      };
+    }
+  }
+
+  /*****************************************
+   * 6. PROVIDER TABS
+   *****************************************/
   let currentProvider = "all";
 
   function getProviders(){
     const map = {};
-    CK_GAMES.forEach(g => {
+    ALL_GAMES.forEach(g => {
       if (!map[g.providerKey]) map[g.providerKey] = g.provider;
     });
     return map;
@@ -1210,6 +1273,7 @@
     const holder = document.getElementById("ck-provider-tabs");
     if (!holder) return;
     const providers = getProviders();
+
     let html = `
       <div class="ck-provider-tab-btn ${currentProvider==='all'?'ck-active':''}" data-prov="all">
         সব
@@ -1222,6 +1286,7 @@
         </div>
       `;
     });
+
     holder.innerHTML = html;
 
     holder.querySelectorAll(".ck-provider-tab-btn").forEach(btn => {
@@ -1232,55 +1297,84 @@
     });
   }
 
-  // ============================
-  // HERO TOP 3 HOT GAME (RTP tertinggi)
-  // ============================
-  function renderHeroCard(ss){
+  /*****************************************
+   * 7. HERO HOT LIST (top3 RTP)
+   *****************************************/
+  function renderHeroCard(snapshot){
     const heroListEl = document.getElementById("ck-hero-card-list");
     if (!heroListEl) return;
-    const sorted = ss.slice().sort((a,b) => b.rtpNow - a.rtpNow);
+
+    const sorted = snapshot.slice().sort((a,b) => b.rtpNow - a.rtpNow);
     const top3 = sorted.slice(0,3);
 
-    heroListEl.innerHTML = top3.map(g => `
-      <div class="ck-card-row">
-        <div class="ck-game-thumb">
-          <img src="${g.img}" alt="${g.name} High RTP" />
-        </div>
-        <div class="ck-game-info">
-          <div class="ck-game-name">${g.name}</div>
-          <div class="ck-game-rtp">RTP:
-            <span class="ck-rtp-val">${g.rtpNow.toFixed(2)}%</span>
+    heroListEl.innerHTML = top3.map(g => {
+      const vis = getRtpVisual(g.rtpNow);
+      return `
+        <div class="ck-card-row">
+          <div class="ck-game-thumb">
+            <img src="./img/${g.imgFolder}/${g.id}.png"
+                 alt="${g.name} High RTP"
+                 onerror="this.src='./img/fallback.png';"/>
           </div>
-          <div class="ck-game-provider">${g.provider}</div>
+          <div class="ck-game-info">
+            <div class="ck-game-name">${g.name}</div>
+            <div class="ck-game-rtp">
+              RTP:
+              <span class="ck-rtp-val"
+                    style="
+                      background:${vis.wrapBg};
+                      border:1px solid ${vis.wrapBorder};
+                      color:${vis.cellColor};
+                      text-shadow:0 0 6px ${vis.cellColor}88;
+                      border-radius:4px;
+                      padding:2px 4px;
+                      font-weight:700;
+                    ">
+                ${g.rtpNow.toFixed(2)}%
+              </span>
+            </div>
+            <div class="ck-game-provider">${g.provider}</div>
+          </div>
         </div>
-      </div>
-    `).join("");
+      `;
+    }).join("");
   }
 
-  // ============================
-  // RTP TABLE (tabel bawah)
-  // ============================
-  function renderRtpTable(ss){
+  /*****************************************
+   * 8. TABEL RTP LIST (bawah)
+   *****************************************/
+  function renderRtpTable(snapshot){
     const tbody = document.getElementById("ck-rtp-tbody");
     if (!tbody) return;
-    let list = ss;
+
+    let list = snapshot;
     if (currentProvider !== "all"){
-        list = list.filter(g => g.providerKey === currentProvider);
+      list = list.filter(g => g.providerKey === currentProvider);
     }
+
     list = list.slice().sort((a,b)=> b.rtpNow - a.rtpNow);
-    tbody.innerHTML = list.map(g => `
-      <tr>
-        <td>${g.name}</td>
-        <td>${g.provider}</td>
-        <td class="rtp-cell">${g.rtpNow.toFixed(2)}%</td>
-        <td>${badge(g.rtpNow)}</td>
-      </tr>
-    `).join("");
+
+    tbody.innerHTML = list.map(g => {
+      const vis = getRtpVisual(g.rtpNow);
+      return `
+        <tr>
+          <td>${g.name}</td>
+          <td>${g.provider}</td>
+          <td class="rtp-cell"
+              style="color:${vis.cellColor};
+                     font-weight:600;
+                     text-shadow:0 0 6px ${vis.cellColor}88;">
+            ${g.rtpNow.toFixed(2)}%
+          </td>
+          <td>${getStatusBadge(g.rtpNow)}</td>
+        </tr>
+      `;
+    }).join("");
   }
 
-  // ============================
-  // BAR ANIMASI HIJAU
-  // ============================
+  /*****************************************
+   * 9. ANIMASI BAR
+   *****************************************/
   function animateRtpBars(rootEl){
     const bars = rootEl.querySelectorAll('.ck-rtp-bar-fill');
     bars.forEach(bar => {
@@ -1294,39 +1388,83 @@
     });
   }
 
-  // ============================
-  // PROVIDER DETAIL GRID + MODAL POLA
-  // ============================
-  function renderProviderDetail(ss){
+  /*****************************************
+   * 10. PROVIDER DETAIL GRID
+   *     (di sinilah kita batasi jumlah kartu per render)
+   *****************************************/
+  function renderProviderDetail(snapshot){
     const wrap = document.getElementById("ck-provider-detail-wrap");
     if (!wrap) return;
 
-    // kalau tab sekarang "সব" → jangan tampilkan grid detail
     if (currentProvider === "all"){
       wrap.style.display = "none";
       wrap.innerHTML = "";
       return;
     }
 
-    let list = ss.filter(g => g.providerKey === currentProvider);
+    // filter: provider aktif
+    let list = snapshot.filter(g => g.providerKey === currentProvider);
+
+    // sort by RTP tertinggi
     list = list.slice().sort((a,b)=> b.rtpNow - a.rtpNow);
+
+    // 🔥 LIMIT agar tidak lag di HP
+    const isMobile = window.matchMedia("(max-width:768px)").matches;
+    const MOBILE_CARD_LIMIT = 12;   // cuma 12 kartu tampil di HP
+    const DESKTOP_CARD_LIMIT = 30;  // desktop boleh lebih
+    list = list.slice(0, isMobile ? MOBILE_CARD_LIMIT : DESKTOP_CARD_LIMIT);
 
     const cardsHTML = list.map((g, idx) => {
       const pctText = g.rtpNow.toFixed(2) + "%";
       const widthPct = Math.min(g.rtpNow,100) + "%";
+      const vis = getRtpVisual(g.rtpNow);
 
       return `
-        <div class="ck-game-card" data-game-modal="${currentProvider}-${idx}">
+        <div class="ck-game-card"
+             data-game-modal="${currentProvider}-${idx}"
+             style="
+               border-color:${vis.cellColor}44;
+               box-shadow:
+                 0 20px 40px rgba(0,0,0,.9),
+                 0 0 30px ${vis.cellColor}33,
+                 0 0 60px rgba(255,0,128,.12);
+             ">
           <div class="ck-game-card-thumb">
-            <img src="${g.img}" alt="${g.name}" />
+            <img src="./img/${g.imgFolder}/${g.id}.png"
+                 alt="${g.name}"
+                 onerror="this.src='./img/fallback.png';"/>
           </div>
+
           <div class="ck-game-card-body">
             <div class="ck-game-card-name">${g.name}</div>
             <div class="ck-game-card-provider">${g.provider}</div>
-            <div class="ck-rtp-bar-wrap">
+
+            <div class="ck-rtp-bar-wrap"
+                 style="
+                   background:${vis.wrapBg};
+                   border-radius:4px;
+                   border:1px solid ${vis.wrapBorder};
+                   box-shadow:0 0 6px ${vis.cellColor}55;
+                 ">
               <div class="ck-rtp-bar-fill"
                    data-target-width="${widthPct}"
-                   style="width:0%;">
+                   style="
+                      width:0%;
+                      background:${vis.fillBg};
+                      box-shadow:${vis.fillShadow};
+                      border-right:1px solid rgba(0,0,0,.4);
+                      color:${vis.textColor};
+                      font-weight:700;
+                      font-size:.75rem;
+                      line-height:1.2;
+                      text-shadow:${vis.textShadow};
+                      display:flex;
+                      align-items:center;
+                      justify-content:center;
+                      height:24px;
+                      position:relative;
+                      border-radius:4px;
+                   ">
                 ${pctText}
               </div>
             </div>
@@ -1387,16 +1525,17 @@
           ${list[0]?.provider || ""} • হট RTP & প্যাটার্ন
         </div>
         <div class="ck-provider-detail-sub">
-          গেমে ট্যাপ করো → জেতার স্টেপ / ট্যাকটিক দেখো। সবুজ বার = এখনকার লাইভ পারফরম্যান্স।
+          গেমে ট্যাপ করো → জেতার স্টেপ / ট্যাকটিক দেখো।<br/>
+          রঙের বার = লাইভ পারফরম্যান্স sekarang.<br/>
+          সবুজ = bagus, হলুদ = hati-hati, লাল = bahaya.
         </div>
       </div>
-
       <div class="ck-game-grid">
         ${cardsHTML}
       </div>
     `;
 
-    // buka modal pola saat kartu di-klik
+    // open modal pola
     wrap.querySelectorAll("[data-game-modal]").forEach(card => {
       card.addEventListener("click", () => {
         const id = "pola-" + card.getAttribute("data-game-modal");
@@ -1405,7 +1544,7 @@
       });
     });
 
-    // tombol X
+    // close modal (X)
     document.querySelectorAll("[data-close-pola]").forEach(btn=>{
       btn.addEventListener("click", ()=>{
         const targetId = btn.getAttribute("data-close-pola");
@@ -1414,7 +1553,7 @@
       });
     });
 
-    // klik luar overlay buat close
+    // close modal jika klik luar
     document.querySelectorAll(".ck-pola-overlay").forEach(overlay=>{
       overlay.addEventListener("click", e=>{
         if(e.target===overlay){
@@ -1423,25 +1562,25 @@
       });
     });
 
-    // animasi progress bar hijau
+    // animasi bar width smooth
     animateRtpBars(wrap);
   }
 
-  // ============================
-  // RENDER SEMUA BAGIAN
-  // ============================
+  /*****************************************
+   * 11. RENDER SEMUA BAGIAN
+   *****************************************/
   function renderAll(){
-    const snap = getSnapshot();
-    renderProviderTabs();
-    renderHeroCard(snap);
-    renderRtpTable(snap);
-    renderProviderDetail(snap);
+    const snap = getSnapshot();        // ambil RTP baru
+    renderProviderTabs();              // tabs atas
+    renderHeroCard(snap);              // HOT NOW 3 teratas
+    renderRtpTable(snap);              // tabel bawah
+    renderProviderDetail(snap);        // grid by provider (limit)
   }
 
-  // first render
+  // pertama kali render
   renderAll();
 
-  // auto refresh konten (rtp baru) tiap 15 menit
+  // refresh otomatis 15 menit
   setInterval(renderAll, 900000);
 
 })();
