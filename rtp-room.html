@@ -1165,6 +1165,248 @@
 .ck-pola-btn:active { transform:scale(.97); }
 
 </style>
+<style>
+/* === CLEAN MODE (NO NEON / NO GLOW) =========================
+   - Ini override visual saja.
+   - Tidak mengubah struktur HTML, class, event JS.
+   - Tombol hijau tetap hijau tapi flat.
+============================================================== */
+
+/* MATIKAN efek kaca blur + aura neon pada kartu utama */
+.ck-section-card,
+.ck-rtp-main-card,
+#ck-provider-detail-wrap,
+.ck-pola-card,
+.ck-pola-provider,
+.ck-pola-steps div,
+.ck-pola-note,
+.ck-pola-overlay .ck-pola-card,
+.message-left-container,
+.ck-game-card,
+.ck-card-row {
+  background: #0f0f13 !important;
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
+  box-shadow: none !important;
+  border: 1px solid rgba(255,255,255,0.07) !important;
+  border-radius: 8px !important;
+  background-image: none !important;
+}
+
+/* Hilangkan glow hover card */
+.ck-game-card:hover {
+  box-shadow: none !important;
+  transform: none !important;
+}
+
+/* Thumbnail game: hilang glow neon */
+.ck-game-card-thumb,
+.ck-game-thumb {
+  background: #000 !important;
+  border: 1px solid rgba(255,255,255,0.15) !important;
+  box-shadow: none !important;
+  filter: none !important;
+}
+.ck-game-card-thumb img,
+.ck-game-thumb img {
+  filter: none !important;
+  box-shadow: none !important;
+}
+
+/* Judul section / headline ➜ tanpa glow */
+.ck-section-card h2,
+.ck-section-card h3,
+.ck-daily-bonus h3,
+.ck-rtp-main-title,
+.ck-provider-detail-title,
+.ck-pola-head {
+  color: #ffffff !important;
+  text-shadow: none !important;
+  font-weight: 600 !important;
+}
+
+/* Badge LIVE hijau ➜ tanpa pulse neon */
+.ck-live-wrap {
+  color: #00c84a !important;
+  text-shadow: none !important;
+  font-weight: 600 !important;
+}
+.ck-live-dot {
+  background: #00c84a !important;
+  box-shadow: none !important;
+  animation: none !important;
+}
+
+/* Nama game / judul kartu RTP */
+.ck-game-name,
+.ck-game-card-name {
+  color: #ffffff !important;
+  text-shadow: none !important;
+  font-weight: 600 !important;
+}
+
+/* Provider text dsb */
+.ck-game-provider,
+.ck-game-card-provider,
+.ck-provider-detail-sub,
+.ck-section-desc,
+.ck-rtp-main-desc,
+.ck-rtp-main-footnote,
+.ck-hero-text-block,
+.ck-hero-text-block p,
+.ck-pola-body,
+.ck-pola-note,
+.ck-pola-warning,
+.ck-daily-bonus,
+.ck-daily-bonus *,
+.message-left-container,
+.message-left-container * {
+  color: #dcdcdc !important;
+  text-shadow: none !important;
+  font-weight: 400 !important;
+  line-height: 1.4;
+}
+
+/* Angka RTP kecil hijau di hero row */
+.ck-rtp-val {
+  background: transparent !important;
+  border: 1px solid #00c84a !important;
+  color: #00c84a !important;
+  box-shadow: none !important;
+  text-shadow: none !important;
+  border-radius: 4px !important;
+  font-weight: 600 !important;
+}
+
+/* Tabel RTP container */
+.ck-rtp-table {
+  background: #1a1a1a !important;
+  box-shadow: none !important;
+  border: 1px solid rgba(255,255,255,0.07) !important;
+}
+.ck-rtp-table thead th {
+  background: #2a2a2a !important;
+  color: #fff !important;
+  font-weight: 600 !important;
+  box-shadow: none !important;
+  text-shadow: none !important;
+}
+.ck-rtp-table tbody td {
+  color: #ccc !important;
+  text-shadow: none !important;
+  box-shadow: none !important;
+  font-weight: 400 !important;
+}
+#ck-rtp-tbody td:nth-child(3),
+#ck-rtp-tbody td:nth-child(4) {
+  font-weight: 600 !important;
+  text-shadow: none !important;
+}
+
+/* Status HOT/STABLE/etc tidak glowing */
+#ck-rtp-tbody td:nth-child(4) {
+  text-shadow: none !important;
+  box-shadow: none !important;
+}
+
+/* Bar RTP di grid provider */
+.ck-rtp-bar-wrap {
+  background: #1a1a1a !important;
+  border: 1px solid rgba(255,255,255,0.07) !important;
+  box-shadow: none !important;
+  border-radius: 4px !important;
+}
+.ck-rtp-bar-fill {
+  /* ganti gradient neon -> flat */
+  background: #00c84a !important;
+  background-image: none !important;
+  color: #000 !important;
+  font-weight: 700 !important;
+  text-shadow: none !important;
+  box-shadow: none !important;
+  border-right: none !important;
+}
+.ck-rtp-bar-fill::after {
+  content: none !important;
+}
+
+/* Tombol hijau utama tetap hijau tapi non-neon */
+.ck-btn,
+.ck-pola-btn,
+.ck-register-btn,
+.ck-claim-btn {
+  background: linear-gradient(#00c84a,#00963a) !important;
+  color: #000 !important;
+  border: 1px solid #008d33 !important;
+  box-shadow: none !important;
+  text-shadow: none !important;
+  font-weight: 600 !important;
+  border-radius: 8px !important;
+}
+.ck-btn:active,
+.ck-pola-btn:active {
+  transform: none !important;
+}
+
+/* Tombol abu / ghost / close */
+.ck-btn-ghost,
+.ck-pola-close,
+.ck-pola-btn-right {
+  background: #2a2a33 !important;
+  border: 1px solid rgba(255,255,255,0.15) !important;
+  color: #fff !important;
+  box-shadow: none !important;
+  text-shadow: none !important;
+  font-weight: 600 !important;
+  border-radius: 8px !important;
+}
+
+/* Tabs provider: no neon */
+#ck-provider-tabs .ck-provider-tab-btn {
+  background: #1c1c22 !important;
+  border: 1px solid rgba(255,255,255,0.15) !important;
+  box-shadow: none !important;
+  text-shadow: none !important;
+  color: #dcdcdc !important;
+  font-weight: 500 !important;
+}
+#ck-provider-tabs .ck-provider-tab-btn.ck-active {
+  background: #00c84a !important;
+  border: 1px solid #008d33 !important;
+  color: #000 !important;
+  box-shadow: none !important;
+  text-shadow: none !important;
+  font-weight: 600 !important;
+}
+
+/* Pop-up / pola modal */
+.ck-pola-overlay .ck-pola-card {
+  background: #0f0f13 !important;
+  border: 1px solid rgba(255,255,255,0.07) !important;
+  box-shadow: none !important;
+  text-shadow: none !important;
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
+}
+
+/* Badge HOT NOW / dsb yang biasanya pink neon */
+.ck-card-row::after {
+  background: #444 !important;
+  color: #fff !important;
+  box-shadow: none !important;
+  text-shadow: none !important;
+  border-radius: 4px !important;
+}
+
+/* Background halaman: matikan pulse neon */
+.ck-page-bg {
+  background: #000000 !important;
+  background-image: none !important;
+  box-shadow: none !important;
+  filter: none !important;
+}
+</style>
+
 </head>
 <body class="ck-page-bg">
 
