@@ -857,315 +857,9 @@
       display:block!important;
       margin:auto!important;
     }
-  
+  </style>
 
-/*************************************
- EXTRA OVERRIDES (TANPA HAPUS KODE ASLI)
-**************************************/
-
-/* 1. Page aura background */
-.ck-page-bg {
-  background:
-    radial-gradient(circle at 20% 15%, rgba(0,255,163,0.18) 0%, rgba(0,0,0,0) 60%),
-    radial-gradient(circle at 80% 30%, rgba(255,0,115,0.18) 0%, rgba(0,0,0,0) 60%),
-    radial-gradient(circle at 50% 80%, rgba(0,128,255,0.12) 0%, rgba(0,0,0,0) 70%),
-    #000000;
-  background-color:#000;
-  background-repeat:no-repeat;
-  background-size:900px 600px,800px 700px,900px 900px;
-  background-attachment:fixed;
-  color:#fff;
-}
-
-/* 2. VIP-style glass card look untuk semua .ck-section-card */
-.ck-section-card {
-  background:rgba(20,20,28,0.6);
-  backdrop-filter:blur(6px);
-  -webkit-backdrop-filter:blur(6px);
-  border:1px solid rgba(255,255,255,0.08);
-  border-radius:16px;
-  box-shadow:
-    0 20px 40px rgba(0,0,0,.9),
-    0 0 40px rgba(0,255,170,.18),
-    0 0 80px rgba(255,0,128,.12) inset;
-  position:relative;
-}
-
-/* Headline jadi lebih "casino neon" */
-.ck-section-card h2,
-.ck-section-card h3 {
-  color:#00ffbf !important;
-  text-shadow:
-    0 0 8px rgba(0,255,191,.6),
-    0 0 18px rgba(0,255,191,.4),
-    0 0 32px rgba(0,255,191,.2) !important;
-}
-
-/* Tombol utama hijau neon sebagai CTA */
-.ck-btn {
-  background:radial-gradient(circle at 0% 0%, #00ff88 0%, #006634 70%);
-  color:#000;
-  border:1px solid rgba(0,255,136,.5);
-  box-shadow:
-    0 0 10px rgba(0,255,136,.7),
-    0 0 40px rgba(0,255,136,.3),
-    0 16px 32px rgba(0,0,0,.8);
-  text-shadow:0 0 4px rgba(0,0,0,.8);
-  font-weight:700;
-}
-.ck-btn:active { transform:scale(.97); }
-
-/* Secondary ghost button kontras */
-.ck-btn-ghost {
-  background:rgba(255,255,255,.07);
-  border:1px solid rgba(255,255,255,.3);
-  box-shadow:
-    0 0 10px rgba(255,255,255,.15),
-    0 16px 32px rgba(0,0,0,.8);
-  color:#fff;
-  font-weight:700;
-  text-shadow:0 0 4px rgba(0,0,0,.8);
-}
-.ck-btn-ghost:active { transform:scale(.97); }
-
-/* 3. HERO HOT LIST (3 game paling panas) */
-.ck-rtp-hot-list {
-  gap:16px !important;
-}
-.ck-card-row {
-  position:relative;
-  background: radial-gradient(circle at 0% 0%, rgba(255,0,128,.18) 0%, rgba(0,0,0,0) 70%),
-              radial-gradient(circle at 100% 100%, rgba(0,255,136,.18) 0%, rgba(0,0,0,0) 70%),
-              rgba(20,20,28,.6);
-  border:1px solid rgba(255,255,255,.1);
-  border-radius:14px;
-  box-shadow:
-    0 24px 48px rgba(0,0,0,.9),
-    0 0 60px rgba(255,0,128,.25),
-    0 0 60px rgba(0,255,136,.25);
-  padding:12px 14px !important;
-}
-.ck-card-row::after {
-  content:"HOT NOW";
-  position:absolute;
-  top:8px;
-  right:10px;
-  font-size:.6rem;
-  font-weight:700;
-  color:#fff;
-  background:linear-gradient(90deg,#ff007a 0%,#ffae00 100%);
-  padding:3px 6px;
-  border-radius:6px;
-  box-shadow:0 0 10px rgba(255,0,128,.6);
-  text-shadow:0 0 4px rgba(0,0,0,.8);
-  line-height:1.2;
-}
-
-/* thumb hero list */
-.ck-game-thumb {
-  box-shadow:
-    0 0 20px rgba(0,0,0,.9),
-    0 0 30px rgba(0,255,136,.25);
-  border-radius:10px !important;
-  border:1px solid rgba(255,255,255,.15) !important;
-  background:#000 !important;
-}
-.ck-game-thumb img {
-  filter:drop-shadow(0 0 8px rgba(0,0,0,.9));
-}
-
-/* judul game hero */
-.ck-game-name {
-  color:#fff !important;
-  text-shadow:
-    0 0 6px rgba(0,0,0,.9),
-    0 0 20px rgba(0,255,170,.4);
-  font-weight:600 !important;
-}
-
-/* nilai RTP hero */
-.ck-rtp-val {
-  min-width:50px;
-  text-align:center;
-  font-size:.75rem!important;
-  line-height:1.2!important;
-  border-radius:4px!important;
-  font-weight:700!important;
-  text-shadow:0 0 4px rgba(0,0,0,.8)!important;
-}
-
-/* 4. Tabs provider jadi tombol */
-#ck-provider-tabs {
-  justify-content:flex-start;
-}
-#ck-provider-tabs .ck-provider-tab-btn {
-  background:rgba(0,0,0,.4);
-  border:1px solid rgba(255,255,255,.3);
-  box-shadow:
-    0 0 10px rgba(255,255,255,.15),
-    0 16px 32px rgba(0,0,0,.8);
-  font-weight:600;
-  color:#fff;
-  text-shadow:0 0 4px rgba(0,0,0,.8);
-}
-#ck-provider-tabs .ck-provider-tab-btn.ck-active {
-  background:radial-gradient(circle at 0% 0%, #00ff88 0%, #006634 70%);
-  color:#000;
-  border:1px solid rgba(0,255,136,.6);
-  box-shadow:
-    0 0 12px rgba(0,255,136,.7),
-    0 0 42px rgba(0,255,136,.3),
-    0 20px 40px rgba(0,0,0,.9);
-  text-shadow:0 0 4px rgba(0,0,0,.8);
-}
-
-/* 5. Provider detail wrap aura */
-#ck-provider-detail-wrap {
-  background:rgba(20,20,28,.6) !important;
-  box-shadow:
-    0 20px 40px rgba(0,0,0,.9) !important,
-    0 0 60px rgba(0,255,170,.2) !important,
-    0 0 80px rgba(255,0,128,.15) inset !important;
-  border:1px solid rgba(255,255,255,.08) !important;
-}
-.ck-provider-detail-title {
-  color:#00ffbf !important;
-  text-shadow:
-    0 0 8px rgba(0,255,191,.6),
-    0 0 18px rgba(0,255,191,.4) !important;
-}
-
-/* 6. Game card glow */
-.ck-game-card {
-  background:rgba(15,15,22,.75) !important;
-  border-radius:14px !important;
-  border:1px solid rgba(255,255,255,.07) !important;
-  box-shadow:
-    0 20px 40px rgba(0,0,0,.9),
-    0 0 40px rgba(0,255,170,.18),
-    0 0 60px rgba(255,0,128,.12) !important;
-  transition:box-shadow .15s ease, transform .15s ease;
-}
-.ck-game-card:hover {
-  transform:translateY(-2px) scale(1.02);
-  box-shadow:
-    0 24px 50px rgba(0,0,0,.95),
-    0 0 50px rgba(0,255,170,.3),
-    0 0 80px rgba(255,0,128,.25);
-}
-
-/* thumbnail game */
-.ck-game-card-thumb {
-  background:#000 !important;
-  border:1px solid rgba(255,255,255,.15) !important;
-  box-shadow:
-    0 0 20px rgba(0,0,0,.9),
-    0 0 30px rgba(0,255,136,.25) !important;
-  border-radius:10px !important;
-}
-.ck-game-card-thumb img {
-  filter:drop-shadow(0 0 8px rgba(0,0,0,.9));
-}
-
-/* judul & provider */
-.ck-game-card-name {
-  text-shadow:
-    0 0 6px rgba(0,0,0,.9),
-    0 0 20px rgba(0,255,170,.4) !important;
-  font-weight:600 !important;
-  color:#fff !important;
-}
-.ck-game-card-provider {
-  color:#9afff0 !important;
-  text-shadow:0 0 8px rgba(0,255,200,.4) !important;
-  font-weight:500 !important;
-}
-
-/* 7. RTP bar */
-.ck-rtp-bar-wrap {
-  box-shadow:0 0 10px rgba(0,255,98,.5) !important;
-}
-.ck-rtp-bar-fill {
-  font-size:.7rem !important;
-  font-weight:700 !important;
-  text-shadow:0 0 4px rgba(0,0,0,.8) !important;
-}
-
-/* 8. Modal pola / tactic */
-.ck-pola-card {
-  background:rgba(15,15,22,.9) !important;
-  border:1px solid rgba(255,255,255,.12) !important;
-  box-shadow:
-    0 40px 80px rgba(0,0,0,.95),
-    0 0 60px rgba(0,255,170,.25),
-    0 0 80px rgba(255,0,128,.2) !important;
-  border-radius:16px !important;
-}
-.ck-pola-head {
-  color:#00ffbf !important;
-  text-shadow:
-    0 0 8px rgba(0,255,191,.6),
-    0 0 18px rgba(0,255,191,.4) !important;
-}
-.ck-pola-close {
-  background:rgba(255,255,255,.07) !important;
-  border:1px solid rgba(255,255,255,.3) !important;
-  box-shadow:
-    0 0 10px rgba(255,255,255,.15),
-    0 16px 32px rgba(0,0,0,.8) !important;
-  color:#fff !important;
-  font-weight:600 !important;
-}
-.ck-pola-provider {
-  background:rgba(20,20,28,.6) !important;
-  border:1px solid rgba(255,255,255,.08) !important;
-  box-shadow:
-    0 20px 40px rgba(0,0,0,.9),
-    0 0 40px rgba(0,255,170,.18),
-    0 0 60px rgba(255,0,128,.12) !important;
-  border-radius:10px !important;
-  color:#fff !important;
-}
-.ck-pola-steps div {
-  background:rgba(20,20,28,.6) !important;
-  border:1px solid rgba(255,255,255,.08) !important;
-  box-shadow:
-    0 20px 40px rgba(0,0,0,.9),
-    0 0 40px rgba(0,255,170,.18),
-    0 0 60px rgba(255,0,128,.12) !important;
-  color:#dcdcdc !important;
-}
-.ck-pola-warning {
-  color:#ffd24a !important;
-  text-shadow:
-    0 0 8px rgba(212,175,55,.7),
-    0 0 20px rgba(212,175,55,.4) !important;
-}
-.ck-pola-note {
-  background:rgba(20,20,28,.6) !important;
-  border:1px solid rgba(255,255,255,.08) !important;
-  box-shadow:
-    0 20px 40px rgba(0,0,0,.9),
-    0 0 40px rgba(0,255,170,.18),
-    0 0 60px rgba(255,0,128,.12) !important;
-  border-radius:10px !important;
-  color:#dcdcdc !important;
-}
-.ck-pola-btn {
-  background:radial-gradient(circle at 0% 0%, #00ff88 0%, #006634 70%) !important;
-  border:1px solid rgba(0,255,136,.6) !important;
-  box-shadow:
-    0 0 12px rgba(0,255,136,.7),
-    0 0 42px rgba(0,255,136,.3),
-    0 20px 40px rgba(0,0,0,.9) !important;
-  color:#000 !important;
-  text-shadow:0 0 4px rgba(0,0,0,.8) !important;
-  font-weight:700 !important;
-}
-.ck-pola-btn:active { transform:scale(.97); }
-
-</style>
-<style>
+  <style>
 /* === CLEAN MODE (NO NEON / NO GLOW) =========================
    - Ini override visual saja.
    - Tidak mengubah struktur HTML, class, event JS.
@@ -1405,7 +1099,363 @@
   box-shadow: none !important;
   filter: none !important;
 }
-</style>
+  </style>
+
+  <!-- === CK44 FINAL MATTE THEME (RINGAN, HD, TANPA NEON BERAT) === -->
+  <style>
+/* 0. Background halaman matte gradasi lembut */
+body.ck-page-bg {
+  background:
+    radial-gradient(circle at 20% 10%, rgba(32,69,116,0.35) 0%, rgba(0,0,0,0) 60%),
+    radial-gradient(circle at 80% 30%, rgba(36,107,71,0.28) 0%, rgba(0,0,0,0) 70%),
+    linear-gradient(to bottom,#0f1117 0%,#0a0c10 60%,#000 100%) !important;
+  background-color:#0f1117 !important;
+  background-repeat:no-repeat !important;
+  background-size:900px 500px,800px 600px,100% 100% !important;
+  background-attachment:fixed !important;
+  color:#fff;
+}
+
+/* 1. Card utama matte abu tua, tanpa glow besar */
+.ck-section-card,
+.ck-rtp-main-card,
+#ck-provider-detail-wrap,
+.ck-pola-card,
+.ck-pola-provider,
+.ck-pola-steps div,
+.ck-pola-note,
+.ck-game-card,
+.ck-card-row {
+  background:#1a1d21 !important;
+  border:1px solid rgba(255,255,255,.07) !important;
+  border-radius:12px !important;
+  box-shadow:0 16px 32px rgba(0,0,0,.8) !important;
+  backdrop-filter:none !important;
+  -webkit-backdrop-filter:none !important;
+  background-image:none !important;
+  color:#dcdcdc !important;
+}
+
+/* header judul card */
+.ck-section-card h2,
+.ck-section-card h3,
+.ck-rtp-main-title,
+.ck-provider-detail-title,
+.ck-pola-head {
+  color:#ffffff !important;
+  text-shadow:none !important;
+  font-weight:600 !important;
+}
+
+/* 2. LIVE badge titik hijau "napas pelan" (pulse halus, bukan neon blink) */
+.ck-live-wrap {
+  color:#00c84a !important;
+  text-shadow:none !important;
+  font-weight:600 !important;
+}
+.ck-live-dot {
+  width:8px;
+  height:8px;
+  border-radius:50%;
+  background:#00c84a !important;
+  box-shadow:none !important;
+  animation:ck-soft-pulse 2.2s infinite ease-in-out !important;
+}
+@keyframes ck-soft-pulse {
+  0%,100% { opacity:1; }
+  50%    { opacity:.4; }
+}
+
+/* 3. HOT NOW badge di hero list card */
+.ck-card-row {
+  position:relative;
+  padding:12px 14px !important;
+}
+.ck-card-row::after {
+  content:"HOT NOW";
+  position:absolute;
+  top:8px;
+  right:10px;
+  font-size:.6rem;
+  font-weight:600;
+  line-height:1.2;
+  color:#fff !important;
+  background:linear-gradient(90deg,#d6472d 0%,#f5a623 100%);
+  border-radius:4px !important;
+  padding:3px 6px;
+  box-shadow:none !important;
+  text-shadow:none !important;
+}
+
+/* 4. Thumbnail di hero list / grid */
+.ck-game-thumb,
+.ck-game-card-thumb {
+  background:#000 !important;
+  border:1px solid rgba(255,255,255,.15) !important;
+  border-radius:8px !important;
+  box-shadow:0 8px 16px rgba(0,0,0,.9) !important;
+  filter:none !important;
+}
+.ck-game-thumb img,
+.ck-game-card-thumb img {
+  filter:none !important;
+  box-shadow:none !important;
+}
+
+/* 5. Nama game & provider */
+.ck-game-name,
+.ck-game-card-name {
+  color:#fff !important;
+  text-shadow:none !important;
+  font-weight:600 !important;
+}
+.ck-game-provider,
+.ck-game-card-provider {
+  color:#9a9a9a !important;
+  text-shadow:none !important;
+  font-weight:500 !important;
+}
+
+/* 6. Angka RTP kecil (hero list chip)  -> siap diskon warna hijau/kuning/merah */
+.ck-rtp-val {
+  min-width:50px;
+  text-align:center;
+  font-size:.75rem!important;
+  line-height:1.2!important;
+  border-radius:4px!important;
+  font-weight:700!important;
+  text-shadow:none !important;
+  box-shadow:none !important;
+  background:transparent !important;
+  border:1px solid #00c84a !important;
+  color:#00c84a !important;
+}
+
+/* warna custom berdasar inline style dari JS lama (#00ff..,#ffd..,#ff3..) */
+.ck-rtp-val[style*="#00ff"],
+.ck-rtp-val[style*="#00c8"],
+.ck-rtp-val[style*="#00c8"] {
+  background:#113a22 !important;
+  border:1px solid #1faa5c !important;
+  color:#1faa5c !important;
+}
+.ck-rtp-val[style*="#ffd"],
+.ck-rtp-val[style*="#ffb"],
+.ck-rtp-val[style*="#ffa"] {
+  background:#3a3311 !important;
+  border:1px solid #d4b13a !important;
+  color:#d4b13a !important;
+}
+.ck-rtp-val[style*="#ff3"],
+.ck-rtp-val[style*="#ff4"],
+.ck-rtp-val[style*="#ff5"],
+.ck-rtp-val[style*="#ff6"],
+.ck-rtp-val[style*="#ff7"],
+.ck-rtp-val[style*="#ff8"],
+.ck-rtp-val[style*="#ff9"] {
+  background:#3a1a1a !important;
+  border:1px solid #c94343 !important;
+  color:#c94343 !important;
+}
+
+/* 7. RTP bar di card provider */
+.ck-rtp-bar-wrap {
+  background:#1f1f1f !important;
+  border:1px solid rgba(255,255,255,.08) !important;
+  border-radius:4px !important;
+  box-shadow:0 10px 20px rgba(0,0,0,.8) !important;
+}
+.ck-rtp-bar-fill {
+  border-right:none !important;
+  box-shadow:none !important;
+  text-shadow:none !important;
+  font-weight:700 !important;
+  font-size:.7rem !important;
+  color:#000 !important;
+  background-image:none !important;
+}
+.ck-rtp-bar-fill::after {
+  content:none !important;
+}
+
+/* fill hijau / kuning / merah sesuai inline style color di JS */
+.ck-rtp-bar-fill[style*="#00ff"],
+.ck-rtp-bar-fill[style*="#00c8"],
+.ck-rtp-bar-fill[style*="#00c8"] {
+  background:#1faa5c !important;
+  color:#000 !important;
+}
+.ck-rtp-bar-fill[style*="#ffd"],
+.ck-rtp-bar-fill[style*="#ffb"],
+.ck-rtp-bar-fill[style*="#ffa"] {
+  background:#d4b13a !important;
+  color:#000 !important;
+}
+.ck-rtp-bar-fill[style*="#ff3"],
+.ck-rtp-bar-fill[style*="#ff4"],
+.ck-rtp-bar-fill[style*="#ff5"],
+.ck-rtp-bar-fill[style*="#ff6"],
+.ck-rtp-bar-fill[style*="#ff7"],
+.ck-rtp-bar-fill[style*="#ff8"],
+.ck-rtp-bar-fill[style*="#ff9"] {
+  background:#c94343 !important;
+  color:#fff !important;
+}
+
+/* 8. Kolom RTP / স্ট্যাটাস di tabel utama */
+#ck-rtp-tbody td:nth-child(3),
+#ck-rtp-tbody td:nth-child(4) {
+  font-weight:600 !important;
+  text-shadow:none !important;
+}
+
+/* hijau */
+#ck-rtp-tbody td:nth-child(3)[style*="#00ff"],
+#ck-rtp-tbody td:nth-child(4)[style*="#00ff"],
+#ck-rtp-tbody td:nth-child(3)[style*="#00c8"],
+#ck-rtp-tbody td:nth-child(4)[style*="#00c8"] {
+  color:#1faa5c !important;
+}
+/* kuning */
+#ck-rtp-tbody td:nth-child(3)[style*="#ffd"],
+#ck-rtp-tbody td:nth-child(4)[style*="#ffd"],
+#ck-rtp-tbody td:nth-child(3)[style*="#ffb"],
+#ck-rtp-tbody td:nth-child(4)[style*="#ffb"],
+#ck-rtp-tbody td:nth-child(3)[style*="#ffa"],
+#ck-rtp-tbody td:nth-child(4)[style*="#ffa"] {
+  color:#d4b13a !important;
+}
+/* merah */
+#ck-rtp-tbody td:nth-child(3)[style*="#ff3"],
+#ck-rtp-tbody td:nth-child(4)[style*="#ff3"],
+#ck-rtp-tbody td:nth-child(3)[style*="#ff4"],
+#ck-rtp-tbody td:nth-child(4)[style*="#ff4"],
+#ck-rtp-tbody td:nth-child(3)[style*="#ff5"],
+#ck-rtp-tbody td:nth-child(4)[style*="#ff5"],
+#ck-rtp-tbody td:nth-child(3)[style*="#ff6"],
+#ck-rtp-tbody td:nth-child(4)[style*="#ff6"],
+#ck-rtp-tbody td:nth-child(3)[style*="#ff7"],
+#ck-rtp-tbody td:nth-child(4)[style*="#ff7"],
+#ck-rtp-tbody td:nth-child(3)[style*="#ff8"],
+#ck-rtp-tbody td:nth-child(4)[style*="#ff8"],
+#ck-rtp-tbody td:nth-child(3)[style*="#ff9"],
+#ck-rtp-tbody td:nth-child(4)[style*="#ff9"] {
+  color:#c94343 !important;
+}
+
+/* 9. Provider tabs tombol aktif -> hijau matte, bukan neon */
+#ck-provider-tabs .ck-provider-tab-btn {
+  background:#2a2d33 !important;
+  border:1px solid rgba(255,255,255,.15) !important;
+  color:#dcdcdc !important;
+  box-shadow:0 6px 18px rgba(0,0,0,.8) !important;
+  text-shadow:none !important;
+  font-weight:500 !important;
+  border-radius:8px !important;
+}
+#ck-provider-tabs .ck-provider-tab-btn.ck-active {
+  background:linear-gradient(#26c25a,#118539) !important;
+  border:1px solid #0f6a2f !important;
+  color:#000 !important;
+  box-shadow:0 6px 18px rgba(0,0,0,.8) !important;
+  text-shadow:none !important;
+  font-weight:600 !important;
+}
+
+/* 10. Tombol utama hijau matte */
+.ck-btn,
+.ck-pola-btn,
+.ck-register-btn,
+.ck-claim-btn {
+  background:linear-gradient(#26c25a,#118539) !important;
+  border:1px solid #0f6a2f !important;
+  color:#000 !important;
+  box-shadow:0 6px 18px rgba(0,0,0,.8) !important;
+  text-shadow:none !important;
+  font-weight:600 !important;
+  border-radius:8px !important;
+}
+.ck-btn:active,
+.ck-pola-btn:active {
+  transform:none !important;
+}
+
+/* tombol abu / ghost */
+.ck-btn-ghost,
+.ck-pola-close,
+.ck-pola-btn-right {
+  background:#2a2d33 !important;
+  border:1px solid rgba(255,255,255,.15) !important;
+  color:#fff !important;
+  box-shadow:0 6px 18px rgba(0,0,0,.8) !important;
+  text-shadow:none !important;
+  font-weight:600 !important;
+  border-radius:8px !important;
+}
+
+/* 11. Modal pola ikut matte */
+.ck-pola-card,
+.ck-pola-provider,
+.ck-pola-steps div,
+.ck-pola-note {
+  background:#1a1d21 !important;
+  border:1px solid rgba(255,255,255,.07) !important;
+  border-radius:12px !important;
+  box-shadow:0 24px 48px rgba(0,0,0,.9) !important;
+  color:#dcdcdc !important;
+}
+.ck-pola-warning {
+  color:#d4b13a !important;
+  text-shadow:none !important;
+  font-weight:600 !important;
+}
+
+/* 12. Fallback for older injected grids:
+   kita support .rtp-bar / .rtpWrap yang nanti dikasih class rtp-high/mid/low oleh script kecil  */
+.rtp-bar,
+.rtpWrap {
+  width:90%;
+  margin:0 auto 14px auto;
+  border-radius:6px !important;
+  border:1px solid rgba(255,255,255,.07) !important;
+  background:#1f1f1f !important;
+  box-shadow:0 10px 20px rgba(0,0,0,.8) !important;
+  font-size:13px !important;
+  font-weight:600 !important;
+  color:#dcdcdc !important;
+  line-height:34px !important;
+  height:34px !important;
+  text-align:center !important;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  padding:0 8px;
+}
+.rtp-bar span,
+.rtpWrap span {
+  width:100%;
+  text-align:center;
+  color:inherit !important;
+  font-weight:600 !important;
+  font-size:13px !important;
+  line-height:1 !important;
+}
+.rtp-high {
+  background:#113a22 !important;
+  border:1px solid #1faa5c !important;
+  color:#1faa5c !important;
+}
+.rtp-mid {
+  background:#3a3311 !important;
+  border:1px solid #d4b13a !important;
+  color:#d4b13a !important;
+}
+.rtp-low {
+  background:#3a1a1a !important;
+  border:1px solid #c94343 !important;
+  color:#c94343 !important;
+}
+  </style>
 
 </head>
 <body class="ck-page-bg">
@@ -1607,7 +1657,7 @@
     <div class="ck-section-card" style="margin-top:24px;">
       <h3 style="margin:0 0 8px;font-size:.9rem;line-height:1.3;font-weight:600;color:#ffd24a;text-shadow:0 0 8px rgba(212,175,55,.7);display:flex;flex-wrap:wrap;gap:.5rem;align-items:flex-start;">
         <span class="ck-section-title-emoji">⚡</span>
-        <span>প্রোভাইডার &amp; RTP লাইভ</span>
+        <span>прোভাইডার &amp; RTP লাইভ</span>
       </h3>
 
       <div class="ck-section-desc" style="margin-bottom:8px;">
@@ -1827,5 +1877,34 @@
       }
     });
   </script>
+
+  <!-- fallback pewarnaan rtp-high / rtp-mid / rtp-low
+       untuk layout kartu provider lama, kalau main.js inject .rtp-bar/.rtpWrap -->
+  <script>
+  (function(){
+    function classifyRTPBars(){
+      const bars = document.querySelectorAll('.rtp-bar, .rtpWrap');
+      bars.forEach(bar => {
+        const txt = bar.textContent.trim();
+        const m = txt.match(/([\d.]+)/);
+        if(!m) return;
+        const val = parseFloat(m[1]);
+        let cat = 'mid';
+        if(val >= 80){ cat='high'; }
+        else if(val < 60){ cat='low'; }
+        bar.classList.remove('rtp-high','rtp-mid','rtp-low');
+        bar.classList.add('rtp-'+cat);
+      });
+    }
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', classifyRTPBars);
+    } else {
+      classifyRTPBars();
+    }
+    // re-run after main.js inject
+    setTimeout(classifyRTPBars, 1500);
+  })();
+  </script>
+
 </body>
 </html>
