@@ -1726,6 +1726,7 @@
 
   </head>
   <body>
+     <div id="stardust" class="stardust" aria-hidden="true"></div>
   <!-- Ambient sound -->
   <audio id="ambientAudio" src="assets/ambient.mp3" autoplay loop preload="auto" playsinline></audio>
 
@@ -2204,21 +2205,22 @@
 
   // Build golden stardust particles
   (function buildStardust(){
-    const root=document.getElementById('stardust');
-    const N=90; // particle count
-    for(let i=0;i<N;i++){
-      const p=document.createElement('i');
-      const left=Math.random()*100;
-      const delay=(Math.random()*8).toFixed(2);
-      const dur=8 + Math.random()*8;
-      const size=1 + Math.random()*2;
-      p.style.left=left+'vw';
-      p.style.bottom=(-10 - Math.random()*20)+'vh';
-      p.style.width=p.style.height=size+'px';
-      p.style.animationDuration=dur+'s';
-      p.style.animationDelay='-'+delay+'s';
-      p.style.opacity=0.7 + Math.random()*0.3;
-      root.appendChild(p);
+  const root = document.getElementById('stardust');
+  if (!root) { console.warn('stardust container missing — skipped'); return; }
+  const N = 90;
+  for (let i = 0; i < N; i++) {
+    const p = document.createElement('i');
+    const left = Math.random() * 100;
+    const delay = (Math.random() * 8).toFixed(2);
+    const dur = 8 + Math.random() * 8;
+    const size = 1 + Math.random() * 2;
+    p.style.left = left + 'vw';
+    p.style.bottom = (-10 - Math.random() * 20) + 'vh';
+    p.style.width = p.style.height = size + 'px';
+    p.style.animationDuration = dur + 's';
+    p.style.animationDelay = '-' + delay + 's';
+    p.style.opacity = 0.7 + Math.random() * 0.3;
+    root.appendChild(p);
     }
   })();
   </script>
